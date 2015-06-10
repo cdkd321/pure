@@ -21,7 +21,7 @@ public class MainActivity extends BaseActivity {
 	};
 
 	// Tab选项卡的文字
-	private String mTextviewArray[] = { "拓客", "好友", "资讯", "我" };
+	private String mTextviewArray[] = { "手", "脸", "眼", "颈" };
 
 	private LayoutInflater layoutInflater;
 
