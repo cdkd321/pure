@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="radio_pay_checked">#f7fff2</color>
+    <color name="top_bg">#ee0000</color>
+    <color name="login_btn_n">#ee0000</color>
+    <color name="login_btn_p">#ff0000</color>
+    <color name="crystalwhite">#00ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="tran_black">#99000000</color>
+    <color name="btn_blue">#000033</color>
+    <color name="sc_transparent_background">#00111111</color>
+    <color name="title">#ebeaea</color>
+    <color name="bg">#f2f2f2</color>
+    <color name="btn_gold">#ffc542</color>
+    <color name="btn_demand">#ff5b36</color>
+    <color name="split">#e0e0e0</color>
+    <color name="touming">#aa000000</color>
+    <color name="district_bg">#eaeaea</color>
+    <color name="operate_content_item_pressed">#e8e8e8</color>
+    <color name="operate_bottom_bg">#1b212d</color>
+    <color name="operate_title">#f7f7f7</color>
+    <color name="wheel_text_value">#3985fe</color>
+    <color name="text_gray">#474747</color>
+    <color name="text_green">#4fbb0f</color>
+    <color name="text_yellow">#bbbb00</color>
+    <color name="gray">#b3b3b3</color>
+    <color name="line_gray">#e0e0e0</color>
+    <color name="blue">#0000ff</color>
+    <color name="text_register_gray">#a8a8a8</color>
+    <color name="item_title">#474747</color>
+    <color name="item_subtitle">#878787</color>
+    <color name="item_righttext">#bebebe</color>
+    <color name="et_hint">#acacac</color>
+    <color name="text_pwd_gray">#576b95</color>
+    <color name="et_focus">#000000</color>
+    <color name="orange">#fd5200</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="half_transparent">#33ffffff</color>
+    <color name="yellow_tip">#fff3bb</color>
+    <color name="red">#ff0000</color>
+    <color name="theme_blue">#2aaffb</color>
+    <color name="theme_gray">#bcb0ae</color>
+</resources>

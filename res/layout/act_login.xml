@@ -1,0 +1,106 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:gravity="top|center"
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_fragment_navigation_bar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ScrollView
+            android:id="@+id/slLogin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/llParent"
+                style="@style/ContentBgTheme"
+                android:layout_width="match_parent"
+                android:clickable="true"
+                android:onClick="onHideInputClick"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/table_bg"
+                    android:orientation="vertical" >
+
+                   <include layout="@layout/include_split" />
+
+                    <RelativeLayout
+                        style="@style/InputParentTheme"
+                        android:layout_width="match_parent" >
+
+                        <ImageView
+                            android:id="@+id/ivSanjiao"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/login_uname" />
+
+                        <EditText
+                            android:id="@+id/etUname"
+                            style="@style/EtTheme"
+                            android:layout_toRightOf="@+id/ivSanjiao"
+                            android:hint="请输入手机号码"
+                            android:inputType="number|phone" >
+
+                            <requestFocus />
+                        </EditText>
+                    </RelativeLayout>
+
+                    
+                    <include layout="@layout/include_split" /> 
+
+                    <RelativeLayout
+                        style="@style/InputParentTheme"
+                        android:layout_width="match_parent" >
+
+                        <ImageView
+                            android:id="@+id/ivQuickSearch"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/login_pwd" />
+
+                        <EditText
+                            android:id="@+id/etPwd"
+                            style="@style/EtTheme"
+                            android:layout_toRightOf="@+id/ivQuickSearch"
+                            android:hint="密码"
+                            android:inputType="textPassword" />
+                    </RelativeLayout>
+                    
+                    <include layout="@layout/include_split" />
+                     
+                </LinearLayout>
+
+<!--                 <Button -->
+<!--                     android:id="@+id/btnForgetPwd" -->
+<!--                     style="@style/btnFogetPwdTheme" -->
+<!--                     android:onClick="onSkipToFindPwd" -->
+<!--                     android:text="忘记密码？" /> -->
+
+                <Button
+                    android:id="@+id/btnLoad"
+                    style="@style/BtnCommitTheme"
+                    android:onClick="onLoginClick"
+                    android:text="登录" />
+
+                <Button
+                    android:id="@+id/btnRegister"
+                    style="@style/BtnRegisterTheme"
+                    android:layout_width="80dp"
+                    android:onClick="onRegisterClick"
+                    android:text="注册" />
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+
+</LinearLayout>

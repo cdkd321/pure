@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvText"
+    style="@style/m_m" 
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_fragment_navigation_bar" />
+
+    <LinearLayout
+        android:id="@+id/llContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/twenty_dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tvQuestion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/twenty_dp"
+            android:text="你的预期谈恋爱时间是多久(步入婚姻)?"
+            android:textColor="@color/red"
+            android:textSize="@dimen/activity_title_text_size" />
+
+        <include layout="@layout/question_radio_choose" />
+    </LinearLayout>
+
+</LinearLayout>
