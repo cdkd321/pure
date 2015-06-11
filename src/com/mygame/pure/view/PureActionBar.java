@@ -16,7 +16,7 @@ import com.mygame.pure.R;
  * @author tom 所有界面用到的actionbar，顶部可配置
  * 
  */
-public class SelfDefineActionBar extends RelativeLayout {
+public class PureActionBar extends RelativeLayout {
 
 	Context context;
 	View parentView;
@@ -24,18 +24,18 @@ public class SelfDefineActionBar extends RelativeLayout {
 	private ViewGroup mFlNaviRight;
 	private ViewGroup mFlNaviMid;
 
-	public SelfDefineActionBar(Context context) {
+	public PureActionBar(Context context) {
 		super(context, null);
 		this.context = context;
 	}
 
-	public SelfDefineActionBar(Context context, AttributeSet attrs) {
+	public PureActionBar(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
 	}
 
 	public static interface IProvideTkActionBar {
-		SelfDefineActionBar getTkActionBar();
+		PureActionBar getTkActionBar();
 
 		void setupTkActionBar(int resId);
 

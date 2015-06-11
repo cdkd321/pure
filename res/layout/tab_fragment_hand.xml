@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:gravity="top|center"
+    android:orientation="vertical"
+    android:background="@drawable/bg_for_app" >
+    
+    <include layout="@layout/include_fragment_navigation_bar" />
+    
+    <RelativeLayout
+        android:id="@+id/rlProgress"
+        android:layout_marginTop="43dp"
+        android:layout_width="259dp"
+        android:layout_height="259dp" >
+        
+    <ProgressBar 
+        android:id="@+id/pbWetDegree"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="?android:attr/progressBarStyleLargeInverse"
+        android:progress="100"
+        android:secondaryProgress="5"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/circle_bg"
+        android:progressDrawable="@drawable/circle_light"
+        android:background="@null" 
+        android:scrollbarStyle="insideOverlay" />
+    
+    <TextView 
+        style="@style/w_w"
+        android:textSize="@dimen/input_size"
+        android:text="蓝牙已连接"
+        android:textColor="@color/white"
+        android:layout_marginBottom="36dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" />
+    
+    </RelativeLayout>
+
+</LinearLayout>

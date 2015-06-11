@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -12,15 +11,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.mygame.pure.bean.Constant;
 import com.mygame.pure.http.AjaxParams;
 import com.mygame.pure.http.FinalHttp;
 import com.mygame.pure.info.User;
-import com.mygame.pure.view.SelfDefineActionBar;
-import com.mygame.pure.view.SelfDefineActionBar.IProvideTkActionBar;
+import com.mygame.pure.view.PureActionBar;
+import com.mygame.pure.view.PureActionBar.IProvideTkActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -35,7 +32,7 @@ public class BaseFragment extends Fragment implements IProvideTkActionBar {
 	public User user;
 	public String ipAddress;
 	public ImageLoader imageLoader = ImageLoader.getInstance();
-	protected SelfDefineActionBar mTkActionBar;
+	protected PureActionBar mTkActionBar;
 	protected View rootView;
 	private FinalHttp http;
 	Activity activity = null;
@@ -59,10 +56,10 @@ public class BaseFragment extends Fragment implements IProvideTkActionBar {
 	}
 
 	@Override
-	public SelfDefineActionBar getTkActionBar() {
+	public PureActionBar getTkActionBar() {
 		if (rootView != null) {
-			mTkActionBar = (SelfDefineActionBar) rootView
-					.findViewById(R.id.tkActionBar);
+			mTkActionBar = (PureActionBar) rootView
+					.findViewById(R.id.actionBar);
 		}
 		return mTkActionBar;
 	}
@@ -244,7 +241,7 @@ public class BaseFragment extends Fragment implements IProvideTkActionBar {
 	 */
 	@Override
 	public void setupTkActionBar(int resId) {
-		mTkActionBar = (SelfDefineActionBar) getView().findViewById(resId);
+		mTkActionBar = (PureActionBar) getView().findViewById(resId);
 	}
 
 	@Override

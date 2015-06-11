@@ -3,13 +3,14 @@
 
     <style name="AppThemeStyle" parent="@android:style/Theme.Translucent">
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:windowBackground">@color/top_bg</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowAnimationStyle">@style/SelfDefine.Activity</item>
         <item name="android:scrollingCache">false</item>
+        <item name="android:background">@color/top_bg</item>
     </style>
-
+    
     <style name="SelfDefine.Activity" parent="@android:style/Animation">
         <item name="android:activityOpenEnterAnimation">@anim/activity_slide_right_in</item>
         <item name="android:activityOpenExitAnimation">@anim/activity_slide_left_out</item>

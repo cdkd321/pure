@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TabHost.TabSpec;
 
 public class MainActivity extends BaseActivity {
@@ -49,13 +50,10 @@ public class MainActivity extends BaseActivity {
 		for (int i = 0; i < count; i++) {
 			// 为每一个Tab按钮设置图标、文字和内容
 			TabSpec tabSpec = mTabHost.newTabSpec(mTextviewArray[i]).setIndicator(getTabItemView(i));
+			
 			// 将Tab按钮添加进Tab选项卡中
 			mTabHost.addTab(tabSpec, fragmentArray[i], null);
 		}
-	
-//		if (getIntent() != null) {
-//			selectIdx = getIntent().getIntExtra(Extra.INT, 0);
-//		}
 	
 		mTabHost.setCurrentTab(0);
 	}
@@ -66,13 +64,10 @@ public class MainActivity extends BaseActivity {
 	 */
 	private View getTabItemView(int index) {
 		View view = layoutInflater.inflate(R.layout.tab_item_view, null);
-
+		ImageView ivTab = (ImageView)view.findViewById(R.id.ivTab);
 		Button btnTab = (Button) view.findViewById(R.id.btnTab);
 		btnTab.setText(mTextviewArray[index]);
-
-		btnTab.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(mImageViewArray[index]), null,
-				null);
-
+		ivTab.setImageResource(mImageViewArray[index]);
 		return view;
 	}
 }

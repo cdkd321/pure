@@ -14,9 +14,9 @@ import com.google.gson.reflect.TypeToken;
 import com.mygame.pure.bean.Constant.Preference;
 import com.mygame.pure.http.FinalHttp;
 import com.mygame.pure.info.User;
-import com.mygame.pure.log.MyLog;
-import com.mygame.pure.view.SelfDefineActionBar;
-import com.mygame.pure.view.SelfDefineActionBar.IProvideTkActionBar;
+import com.mygame.pure.log.MyLog; 
+import com.mygame.pure.view.PureActionBar;
+import com.mygame.pure.view.PureActionBar.IProvideTkActionBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -30,11 +30,11 @@ public class BaseActivity extends FragmentActivity implements
 	public User user;
 	public ImageLoader imageLoader = ImageLoader.getInstance();
 	private FinalHttp http;
-	protected SelfDefineActionBar mTkActionBar;
+	protected PureActionBar mTkActionBar;
 
 	@Override
-	public SelfDefineActionBar getTkActionBar() {
-		mTkActionBar = (SelfDefineActionBar) findViewById(R.id.tkActionBar);
+	public PureActionBar getTkActionBar() {
+		mTkActionBar = (PureActionBar) findViewById(R.id.actionBar);
 		return mTkActionBar;
 	}
 	
@@ -215,7 +215,7 @@ public class BaseActivity extends FragmentActivity implements
 	 */
 	@Override
 	public void setupTkActionBar(int resId) {
-		mTkActionBar = (SelfDefineActionBar) findViewById(resId);
+		mTkActionBar = (PureActionBar) findViewById(resId);
 	}
 
 	/**

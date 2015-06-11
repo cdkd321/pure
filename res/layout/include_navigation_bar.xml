@@ -13,6 +13,17 @@
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/item_selector"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:onClick="onBackClick"
+            android:src="@drawable/btn_back_bg" />
     </FrameLayout>
 
     <!-- middle view container -->

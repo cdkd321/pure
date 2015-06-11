@@ -5,11 +5,13 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="operate_text_size">14sp</dimen>
     <dimen name="activity_title_text_size">16sp</dimen>
-    <dimen name="input_size">13sp</dimen>
+    <dimen name="input_size">11sp</dimen>
     <dimen name="ten_dp">10dp</dimen> 
-    <dimen name="five_dp">5dp</dimen> 
+    <dimen name="five_dp">5dp</dimen>
+    <dimen name="three_dp">3dp</dimen>
     <dimen name="twenty_dp">20dp</dimen>
     <dimen name="forty_dp">40dp</dimen>
+    <dimen name="forty_eight_dp">48dp</dimen>
     <dimen name="fifty_dp">50dp</dimen>
     <dimen name="sixty_dp">60dp</dimen>
     <dimen name="seventy_dp">70dp</dimen>
