@@ -2,40 +2,84 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_for_app"
     android:gravity="top|center"
-    android:orientation="vertical"
-    android:background="@drawable/bg_for_app" >
-    
+    android:orientation="vertical" >
+
     <include layout="@layout/include_fragment_navigation_bar" />
-    
+
     <RelativeLayout
         android:id="@+id/rlProgress"
-        android:layout_marginTop="43dp"
         android:layout_width="259dp"
-        android:layout_height="259dp" >
-        
-    <ProgressBar 
-        android:id="@+id/pbWetDegree"
+        android:layout_height="259dp"
+        android:layout_marginTop="43dp" >
+
+        <ProgressBar
+            android:id="@+id/pbWetDegree"
+            style="?android:attr/progressBarStyleLargeInverse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/circle_bg"
+            android:progress="100"
+            android:progressDrawable="@drawable/circle_light"
+            android:scrollbarStyle="insideOverlay"
+            android:secondaryProgress="5" />
+
+        <TextView
+            android:id="@+id/tvBlueTouth"
+            style="@style/styleNormalText"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="36dp"
+            android:text="蓝牙已连接" />
+    </RelativeLayout>
+
+    <TextView
+        style="@style/styleNormalText"
+        android:layout_marginTop="38dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_horizontal"
+        android:text="皮肤很湿润，向朋友嘚瑟一下吧~" />
+    
+    
+    <RelativeLayout
+        android:id="@+id/rlData"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        style="?android:attr/progressBarStyleLargeInverse"
-        android:progress="100"
-        android:secondaryProgress="5"
-        android:indeterminate="true"
-        android:indeterminateDrawable="@drawable/circle_bg"
-        android:progressDrawable="@drawable/circle_light"
-        android:background="@null" 
-        android:scrollbarStyle="insideOverlay" />
-    
-    <TextView 
-        style="@style/w_w"
-        android:textSize="@dimen/input_size"
-        android:text="蓝牙已连接"
-        android:textColor="@color/white"
-        android:layout_marginBottom="36dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true" />
-    
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp" >
+
+        <TextView
+            android:id="@+id/tvAverageLabel"
+            style="@style/styleNormalText"
+            android:layout_marginLeft="@dimen/thirty_six_dp"
+            android:text="平均水平" />
+        
+        <TextView
+            android:id="@+id/tvAverage"
+            style="@style/styleNormalText"
+            android:layout_below="@+id/tvAverageLabel"
+            android:textSize="25sp"
+            android:layout_marginLeft="43dp"
+            android:text="30.0" />
+        
+        <TextView
+            android:id="@+id/tvYestodayLabel"
+            style="@style/styleNormalText"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tvAverageLabel"
+            android:layout_marginRight="36dp"
+            android:text="较前一天" />
+        
+        <TextView
+            android:id="@+id/tvYestoday"
+            style="@style/styleNormalText"
+            android:layout_below="@+id/tvYestodayLabel"
+            android:layout_alignParentRight="true"
+            android:textSize="25sp"
+            android:layout_marginRight="43dp"
+            android:text="+5.2" />
     </RelativeLayout>
 
 </LinearLayout>

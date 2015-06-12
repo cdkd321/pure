@@ -3,12 +3,11 @@
 
     <style name="AppThemeStyle" parent="@android:style/Theme.Translucent">
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/top_bg</item>
+        <item name="android:windowBackground">@color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowAnimationStyle">@style/SelfDefine.Activity</item>
         <item name="android:scrollingCache">false</item>
-        <item name="android:background">@color/top_bg</item>
     </style>
     
     <style name="SelfDefine.Activity" parent="@android:style/Animation">
@@ -204,5 +203,10 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:textColor">@color/item_subtitle</item>
         <item name="android:textSize">15sp</item>
+    </style>
+    <style name="styleNormalText" parent="@style/w_w">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

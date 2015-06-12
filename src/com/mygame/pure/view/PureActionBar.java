@@ -150,7 +150,7 @@ public class PureActionBar extends RelativeLayout {
 	public void addBackText(String text, final OnClickListener listener,
 			final Activity activity) {
 		TextView backBtn = (TextView) View.inflate(context,
-				R.layout.action_bar_text, null);
+				R.layout.action_bar_mid_text, null);
 		backBtn.setText(text);
 		setLeftView(backBtn, listener);
 	}
@@ -167,7 +167,7 @@ public class PureActionBar extends RelativeLayout {
 	 */
 	public void addBackText(int textId, final OnClickListener listener) {
 		TextView backBtn = (TextView) View.inflate(context,
-				R.layout.action_bar_text, null);
+				R.layout.action_bar_mid_text, null);
 		backBtn.setText(textId);
 		setLeftView(backBtn, listener);
 	}
@@ -185,7 +185,7 @@ public class PureActionBar extends RelativeLayout {
 	 */
 	public void addRightText(String text, final OnClickListener listener) {
 		TextView backBtn = (TextView) View.inflate(context,
-				R.layout.action_bar_text, null);
+				R.layout.action_bar_mid_text, null);
 		backBtn.setText(text);
 		setRightView(backBtn, listener);
 	}
@@ -202,7 +202,7 @@ public class PureActionBar extends RelativeLayout {
 	 */
 	public void addRightText(int textId, final OnClickListener listener) {
 		TextView backBtn = (TextView) View.inflate(context,
-				R.layout.action_bar_text, null);
+				R.layout.action_bar_mid_text, null);
 		backBtn.setText(textId);
 		setRightView(backBtn, listener);
 	}
@@ -231,25 +231,23 @@ public class PureActionBar extends RelativeLayout {
 	 */
 	public void setTitle(int textId, OnClickListener listener) {
 		TextView tvTitle = (TextView) View.inflate(context,
-				R.layout.action_bar_text, null);
+				R.layout.action_bar_mid_text, null);
 		tvTitle.setText(textId);
 		setMiddleView(tvTitle, listener);
 	}
 
 	public void addBackImage(int draId, final OnClickListener listener) {
-		ImageView backBtn = (ImageView) View.inflate(context,
-				R.layout.action_bar_image, null);
+		ImageView backBtn = (ImageView) View.inflate(context, R.layout.action_bar_image_l, null);
 		backBtn.setImageResource(draId);
-		backBtn.setOnClickListener(listener);
 		setLeftView(backBtn, null);
+		backBtn.setOnClickListener(listener);
 	}
 
 	public void addRightImage(int draId, final OnClickListener listener) {
-		ImageView backBtn = (ImageView) View.inflate(context,
-				R.layout.action_bar_image, null);
+		ImageView backBtn = (ImageView) View.inflate(context, R.layout.action_bar_image_r, null);
 		backBtn.setImageResource(draId);
-		backBtn.setOnClickListener(listener);
 		setRightView(backBtn, null);
+		backBtn.setOnClickListener(listener);
 	}
 
 }
