@@ -21,7 +21,7 @@ public class HandFragment extends BaseFragment implements OnClickListener{
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		rootView = View.inflate(activity, R.layout.tab_fragment_hand, null);
+		rootView = inflater.inflate(R.layout.tab_fragment_hand, container, false);
 		setTitle("检测中心");
 		addBackImage(R.drawable.btn_more_bg, this);
 		addRightImage(R.drawable.btn_news_bg, this);

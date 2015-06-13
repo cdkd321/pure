@@ -3,18 +3,15 @@ package com.mygame.pure.adapter;
 
 import java.util.List;
 
-import com.mygame.pure.R;
-import com.mygame.pure.struct.StructFriendInfo;
-
 import android.content.Context;
-import android.graphics.Color;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.mygame.pure.R;
+import com.mygame.pure.struct.StructFriendInfo;
 
 /**
  * 查找中的更多的界面中右边listview的适配器

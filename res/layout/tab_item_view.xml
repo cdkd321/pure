@@ -1,30 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/llTab"
-    style="@style/w_w"
-    android:paddingTop="@dimen/five_dp"
+    style="@style/m_w"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="horizontal"
+    android:layout_alignParentBottom="true" >
+
+    <LinearLayout
+        android:id="@+id/llTab1" 
+        style="@style/styleTab" >
+
+        <ImageView
+            android:id="@+id/ivTab1"
+            style="@style/styleTabImg" 
+            android:src="@drawable/tab_hand_bg" />
+
+        <Button
+            android:id="@+id/btnTab1"
+            style="@style/styleTabText"
+            android:text="@string/hand" />
+    </LinearLayout>
     
-    <ImageView
-        android:id="@+id/ivTab"
-        android:contentDescription="@string/app_name"
-        style="@style/w_w"
-        android:layout_width="29dp"
-        android:layout_height="29dp"
-        android:scaleType="fitXY"
-        android:background="@color/white"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/tab_eye_bg" />
-    <Button
-	    android:id="@+id/btnTab"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_gravity="center_horizontal"
-	    android:textColor="@color/tab_text_color"
-	    android:textSize="@dimen/input_size" 
-	    android:background="@null"
-	    android:text="@string/back" />
-    
+    <LinearLayout
+        android:id="@+id/llTab2" 
+        style="@style/styleTab">
+
+        <ImageView
+            android:id="@+id/ivTab2"
+            style="@style/styleTabImg"
+            android:src="@drawable/tab_face_bg" />
+
+        <Button
+            android:id="@+id/btnTab2"
+            style="@style/styleTabText"
+            android:text="@string/face" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTab3" 
+        style="@style/styleTab">
+
+        <ImageView
+            android:id="@+id/ivTab3"
+            style="@style/styleTabImg"
+            android:src="@drawable/tab_eye_bg" />
+
+        <Button
+            android:id="@+id/btnTab3"
+            style="@style/styleTabText"
+            android:text="@string/eye" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llTab4"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        style="@style/styleTab" >
+
+        <ImageView
+            android:id="@+id/ivTab4"
+            style="@style/styleTabImg"
+            android:src="@drawable/tab_neck_bg" />
+
+        <Button
+            android:id="@+id/btnTab4"
+            style="@style/styleTabText"
+            android:text="@string/neck"  />
+    </LinearLayout>
+
 </LinearLayout>
- 

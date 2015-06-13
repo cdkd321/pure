@@ -17,7 +17,7 @@ public class NeckFragment extends BaseFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		rootView = View.inflate(activity, R.layout.activity_welcom, null);
+		rootView = inflater.inflate(R.layout.tab_fragment_neck, container, false);
 		return rootView;
 	}
 }

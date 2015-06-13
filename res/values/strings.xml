@@ -23,4 +23,8 @@
 	<string name="pwd_empty">密码为空</string>
 	<string name="username_limit">用户名长度在16个字符以内哦</string>
 	<string name="pwd_length_limit">密码长度在6-16个字符以内哦</string>
+	<string name="hand">手</string>
+    <string name="face">脸</string>
+    <string name="eye">眼</string>
+    <string name="neck">颈</string>
 </resources>
