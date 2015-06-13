@@ -1,4 +1,4 @@
-package com.mygame.pure;
+package com.mygame.pure.activity;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -11,6 +11,10 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mygame.pure.R;
+import com.mygame.pure.SelfDefineApplication;
+import com.mygame.pure.R.id;
+import com.mygame.pure.R.string;
 import com.mygame.pure.bean.Constant.Preference;
 import com.mygame.pure.http.FinalHttp;
 import com.mygame.pure.info.User;

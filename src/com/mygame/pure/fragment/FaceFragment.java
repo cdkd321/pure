@@ -1,4 +1,7 @@
-package com.mygame.pure;
+package com.mygame.pure.fragment;
+
+import com.mygame.pure.R;
+import com.mygame.pure.R.layout;
 
 import android.app.Activity;
 import android.os.Bundle;

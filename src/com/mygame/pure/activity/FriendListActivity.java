@@ -1,8 +1,11 @@
-package com.mygame.pure;
+package com.mygame.pure.activity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mygame.pure.R;
+import com.mygame.pure.R.id;
+import com.mygame.pure.R.layout;
 import com.mygame.pure.adapter.FriendListViewAdapter;
 import com.mygame.pure.struct.StructFriendInfo;
 

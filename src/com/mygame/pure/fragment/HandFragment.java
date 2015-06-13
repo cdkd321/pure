@@ -1,5 +1,9 @@
-package com.mygame.pure;
+package com.mygame.pure.fragment;
 
+import com.mygame.pure.R;
+import com.mygame.pure.R.drawable;
+import com.mygame.pure.R.id;
+import com.mygame.pure.R.layout;
 import com.mygame.pure.utils.ToastHelper;
 
 import android.app.Activity;

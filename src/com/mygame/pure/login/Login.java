@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.mygame.pure.BaseActivity;
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
+import com.mygame.pure.activity.BaseActivity;
 import com.mygame.pure.bean.Constant.Preference;
 import com.mygame.pure.http.AjaxParams;
 import com.mygame.pure.utils.AssetUtils;

@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mygame.pure.BaseActivity;
 import com.mygame.pure.Question;
 import com.mygame.pure.R;
 import com.mygame.pure.bean.Response;

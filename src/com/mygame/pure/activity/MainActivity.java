@@ -1,4 +1,4 @@
-package com.mygame.pure;
+package com.mygame.pure.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,15 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.mygame.pure.R;
+import com.mygame.pure.R.id;
+import com.mygame.pure.R.layout;
 import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.adapter.VerticalPagerAdapter;
+import com.mygame.pure.fragment.EyesFragment;
+import com.mygame.pure.fragment.FaceFragment;
+import com.mygame.pure.fragment.HandFragment;
+import com.mygame.pure.fragment.NeckFragment;
 import com.mygame.pure.view.VerticalViewPager;
 
 public class MainActivity extends BaseActivity implements OnClickListener {
