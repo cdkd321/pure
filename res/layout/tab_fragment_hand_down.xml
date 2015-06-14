@@ -32,6 +32,141 @@
             android:text="本月" />
     </RadioGroup>
 
-    <inclucde layout="@layout/include_split" />
+    <include layout="@layout/include_split" />
+    
+    
+    <RelativeLayout
+        android:id="@+id/rlPage"
+        style="@style/m_w">
+        
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vPager"
+            android:layout_height="100dp"
+            style="@style/m_w" />
+        
+         <ImageView
+			style="@style/w_w"
+            android:layout_alignParentLeft="true"
+            android:onClick="clickPageLeft"
+            android:layout_margin="@dimen/margin_of_cell"
+            android:src="@drawable/icon_arrow_left"/>
+         
+         <ImageView
+			style="@style/w_w"
+             android:onClick="clickPageRight"
+             android:layout_alignParentRight="true"
+             android:layout_margin="@dimen/margin_of_cell"
+             android:src="@drawable/icon_arrow_right"/>
+        
+    </RelativeLayout>
+    
+    <include layout="@layout/include_split" android:layout_width="match_parent"/>
+    
+    <RelativeLayout
+        android:id="@+id/rlOlder"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="@dimen/margin_of_cell"
+        android:paddingRight="@dimen/margin_of_cell"
+        style="@style/m_w">
+         
+         <TextView 
+             style="@style/styleCenterText"
+             android:layout_centerVertical="true"
+             android:text="脸部的肌肤比实际年龄" />
+         
+         <TextView 
+             style="@style/styleCenterText"
+             android:layout_centerVertical="true" 
+             android:layout_alignParentRight="true"
+             android:text="老了0岁" />
+         <include layout="@layout/include_split" android:layout_alignParentTop="true"/>
+         
+    </RelativeLayout>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/theme_dive_blue" />
+    
+    <RelativeLayout
+        android:id="@+id/rlWater"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="@dimen/margin_of_cell"
+        android:paddingRight="@dimen/margin_of_cell"
+        style="@style/m_w">
+         
+         <TextView 
+             style="@style/styleCenterText"
+             android:layout_centerVertical="true"
+             android:text="脸部的肌肤水嫩度" />
+         
+         <TextView 
+             style="@style/styleCenterText"
+             android:layout_centerVertical="true" 
+             android:layout_alignParentRight="true"
+             android:text="45" />
+    </RelativeLayout>
+    <include layout="@layout/include_split" />
+    
+    
+    <include layout="@layout/include_split" android:layout_marginTop="@dimen/ten_dp"/>
+
+    <RelativeLayout style="@style/m_w" 
+        android:visibility="gone"
+        android:padding="@dimen/margin_of_cell">
+
+        <ImageView
+            style="@style/w_w"
+            android:src="@drawable/line_bg_toady" />
+
+        <ImageView
+            style="@style/w_w"
+            android:src="@drawable/line_bg_week" />
+        
+        <ImageView
+            style="@style/w_w"
+            android:src="@drawable/line" />
+    </RelativeLayout>
+    
+    
+    <RelativeLayout style="@style/m_w" 
+        android:padding="@dimen/margin_of_cell">
+
+        <ProgressBar
+            android:id="@+id/pbWetDegree"
+            style="?android:attr/progressBarStyleLargeInverse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:indeterminate="true"
+            android:indeterminateDrawable="@drawable/circle_bg"
+            android:progress="100"
+            android:progressDrawable="@drawable/circle_light"
+            android:scrollbarStyle="insideOverlay"
+            android:secondaryProgress="5" />
+        
+        <ImageView
+            android:id="@+id/ivDegreeImg"
+            style="@style/w_w"
+            android:layout_marginTop="28dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/water_drop" />
+        
+        <TextView 
+            android:id="@+id/tvDegreeText"
+             style="@style/styleCenterText"
+             android:layout_centerInParent="true"
+             android:text="0%" />
+        
+        <TextView 
+             style="@style/styleCenterText"
+             android:textColor="@color/gray"
+             android:layout_centerHorizontal="true"
+             android:layout_alignParentBottom="true"
+             android:layout_marginBottom="28dp"
+             android:text="45" />
+    </RelativeLayout>
 
 </LinearLayout>
