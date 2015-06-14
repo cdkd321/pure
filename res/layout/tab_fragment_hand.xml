@@ -6,8 +6,6 @@
     android:gravity="top|center"
     android:orientation="vertical" >
 
-    <include layout="@layout/include_fragment_navigation_bar" />
-
     <RelativeLayout
         android:id="@+id/rlProgress"
         android:layout_width="259dp"

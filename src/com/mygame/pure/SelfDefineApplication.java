@@ -2,6 +2,8 @@ package com.mygame.pure;
 
 import com.mygame.pure.http.FinalHttp;
 import com.mygame.pure.info.User;
+import com.mygame.pure.utils.DeviceConfiger;
+
 import android.app.Application;
 
 public class SelfDefineApplication extends Application {
@@ -32,6 +34,7 @@ public class SelfDefineApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		finalHttp = getFinalHttp();
+		DeviceConfiger.init();
 	}
 	
 	

@@ -104,7 +104,7 @@ public class BaseActivity extends FragmentActivity implements
 	 * 
 	 * @param listener
 	 */
-	protected void addBackImage(int drawId, OnClickListener listener) {
+	public void addBackImage(int drawId, OnClickListener listener) {
 		getTkActionBar();
 		if (mTkActionBar != null) {
 			if (listener == null) {
@@ -145,7 +145,7 @@ public class BaseActivity extends FragmentActivity implements
 	 * 
 	 * @param listener
 	 */
-	protected void addRightImage(int drawId, OnClickListener listener) {
+	public void addRightImage(int drawId, OnClickListener listener) {
 		getTkActionBar();
 		if (mTkActionBar != null) {
 			if (listener == null) {

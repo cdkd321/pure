@@ -1,5 +1,7 @@
 package com.mygame.pure.view;
 
+import com.mygame.pure.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -8,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.mygame.pure.R;
 
 /**
  * 

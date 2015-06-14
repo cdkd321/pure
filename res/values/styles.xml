@@ -36,6 +36,13 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
+    
+    <style name="w_0_weight_1">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    
 
     <style name="dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowIsFloating">true</item>
@@ -231,5 +238,20 @@
         <item name="android:textSize">@dimen/input_size</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:duplicateParentState">true</item>
+    </style>
+    <style name="styleRadioButton" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:textColor">@color/radio_button_text</item>
+        <item name="android:textSize">@dimen/list_text_size</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="styleCenterText" parent="w_w">
+        <item name="android:textColor">@color/theme_blue</item>
+        <item name="android:textSize">@dimen/list_text_size</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_margin">7dp</item>
     </style>
 </resources>

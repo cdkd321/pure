@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class NeckFragment extends BaseFragment{
+public class EyesFragmentUp extends BaseFragment{
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -20,7 +20,7 @@ public class NeckFragment extends BaseFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.tab_fragment_neck, container, false);
+		rootView = inflater.inflate(R.layout.tab_fragment_eyes, container, false);
 		return rootView;
 	}
 }

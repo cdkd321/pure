@@ -4,6 +4,7 @@ import com.mygame.pure.R;
 import com.mygame.pure.R.drawable;
 import com.mygame.pure.R.id;
 import com.mygame.pure.R.layout;
+import com.mygame.pure.activity.MainActivity;
 import com.mygame.pure.utils.ToastHelper;
 
 import android.app.Activity;
@@ -14,21 +15,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-public class HandFragment extends BaseFragment implements OnClickListener{
+public class HandFragmentDown extends BaseFragment implements OnClickListener{
 
+	MainActivity mact;
 	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		this.mact = (MainActivity) activity;
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.tab_fragment_hand, container, false);
-		setTitle("检测中心");
-		addBackImage(R.drawable.btn_more_bg, this);
-		addRightImage(R.drawable.btn_news_bg, this);
+		rootView = inflater.inflate(R.layout.tab_fragment_hand_down, container, false);
 		return rootView;
 	}
 

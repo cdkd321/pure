@@ -1,0 +1,78 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:gravity="top|center"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="19dp"
+        android:textSize="@dimen/activity_title_text_size"
+        android:text="4月20日"
+        android:textColor="@color/theme_blue" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            style="@style/w_0_weight_1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvJzzk"
+                style="@style/styleCenterText" 
+                android:text="4月20日" />
+
+            <TextView
+                android:id="@+id/tvJzzkData"
+                style="@style/styleCenterText" 
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:layout_marginBottom="34dp"
+                android:text="没有数据" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/w_0_weight_1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvAverageLevel"
+                style="@style/styleCenterText" 
+                android:text="平均水平" />
+
+            <TextView
+                android:id="@+id/tvAverageLevelData"
+                style="@style/styleCenterText" 
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="34dp"
+                android:textColor="@color/black"
+                android:text="0.0%" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/w_0_weight_1"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvThanLastDay"
+                style="@style/styleCenterText" 
+                android:text="比最近一天" />
+
+            <TextView
+                android:id="@+id/tvThanLastDayData"
+                style="@style/styleCenterText" 
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="34dp"
+                android:text="0.0%" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

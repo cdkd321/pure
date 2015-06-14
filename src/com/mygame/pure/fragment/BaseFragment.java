@@ -14,8 +14,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
-import com.mygame.pure.R.id;
-import com.mygame.pure.R.string;
 import com.mygame.pure.bean.Constant;
 import com.mygame.pure.http.AjaxParams;
 import com.mygame.pure.http.FinalHttp;

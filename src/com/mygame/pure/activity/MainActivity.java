@@ -11,21 +11,28 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.mygame.pure.R;
-import com.mygame.pure.R.id;
-import com.mygame.pure.R.layout;
 import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.adapter.VerticalPagerAdapter;
-import com.mygame.pure.fragment.EyesFragment;
-import com.mygame.pure.fragment.FaceFragment;
-import com.mygame.pure.fragment.HandFragment;
-import com.mygame.pure.fragment.NeckFragment;
+import com.mygame.pure.fragment.EyesFragmentDown;
+import com.mygame.pure.fragment.EyesFragmentUp;
+import com.mygame.pure.fragment.FaceFragmentDown;
+import com.mygame.pure.fragment.FaceFragmentUp;
+import com.mygame.pure.fragment.HandFragmentDown;
+import com.mygame.pure.fragment.HandFragmentUp;
+import com.mygame.pure.fragment.NeckFragmentUp;
+import com.mygame.pure.fragment.NeckFragmentDown;
 import com.mygame.pure.view.VerticalViewPager;
 
+/**
+ * 主界面 使用ViewPager + VerticalViewPager 作为程序主框架
+ * 主界面就可以上下左右滑动
+ * @author lenovo
+ */
 public class MainActivity extends BaseActivity implements OnClickListener {
 	
 	private List<View> baseList;
 	private ViewPager viewPager;
-	private View llTab1, llTab2, llTab3, llTab4; 
+	private View llTab1, llTab2, llTab3, llTab4;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +43,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	
 	
 	public List<View> getList() {
-		List<View> mList;
 		int[] layoutId = new int[]{R.layout.check_one, R.layout.check_two,
-				R.layout.check_three, R.layout.check_four,
-		};
-		mList = new ArrayList<View>();
+				R.layout.check_three, R.layout.check_four };
+		List<View> mList = new ArrayList<View>();
 		for(int i = 0; i < 4; i++){
 			View view1 = View.inflate(this, layoutId[i], null);
 			mList.add(view1);
@@ -50,7 +55,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	
 	public List<Fragment> getFragmentList(int type) {
 		List<Fragment> listFragments = new ArrayList<Fragment>();
-
+		
 		switch (type) {
 		case 0:
 			listFragments = getOneFragments();
@@ -74,30 +79,38 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	
 	private List<Fragment> getOneFragments() {
 		List<Fragment> listFragments = new ArrayList<Fragment>();
-		HandFragment fragment = new HandFragment();
+		HandFragmentUp fragment = new HandFragmentUp();
 		listFragments.add(fragment);
+		HandFragmentDown fragment2 = new HandFragmentDown();
+		listFragments.add(fragment2);
 		return listFragments;
 	}
 
 
 	public List<Fragment> getTwoFragments(){
 		List<Fragment> listFragments = new ArrayList<Fragment>();
-		FaceFragment fragment = new FaceFragment();
-		listFragments.add(fragment); 
+		FaceFragmentUp fragment = new FaceFragmentUp();
+		listFragments.add(fragment);
+		FaceFragmentDown fragment2 = new FaceFragmentDown();
+		listFragments.add(fragment2); 
 		return listFragments;
 		
 	}
 	public List<Fragment> getThreeFragments(){
 		List<Fragment> listFragments = new ArrayList<Fragment>();
-		EyesFragment fragment = new EyesFragment();
-		listFragments.add(fragment); 
+		EyesFragmentUp fragment = new EyesFragmentUp();
+		listFragments.add(fragment);
+		EyesFragmentDown fragment2 = new EyesFragmentDown();
+		listFragments.add(fragment2); 
 		return listFragments;
 	}
 	
 	private List<Fragment> getFourFragments() {
 		List<Fragment> listFragments = new ArrayList<Fragment>();
-		NeckFragment fragment = new NeckFragment();
-		listFragments.add(fragment);  
+		NeckFragmentUp fragment = new NeckFragmentUp();
+		listFragments.add(fragment);
+		NeckFragmentDown fragment2 = new NeckFragmentDown();
+		listFragments.add(fragment2);
 		return listFragments;
 	}
 	
@@ -112,7 +125,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		llTab2.setOnClickListener(this);
 		llTab3.setOnClickListener(this);
 		llTab4.setOnClickListener(this);
-		
 		
 		viewPager = (ViewPager) findViewById(R.id.check_list);
 		baseList = getList();
@@ -196,16 +208,4 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			break;
 		}
 	}
-	
-	/**
-	 * 给Tab按钮设置图标和文字
-	 */
-//	private View getTabItemView(int index) {
-//		View view = layoutInflater.inflate(R.layout.tab_item_view, null);
-//		ImageView ivTab = (ImageView)view.findViewById(R.id.ivTab);
-//		Button btnTab = (Button) view.findViewById(R.id.btnTab);
-//		btnTab.setText(mTextviewArray[index]);
-//		ivTab.setImageResource(mImageViewArray[index]);
-//		return view;
-//	}
 }

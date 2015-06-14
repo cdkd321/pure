@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_for_app"
+    android:gravity="top|center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rlProgress"
+        android:layout_width="259dp"
+        android:layout_height="259dp"
+        android:layout_marginTop="43dp" >
+
+        <TextView
+            android:id="@+id/tvBlueTouth"
+            style="@style/styleNormalText"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="36dp"
+            android:text="脸" />
+    </RelativeLayout> 
+
+</LinearLayout>

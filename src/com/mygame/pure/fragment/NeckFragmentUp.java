@@ -10,7 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FaceFragment extends BaseFragment{
+public class NeckFragmentUp extends BaseFragment{
+	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -19,7 +20,7 @@ public class FaceFragment extends BaseFragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.tab_fragment_face, container, false);
+		rootView = inflater.inflate(R.layout.tab_fragment_neck, container, false);
 		return rootView;
 	}
 }
