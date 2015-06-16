@@ -44,6 +44,7 @@ public class CircleProgressBar extends View {
 		paint.setColor(Color.BLACK);
 		paint.setStrokeWidth(STROKE_W);
 		paint.setStyle(Style.STROKE);
+		paint.setAntiAlias(true);
 		BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(R.drawable.circle_bg);
 		BitmapDrawable forceground = (BitmapDrawable) getResources().getDrawable(R.drawable.circle_light);
 		
