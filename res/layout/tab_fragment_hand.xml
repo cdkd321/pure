@@ -12,18 +12,11 @@
         android:layout_height="259dp"
         android:layout_marginTop="43dp" >
 
-        <ProgressBar
-            android:id="@+id/pbWetDegree"
-            style="?android:attr/progressBarStyleLargeInverse"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@drawable/circle_bg"
-            android:progress="100"
-            android:progressDrawable="@drawable/circle_light"
-            android:scrollbarStyle="insideOverlay"
-            android:secondaryProgress="5" />
+        <com.mygame.pure.view.CircleProgressBar
+             android:id="@+id/cpbUp"
+             android:layout_centerHorizontal="true"
+             android:layout_width="100dp"
+             android:layout_height="100dp" />
 
         <TextView
             android:id="@+id/tvBlueTouth"

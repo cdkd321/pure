@@ -5,8 +5,17 @@
     android:background="@color/white"
     android:gravity="top|center"
     android:orientation="vertical" >
-
-    <RadioGroup
+    
+    <ScrollView 
+        style="@style/m_w" >
+        
+        
+        <LinearLayout 
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+		    
+            <RadioGroup
         android:id="@+id/rGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -132,20 +141,15 @@
     
     
     <RelativeLayout style="@style/m_w" 
-        android:padding="@dimen/margin_of_cell">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_of_cell"
+        android:visibility="visible">
 
-        <ProgressBar
-            android:id="@+id/pbWetDegree"
-            style="?android:attr/progressBarStyleLargeInverse"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:indeterminate="true"
-            android:indeterminateDrawable="@drawable/circle_bg"
-            android:progress="100"
-            android:progressDrawable="@drawable/circle_light"
-            android:scrollbarStyle="insideOverlay"
-            android:secondaryProgress="5" />
+         <com.mygame.pure.view.CircleProgressBar
+             android:id="@+id/cpb"
+             android:layout_centerHorizontal="true"
+             android:layout_width="100dp"
+             android:layout_height="100dp" />
         
         <ImageView
             android:id="@+id/ivDegreeImg"
@@ -161,12 +165,30 @@
              android:text="0%" />
         
         <TextView 
-             style="@style/styleCenterText"
+            android:id="@+id/tvPoint"
+             style="@style/w_w"
              android:textColor="@color/gray"
              android:layout_centerHorizontal="true"
-             android:layout_alignParentBottom="true"
-             android:layout_marginBottom="28dp"
+             android:layout_marginTop="180dp"
              android:text="45" />
     </RelativeLayout>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/theme_dive_blue" />
+  
+         
+     <TextView 
+          style="@style/styleCenterText"
+          android:layout_gravity="left"
+          android:layout_margin="@dimen/margin_of_cell"
+          android:text="抱歉现在您还没有数据" />
+            
+		</LinearLayout>
+        
+    </ScrollView>
+
+    
 
 </LinearLayout>

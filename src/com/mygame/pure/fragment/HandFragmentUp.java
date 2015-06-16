@@ -5,6 +5,7 @@ import com.mygame.pure.R.drawable;
 import com.mygame.pure.R.id;
 import com.mygame.pure.R.layout;
 import com.mygame.pure.utils.ToastHelper;
+import com.mygame.pure.view.CircleProgressBar;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -29,6 +30,8 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener{
 		setTitle("检测中心");
 		addBackImage(R.drawable.btn_more_bg, this);
 		addRightImage(R.drawable.btn_news_bg, this);
+		CircleProgressBar pb = (CircleProgressBar) rootView.findViewById(R.id.cpbUp);
+		 pb.setPoint(50);
 		return rootView;
 	}
 

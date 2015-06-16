@@ -16,6 +16,7 @@ import com.mygame.pure.R;
 import com.mygame.pure.activity.MainActivity;
 import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.utils.ToastHelper;
+import com.mygame.pure.view.CircleProgressBar;
 
 public class HandFragmentDown extends BaseFragment implements OnClickListener{
 
@@ -43,6 +44,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener{
 			 viewList.add(view);
 		 }
 		 HistoryAdapter adapter = new HistoryAdapter(viewList);
+		 CircleProgressBar pb = (CircleProgressBar) rootView.findViewById(R.id.cpb);
+		 pb.setPoint(50);
 		 vpager.setAdapter(adapter);
 	}
 

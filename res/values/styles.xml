@@ -252,6 +252,5 @@
         <item name="android:textColor">@color/theme_blue</item>
         <item name="android:textSize">@dimen/list_text_size</item>
         <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:layout_margin">7dp</item>
     </style>
 </resources>
