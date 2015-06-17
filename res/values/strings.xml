@@ -27,4 +27,6 @@
     <string name="face">脸</string>
     <string name="eye">眼</string>
     <string name="neck">颈</string>
+    <string name="_settings">设置</string>
+    <string name="space">" "</string>
 </resources>

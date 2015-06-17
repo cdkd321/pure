@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvText"
+    style="@style/m_w" 
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <View 
+        android:id="@+id/item_line"
+        android:layout_height="1px"
+        android:layout_width="match_parent"
+        android:background="#d6d6d6"/>
+    
+    <LinearLayout
+        android:layout_height="@dimen/fifty_dp"
+        style="@style/m_w" >
+        
+        <ImageView 
+            android:id="@+id/item_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="@dimen/ten_dp"
+            android:src="@drawable/drop"
+            android:scaleType="fitCenter"
+            />
+        
+        
+        <TextView 
+            android:id="@+id/item_tvLeft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_weight="5"
+            android:textSize="@dimen/list_text_size"
+            android:text="test"
+            />
+
+        <TextView
+            android:id="@+id/item_tvRight"
+            android:layout_width="0dp"
+            android:paddingRight="@dimen/ten_dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:drawablePadding="@dimen/ten_dp"
+            android:drawableRight="@drawable/next"
+            android:gravity="center_vertical"
+            android:text="tewthi" />
+
+    </LinearLayout>
+        
+
+</LinearLayout>

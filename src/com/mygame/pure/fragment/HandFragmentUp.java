@@ -1,12 +1,5 @@
 package com.mygame.pure.fragment;
 
-import com.mygame.pure.R;
-import com.mygame.pure.R.drawable;
-import com.mygame.pure.R.id;
-import com.mygame.pure.R.layout;
-import com.mygame.pure.utils.ToastHelper;
-import com.mygame.pure.view.CircleProgressBar;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
+import com.mygame.pure.R;
+import com.mygame.pure.utils.ToastHelper;
+import com.mygame.pure.view.CircleProgressBar;
 
 public class HandFragmentUp extends BaseFragment implements OnClickListener{
 

@@ -13,9 +13,6 @@ public class SelfDefineApplication extends Application {
 	private static FinalHttp finalHttp;
 
 	public static SelfDefineApplication getInstance() {
-		if(application == null){
-			application = new SelfDefineApplication();
-		}
 		return application;
 	}
 
@@ -34,6 +31,7 @@ public class SelfDefineApplication extends Application {
 	public void onCreate() {
 		super.onCreate();
 		finalHttp = getFinalHttp();
+		application = this;
 		DeviceConfiger.init();
 	}
 	

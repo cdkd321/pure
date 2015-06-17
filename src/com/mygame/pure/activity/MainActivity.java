@@ -3,12 +3,14 @@ package com.mygame.pure.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
 
 import com.mygame.pure.R;
 import com.mygame.pure.adapter.HistoryAdapter;
@@ -33,6 +35,13 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private List<View> baseList;
 	private ViewPager viewPager;
 	private View llTab1, llTab2, llTab3, llTab4;
+	int[] viewPageId = new int[] {
+			R.id.check_one,
+			R.id.check_two,
+			R.id.check_three,
+			R.id.check_four
+	};
+	private ImageView ivImg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +52,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	
 	
 	public List<View> getList() {
+		
+		
 		int[] layoutId = new int[]{R.layout.check_one, R.layout.check_two,
 				R.layout.check_three, R.layout.check_four };
 		List<View> mList = new ArrayList<View>();
@@ -121,6 +132,10 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		llTab3 = findViewById(R.id.llTab3);
 		llTab4 = findViewById(R.id.llTab4);
 		
+		ivImg = (ImageView)findViewById(R.id.ivImg);
+		
+		ivImg.setOnClickListener(this);
+		
 		llTab1.setOnClickListener(this);
 		llTab2.setOnClickListener(this);
 		llTab3.setOnClickListener(this);
@@ -130,34 +145,12 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		baseList = getList();
 		
 		HistoryAdapter adapter = new HistoryAdapter(baseList);
-		int[] viewPageId = new int[] {
-				R.id.check_one,
-				R.id.check_two,
-				R.id.check_three,
-				R.id.check_four
-		};
+		
 		for(int i = 0; i < 4; i++){
 			List<Fragment> fragments0 = getFragmentList(0);
 			VerticalPagerAdapter fragmentAdapter = new VerticalPagerAdapter(
 					getSupportFragmentManager(), fragments0);
 			VerticalViewPager page = (VerticalViewPager) baseList.get(i).findViewById(viewPageId[i]);
-			page.setOnPageChangeListener(new VerticalViewPager.OnPageChangeListener() {
-				
-				@Override
-				public void onPageSelected(int position) {
-					 
-				}
-				
-				@Override
-				public void onPageScrolled(int position, float positionOffset,
-						int positionOffsetPixels) {
-				}
-				
-				@Override
-				public void onPageScrollStateChanged(int state) {
-					
-				}
-			});
 			page.setAdapter(fragmentAdapter);
 		}
 		viewPager.setAdapter(adapter);
@@ -203,6 +196,23 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		case R.id.llTab4:
 			viewPager.setCurrentItem(3);
 			setTabSelected(3);
+			startActivity(new Intent(v.getContext(), MoreAct.class));
+			break;
+		case R.id.ivImg:
+				VerticalViewPager vPager = (VerticalViewPager) viewPager.findViewById(
+						viewPageId[viewPager.getCurrentItem()]);
+				if(vPager.getChildCount() > 0){
+					if(vPager.getCurrentItem() > 0) {
+						vPager.setCurrentItem(0);
+						ivImg.setBackgroundResource(R.drawable.back);
+					} else {
+						vPager.setCurrentItem(1);
+						ivImg.setBackgroundResource(R.drawable.arrow_down);
+						
+					}
+				} else {
+					vPager.setCurrentItem(0);
+				}
 			break;
 		default:
 			break;

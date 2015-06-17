@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.mygame.pure"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:gravity="top|center"
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_navigation_bar"/>
+
+    <RelativeLayout
+        android:id="@+id/head"
+        android:layout_width="fill_parent"
+        android:layout_height="158dp"
+        android:background="@color/white" >
+
+        <com.mygame.pure.view.CircleImageView
+            android:id="@+id/cimg"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/psb"
+            app:border_color="@color/gray"
+            app:border_width="2dp" />
+
+        <TextView
+            style="@style/w_w"
+            android:layout_below="@+id/cimg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:text="小红"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/input_size" />
+
+        <TextView
+            style="@style/w_w"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/twenty_dp"
+            android:background="@drawable/bg_round_corner_theme"
+            android:padding="@dimen/five_dp"
+            android:text="已连接"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/input_size" />
+    </RelativeLayout>
+
+
+        <com.mygame.pure.view.UIItem
+            android:id="@+id/ui_settings"
+            style="@style/m_w"
+            android:layout_below="@+id/head"
+            app:leftIcon="@drawable/sitting_pressed"
+            app:leftIcon_visible="0"
+            app:leftText1="提醒设置" />
+
+        <com.mygame.pure.view.UIItem
+            android:id="@+id/ui_hufu"
+            style="@style/m_w"
+            android:layout_below="@+id/ui_settings"
+            app:leftIcon="@drawable/drop_pressed"
+            app:leftIcon_visible="0"
+            app:leftText1="护肤知识" />
+
+        <com.mygame.pure.view.UIItem
+            android:id="@+id/ui_pwd"
+            style="@style/m_w"
+            android:layout_below="@+id/ui_hufu"
+            app:leftIcon="@drawable/password_pressed"
+            app:leftIcon_visible="0"
+            app:leftText1="账户密码" />
+
+        <com.mygame.pure.view.UIItem
+            android:id="@+id/ui_yijian"
+            style="@style/m_w"
+            android:layout_below="@+id/ui_pwd"
+            app:leftIcon="@drawable/feedback_pressed"
+            app:leftIcon_visible="0"
+            app:leftText1="意见反馈" />
+
+</RelativeLayout>

@@ -23,6 +23,7 @@
     <color name="operate_title">#f7f7f7</color>
     <color name="wheel_text_value">#3985fe</color>
     <color name="text_gray">#474747</color>
+    <color name="text_black">#3a3838</color>
     <color name="text_green">#4fbb0f</color>
     <color name="text_yellow">#bbbb00</color>
     <color name="gray">#b3b3b3</color>
