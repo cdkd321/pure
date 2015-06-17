@@ -32,20 +32,17 @@
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
             android:layout_weight="5"
+            android:textColor="#3a3838"
             android:textSize="@dimen/list_text_size"
             android:text="test"
             />
 
-        <TextView
+        <ImageView
             android:id="@+id/item_tvRight"
-            android:layout_width="0dp"
-            android:paddingRight="@dimen/ten_dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:drawablePadding="@dimen/ten_dp"
-            android:drawableRight="@drawable/next"
-            android:gravity="center_vertical"
-            android:text="tewthi" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="15dp"
+            android:src="@drawable/next" />
 
     </LinearLayout>
         

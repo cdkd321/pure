@@ -11,6 +11,7 @@
 
     <RelativeLayout
         android:id="@+id/head"
+        android:layout_below="@+id/actionBar"
         android:layout_width="fill_parent"
         android:layout_height="158dp"
         android:background="@color/white" >

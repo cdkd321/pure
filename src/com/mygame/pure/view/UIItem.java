@@ -21,7 +21,7 @@ import com.mygame.pure.utils.DeviceConfiger;
 public class UIItem extends RelativeLayout {
     private View line;
     private ImageView leftIcon;
-    private TextView tvLeft1, tvRight;
+    private TextView tvLeft1;
 
     public UIItem(Context context, AttributeSet attrs)
     {
@@ -30,7 +30,6 @@ public class UIItem extends RelativeLayout {
         line = findViewById(R.id.item_line);
         leftIcon = (ImageView) findViewById(R.id.item_icon);
         tvLeft1 = (TextView) findViewById(R.id.item_tvLeft);
-        tvRight = (TextView) findViewById(R.id.item_tvRight);
         if (attrs != null) {
             // AttributeSet是节点的属性集合
             // TypedArray 属性的容器
@@ -48,17 +47,12 @@ public class UIItem extends RelativeLayout {
                 break;
             }
             tvLeft1.setText(a.getString(R.styleable.UIItem_leftText1));
-            tvRight.setText(a.getString(R.styleable.UIItem_rightText));
         }
     }
 
     public void setValue(int iconId, int leftStrId1, String leftStr) {
         leftIcon.setImageResource(iconId);
         tvLeft1.setText(leftStrId1);
-    }
-
-    public void setRightText(String rightStr) {
-        tvRight.setText(rightStr);
     }
 
 }
