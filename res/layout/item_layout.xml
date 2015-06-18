@@ -19,7 +19,7 @@
             android:id="@+id/item_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="@dimen/ten_dp"
+            android:padding="13dp"
             android:src="@drawable/drop"
             android:scaleType="fitCenter"
             />
