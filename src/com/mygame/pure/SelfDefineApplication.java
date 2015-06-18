@@ -1,5 +1,6 @@
 package com.mygame.pure;
 
+import com.mygame.pure.ble.BleService;
 import com.mygame.pure.http.FinalHttp;
 import com.mygame.pure.info.User;
 import com.mygame.pure.utils.DeviceConfiger;
@@ -7,7 +8,7 @@ import com.mygame.pure.utils.DeviceConfiger;
 import android.app.Application;
 
 public class SelfDefineApplication extends Application {
-
+	public BleService mService;
 	public static boolean finishLogin;
 	private static SelfDefineApplication application;
 	private static FinalHttp finalHttp;

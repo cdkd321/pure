@@ -154,7 +154,7 @@
                 android:padding="@dimen/margin_of_cell"
                 android:visibility="visible" >
 
-                <com.mygame.pure.view.CircleProgressBarBlue
+                <com.mygame.pure.view.CircleProgressBar
                     android:id="@+id/cpb"
                     android:layout_width="200dp"
                     android:layout_height="200dp"
