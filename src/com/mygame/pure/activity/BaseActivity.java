@@ -45,7 +45,9 @@ public class BaseActivity extends FragmentActivity implements
 	public Activity getActivity() {
 		return this;
 	}
+	
 
+	
 	/**
 	 * 添加标题
 	 * 

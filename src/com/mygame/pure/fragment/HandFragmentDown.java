@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -14,9 +15,11 @@ import android.view.ViewGroup;
 
 import com.mygame.pure.R;
 import com.mygame.pure.activity.MainActivity;
+import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.utils.ToastHelper;
 import com.mygame.pure.view.CircleProgressBar;
+import com.mygame.pure.view.CircleProgressBarBlue;
 
 public class HandFragmentDown extends BaseFragment implements OnClickListener{
 
@@ -33,6 +36,13 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener{
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.tab_fragment_hand_down, container, false);
 		initView();
+		mact.addBackImage(R.drawable.sitting, new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(v.getContext(), MoreAct.class));
+			}
+		});
 		return rootView;
 	}
 	
@@ -44,7 +54,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener{
 			 viewList.add(view);
 		 }
 		 HistoryAdapter adapter = new HistoryAdapter(viewList);
-		 CircleProgressBar pb = (CircleProgressBar) rootView.findViewById(R.id.cpb);
+		 CircleProgressBarBlue pb = (CircleProgressBarBlue) rootView.findViewById(R.id.cpb);
 		 pb.setPoint(50);
 		 vpager.setAdapter(adapter);
 	}

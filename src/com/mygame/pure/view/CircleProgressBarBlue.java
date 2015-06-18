@@ -68,7 +68,7 @@ public class CircleProgressBarBlue extends View {
 		oval.set(boundDelta, boundDelta, getWidth() - boundDelta, getHeight() - boundDelta);
 		
 		paint.setColor(color);
-		canvas.drawArc(oval, 0f, 360f, false, paint);
+		canvas.drawArc(oval, 0f, 360f, false, paint); 
 		
 		boundDelta *= 4;
 		oval.set(boundDelta, boundDelta, getWidth() - boundDelta, getHeight() - boundDelta);

@@ -191,6 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/sixty_dp"
                 android:paddingLeft="@dimen/twenty_dp"
+                android:layout_marginBottom="@dimen/sixty_dp"
                 android:orientation="horizontal" >
                 
                 <ImageView
@@ -205,8 +206,6 @@
 	                android:layout_gravity="center_vertical" 
 	                android:text="抱歉现在您还没有数据" />
             </LinearLayout>
-
-            
         </LinearLayout>
     </ScrollView>
 
