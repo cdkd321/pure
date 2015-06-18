@@ -25,10 +25,8 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener{
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.tab_fragment_hand, container, false);
 		setTitle("检测中心");
-		addBackImage(R.drawable.btn_more_bg, this);
-		addRightImage(R.drawable.btn_news_bg, this);
 		CircleProgressBar pb = (CircleProgressBar) rootView.findViewById(R.id.cpbUp);
-		 pb.setPoint(50);
+		pb.setPoint(50);
 		return rootView;
 	}
 
