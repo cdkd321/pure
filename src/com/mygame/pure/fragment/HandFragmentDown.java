@@ -36,7 +36,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener{
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.tab_fragment_hand_down, container, false);
 		initView();
-		mact.addBackImage(R.drawable.sitting, new OnClickListener() {
+		mact.addBackImage(R.drawable.more, new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
