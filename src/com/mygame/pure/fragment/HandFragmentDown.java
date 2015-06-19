@@ -18,7 +18,6 @@ import com.mygame.pure.activity.MainActivity;
 import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.utils.ToastHelper;
-import com.mygame.pure.view.CircleProgressBar;
 import com.mygame.pure.view.CircleProgressBarBlue;
 
 public class HandFragmentDown extends BaseFragment implements OnClickListener{
