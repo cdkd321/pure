@@ -27,7 +27,7 @@ public class FaceFragmentUp extends BaseFragment{
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.tab_fragment_face, container, false);
 		
-		mact.addBackImage(R.drawable.sitting, new OnClickListener() {
+		mact.addBackImage(R.drawable.btn_more_bg, new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {

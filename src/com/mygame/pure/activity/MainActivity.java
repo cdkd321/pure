@@ -210,8 +210,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 					ivImg.setBackgroundResource(R.drawable.back);
 				} else {
 					vPager.setCurrentItem(1);
-					ivImg.setBackgroundResource(R.drawable.arrow_down);
-
+					ivImg.setBackgroundResource(R.drawable.arrow_up);
 				}
 			} else {
 				vPager.setCurrentItem(0);

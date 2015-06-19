@@ -18,9 +18,7 @@ public class CircleProgressBar extends View {
 
  
 	private Context context;
-	private Paint paint;
-	private Bitmap bgBmp;
-	private Bitmap fgBmp;
+	private Paint paint; 
 	private int color;
 	private RectF oval;
 	private float STROKE_W = 20;
@@ -44,12 +42,7 @@ public class CircleProgressBar extends View {
 		paint.setColor(Color.BLACK);
 		paint.setStrokeWidth(STROKE_W);
 		paint.setStyle(Style.STROKE);
-		paint.setAntiAlias(true);
-		BitmapDrawable background = (BitmapDrawable) getResources().getDrawable(R.drawable.circle_bg);
-		BitmapDrawable forceground = (BitmapDrawable) getResources().getDrawable(R.drawable.circle_light);
-		
-		bgBmp = background.getBitmap();
-		fgBmp = forceground.getBitmap();
+		paint.setAntiAlias(true); 
 		color = Color.parseColor("#4c000000");
 		oval = new RectF();
 	}
@@ -68,9 +61,6 @@ public class CircleProgressBar extends View {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		
-		float point = 180.0f;
-		
 		float boundDelta = STROKE_W / 2;
 		oval.set(boundDelta, boundDelta, getWidth() - boundDelta, getHeight() - boundDelta);
 		

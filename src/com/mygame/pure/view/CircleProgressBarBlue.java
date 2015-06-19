@@ -62,8 +62,6 @@ public class CircleProgressBarBlue extends View {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		
-		float point = 180.0f;
-		
 		float boundDelta = STROKE_W / 2;
 		oval.set(boundDelta, boundDelta, getWidth() - boundDelta, getHeight() - boundDelta);
 		
