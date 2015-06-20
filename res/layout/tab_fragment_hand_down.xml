@@ -6,7 +6,9 @@
     android:gravity="top|center"
     android:orientation="vertical" >
 
-    <com.mygame.pure.view.MyScollView style="@style/m_w" >
+    <com.mygame.pure.view.MyScrollView
+        android:id="@+id/onlysv"
+         style="@style/m_w" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -208,6 +210,6 @@
 	                android:text="抱歉现在您还没有数据" />
             </LinearLayout>
         </LinearLayout>
-    </com.mygame.pure.view.MyScollView>
+    </com.mygame.pure.view.MyScrollView>
 
 </LinearLayout>

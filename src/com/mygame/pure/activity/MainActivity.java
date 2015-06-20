@@ -169,9 +169,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
-		Intent i = new Intent(this, BleService.class);
-		bindService(i, mServiceConnection, BIND_AUTO_CREATE);
-		BluetoothAdapter.getDefaultAdapter().enable();
+//		Intent i = new Intent(this, BleService.class);
+//		bindService(i, mServiceConnection, BIND_AUTO_CREATE);
+//		BluetoothAdapter.getDefaultAdapter().enable();
 	}
 
 	private void setTabSelected(int i) {
