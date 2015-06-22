@@ -5,7 +5,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="19" />
     
      <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -56,6 +56,11 @@
             android:enabled="true" />
         <activity android:name="com.mygame.pure.activity.MoreAct"
             android:screenOrientation="portrait" />
+        <activity 
+            android:name="com.mygame.pure.activity.DeviceListActivity"
+            android:theme="@android:style/Theme.Dialog"
+            android:screenOrientation="portrait"
+            ></activity>
     </application>
 
 </manifest>

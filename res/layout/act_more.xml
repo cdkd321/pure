@@ -54,11 +54,18 @@
             app:leftIcon="@drawable/sitting_pressed"
             app:leftIcon_visible="0"
             app:leftText1="提醒设置" />
+         <com.mygame.pure.view.UIItem
+            android:id="@+id/connect_device"
+            style="@style/m_w"
+            android:layout_below="@+id/ui_settings"
+            app:leftIcon="@drawable/drop_pressed"
+            app:leftIcon_visible="0"
+            app:leftText1="连接设备" />
 
         <com.mygame.pure.view.UIItem
             android:id="@+id/ui_hufu"
             style="@style/m_w"
-            android:layout_below="@+id/ui_settings"
+            android:layout_below="@+id/connect_device"
             app:leftIcon="@drawable/drop_pressed"
             app:leftIcon_visible="0"
             app:leftText1="护肤知识" />

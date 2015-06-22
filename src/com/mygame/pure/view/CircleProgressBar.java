@@ -21,7 +21,7 @@ public class CircleProgressBar extends View {
 	private Paint paint; 
 	private int color;
 	private RectF oval;
-	private float STROKE_W = 20;
+	private float STROKE_W = 10;
 	private float point;
 	
 	public CircleProgressBar(Context context) {
@@ -30,7 +30,7 @@ public class CircleProgressBar extends View {
 		
 		this.paint = new Paint();
 		paint.setColor(Color.BLACK);
-		paint.setStrokeWidth(20);
+		paint.setStrokeWidth(10);
 		paint.setStyle(Style.STROKE);
 		color = Color.BLUE;
 	}

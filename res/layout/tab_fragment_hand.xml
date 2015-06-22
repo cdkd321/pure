@@ -15,8 +15,9 @@
         <com.mygame.pure.view.CircleProgressBar
              android:id="@+id/cpbUp"
              android:layout_centerHorizontal="true"
-             android:layout_width="100dp"
-             android:layout_height="100dp" />
+             android:layout_width="150dp"
+             
+             android:layout_height="150dp" />
 
         <TextView
             android:id="@+id/tvBlueTouth"

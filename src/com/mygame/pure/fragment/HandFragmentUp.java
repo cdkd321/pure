@@ -26,7 +26,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener{
 		rootView = inflater.inflate(R.layout.tab_fragment_hand, container, false);
 		setTitle("检测中心");
 		CircleProgressBar pb = (CircleProgressBar) rootView.findViewById(R.id.cpbUp);
-		pb.setPoint(50);
+		pb.setPoint(180);
 		return rootView;
 	}
 

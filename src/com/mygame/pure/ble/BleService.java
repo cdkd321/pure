@@ -43,7 +43,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 /**
- * @author longke À¶ÑÀ¹ÜÀíÀà
+ * @author longke ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @SuppressLint("NewApi")
@@ -73,7 +73,7 @@ public class BleService extends Service {
 	public static final UUID MAIN_SERVICE = UUID
 			.fromString("0000ffe0-0000-1000-8000-00805f9b34fb");
 	public static final UUID SEND_DATA_CHAR = UUID
-			.fromString("00002A37-0000-1000-8000-00805f9b34fb");
+			.fromString("00002a37-0000-1000-8000-00805f9b34fb");
 	public static final UUID RECEIVE_DATA_CHAR = UUID
 			.fromString("0000fff1-494c-4f47-4943-544543480000");
 	/*
@@ -87,14 +87,14 @@ public class BleService extends Service {
 	public static final UUID UUID_DESCRIPTOR = UUID
 			.fromString("00002902-0000-1000-8000-00805f9b34fb");
 	private boolean isSendData = false;
-	public int mCommand; // å½“å‰çš„æŒ‡ä»?
+	public int mCommand; // å½“å‰çš„æŒ‡ï¿½?
 
 	public static final int COMMAND_SYNC_SAVE = 0;
 	public static final int COMMAND_ALARM = 1;
 	public static final int COMMAND_EVENT = 2;
 	public static final int COMMAND_WEARINFO = 3;
 
-	// äº§å“å‡ºå‚æ—¶æ¸…é™?
+	// äº§å“å‡ºå‚æ—¶æ¸…ï¿½?
 	public static final int COMMAND_CLEAR = 4;
 	// æ­¥è·
 	public static final int STEP_LENGTH = 5;
@@ -110,7 +110,7 @@ public class BleService extends Service {
 	// connection change and services discovered.
 	private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
 
-		// è¿æ¥çŠ¶æ??
+		// è¿æ¥çŠ¶ï¿½??
 		@Override
 		public void onConnectionStateChange(BluetoothGatt gatt, int status,
 				int newState) {
@@ -121,6 +121,7 @@ public class BleService extends Service {
 					mConnectionState = STATE_CONNECTED;
 					broadcastUpdate(intentAction);
 					Log.i(TAG, "Connected to GATT server.");
+					
 					Log.i(TAG, "Attempting to start service discovery:"
 							+ mBluetoothGatt.discoverServices());
 					
@@ -150,10 +151,25 @@ public class BleService extends Service {
 				List<BluetoothGattService> list = gatt.getServices();
 				mGattService = mBluetoothGatt.getService(MAIN_SERVICE);
 				if (mGattService != null) {
-                    //´ò¿ªÍ¨µÀ
+					
+					final ArrayList<BluetoothGattCharacteristic> characs=(ArrayList<BluetoothGattCharacteristic>) mGattService.getCharacteristics();
+					if(characs.get(0)!=null){
+						
+						mHandler.postDelayed(new Runnable() {
+							
+							@Override
+							public void run() {
+								enableNotification4(characs.get(0));
+							}
+						}, 1000);
+						
+						//enableNotification4(characs.get(1));
+					}
+						
+                  /*  //ï¿½ï¿½Í¨ï¿½ï¿½
 					BluetoothGattCharacteristic receiveMcharac = mGattService
 							.getCharacteristic(SEND_DATA_CHAR);
-					enableNotification4(receiveMcharac);
+					enableNotification4(receiveMcharac);*/
 
 				} else {
 					broadcastUpdate(ACTION_GATT_NOTIFICATION_INEXISTENCE);
@@ -286,7 +302,13 @@ public class BleService extends Service {
 		for (byte byteChar : data) {
 			stringBuilder.append(String.format("%02X ", byteChar));
 		}
-		Log.i(TAG, "½ÓÊÕ" + stringBuilder.toString().trim());
+		if(stringBuilder.toString().startsWith("CC")){
+			BleParserLoader.waterParser(data);
+		}
+		if(stringBuilder.toString().startsWith("CC")){
+			BleParserLoader.waterParser(data);
+		}
+		Log.i(TAG, "æ”¶åˆ°" + stringBuilder.toString().trim());
 
 	}
 
@@ -332,7 +354,7 @@ public class BleService extends Service {
 	private final IBinder mBinder = new LocalBinder();
 
 	/**
-	 * åˆå§‹åŒ–è“ç‰™é?‚é…å™?.
+	 * åˆå§‹åŒ–è“ç‰™ï¿½?ï¿½é…ï¿½?.
 	 * 
 	 * @return Return true if the initialization is successful.
 	 */
@@ -380,10 +402,17 @@ public class BleService extends Service {
 			Log.w(TAG, "Device not found.  Unable to connect.");
 			return false;
 		}
+		
 		// We want to directly connect to the device, so we are setting the
 		// autoConnect
 		// parameter to false.
 		mBluetoothGatt = device.connectGatt(this, false, mGattCallback);
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Log.d(TAG, "Trying to create a new connection.");
 		mBluetoothDeviceAddress = address;
 		mConnectionState = STATE_CONNECTING;
@@ -574,7 +603,7 @@ public class BleService extends Service {
 		}
 	}// end of sendCommand
 
-	// ·¢ËÍÃüÁî
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public static void sendCommand(UUID characteristicID,
 			BluetoothGattService mGattService, BluetoothGatt mBluetoothGatt,byte cmd,String json) {
 		switch (cmd) {
@@ -591,7 +620,7 @@ public class BleService extends Service {
 		for (byte byteChar : time) {
 			stringBuilder.append(String.format("%02X ", byteChar));
 		}
-		Log.i(TAG, "·¢ËÍ£º" + stringBuilder.toString().trim());
+		Log.i(TAG, "ï¿½ï¿½ï¿½Í£ï¿½" + stringBuilder.toString().trim());
 	}
 
 
