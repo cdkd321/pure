@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/layout_devicelist_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:text="Heart Rate" 
+        android:textSize="17dp"/>
+
+    <TextView
+        android:id="@+id/layout_devicelist_address"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" 
+        android:text="02:56:56:56:56"
+        android:textSize="14dp"/>
+
+</LinearLayout>

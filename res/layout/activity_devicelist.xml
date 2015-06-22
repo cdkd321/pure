@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:background="#666" >
+
+        <TextView
+            android:id="@+id/devicelist_title_devices"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingLeft="12dp"
+            android:paddingRight="50dp"
+            android:text="select device"
+            android:textColor="#fff"
+            android:textSize="15dip" />
+
+      	<ProgressBar 
+      	    android:id="@+id/progress_bar"
+      	    android:layout_width="wrap_content"
+      	    android:layout_height="wrap_content"
+      	    android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/devicelist_lv"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2"
+            android:stackFromBottom="true" />
+
+       <!--  <TextView
+            android:id="@+id/devicelist_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="scaning" /> -->
+
+        <Button
+            android:id="@+id/devicelist_btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@android:string/cancel" />
+    </LinearLayout>
+
+</LinearLayout>
