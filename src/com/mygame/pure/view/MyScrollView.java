@@ -50,9 +50,9 @@ public class MyScrollView extends ScrollView {
 		// TODO Auto-generated method stub
 		// return super.onInterceptTouchEvent(ev);
 		boolean flags = super.onInterceptTouchEvent(ev) && gestureDetector.onTouchEvent(ev);
-		if(getScrollY() == 0){
-			return false;
-		}
+//		if(getScrollY() == 0){
+//			return false;
+//		}
 		MyLog.i("--tom", "MyScrollView:onInterceptTouchEvent" + flags);
 		return flags;  
 	}
@@ -62,11 +62,9 @@ public class MyScrollView extends ScrollView {
 		public boolean onScroll(MotionEvent e1, MotionEvent e2,
 			float distanceX, float distanceY) {
 			//控制手指滑动的距离
-			
 			if (Math.abs(distanceY)>=Math.abs(distanceX)) {
 				return true;
 			}
-			
 			return false;
 		}
 	}

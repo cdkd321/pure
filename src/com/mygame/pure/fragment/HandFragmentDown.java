@@ -14,7 +14,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.mygame.pure.R;
-import com.mygame.pure.activity.MainActivity;
+import com.mygame.pure.activity.ActMain;
+import com.mygame.pure.activity.ActSpecify;
 import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.utils.ToastHelper;
@@ -22,12 +23,12 @@ import com.mygame.pure.view.CircleProgressBarBlue;
 
 public class HandFragmentDown extends BaseFragment implements OnClickListener{
 
-	MainActivity mact;
+	ActMain mact;
 	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		this.mact = (MainActivity) activity;
+		this.mact = (ActMain) activity;
 	}
 
 	@Override
@@ -40,6 +41,14 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener{
 			@Override
 			public void onClick(View v) {
 				startActivity(new Intent(v.getContext(), MoreAct.class));
+			}
+		});
+		
+		mact.addRightImage(R.drawable.btn_news_bg, new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(v.getContext(), ActSpecify.class));
 			}
 		});
 		return rootView;

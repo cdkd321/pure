@@ -2,7 +2,7 @@
 <resources>
 
     <color name="radio_pay_checked">#f7fff2</color>
-    <color name="top_bg">#046370</color>
+    <color name="top_bg">#00abc6</color>
     <color name="login_btn_n">#ee0000</color>
     <color name="login_btn_p">#ff0000</color>
     <color name="crystalwhite">#00ffffff</color>
@@ -42,6 +42,8 @@
     <color name="yellow_tip">#fff3bb</color>
     <color name="red">#ff0000</color>
     <color name="theme_blue">#00abc6</color>
+    <color name="theme_blue_half_trans">#8800abc6</color>
+    <color name="black_555555">#555555</color>
     <color name="theme_dive_blue">#2abdc3</color>
     <color name="theme_gray">#bcb0ae</color>
     <color name="actionbar_text">#ffffff</color>

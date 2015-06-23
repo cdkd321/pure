@@ -253,4 +253,19 @@
         <item name="android:textSize">@dimen/list_text_size</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
+    <style name="styleText1" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/black_555555</item>
+        <item name="android:textSize">@dimen/input_size</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="styleOfHalfTransLine">
+        <item name="android:background">@color/theme_blue_half_trans</item>
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
 </resources>

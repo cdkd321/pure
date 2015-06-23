@@ -10,16 +10,16 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import com.mygame.pure.R;
-import com.mygame.pure.activity.MainActivity;
+import com.mygame.pure.activity.ActMain;
 import com.mygame.pure.activity.MoreAct;
 
 public class FaceFragmentUp extends BaseFragment{
 	
-	MainActivity mact;
+	ActMain mact;
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		mact = (MainActivity) activity;
+		mact = (ActMain) activity;
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import android.widget.Button;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mygame.pure.R;
-import com.mygame.pure.activity.MainActivity;
+import com.mygame.pure.activity.ActMain;
 import com.mygame.pure.bean.Constant;
 import com.mygame.pure.bean.Response;
 import com.mygame.pure.info.User;
@@ -75,7 +75,7 @@ public class LoginCallBack extends LoadingCallBack<String> {
 //			activity.saveUser();
 //			UserUtils.saveUserInfo(activity, response.getResponse());
 			user = response.getResponse();
-			activity.startActivity(new Intent(activity, MainActivity.class));
+			activity.startActivity(new Intent(activity, ActMain.class));
 			activity.finish();
 		} else {
 			activity.onFindView(false);

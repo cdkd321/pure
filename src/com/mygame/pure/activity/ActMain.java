@@ -34,9 +34,9 @@ import com.mygame.pure.view.VerticalViewPager;
 /**
  * 主界面 使用ViewPager + VerticalViewPager 作为程序主框架 主界面就可以上下左右滑动
  * 
- * @author lenovo
+ * @author tom
  */
-public class MainActivity extends BaseActivity implements OnClickListener {
+public class ActMain extends BaseActivity implements OnClickListener {
 	protected com.mygame.pure.ble.BleService mBleService;
 	private List<View> baseList;
 	private ViewPager viewPager;
