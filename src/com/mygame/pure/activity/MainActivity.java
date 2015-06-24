@@ -29,6 +29,7 @@ import com.mygame.pure.fragment.HandFragmentDown;
 import com.mygame.pure.fragment.HandFragmentUp;
 import com.mygame.pure.fragment.NeckFragmentUp;
 import com.mygame.pure.fragment.NeckFragmentDown;
+import com.mygame.pure.view.PureActionBar;
 import com.mygame.pure.view.VerticalViewPager;
 
 /**
@@ -44,11 +45,15 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	int[] viewPageId = new int[] { R.id.check_one, R.id.check_two,
 			R.id.check_three, R.id.check_four };
 	private ImageView ivImg;
+	private PureActionBar actionBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_main);
+		//actionBar=(PureActionBar) findViewById(R.id.actionBar);
+		//setupNavigationBar(R.id.navigation_bar);
+		setTitle("检测中心");
 		initTab();
 	}
 

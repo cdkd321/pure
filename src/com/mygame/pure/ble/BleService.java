@@ -69,6 +69,8 @@ public class BleService extends Service {
 	public final static String ACTION_DEVICE_FOUND = "com.example.bluetooth.le.DEVICE_FOUND";
 	public final static String EXTRA_DATA = "com.example.bluetooth.le.EXTRA_DATA";
 	public final static String ACTION_STATUS_WRONG = "com.example.bluetooth.le.ACTION_STATUS_WRONG";
+	public final static String ACTION_TIME_TOOSHORT = "com.example.bluetooth.le.ACTION_TIME_TOOSHORT";
+	public final static String ACTION_START = "com.example.bluetooth.le.ACTION_START";
 
 	public static final UUID MAIN_SERVICE = UUID
 			.fromString("0000ffe0-0000-1000-8000-00805f9b34fb");
@@ -137,7 +139,8 @@ public class BleService extends Service {
 					broadcastUpdate(intentAction);
 				}
 			} else {
-				
+				intentAction=ACTION_STATUS_WRONG;
+				broadcastUpdate(intentAction);
 				Log.w(TAG, "onConnectionStateChange: " + status);
 				operateStatusWrong();
 			}
@@ -303,11 +306,15 @@ public class BleService extends Service {
 			stringBuilder.append(String.format("%02X ", byteChar));
 		}
 		if(stringBuilder.toString().startsWith("CC")){
-			BleParserLoader.waterParser(data);
+			BleParserLoader.waterParser(data,getBaseContext(),gatt.getDevice().getAddress());
 		}
-		if(stringBuilder.toString().startsWith("CC")){
-			BleParserLoader.waterParser(data);
+		if(stringBuilder.toString().startsWith("55")){
+			broadcastUpdate(ACTION_TIME_TOOSHORT);
 		}
+		if(stringBuilder.toString().startsWith("AA")){
+			broadcastUpdate(ACTION_START);
+		}
+		
 		Log.i(TAG, "收到" + stringBuilder.toString().trim());
 
 	}
