@@ -21,11 +21,16 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.db.sqlite.WhereBuilder;
+import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
 import com.mygame.pure.activity.ActMain;
 import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.adapter.HistoryAdapter;
+import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.utils.DateUtil;
+import com.mygame.pure.utils.DbUtils;
 import com.mygame.pure.utils.ToastHelper;
 import com.mygame.pure.view.CircleProgressBarBlue;
 
@@ -38,6 +43,9 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 	private TextView tvDate;
 	private RadioGroup rGroup;
 	private int selectFlag = 0;
+	private TextView tvAverageLevelData;
+	private TextView tvThanLastDay;
+	private TextView tvThanLastDayData;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -48,16 +56,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.tab_fragment_hand_down, container,
-				false);
+		rootView = inflater.inflate(R.layout.tab_fragment_hand_down, container, false);
 		initView();
-		mact.addBackImage(R.drawable.btn_more_bg, new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(v.getContext(), MoreAct.class));
-			}
-		});
 		return rootView;
 	}
 
@@ -71,7 +71,31 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		List<View> viewList = new ArrayList<View>();
 		date_record = View.inflate(activity, R.layout.date_record, null);
 		tvDate = (TextView) date_record.findViewById(R.id.tvDate);
+		tvAverageLevelData = (TextView) date_record
+				.findViewById(R.id.tvAverageLevelData);
+		tvThanLastDay = (TextView) date_record.findViewById(R.id.tvThanLastDay);
+		tvThanLastDayData = (TextView) date_record
+				.findViewById(R.id.tvThanLastDayData);
 		tvDate.setText(DateUtil.getCurrentDate());
+		biJiaoToday(DateUtil.getDateStr(DateUtil.getCurrentDate(), -1),
+				DateUtil.getCurrentDate(), tvThanLastDayData);
+		/*
+		 * DbUtils db = DbUtils.create(getActivity()); List<BltModel> blts;
+		 * float averageWater = 0; java.text.DecimalFormat df = new
+		 * java.text.DecimalFormat("#0.0"); WhereBuilder builder =
+		 * WhereBuilder.b("date", "==", DateUtil.getCurrentDate()); try { blts =
+		 * db.findAll(Selector.from(BltModel.class).where(builder)); if (blts !=
+		 * null) { int totalWater = 0; for (int i = 0; i < blts.size(); i++) {
+		 * totalWater = totalWater + Integer.parseInt(blts.get(i).getWater());
+		 * 
+		 * } if (blts.size() > 0) { averageWater = totalWater / blts.size();
+		 * tvAverageLevelData.setText(Float.parseFloat(df .format(averageWater /
+		 * 45.0f + 20.0)) + "%"); }
+		 * 
+		 * } } catch (DbException e1) { // TODO Auto-generated catch block
+		 * e1.printStackTrace(); }
+		 */
+
 		viewList.add(date_record);
 		rGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -81,6 +105,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				switch (checkedId) {
 				case R.id.rbLeft:
 					selectFlag = 0;
+					tvDate.setText(DateUtil.getCurrentDate());
 					break;
 				case R.id.rbRight:
 					selectFlag = 2;
@@ -139,6 +164,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 			if (selectFlag == 0) {
 				tvDate.setText(DateUtil.getDateStr(tvDate.getText().toString(),
 						-1));
+				tvThanLastDay.setText("比今天");
+				biJiaoLastDay(tvDate.getText().toString(),
+						DateUtil.getCurrentDate(), tvThanLastDayData);
+
 			} else if (selectFlag == 1) {
 				String[] dates = tvDate.getText().toString().split("~");
 				tvDate.setText(DateUtil.getDateStr(dates[0], -7) + "~"
@@ -152,15 +181,33 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 							+ "~"
 							+ df.format(getReduceMonth(df.parse(dates[1]))));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 			break;
 		case R.id.clickPageRight:
 			if (selectFlag == 0) {
-				tvDate.setText(DateUtil.getDateStr(tvDate.getText().toString(),
-						1));
+				if (!tvDate.getText().toString()
+						.equals(DateUtil.getCurrentDate())) {
+					tvDate.setText(DateUtil.getDateStr(tvDate.getText()
+							.toString(), 1));
+					if (tvDate.getText().toString()
+							.equals(DateUtil.getCurrentDate())) {
+						tvThanLastDay.setText("比前一天");
+						biJiaoToday(DateUtil.getDateStr(DateUtil.getCurrentDate(), -1),
+								DateUtil.getCurrentDate(), tvThanLastDayData);
+					} else {
+						biJiaoLastDay(tvDate.getText().toString(),
+								DateUtil.getCurrentDate(), tvThanLastDayData);
+						tvThanLastDay.setText("比今天");
+					}
+
+				} else {
+					tvThanLastDay.setText("比前一天");
+					biJiaoToday(tvDate.getText().toString(),
+							DateUtil.getCurrentDate(), tvThanLastDayData);
+				}
+
 			} else if (selectFlag == 1) {
 				String[] dates = tvDate.getText().toString().split("~");
 				tvDate.setText(DateUtil.getDateStr(dates[0], -7) + "~"
@@ -179,6 +226,171 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 			break;
 		default:
 			break;
+		}
+	}
+
+	/**
+	 * 今天的时间和前面的时间比较
+	 * 
+	 * @param lastDay
+	 * @param today
+	 * @param tvbiJiao
+	 */
+	private void biJiaoToday(String lastDay, String today, TextView tvbiJiao) {
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
+		DbUtils db = DbUtils.create(getActivity());
+		List<BltModel> blts;
+		float averageWater = 0;
+		WhereBuilder builder = WhereBuilder.b("date", "==", today);
+		try {
+			blts = db.findAll(Selector.from(BltModel.class).where(builder));
+			if (blts != null) {
+				int totalWater = 0;
+
+				for (int i = 0; i < blts.size(); i++) {
+					totalWater = totalWater
+							+ Integer.parseInt(blts.get(i).getWater());
+
+				}
+				if (blts.size() > 0) {
+					averageWater = totalWater / blts.size();
+					tvAverageLevelData.setText(Float.parseFloat(df
+							.format(averageWater / 45.0f + 20.0)) + "%");
+
+				}else{
+					tvAverageLevelData.setText("0.0%");
+				}
+
+			} else {
+
+				tvAverageLevelData.setText("0.0%");
+			}
+		} catch (DbException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		List<BltModel> yesTodayBlts;
+		float averageYesTodayWater = 0;
+		// 昨天的数据
+		WhereBuilder builder1 = WhereBuilder.b("date", "==", lastDay);
+		try {
+			yesTodayBlts = db.findAll(Selector.from(BltModel.class).where(
+					builder1));
+			if (yesTodayBlts != null) {
+				int totalWater = 0;
+
+				for (int i = 0; i < yesTodayBlts.size(); i++) {
+					totalWater = totalWater
+							+ Integer.parseInt(yesTodayBlts.get(i).getWater());
+
+				}
+				if (yesTodayBlts.size() > 0) {
+					averageYesTodayWater = totalWater / yesTodayBlts.size();
+				}
+
+				// mAdapter.notifymDataSetChanged(lists);
+			} else {
+				averageYesTodayWater = 0;
+			}
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (averageWater - averageYesTodayWater > 0) {
+			tvbiJiao.setText("+"
+					+ Float.parseFloat(df
+							.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
+					+ "%");
+		}else if (averageYesTodayWater - averageWater == 0) {
+			tvbiJiao.setText( "+0%");
+		} else {
+			tvbiJiao.setText("-"
+					+ Float.parseFloat(df
+							.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
+					+ "%");
+		}
+	}
+
+	/**
+	 * 前面的时间和后面的时间比较
+	 * 
+	 * @param lastDay
+	 * @param today
+	 * @param tvbiJiao
+	 */
+	private void biJiaoLastDay(String lastDay, String today, TextView tvbiJiao) {
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
+		DbUtils db = DbUtils.create(getActivity());
+		List<BltModel> blts;
+		float averageWater = 0;
+		WhereBuilder builder = WhereBuilder.b("date", "==", today);
+		try {
+			blts = db.findAll(Selector.from(BltModel.class).where(builder));
+			if (blts != null) {
+				int totalWater = 0;
+
+				for (int i = 0; i < blts.size(); i++) {
+					totalWater = totalWater
+							+ Integer.parseInt(blts.get(i).getWater());
+
+				}
+				if (blts.size() > 0) {
+					averageWater = totalWater / blts.size();
+
+				}
+
+			}
+		} catch (DbException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		List<BltModel> yesTodayBlts;
+		float averageYesTodayWater = 0;
+		// 昨天的数据
+		WhereBuilder builder1 = WhereBuilder.b("date", "==", lastDay);
+		try {
+			yesTodayBlts = db.findAll(Selector.from(BltModel.class).where(
+					builder1));
+			if (yesTodayBlts != null) {
+				int totalWater = 0;
+
+				for (int i = 0; i < yesTodayBlts.size(); i++) {
+					totalWater = totalWater
+							+ Integer.parseInt(yesTodayBlts.get(i).getWater());
+
+				}
+				if (yesTodayBlts.size() > 0) {
+					averageYesTodayWater = totalWater / yesTodayBlts.size();
+					tvAverageLevelData.setText(Float.parseFloat(df
+							.format(averageYesTodayWater / 45.0f + 20.0)) + "%");
+				} else {
+					tvAverageLevelData.setText("0.0%");
+				}
+
+				// mAdapter.notifymDataSetChanged(lists);
+			} else {
+				averageYesTodayWater = 0;
+
+				tvAverageLevelData.setText("0.0%");
+			}
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (averageYesTodayWater - averageWater > 0) {
+			tvbiJiao.setText("+"
+					+ Float.parseFloat(df
+							.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
+					+ "%");
+		} else if (averageYesTodayWater - averageWater == 0) {
+			tvbiJiao.setText( "+0%");
+		} else {
+			tvbiJiao.setText("-"
+					+ Float.parseFloat(df
+							.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
+					+ "%");
 		}
 	}
 
