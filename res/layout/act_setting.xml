@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.mygame.pure"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:gravity="top|center"
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_navigation_bar"/>
+    
+      <com.mygame.pure.view.UIItem
+          android:id="@+id/ui_alarm"
+          style="@style/m_w"
+          android:layout_below="@+id/actionBar"
+          app:leftIcon="@drawable/sitting_pressed"
+          app:leftIcon_visible="0"
+          app:leftText1="定时提醒" />
+       <com.mygame.pure.view.UIItem
+          android:id="@+id/ui_questions"
+          style="@style/m_w"
+          android:layout_below="@+id/ui_alarm"
+          app:leftIcon="@drawable/drop_pressed"
+          app:leftIcon_visible="0"
+          app:leftText1="常见问题" />
+
+      <com.mygame.pure.view.UIItem
+          android:id="@+id/ui_bluetouth"
+          style="@style/m_w"
+          android:layout_below="@+id/ui_questions"
+          app:leftIcon="@drawable/drop_pressed"
+          app:leftIcon_visible="0"
+          app:leftText1="蓝牙开关" />
+
+      <com.mygame.pure.view.UIItem
+          android:id="@+id/ui_pwd"
+          style="@style/m_w"
+          android:layout_below="@+id/ui_bluetouth"
+          app:leftIcon="@drawable/password_pressed"
+          app:leftIcon_visible="0"
+          app:leftText1="修改密码" />
+
+      <com.mygame.pure.view.UIItem
+          android:id="@+id/ui_info"
+          style="@style/m_w"
+          android:layout_below="@+id/ui_pwd"
+          app:leftIcon="@drawable/feedback_pressed"
+          app:leftIcon_visible="0"
+          app:leftText1="咨询更新提醒" /> 
+
+</RelativeLayout>
