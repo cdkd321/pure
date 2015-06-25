@@ -71,11 +71,11 @@
                     android:src="@drawable/icon_arrow_right" />
             </RelativeLayout>
 
-            <include
+           <!--  <include
                 android:layout_width="match_parent"
-                layout="@layout/include_split" />
+                layout="@layout/include_split" /> -->
 
-            <RelativeLayout
+            <!-- <RelativeLayout
                 android:id="@+id/rlOlder"
                 style="@style/m_w"
                 android:layout_height="60dp"
@@ -86,7 +86,7 @@
                 <TextView
                     style="@style/styleCenterText"
                     android:layout_centerVertical="true"
-                    android:text="脸部的肌肤比实际年龄" />
+                    android:text="手部肌肤水嫩度" />
 
                 <TextView
                     style="@style/styleCenterText"
@@ -94,15 +94,10 @@
                     android:layout_centerVertical="true"
                     android:text="老了0岁" />
 
-                <include
-                    android:layout_alignParentTop="true"
-                    layout="@layout/include_split" />
-            </RelativeLayout>
+                
+            </RelativeLayout> -->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/theme_dive_blue" />
+            <include layout="@layout/include_split" />
 
             <RelativeLayout
                 android:id="@+id/rlWater"

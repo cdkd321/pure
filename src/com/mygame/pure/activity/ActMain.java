@@ -129,7 +129,8 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		llTab2 = findViewById(R.id.llTab2);
 		llTab3 = findViewById(R.id.llTab3);
 		llTab4 = findViewById(R.id.llTab4);
-
+		getTkActionBar();
+		setTitle("检测中心");
 		ivImg = (ImageView) findViewById(R.id.ivImg);
 
 		ivImg.setOnClickListener(this);
@@ -169,9 +170,9 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
-//		Intent i = new Intent(this, BleService.class);
-//		bindService(i, mServiceConnection, BIND_AUTO_CREATE);
-//		BluetoothAdapter.getDefaultAdapter().enable();
+		Intent i = new Intent(this, BleService.class);
+		bindService(i, mServiceConnection, BIND_AUTO_CREATE);
+		BluetoothAdapter.getDefaultAdapter().enable();
 	}
 
 	private void setTabSelected(int i) {

@@ -27,7 +27,7 @@
             <TextView
                 android:id="@+id/tvJzzk"
                 style="@style/styleCenterText" 
-                android:text="4月20日" />
+                android:text="皮肤状况" />
 
             <TextView
                 android:id="@+id/tvJzzkData"
@@ -64,11 +64,12 @@
             <TextView
                 android:id="@+id/tvThanLastDay"
                 style="@style/styleCenterText" 
-                android:text="比最近一天" />
+                android:text="比前一天" />
 
             <TextView
                 android:id="@+id/tvThanLastDayData"
                 style="@style/styleCenterText" 
+                android:layout_marginTop="10dp"
                 android:textColor="@color/black"
                 android:text="0.0%" />
         </LinearLayout>

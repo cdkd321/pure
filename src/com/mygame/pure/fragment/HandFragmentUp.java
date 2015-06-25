@@ -46,7 +46,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.tab_fragment_hand, container,
 				false);
-		setTitle("检测中心");
+		
 		pb = (CircleProgressBar) rootView.findViewById(R.id.cpbUp);
 		tvBlueProgress = (TextView) rootView.findViewById(R.id.tvBlueProgress);
 		tvBlueTouth = (TextView) rootView.findViewById(R.id.tvBlueTouth);
@@ -115,7 +115,6 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 				DbUtils db = DbUtils.create(getActivity());
 				List<BltModel> blts;
 				float averageWater = 0;
-
 				WhereBuilder builder = WhereBuilder.b("date", "==",
 						DateUtil.getCurrentDate());
 				try {
@@ -202,7 +201,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 				Toast.makeText(getActivity(), "请连续按住5秒", 1000).show();
 				pb.setProgressing(0.0f, tvBlueProgress);
 			} else if (BleService.ACTION_START.equals(action)) {
-				pb.setProgressing(0.2f, tvBlueProgress);
+				pb.setProgressing(0.3f, tvBlueProgress);
 			}
 
 		}
