@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="19dp"
         android:textSize="@dimen/activity_title_text_size"
-        android:text="4月20日"
+        android:text="2015-06-20"
         android:textColor="@color/theme_blue" />
 
     <LinearLayout

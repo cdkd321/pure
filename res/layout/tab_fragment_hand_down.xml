@@ -57,17 +57,17 @@
                     android:layout_height="150dp" />
 
                 <ImageView
+                    android:id="@+id/clickPageLeft"
                     style="@style/w_w"
                     android:layout_alignParentLeft="true"
                     android:layout_margin="@dimen/margin_of_cell"
-                    android:onClick="clickPageLeft"
                     android:src="@drawable/icon_arrow_left" />
 
                 <ImageView
+                    android:id="@+id/clickPageRight"
                     style="@style/w_w"
                     android:layout_alignParentRight="true"
                     android:layout_margin="@dimen/margin_of_cell"
-                    android:onClick="clickPageRight"
                     android:src="@drawable/icon_arrow_right" />
             </RelativeLayout>
 
