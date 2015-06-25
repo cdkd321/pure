@@ -21,6 +21,8 @@ import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
+import com.mygame.pure.activity.ActMain;
+import com.mygame.pure.activity.SettingAct;
 import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.ble.BleService;
 import com.mygame.pure.utils.Constants;
@@ -35,10 +37,12 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 	private TextView tvBlueTouth;
 	private TextView tvAverage;
 	private TextView tvYestodayLabel;
+	ActMain main;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		main = (ActMain) activity;
 	}
 
 	@Override
@@ -51,8 +55,14 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		tvBlueProgress = (TextView) rootView.findViewById(R.id.tvBlueProgress);
 		tvBlueTouth = (TextView) rootView.findViewById(R.id.tvBlueTouth);
 		tvAverage = (TextView) rootView.findViewById(R.id.tvAverage);
-		tvYestodayLabel = (TextView) rootView
-				.findViewById(R.id.tvYestoday);
+		tvYestodayLabel = (TextView) rootView.findViewById(R.id.tvYestoday);
+		main.addBackImage(R.drawable.btn_more_bg, new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				main.startActivity(new Intent(getActivity(), SettingAct.class));
+			}
+		});
 		pb.setProgressing(0.0f, tvBlueProgress);
 		return rootView;
 	}

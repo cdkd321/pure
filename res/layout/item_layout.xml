@@ -13,13 +13,18 @@
     
     <LinearLayout
         android:layout_height="@dimen/fifty_dp"
+        android:layout_marginLeft="@dimen/twenty_dp"
+        android:layout_marginRight="@dimen/twenty_dp"
         style="@style/m_w" >
         
         <ImageView 
             android:id="@+id/item_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:padding="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:visibility="visible"
             android:src="@drawable/drop"
             android:scaleType="fitCenter"
             />
@@ -30,19 +35,27 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
+            android:gravity="center_vertical" 
             android:layout_weight="5"
             android:textColor="#3a3838"
             android:textSize="@dimen/list_text_size"
-            android:text="test"
-            />
+            android:text="test" />
 
         <ImageView
-            android:id="@+id/item_tvRight"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="15dp"
+            android:id="@+id/item_ivRight"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/next" />
+        
+        
+        <ImageView
+            android:id="@+id/item_ivRight2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/open" />
 
     </LinearLayout>
         

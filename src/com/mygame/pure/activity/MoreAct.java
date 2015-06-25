@@ -12,7 +12,7 @@ import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
 import com.mygame.pure.view.UIItem;
 
-public class MoreAct extends BaseActivity{
+public class MoreAct extends BaseActivity implements OnClickListener{
 	private String mAddress;
 
 	@Override
@@ -24,6 +24,13 @@ public class MoreAct extends BaseActivity{
 		UIItem ui_pwd = (UIItem) findViewById(R.id.ui_pwd);
 		UIItem ui_yijian = (UIItem) findViewById(R.id.ui_yijian);
 		UIItem connect_device = (UIItem) findViewById(R.id.connect_device);
+		
+		ui_settings.setOnClickListener(this);
+		ui_hufu.setOnClickListener(this);
+		ui_pwd.setOnClickListener(this);
+		ui_yijian.setOnClickListener(this);
+		ui_settings.setOnClickListener(this);
+		
 		connect_device.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -31,7 +38,6 @@ public class MoreAct extends BaseActivity{
 				Intent i = new Intent(MoreAct.this, DeviceListActivity.class);
 				i.putExtra("uid", "");
 				startActivityForResult(i, 0);
-				
 			}
 		});
 		
@@ -43,13 +49,7 @@ public class MoreAct extends BaseActivity{
 			}
 		});
 		setTitle("更多");
-		
-//		ui_settings.setValue(R.drawable.sitting_pressed, R.string._settings, " ");
-//		ui_hufu.setValue(R.drawable.drop_pressed, "护肤设置, " ");
-//		ui_pwd.setValue(R.drawable.sitting_pressed, R.string._settings, " ");
-//		ui_yijian.setValue(R.drawable.sitting_pressed, R.string._settings, " ");
-		
-		
+ 
 	}
 	
 	@Override
@@ -63,8 +63,7 @@ public class MoreAct extends BaseActivity{
 			if(SelfDefineApplication.getInstance().mService!=null){
 				SelfDefineApplication.getInstance().mService.connect(mAddress);
 			}
-			//showProgressDialog("������");
-		} else if (requestCode == 1) { // ������
+		} else if (requestCode == 1) { // 
 			if (resultCode == Activity.RESULT_OK) {
 				Toast.makeText(this, "bluetooth open success!",
 						Toast.LENGTH_SHORT).show();
@@ -72,6 +71,23 @@ public class MoreAct extends BaseActivity{
 				Toast.makeText(this, "bluetooth open failed",
 						Toast.LENGTH_SHORT).show();
 			}
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.ui_settings:
+			break;
+		case R.id.ui_hufu:
+			break;
+		case R.id.ui_pwd:
+			break;
+		case R.id.ui_yijian:
+			break;
+
+		default:
+			break;
 		}
 	}
 	

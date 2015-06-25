@@ -92,11 +92,11 @@
             style="@style/m_w"
             android:layout_height="43dp"
             android:gravity="center"
-            android:layout_below="@+id/ui_yijian"
             android:layout_margin="@dimen/dp_30"
             android:layout_centerHorizontal="true"
             android:background="@drawable/bg_round_corner_theme"
             android:padding="@dimen/five_dp"
+            android:layout_alignParentBottom="true"
             android:text="退出账号"
             android:textColor="@color/white"
             android:textSize="@dimen/input_size" />
