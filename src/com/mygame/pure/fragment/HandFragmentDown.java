@@ -22,7 +22,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.mygame.pure.R;
-import com.mygame.pure.activity.MainActivity;
+import com.mygame.pure.activity.ActMain;
 import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.utils.DateUtil;
@@ -31,7 +31,7 @@ import com.mygame.pure.view.CircleProgressBarBlue;
 
 public class HandFragmentDown extends BaseFragment implements OnClickListener {
 
-	MainActivity mact;
+	ActMain mact;
 	private ImageView clickPageLeft;
 	private ImageView clickPageRight;
 	private View date_record;
@@ -42,7 +42,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		this.mact = (MainActivity) activity;
+		this.mact = (ActMain) activity;
 	}
 
 	@Override

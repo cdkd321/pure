@@ -4,8 +4,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="21" />
+        android:minSdkVersion="8" 
+        android:targetSdkVersion="19" /> 
     
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -66,6 +66,10 @@
             android:screenOrientation="portrait" />
         
         <activity android:name="com.mygame.pure.activity.ActSpecify"
+            android:screenOrientation="portrait" />
+        <activity 
+            android:name="com.mygame.pure.activity.DeviceListActivity"
+            android:theme="@android:style/Theme.Dialog"
             android:screenOrientation="portrait" />
     </application>
 

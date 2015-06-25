@@ -8,8 +8,10 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 import com.mygame.pure.R;
 
@@ -21,8 +23,12 @@ public class CircleProgressBar extends View {
 	private Paint paint; 
 	private int color;
 	private RectF oval;
-	private float STROKE_W = 20;
+	private float STROKE_W = 10;
 	private float point;
+	private float allPoint;
+	public static long TIME=5;
+	private float i;
+	private TextView progressText;
 	
 	public CircleProgressBar(Context context) {
 		super(context, null);
@@ -30,7 +36,7 @@ public class CircleProgressBar extends View {
 		
 		this.paint = new Paint();
 		paint.setColor(Color.BLACK);
-		paint.setStrokeWidth(20);
+		paint.setStrokeWidth(10);
 		paint.setStyle(Style.STROKE);
 		color = Color.BLUE;
 	}
@@ -57,6 +63,34 @@ public class CircleProgressBar extends View {
 		this.point = point;
 		invalidate();
 	}
+	/**
+	 * 当前的角度
+	 * @param point 以角度计算，范围0-360度
+	 * 必须在主线程里调用
+	 */
+	
+	public void setProgress(float progress){
+		this.point = progress*360;
+		java.text.DecimalFormat   df=new   java.text.DecimalFormat("#0.0"); 
+		progressText.setText( df.format(progress*100)+"%");
+		invalidate();
+	}
+	/**
+	 * 当前的角度
+	 * @param point 以角度计算，范围0-360度
+	 * 必须在主线程里调用
+	 */
+	
+	public void setProgressing(float progress,TextView progressText){
+		if(progress==0){
+			i=0;
+		}
+		this.allPoint = progress;
+		this.progressText=progressText;
+		//invalidate();
+		
+		handler.postDelayed(runnable, TIME); 
+	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
@@ -70,8 +104,32 @@ public class CircleProgressBar extends View {
 		paint.setColor(Color.WHITE);
 		canvas.drawArc(oval, -90f, point, false, paint);
 	}
-	
-	
+	Handler handler = new Handler();  
+    Runnable runnable = new Runnable() {  
+  
+       
+
+		@Override  
+        public void run() {  
+            // handler自带方法实现定时器  
+            try { 
+            	if(i<=allPoint){
+            		handler.postDelayed(this, TIME);
+            		setProgress(i);
+            		//postInvalidate();
+            		i=i+0.001f;
+            	}else{
+            		i=0;
+            		handler.removeCallbacks(this);
+            	}
+                System.out.println("do...");  
+            } catch (Exception e) {  
+                // TODO Auto-generated catch block  
+                e.printStackTrace();  
+                System.out.println("exception...");  
+            }  
+        }  
+    };
 	
 
 }
