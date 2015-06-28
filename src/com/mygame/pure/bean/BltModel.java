@@ -16,6 +16,8 @@ public class BltModel extends EntityBase{
 	private String date; // 日期
 	@Column(column = "water")
 	private String water; // 水分
+	@Column(column = "hour")
+	private String hour; // 时间
 	public String getBltname() {
 		return bltname;
 	}
@@ -51,6 +53,12 @@ public class BltModel extends EntityBase{
 	}
 	public void setWater(String water) {
 		this.water = water;
+	}
+	public String getHour() {
+		return hour;
+	}
+	public void setHour(String hour) {
+		this.hour = hour;
 	}
 	
 	

@@ -18,7 +18,7 @@ import com.mygame.pure.R;
  */
 public class UIItem extends RelativeLayout {
     private View line;
-    private ImageView leftIcon, item_ivRight, item_ivRight2;
+    private ImageView leftIcon, item_ivRight;
     private TextView tvLeft1;
 
     public UIItem(Context context, AttributeSet attrs)
@@ -29,7 +29,6 @@ public class UIItem extends RelativeLayout {
         leftIcon = (ImageView) findViewById(R.id.item_icon);
         tvLeft1 = (TextView) findViewById(R.id.item_tvLeft);
         item_ivRight = (ImageView) findViewById(R.id.item_ivRight);
-        item_ivRight2 = (ImageView) findViewById(R.id.item_ivRight2);
         if (attrs != null) {
             // AttributeSet是节点的属性集合
             // TypedArray 属性的容器
@@ -70,12 +69,12 @@ public class UIItem extends RelativeLayout {
     		item_ivRight.setImageResource(rDid1);
     	}
     	
-    	if(rDid2 == -1){
+    	/*if(rDid2 == -1){
     		item_ivRight2.setVisibility(View.GONE);
     	} else {
     		item_ivRight2.setVisibility(View.VISIBLE);
     		item_ivRight2.setImageResource(rDid2);
-    	}
+    	}*/
     	
     	if(leftStrId1 != -1) {
     		tvLeft1.setText(leftStrId1);

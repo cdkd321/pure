@@ -1,5 +1,8 @@
 package com.mygame.pure.ble;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import android.content.Context;
 import android.content.Intent;
 import android.text.format.DateUtils;
@@ -26,6 +29,8 @@ public class BleParserLoader {
 		model.setDate(DateUtil.getCurrentDate());
 		model.setWater(waters + "");
 		model.setBltid(mac);
+		SimpleDateFormat df = new SimpleDateFormat("HH");
+		model.setHour(df.format(new Date()));
 		try {
 			db.saveBindingId(model);
 		} catch (DbException e) {

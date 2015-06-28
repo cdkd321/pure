@@ -151,6 +151,33 @@ public class ActMain extends BaseActivity implements OnClickListener {
 					getSupportFragmentManager(), fragments0);
 			VerticalViewPager page = (VerticalViewPager) baseList.get(i)
 					.findViewById(viewPageId[i]);
+			page.setOnPageChangeListener(new OnPageChangeListener() {
+
+				@Override
+				public void onPageSelected(int arg0) {
+					switch (arg0) {
+					case 0:
+						setTitle("检测中心");
+						break;
+					case 1:
+						setTitle("历史记录");
+						break;
+					}
+
+				}
+
+				@Override
+				public void onPageScrolled(int arg0, float arg1, int arg2) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void onPageScrollStateChanged(int arg0) {
+					// TODO Auto-generated method stub
+
+				}
+			});
 			page.setAdapter(fragmentAdapter);
 		}
 		viewPager.setAdapter(adapter);
@@ -200,7 +227,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		case R.id.llTab4:
 			viewPager.setCurrentItem(3);
 			setTabSelected(3);
-			startActivity(new Intent(v.getContext(), MoreAct.class));
+			//startActivity(new Intent(v.getContext(), MoreAct.class));
 			break;
 		case R.id.ivImg:
 			VerticalViewPager vPager = (VerticalViewPager) viewPager

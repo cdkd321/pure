@@ -5,10 +5,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
+import org.xclcharts.chart.PointD;
+import org.xclcharts.chart.SplineData;
+
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -18,6 +26,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
@@ -29,10 +38,14 @@ import com.mygame.pure.activity.ActMain;
 import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.bean.BltModel;
+import com.mygame.pure.ble.BleService;
+import com.mygame.pure.utils.Constants;
 import com.mygame.pure.utils.DateUtil;
 import com.mygame.pure.utils.DbUtils;
 import com.mygame.pure.utils.ToastHelper;
 import com.mygame.pure.view.CircleProgressBarBlue;
+import com.mygame.pure.view.MyrogressBar;
+import com.mygame.pure.view.SplineChart03View;
 
 public class HandFragmentDown extends BaseFragment implements OnClickListener {
 
@@ -46,6 +59,9 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 	private TextView tvAverageLevelData;
 	private TextView tvThanLastDay;
 	private TextView tvThanLastDayData;
+	private TextView detectionTimes;
+	private MyrogressBar progressBar;
+	private SplineChart03View chartView;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -56,7 +72,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.tab_fragment_hand_down, container, false);
+		rootView = inflater.inflate(R.layout.tab_fragment_hand_down, container,
+				false);
 		initView();
 		return rootView;
 	}
@@ -66,6 +83,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		clickPageLeft = (ImageView) rootView.findViewById(R.id.clickPageLeft);
 		clickPageRight = (ImageView) rootView.findViewById(R.id.clickPageRight);
 		rGroup = (RadioGroup) rootView.findViewById(R.id.rGroup);
+		detectionTimes=(TextView) rootView.findViewById(R.id.detection_times);
+		chartView = (SplineChart03View) rootView
+				.findViewById(R.id.spline_chart);
+		
 		clickPageLeft.setOnClickListener(this);
 		clickPageRight.setOnClickListener(this);
 		List<View> viewList = new ArrayList<View>();
@@ -77,8 +98,15 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		tvThanLastDayData = (TextView) date_record
 				.findViewById(R.id.tvThanLastDayData);
 		tvDate.setText(DateUtil.getCurrentDate());
+		progressBar = (MyrogressBar) rootView.findViewById(R.id.myProgress);
+
 		biJiaoToday(DateUtil.getDateStr(DateUtil.getCurrentDate(), -1),
 				DateUtil.getCurrentDate(), tvThanLastDayData);
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
+		Float d = Float.parseFloat(tvAverageLevelData.getText().toString()
+				.replace("%", "")) / 60f;
+		progressBar.setProgress(Float.parseFloat(df.format(d)));
+		refreshChartView(tvDate.getText().toString());
 		/*
 		 * DbUtils db = DbUtils.create(getActivity()); List<BltModel> blts;
 		 * float averageWater = 0; java.text.DecimalFormat df = new
@@ -129,10 +157,136 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		 * R.layout.date_record, null); viewList.add(view); }
 		 */
 		HistoryAdapter adapter = new HistoryAdapter(viewList);
+		reFreshDegreeView();
+		vpager.setAdapter(adapter);
+		registerBoradcastReceiver();
+	}
+
+	private void reFreshDegreeView() {
 		CircleProgressBarBlue pb = (CircleProgressBarBlue) rootView
 				.findViewById(R.id.cpb);
-		pb.setPoint(50);
-		vpager.setAdapter(adapter);
+		TextView tvDegreeText=(TextView) rootView.findViewById(R.id.tvDegreeText);
+		pb.setProgress(Float.parseFloat(tvAverageLevelData.getText().toString().replace("%", ""))/100f);
+		tvDegreeText.setText(tvAverageLevelData.getText().toString());
+	}
+    /**
+     * 刷新图表
+     */
+	private void refreshChartView(String date) {
+		// 线1的数据集
+		List<PointD> linePoint1 = new ArrayList<PointD>();
+		if(hourAvera(DateUtil.getCurrentDate(), "01")!=0){
+			linePoint1.add(new PointD(4d, hourAvera(DateUtil.getCurrentDate(), "01")));
+		}
+		if(hourAvera(date, "02")!=0){
+			
+			linePoint1.add(new PointD(8d, hourAvera(DateUtil.getCurrentDate(), "02")));
+		}
+		if(hourAvera(date, "03")!=0){
+			linePoint1.add(new PointD(12d, hourAvera(DateUtil.getCurrentDate(), "03")));
+			
+		}
+		if(hourAvera(date, "04")!=0){
+			linePoint1.add(new PointD(16d, hourAvera(DateUtil.getCurrentDate(), "04")));
+			
+		}
+		if(hourAvera(date, "05")!=0){
+			
+			linePoint1.add(new PointD(20d, hourAvera(DateUtil.getCurrentDate(), "05")));
+		}
+		if(hourAvera(date, "06")!=0){
+			
+			linePoint1.add(new PointD(24d, hourAvera(DateUtil.getCurrentDate(), "06")));
+		}
+		if(hourAvera(date, "07")!=0){
+			linePoint1.add(new PointD(28d, hourAvera(DateUtil.getCurrentDate(), "07")));
+			
+		}
+		if(hourAvera(date, "08")!=0){
+			
+			linePoint1.add(new PointD(32d, hourAvera(DateUtil.getCurrentDate(), "08")));
+		}
+		if(hourAvera(date, "09")!=0){
+			
+			linePoint1.add(new PointD(36d, hourAvera(DateUtil.getCurrentDate(), "09")));
+		}
+		if(hourAvera(date, "10")!=0){
+			
+			linePoint1.add(new PointD(40d, hourAvera(DateUtil.getCurrentDate(), "10")));
+		}
+		if(hourAvera(date, "11")!=0){
+			linePoint1.add(new PointD(44d, hourAvera(DateUtil.getCurrentDate(), "11")));
+			
+		}
+		if(hourAvera(date, "12")!=0){
+			
+			linePoint1.add(new PointD(48d, hourAvera(DateUtil.getCurrentDate(), "12")));
+		}
+		if(hourAvera(date, "13")!=0){
+			
+			linePoint1.add(new PointD(52d, hourAvera(DateUtil.getCurrentDate(), "13")));
+		}
+		if(hourAvera(date, "14")!=0){
+			
+			linePoint1.add(new PointD(56d, hourAvera(DateUtil.getCurrentDate(), "14")));
+		}
+		if(hourAvera(date, "15")!=0){
+			
+			linePoint1.add(new PointD(60d, hourAvera(DateUtil.getCurrentDate(), "15")));
+		}
+		if(hourAvera(date, "16")!=0){
+			
+			linePoint1.add(new PointD(64d, hourAvera(DateUtil.getCurrentDate(), "16")));
+		}
+		if(hourAvera(date, "17")!=0){
+			linePoint1.add(new PointD(68d, hourAvera(DateUtil.getCurrentDate(), "17")));
+			
+		}
+		if(hourAvera(date, "18")!=0){
+			
+			linePoint1.add(new PointD(72d, hourAvera(DateUtil.getCurrentDate(), "18")));
+		}
+		if(hourAvera(date, "19")!=0){
+			linePoint1.add(new PointD(76d, hourAvera(DateUtil.getCurrentDate(), "19")));
+			
+		}
+		if(hourAvera(date, "20")!=0){
+			
+			linePoint1.add(new PointD(80d, hourAvera(DateUtil.getCurrentDate(), "20")));
+		}
+		if(hourAvera(date, "21")!=0){
+			
+			linePoint1.add(new PointD(84d, hourAvera(DateUtil.getCurrentDate(), "21")));
+		}
+		if(hourAvera(date, "22")!=0){
+			
+			linePoint1.add(new PointD(88d, hourAvera(DateUtil.getCurrentDate(), "22")));
+		}
+		if(hourAvera(date, "23")!=0){
+			
+			linePoint1.add(new PointD(92d, hourAvera(DateUtil.getCurrentDate(), "23")));
+		}
+		if(hourAvera(date, "24")!=0){
+			
+			linePoint1.add(new PointD(96d, hourAvera(DateUtil.getCurrentDate(), "24")));
+		}
+		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
+				179, 147, 197));
+		// 把线弄细点
+		dataSeries1.getLinePaint().setStrokeWidth(2);
+		// dataSeries1.setLabelVisible(true);
+		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
+		
+		// 设定数据源
+		chartData.add(dataSeries1);
+		chartView.setChartData(chartData);
+		chartView.initView();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getActivity().unregisterReceiver(mReceiver);
 	}
 
 	// 点击每天显示水平
@@ -152,7 +306,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-
+		java.text.DecimalFormat dfDec = new java.text.DecimalFormat("#0.00");
 		switch (v.getId()) {
 		case R.id.abarLeft: // 左边更多按钮
 			ToastHelper.ToastSht("you click left", getActivity());
@@ -167,6 +321,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				tvThanLastDay.setText("比今天");
 				biJiaoLastDay(tvDate.getText().toString(),
 						DateUtil.getCurrentDate(), tvThanLastDayData);
+				refreshChartView(tvDate.getText().toString());
+				reFreshDegreeView();
 
 			} else if (selectFlag == 1) {
 				String[] dates = tvDate.getText().toString().split("~");
@@ -184,6 +340,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					e.printStackTrace();
 				}
 			}
+
+			Float dl = Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) / 60f;
+			progressBar.setProgress(Float.parseFloat(dfDec.format(dl)));
 			break;
 		case R.id.clickPageRight:
 			if (selectFlag == 0) {
@@ -194,7 +354,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					if (tvDate.getText().toString()
 							.equals(DateUtil.getCurrentDate())) {
 						tvThanLastDay.setText("比前一天");
-						biJiaoToday(DateUtil.getDateStr(DateUtil.getCurrentDate(), -1),
+						biJiaoToday(DateUtil.getDateStr(
+								DateUtil.getCurrentDate(), -1),
 								DateUtil.getCurrentDate(), tvThanLastDayData);
 					} else {
 						biJiaoLastDay(tvDate.getText().toString(),
@@ -207,6 +368,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					biJiaoToday(tvDate.getText().toString(),
 							DateUtil.getCurrentDate(), tvThanLastDayData);
 				}
+				refreshChartView(tvDate.getText().toString());
+				reFreshDegreeView();
 
 			} else if (selectFlag == 1) {
 				String[] dates = tvDate.getText().toString().split("~");
@@ -223,6 +386,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					e.printStackTrace();
 				}
 			}
+
+			Float dr = Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) / 60f;
+			progressBar.setProgress(Float.parseFloat(dfDec.format(dr)));
 			break;
 		default:
 			break;
@@ -256,8 +423,9 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					averageWater = totalWater / blts.size();
 					tvAverageLevelData.setText(Float.parseFloat(df
 							.format(averageWater / 45.0f + 20.0)) + "%");
+					detectionTimes.setText("检测次数 "+blts.size()+"次");
 
-				}else{
+				} else {
 					tvAverageLevelData.setText("0.0%");
 				}
 
@@ -302,8 +470,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					+ Float.parseFloat(df
 							.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
 					+ "%");
-		}else if (averageYesTodayWater - averageWater == 0) {
-			tvbiJiao.setText( "+0%");
+		} else if (averageYesTodayWater - averageWater == 0) {
+			tvbiJiao.setText("+0%");
 		} else {
 			tvbiJiao.setText("-"
 					+ Float.parseFloat(df
@@ -363,10 +531,14 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				}
 				if (yesTodayBlts.size() > 0) {
 					averageYesTodayWater = totalWater / yesTodayBlts.size();
-					tvAverageLevelData.setText(Float.parseFloat(df
-							.format(averageYesTodayWater / 45.0f + 20.0)) + "%");
+					tvAverageLevelData
+							.setText(Float.parseFloat(df
+									.format(averageYesTodayWater / 45.0f + 20.0))
+									+ "%");
+					detectionTimes.setText("检测次数 "+yesTodayBlts.size()+"次");
 				} else {
 					tvAverageLevelData.setText("0.0%");
+					detectionTimes.setText("检测次数  0"+"次");
 				}
 
 				// mAdapter.notifymDataSetChanged(lists);
@@ -385,13 +557,54 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 							.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
 					+ "%");
 		} else if (averageYesTodayWater - averageWater == 0) {
-			tvbiJiao.setText( "+0%");
+			tvbiJiao.setText("+0%");
 		} else {
 			tvbiJiao.setText("-"
 					+ Float.parseFloat(df
 							.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
 					+ "%");
 		}
+	}
+	/**
+	 * 从数据库中查询某个小时检查的平均值
+	 * 
+	 * @param lastDay
+	 * @param today
+	 * @param tvbiJiao
+	 */
+	private float hourAvera(String today,String hour) {
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
+		DbUtils db = DbUtils.create(getActivity());
+		List<BltModel> blts;
+		float averageWater = 0;
+		WhereBuilder builder = WhereBuilder.b("date", "==", today).and("hour", "==", hour);
+		try {
+			blts = db.findAll(Selector.from(BltModel.class).where(builder));
+			if (blts != null) {
+				int totalWater = 0;
+				
+				for (int i = 0; i < blts.size(); i++) {
+					totalWater = totalWater
+							+ Integer.parseInt(blts.get(i).getWater());
+					
+				}
+				if (blts.size() > 0) {
+					averageWater = totalWater / blts.size();
+					averageWater =Float.parseFloat(df
+							.format(averageWater / 45.0f + 20.0));
+							
+					
+				}
+				
+			}
+		} catch (DbException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return 0;
+		}
+		return averageWater;
+		
+		
 	}
 
 	/**
@@ -477,5 +690,112 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 
 		return cal.getTime();
 	}
+
+	private void registerBoradcastReceiver() {
+		IntentFilter myIntentFilter = new IntentFilter();
+		myIntentFilter.addAction(Constants.UPDATE_OK);
+		myIntentFilter.addAction(Constants.CANCEL_REFRESH);
+		myIntentFilter.addAction(BleService.ACTION_GATT_CONNECTED);
+		myIntentFilter.addAction(BleService.ACTION_GATT_DISCONNECTED);
+		myIntentFilter.addAction(BleService.ACTION_STATUS_WRONG);
+		myIntentFilter.addAction(BleService.ACTION_TIME_TOOSHORT);
+		myIntentFilter.addAction(BleService.ACTION_START);
+		myIntentFilter.addAction(Constants.SYNCHRONOUS_FAILURE);
+		myIntentFilter.addAction(Constants.OLD_UPDATE_OK);
+		myIntentFilter.addAction(Constants.CLEAR_AlL);
+		// 注册广播
+		getActivity().registerReceiver(mReceiver, myIntentFilter);
+	}
+
+	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
+			String action = intent.getAction();
+			if (Constants.UPDATE_OK.equals(action)) {
+				int waters = intent.getIntExtra("waters", 0);
+
+				DbUtils db = DbUtils.create(getActivity());
+				List<BltModel> blts;
+				float averageWater = 0;
+				WhereBuilder builder = WhereBuilder.b("date", "==",
+						DateUtil.getCurrentDate());
+				try {
+					blts = db.findAll(Selector.from(BltModel.class).where(
+							builder));
+					if (blts != null) {
+						int totalWater = 0;
+
+						for (int i = 0; i < blts.size(); i++) {
+							totalWater = totalWater
+									+ Integer.parseInt(blts.get(i).getWater());
+
+						}
+						if (blts.size() > 0) {
+							averageWater = totalWater / blts.size();
+							// averageWater=Float.parseFloat(df.format(averageWater/45.0f+20.0))/100f;
+							tvAverageLevelData
+									.setText(Float.parseFloat(df
+											.format(averageWater / 45.0f + 20.0))
+											+ "%");
+							detectionTimes.setText("检测次数 "+blts.size()+"次");
+						}
+
+					}
+				} catch (DbException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+				List<BltModel> yesTodayBlts;
+				float averageYesTodayWater = 0;
+				// 昨天的数据
+				WhereBuilder builder1 = WhereBuilder.b("date", "==",
+						DateUtil.dateAddDay(new Date(), -1));
+				try {
+					yesTodayBlts = db.findAll(Selector.from(BltModel.class)
+							.where(builder1));
+					if (yesTodayBlts != null) {
+						int totalWater = 0;
+
+						for (int i = 0; i < yesTodayBlts.size(); i++) {
+							totalWater = totalWater
+									+ Integer.parseInt(yesTodayBlts.get(i)
+											.getWater());
+
+						}
+						if (yesTodayBlts.size() > 0) {
+							averageYesTodayWater = totalWater
+									/ yesTodayBlts.size();
+						}
+
+						// mAdapter.notifymDataSetChanged(lists);
+					} else {
+						averageYesTodayWater = 0;
+					}
+				} catch (DbException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (averageWater - averageYesTodayWater >= 0) {
+					tvThanLastDayData
+							.setText("+"
+									+ Float.parseFloat(df
+											.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
+									+ "%");
+				} else {
+					tvThanLastDayData
+							.setText("-"
+									+ Float.parseFloat(df
+											.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
+									+ "%");
+				}
+				refreshChartView(tvDate.getText().toString());
+				reFreshDegreeView();
+
+			}
+
+		}
+	};
 
 }

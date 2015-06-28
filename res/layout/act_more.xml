@@ -7,13 +7,13 @@
     android:gravity="top|center"
     android:orientation="vertical" >
 
-    <include layout="@layout/include_navigation_bar"/>
+    <include layout="@layout/include_navigation_bar" />
 
     <RelativeLayout
         android:id="@+id/head"
-        android:layout_below="@+id/actionBar"
         android:layout_width="fill_parent"
         android:layout_height="158dp"
+        android:layout_below="@+id/actionBar"
         android:background="@color/white" >
 
         <com.mygame.pure.view.CircleImageView
@@ -34,7 +34,8 @@
             android:textColor="@color/text_black"
             android:textSize="@dimen/list_text_size" />
 
-        <TextView
+        <!--
+             <TextView
             style="@style/w_w"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
@@ -44,61 +45,80 @@
             android:text="已连接"
             android:textColor="@color/white"
             android:textSize="@dimen/input_size" />
+        -->
     </RelativeLayout>
 
+    <com.mygame.pure.view.UIItem
+        android:id="@+id/ui_settings"
+        style="@style/m_w"
+        android:layout_below="@+id/head"
+        app:leftIcon="@drawable/sitting_pressed"
+        app:leftIcon_visible="0"
+        app:leftText1="提醒设置" />
+
+    <RelativeLayout
+        android:id="@+id/connect_device_relative"
+        android:layout_width="match_parent"
+         android:layout_below="@+id/ui_settings"
+        android:layout_height="wrap_content" >
 
         <com.mygame.pure.view.UIItem
-            android:id="@+id/ui_settings"
-            style="@style/m_w"
-            android:layout_below="@+id/head"
-            app:leftIcon="@drawable/sitting_pressed"
-            app:leftIcon_visible="0"
-            app:leftText1="提醒设置" />
-         <com.mygame.pure.view.UIItem
             android:id="@+id/connect_device"
             style="@style/m_w"
-            android:layout_below="@+id/ui_settings"
             app:leftIcon="@drawable/drop_pressed"
             app:leftIcon_visible="0"
             app:leftText1="连接设备" />
 
-        <com.mygame.pure.view.UIItem
-            android:id="@+id/ui_hufu"
-            style="@style/m_w"
-            android:layout_below="@+id/connect_device"
-            app:leftIcon="@drawable/drop_pressed"
-            app:leftIcon_visible="0"
-            app:leftText1="护肤知识" />
-
-        <com.mygame.pure.view.UIItem
-            android:id="@+id/ui_pwd"
-            style="@style/m_w"
-            android:layout_below="@+id/ui_hufu"
-            app:leftIcon="@drawable/password_pressed"
-            app:leftIcon_visible="0"
-            app:leftText1="账户密码" />
-
-        <com.mygame.pure.view.UIItem
-            android:id="@+id/ui_yijian"
-            style="@style/m_w"
-            android:layout_below="@+id/ui_pwd"
-            app:leftIcon="@drawable/feedback_pressed"
-            app:leftIcon_visible="0"
-            app:leftText1="意见反馈" />
-        
-        
         <TextView
-            android:id="@+id/tvExit"
-            style="@style/m_w"
-            android:layout_height="43dp"
-            android:gravity="center"
-            android:layout_margin="@dimen/dp_30"
-            android:layout_centerHorizontal="true"
+            android:id="@+id/connected_text"
+            style="@style/w_w"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="60dp"
             android:background="@drawable/bg_round_corner_theme"
             android:padding="@dimen/five_dp"
-            android:layout_alignParentBottom="true"
-            android:text="退出账号"
+            android:text="已连接"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="@dimen/input_size" />
+    </RelativeLayout>
+
+    <com.mygame.pure.view.UIItem
+        android:id="@+id/ui_hufu"
+        style="@style/m_w"
+        android:layout_below="@+id/connect_device_relative"
+        app:leftIcon="@drawable/drop_pressed"
+        app:leftIcon_visible="0"
+        app:leftText1="护肤知识" />
+
+    <com.mygame.pure.view.UIItem
+        android:id="@+id/ui_pwd"
+        style="@style/m_w"
+        android:layout_below="@+id/ui_hufu"
+        app:leftIcon="@drawable/password_pressed"
+        app:leftIcon_visible="0"
+        app:leftText1="FAQ" />
+
+    <com.mygame.pure.view.UIItem
+        android:id="@+id/ui_yijian"
+        style="@style/m_w"
+        android:layout_below="@+id/ui_pwd"
+        app:leftIcon="@drawable/feedback_pressed"
+        app:leftIcon_visible="0"
+        app:leftText1="意见反馈" />
+
+    <TextView
+        android:id="@+id/tvExit"
+        style="@style/m_w"
+        android:layout_height="43dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/dp_30"
+        android:background="@drawable/bg_round_corner_theme"
+        android:gravity="center"
+        android:padding="@dimen/five_dp"
+        android:text="退出账号"
+        android:textColor="@color/white"
+        android:textSize="@dimen/input_size" />
 
 </RelativeLayout>

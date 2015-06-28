@@ -12,6 +12,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class CircleProgressBarBlue extends View {
@@ -55,6 +56,17 @@ public class CircleProgressBarBlue extends View {
 	
 	public void setPoint(float point){
 		this.point = point;
+		invalidate();
+	}
+	/**
+	 * 当前的角度
+	 * @param point 以角度计算，范围0-360度
+	 * 必须在主线程里调用
+	 */
+	
+	public void setProgress(float progress){
+		this.point = progress*360;
+		
 		invalidate();
 	}
 

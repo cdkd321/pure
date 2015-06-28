@@ -1754,10 +1754,10 @@ public class VerticalViewPager extends ViewGroup {
                     // 在MyScrollView 视图向下滑动时，继续传递事件，
                     // 向上滑动时，判断如果MyScrollView滑到顶不了，就不在传递事件。
                     Activity act = (Activity)context;
-                    MyScrollView sv = (MyScrollView) act.findViewById(R.id.onlysv);
-                    float height = sv.getTopHeight(); 
-                    MyLog.i("--tom", ",sv height:" + height + "dy" + dy );
-                    if (sv.getTopHeight() > 0){
+                    //MyScrollView sv = (MyScrollView) act.findViewById(R.id.onlysv);
+                    //float height = sv.getTopHeight(); 
+                   // MyLog.i("--tom", ",sv height:" + height + "dy" + dy );
+                   /* if (sv.getTopHeight() > 0){
                     	return false;
                     } else {
                     	if(dy < 0){
@@ -1766,7 +1766,7 @@ public class VerticalViewPager extends ViewGroup {
                     	}
                     	MyLog.i("--tom", "dx >= 0 viewpage interceptTouchEvent return true");
                     	return true;
-                    }
+                    }*/
                 }
                 if (yDiff > mTouchSlop && yDiff * 0.5f > xDiff) {
                     if (DEBUG) Log.v(TAG, "Starting drag!");

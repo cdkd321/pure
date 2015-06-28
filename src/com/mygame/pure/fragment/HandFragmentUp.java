@@ -22,6 +22,7 @@ import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
 import com.mygame.pure.activity.ActMain;
+import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.activity.SettingAct;
 import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.ble.BleService;
@@ -60,10 +61,12 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			
 			@Override
 			public void onClick(View v) {
-				main.startActivity(new Intent(getActivity(), SettingAct.class));
+				main.startActivity(new Intent(getActivity(), MoreAct.class));
 			}
 		});
 		pb.setProgressing(0.0f, tvBlueProgress);
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
+		getData(df);
 		return rootView;
 	}
 
@@ -122,78 +125,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 				pb.setProgressing(
 						Float.parseFloat(df.format(waters / 45.0f + 20.0)) / 100f,
 						tvBlueProgress);
-				DbUtils db = DbUtils.create(getActivity());
-				List<BltModel> blts;
-				float averageWater = 0;
-				WhereBuilder builder = WhereBuilder.b("date", "==",
-						DateUtil.getCurrentDate());
-				try {
-					blts = db.findAll(Selector.from(BltModel.class).where(
-							builder));
-					if (blts != null) {
-						int totalWater = 0;
-
-						for (int i = 0; i < blts.size(); i++) {
-							totalWater = totalWater
-									+ Integer.parseInt(blts.get(i).getWater());
-							
-						}
-						if (blts.size() > 0) {
-							averageWater = totalWater / blts.size();
-							// averageWater=Float.parseFloat(df.format(averageWater/45.0f+20.0))/100f;
-							tvAverage
-									.setText(Float.parseFloat(df
-											.format(averageWater / 45.0f + 20.0))
-											+ "%");
-						}
-
-					}
-				} catch (DbException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-
-				List<BltModel> yesTodayBlts;
-				float averageYesTodayWater = 0;
-				// 昨天的数据
-				WhereBuilder builder1 = WhereBuilder.b("date", "==",
-						DateUtil.dateAddDay(new Date(), -1));
-				try {
-					yesTodayBlts = db.findAll(Selector.from(BltModel.class)
-							.where(builder1));
-					if (yesTodayBlts != null) {
-						int totalWater = 0;
-
-						for (int i = 0; i < yesTodayBlts.size(); i++) {
-							totalWater = totalWater
-									+ Integer.parseInt(yesTodayBlts.get(i)
-											.getWater());
-							
-						}
-						if (yesTodayBlts.size() > 0) {
-							averageYesTodayWater = totalWater
-									/ yesTodayBlts.size();
-						}
-
-						// mAdapter.notifymDataSetChanged(lists);
-					} else {
-						averageYesTodayWater = 0;
-					}
-				} catch (DbException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-                if(averageWater - averageYesTodayWater>=0){
-                	tvYestodayLabel
-					.setText("+"+Float.parseFloat(df
-							.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
-							+ "%");
-                }else{
-                	tvYestodayLabel
-					.setText("-"+Float.parseFloat(df
-							.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
-							+ "%");
-                }
+				getData(df);
 				
 
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
@@ -215,6 +147,82 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			}
 
 		}
+
+		
 	};
+	private void getData(java.text.DecimalFormat df) {
+		DbUtils db = DbUtils.create(getActivity());
+		List<BltModel> blts;
+		float averageWater = 0;
+		WhereBuilder builder = WhereBuilder.b("date", "==",
+				DateUtil.getCurrentDate());
+		try {
+			blts = db.findAll(Selector.from(BltModel.class).where(
+					builder));
+			if (blts != null) {
+				int totalWater = 0;
+
+				for (int i = 0; i < blts.size(); i++) {
+					totalWater = totalWater
+							+ Integer.parseInt(blts.get(i).getWater());
+					
+				}
+				if (blts.size() > 0) {
+					averageWater = totalWater / blts.size();
+					// averageWater=Float.parseFloat(df.format(averageWater/45.0f+20.0))/100f;
+					tvAverage
+							.setText(Float.parseFloat(df
+									.format(averageWater / 45.0f + 20.0))
+									+ "%");
+				}
+
+			}
+		} catch (DbException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		List<BltModel> yesTodayBlts;
+		float averageYesTodayWater = 0;
+		// 昨天的数据
+		WhereBuilder builder1 = WhereBuilder.b("date", "==",
+				DateUtil.dateAddDay(new Date(), -1));
+		try {
+			yesTodayBlts = db.findAll(Selector.from(BltModel.class)
+					.where(builder1));
+			if (yesTodayBlts != null) {
+				int totalWater = 0;
+
+				for (int i = 0; i < yesTodayBlts.size(); i++) {
+					totalWater = totalWater
+							+ Integer.parseInt(yesTodayBlts.get(i)
+									.getWater());
+					
+				}
+				if (yesTodayBlts.size() > 0) {
+					averageYesTodayWater = totalWater
+							/ yesTodayBlts.size();
+				}
+
+				// mAdapter.notifymDataSetChanged(lists);
+			} else {
+				averageYesTodayWater = 0;
+			}
+		} catch (DbException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(averageWater - averageYesTodayWater>=0){
+			tvYestodayLabel
+			.setText("+"+Float.parseFloat(df
+					.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
+					+ "%");
+		}else{
+			tvYestodayLabel
+			.setText("-"+Float.parseFloat(df
+					.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
+					+ "%");
+		}
+	}
 
 }
