@@ -26,7 +26,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
@@ -35,8 +34,8 @@ import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
 import com.mygame.pure.activity.ActMain;
-import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.adapter.HistoryAdapter;
+import com.mygame.pure.bean.Average;
 import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.ble.BleService;
 import com.mygame.pure.utils.Constants;
@@ -83,10 +82,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		clickPageLeft = (ImageView) rootView.findViewById(R.id.clickPageLeft);
 		clickPageRight = (ImageView) rootView.findViewById(R.id.clickPageRight);
 		rGroup = (RadioGroup) rootView.findViewById(R.id.rGroup);
-		detectionTimes=(TextView) rootView.findViewById(R.id.detection_times);
+		detectionTimes = (TextView) rootView.findViewById(R.id.detection_times);
 		chartView = (SplineChart03View) rootView
 				.findViewById(R.id.spline_chart);
-		
+
 		clickPageLeft.setOnClickListener(this);
 		clickPageRight.setOnClickListener(this);
 		List<View> viewList = new ArrayList<View>();
@@ -133,23 +132,42 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				switch (checkedId) {
 				case R.id.rbLeft:
 					selectFlag = 0;
+					refreshChartView(DateUtil.getCurrentDate());
 					tvDate.setText(DateUtil.getCurrentDate());
+					biJiaoToday(
+							DateUtil.getDateStr(DateUtil.getCurrentDate(), -1),
+							DateUtil.getCurrentDate(), tvThanLastDayData);
 					break;
 				case R.id.rbRight:
 					selectFlag = 2;
-
+					Average averagem = refreshMonthChartView(
+							df.format(getFirstDayOfMonth(new Date())),
+							df.format(getLastDayOfMonth(new Date())));
 					tvDate.setText(df.format(getFirstDayOfMonth(new Date()))
 							+ "~" + df.format(getLastDayOfMonth(new Date())));
+					tvAverageLevelData.setText(averagem.getAverage() + "%");
+					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
 					break;
 				case R.id.rbMid:
 					selectFlag = 1;
-					tvDate.setText(df.format(getFirstDayOfWeek(new Date()))
+					Average average = refreshWeekChartView(DateUtil.getDateStr(
+							df.format(getFirstDayOfWeek(new Date())), -1));
+					tvDate.setText(DateUtil.getDateStr(
+							df.format(getFirstDayOfWeek(new Date())), -1)
 							+ "~" + df.format(getLastDayOfWeek(new Date())));
+					tvAverageLevelData.setText(average.getAverage() + "%");
+					detectionTimes.setText("检测次数 " + average.getCount() + "次");
 					break;
 
 				default:
 					break;
 				}
+				java.text.DecimalFormat dfd = new java.text.DecimalFormat(
+						"#0.00");
+				Float d = Float.parseFloat(tvAverageLevelData.getText()
+						.toString().replace("%", "")) / 60f;
+				progressBar.setProgress(Float.parseFloat(dfd.format(d)));
+				reFreshDegreeView();
 			}
 		});
 		/*
@@ -165,110 +183,137 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 	private void reFreshDegreeView() {
 		CircleProgressBarBlue pb = (CircleProgressBarBlue) rootView
 				.findViewById(R.id.cpb);
-		TextView tvDegreeText=(TextView) rootView.findViewById(R.id.tvDegreeText);
-		pb.setProgress(Float.parseFloat(tvAverageLevelData.getText().toString().replace("%", ""))/100f);
+		TextView tvDegreeText = (TextView) rootView
+				.findViewById(R.id.tvDegreeText);
+		pb.setProgress(Float.parseFloat(tvAverageLevelData.getText().toString()
+				.replace("%", "")) / 100f);
 		tvDegreeText.setText(tvAverageLevelData.getText().toString());
 	}
-    /**
-     * 刷新图表
-     */
+
+	/**
+	 * 刷新图表
+	 */
 	private void refreshChartView(String date) {
 		// 线1的数据集
 		List<PointD> linePoint1 = new ArrayList<PointD>();
-		if(hourAvera(DateUtil.getCurrentDate(), "01")!=0){
-			linePoint1.add(new PointD(4d, hourAvera(DateUtil.getCurrentDate(), "01")));
+		if (hourAvera(DateUtil.getCurrentDate(), "01") != 0) {
+			linePoint1.add(new PointD(4d, hourAvera(DateUtil.getCurrentDate(),
+					"01")));
 		}
-		if(hourAvera(date, "02")!=0){
-			
-			linePoint1.add(new PointD(8d, hourAvera(DateUtil.getCurrentDate(), "02")));
+		if (hourAvera(date, "02") != 0) {
+
+			linePoint1.add(new PointD(8d, hourAvera(DateUtil.getCurrentDate(),
+					"02")));
 		}
-		if(hourAvera(date, "03")!=0){
-			linePoint1.add(new PointD(12d, hourAvera(DateUtil.getCurrentDate(), "03")));
-			
+		if (hourAvera(date, "03") != 0) {
+			linePoint1.add(new PointD(12d, hourAvera(DateUtil.getCurrentDate(),
+					"03")));
+
 		}
-		if(hourAvera(date, "04")!=0){
-			linePoint1.add(new PointD(16d, hourAvera(DateUtil.getCurrentDate(), "04")));
-			
+		if (hourAvera(date, "04") != 0) {
+			linePoint1.add(new PointD(16d, hourAvera(DateUtil.getCurrentDate(),
+					"04")));
+
 		}
-		if(hourAvera(date, "05")!=0){
-			
-			linePoint1.add(new PointD(20d, hourAvera(DateUtil.getCurrentDate(), "05")));
+		if (hourAvera(date, "05") != 0) {
+
+			linePoint1.add(new PointD(20d, hourAvera(DateUtil.getCurrentDate(),
+					"05")));
 		}
-		if(hourAvera(date, "06")!=0){
-			
-			linePoint1.add(new PointD(24d, hourAvera(DateUtil.getCurrentDate(), "06")));
+		if (hourAvera(date, "06") != 0) {
+
+			linePoint1.add(new PointD(24d, hourAvera(DateUtil.getCurrentDate(),
+					"06")));
 		}
-		if(hourAvera(date, "07")!=0){
-			linePoint1.add(new PointD(28d, hourAvera(DateUtil.getCurrentDate(), "07")));
-			
+		if (hourAvera(date, "07") != 0) {
+			linePoint1.add(new PointD(28d, hourAvera(DateUtil.getCurrentDate(),
+					"07")));
+
 		}
-		if(hourAvera(date, "08")!=0){
-			
-			linePoint1.add(new PointD(32d, hourAvera(DateUtil.getCurrentDate(), "08")));
+		if (hourAvera(date, "08") != 0) {
+
+			linePoint1.add(new PointD(32d, hourAvera(DateUtil.getCurrentDate(),
+					"08")));
 		}
-		if(hourAvera(date, "09")!=0){
-			
-			linePoint1.add(new PointD(36d, hourAvera(DateUtil.getCurrentDate(), "09")));
+		if (hourAvera(date, "09") != 0) {
+
+			linePoint1.add(new PointD(36d, hourAvera(DateUtil.getCurrentDate(),
+					"09")));
 		}
-		if(hourAvera(date, "10")!=0){
-			
-			linePoint1.add(new PointD(40d, hourAvera(DateUtil.getCurrentDate(), "10")));
+		if (hourAvera(date, "10") != 0) {
+
+			linePoint1.add(new PointD(40d, hourAvera(DateUtil.getCurrentDate(),
+					"10")));
 		}
-		if(hourAvera(date, "11")!=0){
-			linePoint1.add(new PointD(44d, hourAvera(DateUtil.getCurrentDate(), "11")));
-			
+		if (hourAvera(date, "11") != 0) {
+			linePoint1.add(new PointD(44d, hourAvera(DateUtil.getCurrentDate(),
+					"11")));
+
 		}
-		if(hourAvera(date, "12")!=0){
-			
-			linePoint1.add(new PointD(48d, hourAvera(DateUtil.getCurrentDate(), "12")));
+		if (hourAvera(date, "12") != 0) {
+
+			linePoint1.add(new PointD(48d, hourAvera(DateUtil.getCurrentDate(),
+					"12")));
 		}
-		if(hourAvera(date, "13")!=0){
-			
-			linePoint1.add(new PointD(52d, hourAvera(DateUtil.getCurrentDate(), "13")));
+		if (hourAvera(date, "13") != 0) {
+
+			linePoint1.add(new PointD(52d, hourAvera(DateUtil.getCurrentDate(),
+					"13")));
 		}
-		if(hourAvera(date, "14")!=0){
-			
-			linePoint1.add(new PointD(56d, hourAvera(DateUtil.getCurrentDate(), "14")));
+		if (hourAvera(date, "14") != 0) {
+
+			linePoint1.add(new PointD(56d, hourAvera(DateUtil.getCurrentDate(),
+					"14")));
 		}
-		if(hourAvera(date, "15")!=0){
-			
-			linePoint1.add(new PointD(60d, hourAvera(DateUtil.getCurrentDate(), "15")));
+		if (hourAvera(date, "15") != 0) {
+
+			linePoint1.add(new PointD(60d, hourAvera(DateUtil.getCurrentDate(),
+					"15")));
 		}
-		if(hourAvera(date, "16")!=0){
-			
-			linePoint1.add(new PointD(64d, hourAvera(DateUtil.getCurrentDate(), "16")));
+		if (hourAvera(date, "16") != 0) {
+
+			linePoint1.add(new PointD(64d, hourAvera(DateUtil.getCurrentDate(),
+					"16")));
 		}
-		if(hourAvera(date, "17")!=0){
-			linePoint1.add(new PointD(68d, hourAvera(DateUtil.getCurrentDate(), "17")));
-			
+		if (hourAvera(date, "17") != 0) {
+			linePoint1.add(new PointD(68d, hourAvera(DateUtil.getCurrentDate(),
+					"17")));
+
 		}
-		if(hourAvera(date, "18")!=0){
-			
-			linePoint1.add(new PointD(72d, hourAvera(DateUtil.getCurrentDate(), "18")));
+		if (hourAvera(date, "18") != 0) {
+
+			linePoint1.add(new PointD(72d, hourAvera(DateUtil.getCurrentDate(),
+					"18")));
 		}
-		if(hourAvera(date, "19")!=0){
-			linePoint1.add(new PointD(76d, hourAvera(DateUtil.getCurrentDate(), "19")));
-			
+		if (hourAvera(date, "19") != 0) {
+			linePoint1.add(new PointD(76d, hourAvera(DateUtil.getCurrentDate(),
+					"19")));
+
 		}
-		if(hourAvera(date, "20")!=0){
-			
-			linePoint1.add(new PointD(80d, hourAvera(DateUtil.getCurrentDate(), "20")));
+		if (hourAvera(date, "20") != 0) {
+
+			linePoint1.add(new PointD(80d, hourAvera(DateUtil.getCurrentDate(),
+					"20")));
 		}
-		if(hourAvera(date, "21")!=0){
-			
-			linePoint1.add(new PointD(84d, hourAvera(DateUtil.getCurrentDate(), "21")));
+		if (hourAvera(date, "21") != 0) {
+
+			linePoint1.add(new PointD(84d, hourAvera(DateUtil.getCurrentDate(),
+					"21")));
 		}
-		if(hourAvera(date, "22")!=0){
-			
-			linePoint1.add(new PointD(88d, hourAvera(DateUtil.getCurrentDate(), "22")));
+		if (hourAvera(date, "22") != 0) {
+
+			linePoint1.add(new PointD(88d, hourAvera(DateUtil.getCurrentDate(),
+					"22")));
 		}
-		if(hourAvera(date, "23")!=0){
-			
-			linePoint1.add(new PointD(92d, hourAvera(DateUtil.getCurrentDate(), "23")));
+		if (hourAvera(date, "23") != 0) {
+
+			linePoint1.add(new PointD(92d, hourAvera(DateUtil.getCurrentDate(),
+					"23")));
 		}
-		if(hourAvera(date, "24")!=0){
-			
-			linePoint1.add(new PointD(96d, hourAvera(DateUtil.getCurrentDate(), "24")));
+		if (hourAvera(date, "24") != 0) {
+
+			linePoint1.add(new PointD(96d, hourAvera(DateUtil.getCurrentDate(),
+					"24")));
 		}
 		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
 				179, 147, 197));
@@ -276,11 +321,136 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		dataSeries1.getLinePaint().setStrokeWidth(2);
 		// dataSeries1.setLabelVisible(true);
 		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
-		
+
 		// 设定数据源
 		chartData.add(dataSeries1);
 		chartView.setChartData(chartData);
 		chartView.initView();
+	}
+
+	/**
+	 * 刷新月图表
+	 */
+
+	private Average refreshMonthChartView(String startDate, String endDate) {
+		Average averageEntity = new Average();
+		float average = 0;
+		int count = 0;
+		List<PointD> linePoint1 = new ArrayList<PointD>();
+		String ends[] = endDate.split("-");
+		int totalDay = Integer.parseInt(ends[2]);
+		double pointd = (Double) 100d / totalDay;
+		for (int i = 0; i < totalDay; i++) {
+			average = average
+					+ dayAvera(DateUtil.getDateStr(startDate, i)).getAverage();
+			count = count
+					+ dayAvera(DateUtil.getDateStr(startDate, i)).getCount();
+			linePoint1.add(new PointD(i * pointd, dayAvera(
+					DateUtil.getDateStr(startDate, i)).getAverage()));
+		}
+		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
+				179, 147, 197));
+		// 把线弄细点
+		dataSeries1.getLinePaint().setStrokeWidth(2);
+		// dataSeries1.setLabelVisible(true);
+		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
+		LinkedList<String> chartLabels = new LinkedList<String>();
+		chartLabels.add("1");
+		chartLabels.add("15");
+		chartLabels.add("30");
+		// 设定数据源
+		chartData.add(dataSeries1);
+		chartView.setChartData(chartData);
+		chartView.setChartLabels(chartLabels);
+		averageEntity.setAverage(average);
+		averageEntity.setCount(count);
+		chartView.initView();
+		return averageEntity;
+	}
+
+	/**
+	 * 刷新周图表
+	 */
+	private Average refreshWeekChartView(String date) {
+		// 线1的数据集
+		Average averageEntity = new Average();
+		float average = 0;
+		int count = 0;
+		List<PointD> linePoint1 = new ArrayList<PointD>();
+		if (dayAvera(date).getAverage() != 0) {
+			average = average + dayAvera(date).getAverage();
+			count = count + dayAvera(date).getCount();
+			linePoint1.add(new PointD(14d, dayAvera(date).getAverage()));
+		}
+		if (dayAvera(DateUtil.getDateStr(date, 1)).getAverage() != 0) {
+			average = average
+					+ dayAvera(DateUtil.getDateStr(date, 1)).getAverage();
+			count = count + dayAvera(DateUtil.getDateStr(date, 1)).getCount();
+			linePoint1.add(new PointD(28d, dayAvera(
+					DateUtil.getDateStr(date, 1)).getAverage()));
+		}
+		if (dayAvera(DateUtil.getDateStr(date, 2)).getAverage() != 0) {
+			average = average
+					+ dayAvera(DateUtil.getDateStr(date, 2)).getAverage();
+			count = count + dayAvera(DateUtil.getDateStr(date, 2)).getCount();
+			linePoint1.add(new PointD(42d, dayAvera(
+					DateUtil.getDateStr(date, 2)).getAverage()));
+
+		}
+		if (dayAvera(DateUtil.getDateStr(date, 3)).getAverage() != 0) {
+			average = average
+					+ dayAvera(DateUtil.getDateStr(date, 3)).getAverage();
+			count = count + dayAvera(DateUtil.getDateStr(date, 3)).getCount();
+			linePoint1.add(new PointD(56d, dayAvera(
+					DateUtil.getDateStr(date, 3)).getAverage()));
+
+		}
+		if (dayAvera(DateUtil.getDateStr(date, 4)).getAverage() != 0) {
+			average = average
+					+ dayAvera(DateUtil.getDateStr(date, 4)).getAverage();
+			count = count + dayAvera(DateUtil.getDateStr(date, 4)).getCount();
+			linePoint1.add(new PointD(70d, dayAvera(
+					DateUtil.getDateStr(date, 4)).getAverage()));
+
+		}
+		if (dayAvera(DateUtil.getDateStr(date, 5)).getAverage() != 0) {
+			average = average
+					+ dayAvera(DateUtil.getDateStr(date, 5)).getAverage();
+			count = count + dayAvera(DateUtil.getDateStr(date, 5)).getCount();
+			linePoint1.add(new PointD(84d, dayAvera(
+					DateUtil.getDateStr(date, 5)).getAverage()));
+
+		}
+		if (dayAvera(DateUtil.getDateStr(date, 6)).getAverage() != 0) {
+			average = average
+					+ dayAvera(DateUtil.getDateStr(date, 6)).getAverage();
+			count = count + dayAvera(DateUtil.getDateStr(date, 6)).getCount();
+			linePoint1.add(new PointD(98d, dayAvera(
+					DateUtil.getDateStr(date, 6)).getAverage()));
+
+		}
+		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
+				179, 147, 197));
+		// 把线弄细点
+		dataSeries1.getLinePaint().setStrokeWidth(2);
+		// dataSeries1.setLabelVisible(true);
+		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
+		LinkedList<String> chartLabels = new LinkedList<String>();
+		chartLabels.add("日");
+		chartLabels.add("一");
+		chartLabels.add("二");
+		chartLabels.add("三");
+		chartLabels.add("四");
+		chartLabels.add("五");
+		chartLabels.add("六");
+		// 设定数据源
+		chartData.add(dataSeries1);
+		chartView.setChartData(chartData);
+		chartView.setChartLabels(chartLabels);
+		chartView.initView();
+		averageEntity.setAverage(average);
+		averageEntity.setCount(count);
+		return averageEntity;
 	}
 
 	@Override
@@ -322,12 +492,16 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				biJiaoLastDay(tvDate.getText().toString(),
 						DateUtil.getCurrentDate(), tvThanLastDayData);
 				refreshChartView(tvDate.getText().toString());
-				reFreshDegreeView();
 
 			} else if (selectFlag == 1) {
 				String[] dates = tvDate.getText().toString().split("~");
 				tvDate.setText(DateUtil.getDateStr(dates[0], -7) + "~"
 						+ DateUtil.getDateStr(dates[1], -7));
+				Average average = refreshWeekChartView(DateUtil.getDateStr(
+						dates[0], -7));
+
+				tvAverageLevelData.setText(average.getAverage() + "%");
+				detectionTimes.setText("检测次数 " + average.getCount() + "次");
 
 			} else if (selectFlag == 2) {
 				String[] dates = tvDate.getText().toString().split("~");
@@ -336,6 +510,12 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					tvDate.setText(df.format(getReduceMonth(df.parse(dates[0])))
 							+ "~"
 							+ df.format(getReduceMonth(df.parse(dates[1]))));
+
+					Average averagem = refreshMonthChartView(df.format(df
+							.format(getReduceMonth(df.parse(dates[0])))),
+							df.format(getReduceMonth(df.parse(dates[1]))));
+					tvAverageLevelData.setText(averagem.getAverage() + "%");
+					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
@@ -343,6 +523,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 
 			Float dl = Float.parseFloat(tvAverageLevelData.getText().toString()
 					.replace("%", "")) / 60f;
+			reFreshDegreeView();
 			progressBar.setProgress(Float.parseFloat(dfDec.format(dl)));
 			break;
 		case R.id.clickPageRight:
@@ -369,24 +550,33 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 							DateUtil.getCurrentDate(), tvThanLastDayData);
 				}
 				refreshChartView(tvDate.getText().toString());
-				reFreshDegreeView();
 
 			} else if (selectFlag == 1) {
 				String[] dates = tvDate.getText().toString().split("~");
-				tvDate.setText(DateUtil.getDateStr(dates[0], -7) + "~"
-						+ DateUtil.getDateStr(dates[1], -7));
+				tvDate.setText(DateUtil.getDateStr(dates[0], 7) + "~"
+						+ DateUtil.getDateStr(dates[1], 7));
+				Average average = refreshWeekChartView(DateUtil.getDateStr(
+						dates[0], 7));
+
+				tvAverageLevelData.setText(average.getAverage() + "%");
+				detectionTimes.setText("检测次数 " + average.getCount() + "次");
 			} else if (selectFlag == 2) {
 				String[] dates = tvDate.getText().toString().split("~");
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 				try {
 					tvDate.setText(df.format(getAddMonth(df.parse(dates[0])))
 							+ "~" + df.format(getAddMonth(df.parse(dates[1]))));
+					Average averagem = refreshMonthChartView(df.format(df
+							.format(getAddMonth(df.parse(dates[0])))),
+							df.format(getAddMonth(df.parse(dates[1]))));
+					tvAverageLevelData.setText(averagem.getAverage() + "%");
+					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-
+			reFreshDegreeView();
 			Float dr = Float.parseFloat(tvAverageLevelData.getText().toString()
 					.replace("%", "")) / 60f;
 			progressBar.setProgress(Float.parseFloat(dfDec.format(dr)));
@@ -423,7 +613,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					averageWater = totalWater / blts.size();
 					tvAverageLevelData.setText(Float.parseFloat(df
 							.format(averageWater / 45.0f + 20.0)) + "%");
-					detectionTimes.setText("检测次数 "+blts.size()+"次");
+					detectionTimes.setText("检测次数 " + blts.size() + "次");
 
 				} else {
 					tvAverageLevelData.setText("0.0%");
@@ -535,10 +725,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 							.setText(Float.parseFloat(df
 									.format(averageYesTodayWater / 45.0f + 20.0))
 									+ "%");
-					detectionTimes.setText("检测次数 "+yesTodayBlts.size()+"次");
+					detectionTimes.setText("检测次数 " + yesTodayBlts.size() + "次");
 				} else {
 					tvAverageLevelData.setText("0.0%");
-					detectionTimes.setText("检测次数  0"+"次");
+					detectionTimes.setText("检测次数  0" + "次");
 				}
 
 				// mAdapter.notifymDataSetChanged(lists);
@@ -565,6 +755,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					+ "%");
 		}
 	}
+
 	/**
 	 * 从数据库中查询某个小时检查的平均值
 	 * 
@@ -572,30 +763,30 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 	 * @param today
 	 * @param tvbiJiao
 	 */
-	private float hourAvera(String today,String hour) {
+	private float hourAvera(String today, String hour) {
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
 		DbUtils db = DbUtils.create(getActivity());
 		List<BltModel> blts;
 		float averageWater = 0;
-		WhereBuilder builder = WhereBuilder.b("date", "==", today).and("hour", "==", hour);
+		WhereBuilder builder = WhereBuilder.b("date", "==", today).and("hour",
+				"==", hour);
 		try {
 			blts = db.findAll(Selector.from(BltModel.class).where(builder));
 			if (blts != null) {
 				int totalWater = 0;
-				
+
 				for (int i = 0; i < blts.size(); i++) {
 					totalWater = totalWater
 							+ Integer.parseInt(blts.get(i).getWater());
-					
+
 				}
 				if (blts.size() > 0) {
 					averageWater = totalWater / blts.size();
-					averageWater =Float.parseFloat(df
+					averageWater = Float.parseFloat(df
 							.format(averageWater / 45.0f + 20.0));
-							
-					
+
 				}
-				
+
 			}
 		} catch (DbException e1) {
 			// TODO Auto-generated catch block
@@ -603,8 +794,50 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 			return 0;
 		}
 		return averageWater;
-		
-		
+
+	}
+
+	/**
+	 * 从数据库中查询某天检查的平均值
+	 * 
+	 * @param lastDay
+	 * @param today
+	 * @param tvbiJiao
+	 */
+	private Average dayAvera(String day) {
+		Average average = new Average();
+		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
+		DbUtils db = DbUtils.create(getActivity());
+		List<BltModel> blts;
+		float averageWater = 0;
+		WhereBuilder builder = WhereBuilder.b("date", "==", day);
+		try {
+			blts = db.findAll(Selector.from(BltModel.class).where(builder));
+			if (blts != null) {
+				int totalWater = 0;
+
+				for (int i = 0; i < blts.size(); i++) {
+					totalWater = totalWater
+							+ Integer.parseInt(blts.get(i).getWater());
+
+				}
+				if (blts.size() > 0) {
+					averageWater = totalWater / blts.size();
+					average.setCount(blts.size());
+					averageWater = Float.parseFloat(df
+							.format(averageWater / 45.0f + 20.0));
+					average.setAverage(averageWater);
+
+				}
+
+			}
+		} catch (DbException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return average;
+		}
+		return average;
+
 	}
 
 	/**
@@ -625,7 +858,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		Calendar c = Calendar.getInstance();
 		c.setFirstDayOfWeek(Calendar.MONDAY);
 		c.setTime(date);
-		c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek() + 6); // 星期天
+		c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek() + 5); // 星期天
 		return c.getTime();
 	}
 
@@ -738,7 +971,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 									.setText(Float.parseFloat(df
 											.format(averageWater / 45.0f + 20.0))
 											+ "%");
-							detectionTimes.setText("检测次数 "+blts.size()+"次");
+							detectionTimes.setText("检测次数 " + blts.size() + "次");
 						}
 
 					}

@@ -1,8 +1,5 @@
 package com.mygame.pure.activity;
 
-import java.util.Date;
-import java.util.List;
-
 import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
@@ -15,21 +12,17 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lidroid.xutils.db.sqlite.Selector;
-import com.lidroid.xutils.db.sqlite.WhereBuilder;
-import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
-import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.ble.BleService;
 import com.mygame.pure.utils.Constants;
-import com.mygame.pure.utils.DateUtil;
-import com.mygame.pure.utils.DbUtils;
+import com.mygame.pure.view.CircleImageView;
 import com.mygame.pure.view.UIItem;
 
-public class MoreAct extends BaseActivity implements OnClickListener{
+public class MoreAct extends BaseActivity implements OnClickListener {
 	private String mAddress;
 	private TextView connected_text;
+	private CircleImageView cimg;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +33,17 @@ public class MoreAct extends BaseActivity implements OnClickListener{
 		UIItem ui_pwd = (UIItem) findViewById(R.id.ui_pwd);
 		UIItem ui_yijian = (UIItem) findViewById(R.id.ui_yijian);
 		UIItem connect_device = (UIItem) findViewById(R.id.connect_device);
-		connected_text=(TextView) findViewById(R.id.connected_text);
+		connected_text = (TextView) findViewById(R.id.connected_text);
+		cimg = (CircleImageView) findViewById(R.id.cimg);
 		registerBoradcastReceiver();
 		ui_settings.setOnClickListener(this);
 		ui_hufu.setOnClickListener(this);
 		ui_pwd.setOnClickListener(this);
 		ui_yijian.setOnClickListener(this);
 		ui_settings.setOnClickListener(this);
-		
+
 		connect_device.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				Intent i = new Intent(MoreAct.this, DeviceListActivity.class);
@@ -57,22 +51,33 @@ public class MoreAct extends BaseActivity implements OnClickListener{
 				startActivityForResult(i, 0);
 			}
 		});
-		
+		cimg.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(MoreAct.this,
+						PersonalCenterActivity.class);
+				startActivity(i);
+			}
+		});
+
 		addBackImage(R.drawable.btn_back_bg, new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				finish();
 			}
 		});
 		setTitle("更多");
- 
+
 	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(mReceiver);
 	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -81,10 +86,10 @@ public class MoreAct extends BaseActivity implements OnClickListener{
 			BluetoothDevice device = data.getExtras().getParcelable(
 					BluetoothDevice.EXTRA_DEVICE);
 			mAddress = device.getAddress();
-			if(SelfDefineApplication.getInstance().mService!=null){
+			if (SelfDefineApplication.getInstance().mService != null) {
 				SelfDefineApplication.getInstance().mService.connect(mAddress);
 			}
-		} else if (requestCode == 1) { // 
+		} else if (requestCode == 1) { //
 			if (resultCode == Activity.RESULT_OK) {
 				Toast.makeText(this, "bluetooth open success!",
 						Toast.LENGTH_SHORT).show();
@@ -111,6 +116,7 @@ public class MoreAct extends BaseActivity implements OnClickListener{
 			break;
 		}
 	}
+
 	private void registerBoradcastReceiver() {
 		IntentFilter myIntentFilter = new IntentFilter();
 		myIntentFilter.addAction(Constants.UPDATE_OK);
@@ -147,5 +153,5 @@ public class MoreAct extends BaseActivity implements OnClickListener{
 
 		}
 	};
-	
+
 }

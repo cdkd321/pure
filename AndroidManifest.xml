@@ -64,6 +64,10 @@
             ></activity>
         <activity android:name="com.mygame.pure.activity.ActAbout"
             android:screenOrientation="portrait" />
+        <activity 
+            android:name="com.mygame.pure.activity.PersonalCenterActivity"
+            android:screenOrientation="portrait"
+            ></activity>
         
         <activity android:name="com.mygame.pure.activity.ActSpecify"
             android:screenOrientation="portrait" />

@@ -23,7 +23,6 @@ import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
 import com.mygame.pure.activity.ActMain;
 import com.mygame.pure.activity.MoreAct;
-import com.mygame.pure.activity.SettingAct;
 import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.ble.BleService;
 import com.mygame.pure.utils.Constants;
@@ -51,14 +50,14 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.tab_fragment_hand, container,
 				false);
-		
+
 		pb = (CircleProgressBar) rootView.findViewById(R.id.cpbUp);
 		tvBlueProgress = (TextView) rootView.findViewById(R.id.tvBlueProgress);
 		tvBlueTouth = (TextView) rootView.findViewById(R.id.tvBlueTouth);
 		tvAverage = (TextView) rootView.findViewById(R.id.tvAverage);
 		tvYestodayLabel = (TextView) rootView.findViewById(R.id.tvYestoday);
 		main.addBackImage(R.drawable.btn_more_bg, new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				main.startActivity(new Intent(getActivity(), MoreAct.class));
@@ -126,19 +125,40 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 						Float.parseFloat(df.format(waters / 45.0f + 20.0)) / 100f,
 						tvBlueProgress);
 				getData(df);
-				
 
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
 				tvBlueTouth.setText("已连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
+				try {
+					Thread.sleep(1000);
+					tvBlueTouth.setVisibility(View.GONE);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			} else if (BleService.ACTION_GATT_DISCONNECTED.equals(action)) {
 				tvBlueTouth.setText("断开连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress);
+				try {
+					Thread.sleep(1000);
+					tvBlueTouth.setVisibility(View.GONE);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else if (BleService.ACTION_STATUS_WRONG.equals(action)) {
 				tvBlueTouth.setText("断开连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress);
+				try {
+					Thread.sleep(1000);
+					tvBlueTouth.setVisibility(View.GONE);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			} else if (BleService.ACTION_TIME_TOOSHORT.equals(action)) {
 				Toast.makeText(getActivity(), "请连续按住5秒", 1000).show();
 				pb.setProgressing(0.0f, tvBlueProgress);
@@ -148,8 +168,8 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 
 		}
 
-		
 	};
+
 	private void getData(java.text.DecimalFormat df) {
 		DbUtils db = DbUtils.create(getActivity());
 		List<BltModel> blts;
@@ -157,23 +177,20 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		WhereBuilder builder = WhereBuilder.b("date", "==",
 				DateUtil.getCurrentDate());
 		try {
-			blts = db.findAll(Selector.from(BltModel.class).where(
-					builder));
+			blts = db.findAll(Selector.from(BltModel.class).where(builder));
 			if (blts != null) {
 				int totalWater = 0;
 
 				for (int i = 0; i < blts.size(); i++) {
 					totalWater = totalWater
 							+ Integer.parseInt(blts.get(i).getWater());
-					
+
 				}
 				if (blts.size() > 0) {
 					averageWater = totalWater / blts.size();
 					// averageWater=Float.parseFloat(df.format(averageWater/45.0f+20.0))/100f;
-					tvAverage
-							.setText(Float.parseFloat(df
-									.format(averageWater / 45.0f + 20.0))
-									+ "%");
+					tvAverage.setText(Float.parseFloat(df
+							.format(averageWater / 45.0f + 20.0)) + "%");
 				}
 
 			}
@@ -188,20 +205,18 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		WhereBuilder builder1 = WhereBuilder.b("date", "==",
 				DateUtil.dateAddDay(new Date(), -1));
 		try {
-			yesTodayBlts = db.findAll(Selector.from(BltModel.class)
-					.where(builder1));
+			yesTodayBlts = db.findAll(Selector.from(BltModel.class).where(
+					builder1));
 			if (yesTodayBlts != null) {
 				int totalWater = 0;
 
 				for (int i = 0; i < yesTodayBlts.size(); i++) {
 					totalWater = totalWater
-							+ Integer.parseInt(yesTodayBlts.get(i)
-									.getWater());
-					
+							+ Integer.parseInt(yesTodayBlts.get(i).getWater());
+
 				}
 				if (yesTodayBlts.size() > 0) {
-					averageYesTodayWater = totalWater
-							/ yesTodayBlts.size();
+					averageYesTodayWater = totalWater / yesTodayBlts.size();
 				}
 
 				// mAdapter.notifymDataSetChanged(lists);
@@ -212,16 +227,18 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(averageWater - averageYesTodayWater>=0){
+		if (averageWater - averageYesTodayWater >= 0) {
 			tvYestodayLabel
-			.setText("+"+Float.parseFloat(df
-					.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
-					+ "%");
-		}else{
+					.setText("+"
+							+ Float.parseFloat(df
+									.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
+							+ "%");
+		} else {
 			tvYestodayLabel
-			.setText("-"+Float.parseFloat(df
-					.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
-					+ "%");
+					.setText("-"
+							+ Float.parseFloat(df
+									.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
+							+ "%");
 		}
 	}
 

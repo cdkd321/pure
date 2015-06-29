@@ -194,7 +194,7 @@
                     android:layout_alignParentBottom="true"
                     android:paddingBottom="20dp"
                     android:layout_centerHorizontal="true"
-                    android:text="正常"
+                    android:text="平均值"
                     android:textSize="14sp"
                     android:textColor="@color/gray" />
             </RelativeLayout>
