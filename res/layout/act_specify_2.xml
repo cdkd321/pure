@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <include layout="@layout/include_fragment_navigation_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_16" >
+
+        <LinearLayout
+            style="@style/m_w"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvTittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="皮肤测试器"
+                android:textColor="@color/black_555555"
+                android:textSize="@dimen/list_text_size_1" />
+
+            <RelativeLayout
+                style="@style/m_w"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tvLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="来源:88888"
+                    android:textColor="@color/black_555555"
+                    android:textSize="@dimen/input_size" />
+
+                <TextView
+                    android:id="@+id/tvRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="2015-2-1"
+                    android:textColor="@color/black_555555"
+                    android:textSize="@dimen/input_size" />
+            </RelativeLayout>
+
+            <LinearLayout
+                style="@style/m_w"
+                android:layout_marginTop="@dimen/ten_dp"
+                android:background="@drawable/bg_round_corner_black"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" > 
+
+                    <com.mygame.pure.view.CircleImageView
+                        android:layout_width="@dimen/sixty_dp"
+                        android:layout_height="@dimen/sixty_dp"
+                        android:layout_margin="@dimen/ten_dp" 
+                        android:src="@drawable/smiling_face" />
+
+                    <TextView
+                        style="@style/w_w"
+                        android:layout_marginBottom="@dimen/ten_dp"
+                        android:textColor="@color/black"
+                        android:text="艾薇儿" />
+  
+                    <View
+	                    android:layout_width="match_parent"
+	                    android:layout_height="1dp"
+	                    android:background="@color/gray" />
+					<ImageView
+	                    android:layout_width="wrap_content"
+	                    android:layout_height="wrap_content"
+	                    android:layout_marginLeft="@dimen/ten_dp"
+	                    android:layout_marginRight="@dimen/ten_dp"
+	                    android:src="@drawable/icon_vertical_pb" />
+					
+					
+					<TextView
+                        style="@style/w_w"
+                        android:layout_margin="@dimen/twenty_dp"
+                        android:text="同龄人群平均值41.1%"
+                        android:textColor="@color/theme_blue" />
+                    
+					<View
+	                    android:layout_width="match_parent"
+	                    android:layout_height="1dp"
+	                    android:background="@color/gray" />
+					<TextView
+		                style="@style/w_w"
+		                android:layout_margin="@dimen/twenty_dp"
+		                android:layout_width="match_parent" 
+		                android:layout_height="wrap_content"
+		                android:textColor="@color/black_555555"
+		                android:text="美肤测试器，你值得拥有，更多详情。请点击www.mymili.com" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+</LinearLayout>

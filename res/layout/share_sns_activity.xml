@@ -1,0 +1,21 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/com.mygame.pure"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:gravity="top|center"
+    android:orientation="vertical" >
+
+    
+    
+    
+     <GridView 
+         android:id="@+id/gv_bottom"
+         style="@style/m_w"
+         android:layout_alignParentBottom="true"
+         android:numColumns="3"
+         android:horizontalSpacing="@dimen/ten_dp"
+         android:verticalSpacing="@dimen/ten_dp" />
+
+</RelativeLayout>
