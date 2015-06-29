@@ -345,8 +345,12 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					+ dayAvera(DateUtil.getDateStr(startDate, i)).getAverage();
 			count = count
 					+ dayAvera(DateUtil.getDateStr(startDate, i)).getCount();
-			linePoint1.add(new PointD(i * pointd, dayAvera(
-					DateUtil.getDateStr(startDate, i)).getAverage()));
+			if(dayAvera(
+					DateUtil.getDateStr(startDate, i)).getAverage()!=0){
+				linePoint1.add(new PointD(i * pointd, dayAvera(
+						DateUtil.getDateStr(startDate, i)).getAverage()));
+			}
+			
 		}
 		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
 				179, 147, 197));
@@ -511,8 +515,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 							+ "~"
 							+ df.format(getReduceMonth(df.parse(dates[1]))));
 
-					Average averagem = refreshMonthChartView(df.format(df
-							.format(getReduceMonth(df.parse(dates[0])))),
+					Average averagem = refreshMonthChartView(df
+							.format(getReduceMonth(df.parse(dates[0]))),
 							df.format(getReduceMonth(df.parse(dates[1]))));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
 					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
@@ -566,8 +570,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				try {
 					tvDate.setText(df.format(getAddMonth(df.parse(dates[0])))
 							+ "~" + df.format(getAddMonth(df.parse(dates[1]))));
-					Average averagem = refreshMonthChartView(df.format(df
-							.format(getAddMonth(df.parse(dates[0])))),
+					Average averagem = refreshMonthChartView(df
+							.format(getAddMonth(df.parse(dates[0]))),
 							df.format(getAddMonth(df.parse(dates[1]))));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
 					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
@@ -1025,6 +1029,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				}
 				refreshChartView(tvDate.getText().toString());
 				reFreshDegreeView();
+				java.text.DecimalFormat dfc = new java.text.DecimalFormat("#0.00");
+				Float d = Float.parseFloat(tvAverageLevelData.getText().toString()
+						.replace("%", "")) / 60f;
+				progressBar.setProgress(Float.parseFloat(dfc.format(d)));
 
 			}
 
