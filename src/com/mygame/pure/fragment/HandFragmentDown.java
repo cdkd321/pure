@@ -361,8 +361,12 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					+ dayAvera(DateUtil.getDateStr(startDate, i)).getAverage();
 			count = count
 					+ dayAvera(DateUtil.getDateStr(startDate, i)).getCount();
-			linePoint1.add(new PointD(i * pointd, dayAvera(
-					DateUtil.getDateStr(startDate, i)).getAverage()));
+			if(dayAvera(
+					DateUtil.getDateStr(startDate, i)).getAverage()!=0){
+				linePoint1.add(new PointD(i * pointd, dayAvera(
+						DateUtil.getDateStr(startDate, i)).getAverage()));
+			}
+			
 		}
 		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
 				179, 147, 197));
@@ -527,8 +531,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 							+ "~"
 							+ df.format(getReduceMonth(df.parse(dates[1]))));
 
-					Average averagem = refreshMonthChartView(df.format(df
-							.format(getReduceMonth(df.parse(dates[0])))),
+					Average averagem = refreshMonthChartView(df
+							.format(getReduceMonth(df.parse(dates[0]))),
 							df.format(getReduceMonth(df.parse(dates[1]))));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
 					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");

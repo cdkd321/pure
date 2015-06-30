@@ -127,7 +127,7 @@ public class BaseActivity extends FragmentActivity implements
 	 * @param listener
 	 *            如果为null，就pass Activity activity
 	 */
-	protected void addRightBtn(int strId, OnClickListener listener) {
+	protected void addRightBtn(int imgId, OnClickListener listener) {
 		getTkActionBar();
 		if (mTkActionBar != null) {
 			if (listener == null) {
@@ -138,7 +138,7 @@ public class BaseActivity extends FragmentActivity implements
 					}
 				};
 			}
-			mTkActionBar.addRightText(strId, listener);
+			mTkActionBar.addRightImage(imgId, listener);
 		}
 	}
 

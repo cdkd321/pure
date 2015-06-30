@@ -29,8 +29,7 @@
     <string name="neck">颈</string>
     <string name="_settings">设置</string>
     <string name="space">" "</string>
-    <string name="more">更多</string>
-    <string name="cancel">Cancel</string>
+    <string name="more">更多</string> 
     <string name="title">My Bluetooth</string>
     <string name="bundled">bundled device</string>
     <string name="disconnected">disconnecdted device</string>

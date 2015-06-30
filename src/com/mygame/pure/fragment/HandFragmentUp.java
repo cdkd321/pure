@@ -22,6 +22,7 @@ import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
 import com.mygame.pure.activity.ActMain;
+import com.mygame.pure.activity.ActSpecify;
 import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.ble.BleService;
@@ -64,6 +65,14 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 				main.startActivity(new Intent(getActivity(), MoreAct.class));
 			}
 		});
+		
+		main.addRightImage(R.drawable.btn_news_bg, new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				main.startActivity(new Intent(getActivity(), ActSpecify.class));
+			}
+		});
 		pb.setProgressing(0.0f, tvBlueProgress);
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
 		getData(df);
@@ -97,6 +106,36 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		getActivity().unregisterReceiver(mReceiver);
+	}
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		/*if(SelfDefineApplication.getInstance().mService!=null){
+			if(SelfDefineApplication.getInstance().mService.mConnectionState==BleService.STATE_CONNECTED){
+				tvBlueTouth.setText("已连接");
+				tvBlueTouth.setVisibility(View.VISIBLE);
+				try {
+					Thread.sleep(1000);
+					tvBlueTouth.setVisibility(View.GONE);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(SelfDefineApplication.getInstance().mService.mConnectionState==BleService.STATE_DISCONNECTED||SelfDefineApplication.getInstance().mService.mConnectionState==BleService.STATE_CONNECTING){
+				tvBlueTouth.setText("断开连接");
+				tvBlueTouth.setVisibility(View.VISIBLE);
+				try {
+					Thread.sleep(1000);
+					tvBlueTouth.setVisibility(View.GONE);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}*/
 	}
 
 	@Override
