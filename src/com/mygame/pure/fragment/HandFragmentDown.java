@@ -61,6 +61,7 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 	private TextView detectionTimes;
 	private MyrogressBar progressBar;
 	private SplineChart03View chartView;
+	private int checkType;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -178,6 +179,21 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		reFreshDegreeView();
 		vpager.setAdapter(adapter);
 		registerBoradcastReceiver();
+	}
+
+	public static HandFragmentDown newInstance(int checkType) {
+		HandFragmentDown f = new HandFragmentDown();
+		Bundle args = new Bundle();
+		args.putInt("checkType", checkType);
+		f.setArguments(args);
+		return f;
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		checkType = getArguments().getInt("checkType");
 	}
 
 	private void reFreshDegreeView() {
@@ -598,7 +614,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		DbUtils db = DbUtils.create(getActivity());
 		List<BltModel> blts;
 		float averageWater = 0;
-		WhereBuilder builder = WhereBuilder.b("date", "==", today);
+		WhereBuilder builder = WhereBuilder.b("date", "==", today).and(
+				"modelstate", "==", checkType);
 		try {
 			blts = db.findAll(Selector.from(BltModel.class).where(builder));
 			if (blts != null) {
@@ -631,7 +648,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		List<BltModel> yesTodayBlts;
 		float averageYesTodayWater = 0;
 		// 昨天的数据
-		WhereBuilder builder1 = WhereBuilder.b("date", "==", lastDay);
+		WhereBuilder builder1 = WhereBuilder.b("date", "==", lastDay).and(
+				"modelstate", "==", checkType);
 		try {
 			yesTodayBlts = db.findAll(Selector.from(BltModel.class).where(
 					builder1));
@@ -682,7 +700,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		DbUtils db = DbUtils.create(getActivity());
 		List<BltModel> blts;
 		float averageWater = 0;
-		WhereBuilder builder = WhereBuilder.b("date", "==", today);
+		WhereBuilder builder = WhereBuilder.b("date", "==", today).and(
+				"modelstate", "==", checkType);
 		try {
 			blts = db.findAll(Selector.from(BltModel.class).where(builder));
 			if (blts != null) {
@@ -707,7 +726,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		List<BltModel> yesTodayBlts;
 		float averageYesTodayWater = 0;
 		// 昨天的数据
-		WhereBuilder builder1 = WhereBuilder.b("date", "==", lastDay);
+		WhereBuilder builder1 = WhereBuilder.b("date", "==", lastDay).and(
+				"modelstate", "==", checkType);
 		try {
 			yesTodayBlts = db.findAll(Selector.from(BltModel.class).where(
 					builder1));
@@ -768,8 +788,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		DbUtils db = DbUtils.create(getActivity());
 		List<BltModel> blts;
 		float averageWater = 0;
-		WhereBuilder builder = WhereBuilder.b("date", "==", today).and("hour",
-				"==", hour);
+		WhereBuilder builder = WhereBuilder.b("date", "==", today)
+				.and("hour", "==", hour).and("modelstate", "==", checkType);
 		try {
 			blts = db.findAll(Selector.from(BltModel.class).where(builder));
 			if (blts != null) {
@@ -810,7 +830,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		DbUtils db = DbUtils.create(getActivity());
 		List<BltModel> blts;
 		float averageWater = 0;
-		WhereBuilder builder = WhereBuilder.b("date", "==", day);
+		WhereBuilder builder = WhereBuilder.b("date", "==", day).and(
+				"modelstate", "==", checkType);
 		try {
 			blts = db.findAll(Selector.from(BltModel.class).where(builder));
 			if (blts != null) {
@@ -952,7 +973,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				List<BltModel> blts;
 				float averageWater = 0;
 				WhereBuilder builder = WhereBuilder.b("date", "==",
-						DateUtil.getCurrentDate());
+						DateUtil.getCurrentDate()).and("modelstate", "==",
+						checkType);
 				try {
 					blts = db.findAll(Selector.from(BltModel.class).where(
 							builder));
@@ -984,7 +1006,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				float averageYesTodayWater = 0;
 				// 昨天的数据
 				WhereBuilder builder1 = WhereBuilder.b("date", "==",
-						DateUtil.dateAddDay(new Date(), -1));
+						DateUtil.dateAddDay(new Date(), -1)).and("modelstate",
+						"==", checkType);
 				try {
 					yesTodayBlts = db.findAll(Selector.from(BltModel.class)
 							.where(builder1));

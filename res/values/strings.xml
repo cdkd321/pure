@@ -15,19 +15,25 @@
     <string name="xlistview_header_last_time">上次更新时间：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
-    <string name="good_friends">好友</string> 
-    <string name="no_data">抱歉没有数据，请稍后再试试!</string> 
-    <string name="login">登录</string> 
+    <string name="good_friends">好友</string>
+    <string name="no_data">抱歉没有数据，请稍后再试试!</string>
+    <string name="login">登录</string>
     <string name="loginggg">登录中...</string>
     <string name="username_empty">用户名为空</string>
-	<string name="pwd_empty">密码为空</string>
-	<string name="username_limit">用户名长度在16个字符以内哦</string>
-	<string name="pwd_length_limit">密码长度在6-16个字符以内哦</string>
-	<string name="hand">手</string>
+    <string name="pwd_empty">密码为空</string>
+    <string name="username_limit">用户名长度在16个字符以内哦</string>
+    <string name="pwd_length_limit">密码长度在6-16个字符以内哦</string>
+    <string name="hand">手</string>
     <string name="face">脸</string>
     <string name="eye">眼</string>
     <string name="neck">颈</string>
     <string name="_settings">设置</string>
     <string name="space">" "</string>
     <string name="more">更多</string>
+    <string name="cancel">Cancel</string>
+    <string name="title">My Bluetooth</string>
+    <string name="bundled">bundled device</string>
+    <string name="disconnected">disconnecdted device</string>
+    <string name="connected">connected</string>
+
 </resources>

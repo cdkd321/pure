@@ -1,17 +1,18 @@
 package com.mygame.pure;
 
+import android.app.Application;
+
 import com.mygame.pure.ble.BleService;
 import com.mygame.pure.http.FinalHttp;
 import com.mygame.pure.info.User;
 import com.mygame.pure.utils.DeviceConfiger;
-
-import android.app.Application;
 
 public class SelfDefineApplication extends Application {
 	public BleService mService;
 	public static boolean finishLogin;
 	private static SelfDefineApplication application;
 	private static FinalHttp finalHttp;
+	public static int selectPostion;
 
 	public static SelfDefineApplication getInstance() {
 		return application;
@@ -22,7 +23,7 @@ public class SelfDefineApplication extends Application {
 	}
 
 	public FinalHttp getFinalHttp() {
-		if(finalHttp == null){
+		if (finalHttp == null) {
 			finalHttp = new FinalHttp();
 		}
 		return finalHttp;
@@ -35,8 +36,5 @@ public class SelfDefineApplication extends Application {
 		application = this;
 		DeviceConfiger.init();
 	}
-	
-	
-	
 
 }

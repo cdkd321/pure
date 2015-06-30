@@ -5,12 +5,9 @@ import java.util.Date;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.format.DateUtils;
-import android.util.Log;
 
-import com.lidroid.xutils.db.sqlite.Selector;
-import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
+import com.mygame.pure.SelfDefineApplication;
 import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.utils.Constants;
 import com.mygame.pure.utils.DateUtil;
@@ -29,6 +26,7 @@ public class BleParserLoader {
 		model.setDate(DateUtil.getCurrentDate());
 		model.setWater(waters + "");
 		model.setBltid(mac);
+		model.setModelstate(SelfDefineApplication.getInstance().selectPostion);
 		SimpleDateFormat df = new SimpleDateFormat("HH");
 		model.setHour(df.format(new Date()));
 		try {
@@ -39,6 +37,8 @@ public class BleParserLoader {
 		}
 
 		Intent intent = new Intent(Constants.UPDATE_OK);
+		intent.putExtra("selectPostion",
+				SelfDefineApplication.getInstance().selectPostion);
 		intent.putExtra("waters", waters);
 		context.sendBroadcast(intent);
 		return 0;

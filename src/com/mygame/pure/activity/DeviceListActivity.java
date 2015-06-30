@@ -18,8 +18,8 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mygame.pure.R;
@@ -29,39 +29,64 @@ import com.mygame.pure.ble.BleService;
 public class DeviceListActivity extends Activity {
 	private List<BluetoothDevice> deviceList;
 	private ListView lv;
-	private Button bu_cancle;
+	private TextView bu_cancle;
 	private DeviceAdapter adapter;
 	private MyReceiver receiver = new MyReceiver();
 	private IntentFilter filter = new IntentFilter(
 			BleService.ACTION_DEVICE_FOUND);
-	
+
 	private UUID uuid;
+	private TextView connectedName;
+	private RelativeLayout connectedMacLayout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_devicelist);
+		setContentView(R.layout.bluetooth);
 		String uid = getIntent().getExtras().getString("uid");
-//		if (uid != null){
-//			uuid = UUID.fromString(uid);
-//		}
+
+		// if (uid != null){
+		// uuid = UUID.fromString(uid);
+		// }
 		init();
 	}
 
 	private void init() {
 		deviceList = new ArrayList<BluetoothDevice>();
-		lv = (ListView) findViewById(R.id.devicelist_lv);
-		bu_cancle = (Button) findViewById(R.id.devicelist_btn_cancel);
+
+		bu_cancle = (TextView) findViewById(R.id.cancel);
+		connectedName = (TextView) findViewById(R.id.name);
+		lv = (ListView) findViewById(R.id.available_device);
+		connectedMacLayout = (RelativeLayout) findViewById(R.id.connectedMacLayout);
 		bu_cancle.setOnClickListener(new OnClickListener() {
+
 			@Override
-			public void onClick(View v) {
+			public void onClick(View arg0) {
 				finish();
 			}
 		});
+		lv.setOnItemClickListener(onItemClickListener);
+		connectedMacLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+			}
+		});
+		// connectedName.setText(text)
+
+		/*
+		 * List<HashMap<String, String>> data = new
+		 * ArrayList<HashMap<String,String>>(); for (int i = 0; i < 5; i++) {
+		 * 
+		 * HashMap<String, String> itemHashMap = new HashMap<String, String>();
+		 * // itemHashMap.put("signatureStrenth","信号强度"+i);
+		 * itemHashMap.put("name","设备名字"+i); data.add(itemHashMap); }
+		 */
 		adapter = new DeviceAdapter();
 		lv.setAdapter(adapter);
-		lv.setOnItemClickListener(onItemClickListener);
+
 	}
 
 	@Override
@@ -76,7 +101,8 @@ public class DeviceListActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		registerReceiver(receiver, filter);
-		SelfDefineApplication.getInstance().mService.scan(true,new UUID[]{uuid});
+		SelfDefineApplication.getInstance().mService.scan(true,
+				new UUID[] { uuid });
 	}
 
 	// ����豸
@@ -145,18 +171,27 @@ public class DeviceListActivity extends Activity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
+
+			ViewHolder holder = null;
 			if (convertView == null) {
-				convertView = getLayoutInflater().inflate(
-						R.layout.layout_devicelist, null);
+				convertView = getLayoutInflater().inflate(R.layout.item, null);
+				holder = new ViewHolder();
+				// holder.signatureStrenth = (TextView)
+				// convertView.findViewById(R.id.signal_strength);
+				holder.name = (TextView) convertView.findViewById(R.id.name);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
 			}
-			TextView tv_name = (TextView) convertView
-					.findViewById(R.id.layout_devicelist_name);
-			tv_name.setText(deviceList.get(position).getName());
-			TextView tv_add = (TextView) convertView
-					.findViewById(R.id.layout_devicelist_address);
-			tv_add.setText(deviceList.get(position).getAddress());
+			// holder.signatureStrenth.setText(itemData.get("signatureStrenth"));
+			holder.name.setText(deviceList.get(position).getName());
 			return convertView;
 		}
 
+	}
+
+	class ViewHolder {
+		// private TextView signatureStrenth;
+		private TextView name;
 	}
 }

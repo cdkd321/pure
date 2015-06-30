@@ -27,8 +27,8 @@ import com.mygame.pure.fragment.FaceFragmentDown;
 import com.mygame.pure.fragment.FaceFragmentUp;
 import com.mygame.pure.fragment.HandFragmentDown;
 import com.mygame.pure.fragment.HandFragmentUp;
-import com.mygame.pure.fragment.NeckFragmentUp;
 import com.mygame.pure.fragment.NeckFragmentDown;
+import com.mygame.pure.fragment.NeckFragmentUp;
 import com.mygame.pure.view.VerticalViewPager;
 
 /**
@@ -66,32 +66,22 @@ public class ActMain extends BaseActivity implements OnClickListener {
 
 	public List<Fragment> getFragmentList(int type) {
 		List<Fragment> listFragments = new ArrayList<Fragment>();
-
-		switch (type) {
-		case 0:
-			listFragments = getOneFragments();
-			break;
-		case 1:
-			listFragments = getTwoFragments();
-			break;
-		case 2:
-			listFragments = getThreeFragments();
-			break;
-		case 3:
-			listFragments = getFourFragments();
-			break;
-		default:
-			break;
-		}
+		listFragments = getOneFragments(type);
+		/*
+		 * switch (type) { case 0: listFragments = getOneFragments(); break;
+		 * case 1: listFragments = getTwoFragments(); break; case 2:
+		 * listFragments = getThreeFragments(); break; case 3: listFragments =
+		 * getFourFragments(); break; default: break; }
+		 */
 
 		return listFragments;
 	}
 
-	private List<Fragment> getOneFragments() {
+	private List<Fragment> getOneFragments(int type) {
 		List<Fragment> listFragments = new ArrayList<Fragment>();
-		HandFragmentUp fragment = new HandFragmentUp();
+		HandFragmentUp fragment = HandFragmentUp.newInstance(type);
 		listFragments.add(fragment);
-		HandFragmentDown fragment2 = new HandFragmentDown();
+		HandFragmentDown fragment2 = HandFragmentDown.newInstance(type);
 		listFragments.add(fragment2);
 		return listFragments;
 	}
@@ -186,6 +176,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onPageSelected(int arg0) {
+				SelfDefineApplication.getInstance().selectPostion = arg0;
 				setTabSelected(arg0);
 			}
 
@@ -227,7 +218,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		case R.id.llTab4:
 			viewPager.setCurrentItem(3);
 			setTabSelected(3);
-			//startActivity(new Intent(v.getContext(), MoreAct.class));
+			// startActivity(new Intent(v.getContext(), MoreAct.class));
 			break;
 		case R.id.ivImg:
 			VerticalViewPager vPager = (VerticalViewPager) viewPager
