@@ -5,12 +5,16 @@ import java.util.List;
 import java.util.UUID;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -31,6 +35,7 @@ public class DeviceListActivity extends Activity {
 	private ListView lv;
 	private TextView bu_cancle;
 	private TextView bund_text;
+	private TextView state;
 	private DeviceAdapter adapter;
 	private MyReceiver receiver = new MyReceiver();
 	private IntentFilter filter = new IntentFilter(
@@ -39,13 +44,18 @@ public class DeviceListActivity extends Activity {
 	private UUID uuid;
 	private TextView connectedName;
 	private RelativeLayout connectedMacLayout;
+	private SharedPreferences share;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.bluetooth);
+		filter.addAction(BleService.ACTION_GATT_CONNECTED);
+		filter.addAction(BleService.ACTION_GATT_DISCONNECTED);
+		filter.addAction(BleService.ACTION_STATUS_WRONG);
 		String uid = getIntent().getExtras().getString("uid");
+		share = super.getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
 
 		// if (uid != null){
 		// uuid = UUID.fromString(uid);
@@ -58,8 +68,53 @@ public class DeviceListActivity extends Activity {
 		bu_cancle = (TextView) findViewById(R.id.cancel);
 		connectedName = (TextView) findViewById(R.id.name);
 		bund_text = (TextView) findViewById(R.id.bund_text);
+		state = (TextView) findViewById(R.id.state);
 		lv = (ListView) findViewById(R.id.available_device);
 		connectedMacLayout = (RelativeLayout) findViewById(R.id.connectedMacLayout);
+		connectedMacLayout.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				finish();
+				AlertDialog dialog = new AlertDialog.Builder(
+						DeviceListActivity.this)
+						.setMessage("Do you wanna canel the device?")
+						.setPositiveButton("confirm",
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface arg0,
+											int arg1) {
+										// TODO Auto-generated method stub
+										connectedName.setVisibility(View.GONE);
+										share.edit().putString("LAST_CONNECT_MAC", "").commit();
+										share.edit().putString("LAST_CONNECT_NAME", "").commit();
+									}
+								}).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+									
+									@Override
+									public void onClick(DialogInterface arg0, int arg1) {
+										// TODO Auto-generated method stub
+										
+									}
+								}).create();
+				dialog.show();
+			}
+		});
+		if (!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))) {
+			connectedMacLayout.setVisibility(View.VISIBLE);
+			connectedName.setVisibility(View.VISIBLE);
+			connectedName.setText(share.getString("LAST_CONNECT_NAME", ""));
+			if (SelfDefineApplication.getInstance().mService != null) {
+				if (SelfDefineApplication.getInstance().mService.mConnectionState == BleService.STATE_CONNECTED) {
+					state.setText("connected");
+				} else {
+					state.setText("disconnected");
+				}
+			}
+		}
+		
 		bu_cancle.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -115,8 +170,11 @@ public class DeviceListActivity extends Activity {
 			}
 		}
 		if (!isHave) {
-			deviceList.add(device);
-			adapter.notifyDataSetChanged();
+			if(!share.getString("LAST_CONNECT_MAC", "").equals(device.getAddress())){
+				deviceList.add(device);
+				adapter.notifyDataSetChanged();
+			}
+			
 		}
 	}
 
@@ -129,6 +187,9 @@ public class DeviceListActivity extends Activity {
 			b.putParcelable(BluetoothDevice.EXTRA_DEVICE,
 					deviceList.get(position));
 			data.putExtras(b);
+			connectedMacLayout.setVisibility(View.VISIBLE);
+			connectedName.setVisibility(View.VISIBLE);
+			connectedName.setText(deviceList.get(position).getName());
 			setResult(RESULT_OK, data);
 			finish();
 		}
@@ -149,6 +210,12 @@ public class DeviceListActivity extends Activity {
 						addDevice(device);
 					}
 				});
+			}else if(BleService.ACTION_GATT_CONNECTED.endsWith(action)){
+				state.setText("connected");
+			}else if(BleService.ACTION_GATT_DISCONNECTED.endsWith(action)){
+				state.setText("disconnected");
+			}else if(BleService.ACTION_STATUS_WRONG.endsWith(action)){
+				state.setText("disconnected");
 			}
 		}
 

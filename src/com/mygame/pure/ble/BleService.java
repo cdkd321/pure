@@ -48,7 +48,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 /**
- * @author longke 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+ * @author longke 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @SuppressLint("NewApi")
@@ -90,26 +90,26 @@ public class BleService extends Service {
 	public static final UUID REALTIME_RECEIVE_DATA_CHAR = UUID
 			.fromString("d0a2ff04-2996-d38b-e214-86515df5a1df");
 
-	// 锟斤拷通知UUID
+	// 閿熸枻鎷烽�氱煡UUID
 	public static final UUID UUID_DESCRIPTOR = UUID
 			.fromString("00002902-0000-1000-8000-00805f9b34fb");
 	private boolean isSendData = false;
-	public int mCommand; // 褰撳墠鐨勬寚锟�?
+	public int mCommand; // 瑜版挸澧犻惃鍕瘹閿燂拷?
 
 	public static final int COMMAND_SYNC_SAVE = 0;
 	public static final int COMMAND_ALARM = 1;
 	public static final int COMMAND_EVENT = 2;
 	public static final int COMMAND_WEARINFO = 3;
 
-	// 浜у搧鍑哄巶鏃舵竻锟�?
+	// 娴溠冩惂閸戝搫宸堕弮鑸电閿燂拷?
 	public static final int COMMAND_CLEAR = 4;
-	// 姝ヨ窛
+	// 濮濄儴绐�
 	public static final int STEP_LENGTH = 5;
-	// 涔呭潗鎻愰啋
+	// 娑斿懎娼楅幓鎰板晪
 	public static final int LONG_TIME_SLEEP = 6;
-	// 鎵撳紑瀹炴椂浼犺緭
+	// 閹垫挸绱戠�圭偞妞傛导鐘虹翻
 	public static final int OPEN_REAL_TIME = 7;
-	// 鍏抽棴瀹炴椂浼犺緭
+	// 閸忔娊妫寸�圭偞妞傛导鐘虹翻
 	public static final int CLOSE_REAL_TIME = 8;
 	private String tempData = "";
 	private int TIME = 20000;
@@ -118,7 +118,7 @@ public class BleService extends Service {
 	// connection change and services discovered.
 	private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
 
-		// 杩炴帴鐘讹拷??
+		// 鏉╃偞甯撮悩璁规嫹??
 		@Override
 		public void onConnectionStateChange(BluetoothGatt gatt, int status,
 				int newState) {
@@ -130,6 +130,7 @@ public class BleService extends Service {
 					broadcastUpdate(intentAction);
 					Log.i(TAG, "Connected to GATT server.");
 					share.edit().putString("LAST_CONNECT_MAC", gatt.getDevice().getAddress()).commit();
+					share.edit().putString("LAST_CONNECT_NAME", gatt.getDevice().getName()).commit();
 					Log.i(TAG, "Attempting to start service discovery:"
 							+ mBluetoothGatt.discoverServices());
 					
@@ -152,7 +153,7 @@ public class BleService extends Service {
 			}
 		}
 
-		// 鍙戠幇鏈嶅姟
+		// 閸欐垹骞囬張宥呭
 		@Override
 		public void onServicesDiscovered(BluetoothGatt gatt, int status) {
 			if (status == BluetoothGatt.GATT_SUCCESS) {
@@ -175,7 +176,7 @@ public class BleService extends Service {
 						//enableNotification4(characs.get(1));
 					}
 						
-                  /*  //锟斤拷通锟斤拷
+                  /*  //閿熸枻鎷烽�氶敓鏂ゆ嫹
 					BluetoothGattCharacteristic receiveMcharac = mGattService
 							.getCharacteristic(SEND_DATA_CHAR);
 					enableNotification4(receiveMcharac);*/
@@ -190,7 +191,7 @@ public class BleService extends Service {
 			}
 		}
 
-		// 鐢甸噺鐗瑰緛鏁版嵁璇诲彇
+		// 閻㈢敻鍣洪悧鐟扮窙閺佺増宓佺拠璇插絿
 		@Override
 		public void onCharacteristicRead(BluetoothGatt gatt,
 				BluetoothGattCharacteristic characteristic, int status) {
@@ -201,12 +202,12 @@ public class BleService extends Service {
 			}
 		}
 
-		// 鐗瑰緛鏁版嵁璇诲彇
+		// 閻楃懓绶涢弫鐗堝祦鐠囪褰�
 		@Override
 		public void onCharacteristicChanged(BluetoothGatt gatt,
 				BluetoothGattCharacteristic characteristic) {
 			/*
-			 * Log.i(TAG, "鐗瑰緛"); final StringBuilder stringBuilder = new
+			 * Log.i(TAG, "閻楃懓绶�"); final StringBuilder stringBuilder = new
 			 * StringBuilder( characteristic.getValue().length);
 			 * 
 			 * for (byte byteChar : characteristic.getValue()) {
@@ -228,7 +229,7 @@ public class BleService extends Service {
 				mBluetoothGatt = gatt;
 				
 				if (status == 0) {
-					// 锟斤拷始锟斤拷锟斤拷notify锟饺匡拷锟斤拷
+					// 閿熸枻鎷峰閿熸枻鎷烽敓鏂ゆ嫹notify閿熼ズ鍖℃嫹閿熸枻鎷�
 					mCurrentTask = null;
 					mCurrentTask = new Thread() {
 						public void run() {
@@ -252,7 +253,7 @@ public class BleService extends Service {
 
 		};
 
-		// 锟斤拷取锟斤拷锟脚猴拷强锟斤拷
+		// 閿熸枻鎷峰彇閿熸枻鎷烽敓鑴氱尨鎷峰己閿熸枻鎷�
 		public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
 
 		};
@@ -261,7 +262,7 @@ public class BleService extends Service {
 
 	
 
-	// 钃濈墮鎵弿鍥炶皟.
+	// 閽冩繄澧幍顐ｅ伎閸ョ偠鐨�.
 	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 		@Override
 		public void onLeScan(final BluetoothDevice device, int rssi,
@@ -293,9 +294,9 @@ public class BleService extends Service {
 		super.onCreate();
 		initialize();
 		mHandler = new Handler();
-		handler.postDelayed(runnable, TIME); // 每隔1s执行
+		handler.postDelayed(runnable, TIME); // 姣忛殧1s鎵ц
 		share = super.getSharedPreferences("longke",
-				Activity.MODE_PRIVATE); // 指定操作的文件名
+				Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
 		
 	}
 
@@ -324,7 +325,7 @@ public class BleService extends Service {
 			broadcastUpdate(ACTION_START);
 		}
 		
-		Log.i(TAG, "鏀跺埌" + stringBuilder.toString().trim());
+		Log.i(TAG, "閺�璺哄煂" + stringBuilder.toString().trim());
 
 	}
 
@@ -370,7 +371,7 @@ public class BleService extends Service {
 	private final IBinder mBinder = new LocalBinder();
 
 	/**
-	 * 鍒濆鍖栬摑鐗欙拷?锟介厤锟�?.
+	 * 閸掓繂顫愰崠鏍憫閻楁瑱鎷�?閿熶粙鍘ら敓锟�?.
 	 * 
 	 * @return Return true if the initialization is successful.
 	 */
@@ -396,7 +397,7 @@ public class BleService extends Service {
 	}
 
 	/**
-	 * 杩炴帴钃濈墮鏈嶅姟
+	 * 鏉╃偞甯撮拑婵堝閺堝秴濮�
 	 * 
 	 * @param address
 	 *            The device address of the destination device.
@@ -619,7 +620,7 @@ public class BleService extends Service {
 		}
 	}// end of sendCommand
 
-	// 锟斤拷锟斤拷锟斤拷锟斤拷
+	// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
 	public static void sendCommand(UUID characteristicID,
 			BluetoothGattService mGattService, BluetoothGatt mBluetoothGatt,byte cmd,String json) {
 		switch (cmd) {
@@ -636,14 +637,14 @@ public class BleService extends Service {
 		for (byte byteChar : time) {
 			stringBuilder.append(String.format("%02X ", byteChar));
 		}
-		Log.i(TAG, "锟斤拷锟酵ｏ拷" + stringBuilder.toString().trim());
+		Log.i(TAG, "閿熸枻鎷烽敓閰碉綇鎷�" + stringBuilder.toString().trim());
 	}
 	Handler handler = new Handler();
 	Runnable runnable = new Runnable() {
 
 		@Override
 		public void run() {
-			// handler自带方法实现定时器
+			// handler鑷甫鏂规硶瀹炵幇瀹氭椂鍣�
 			try {
 				handler.postDelayed(this, TIME);
                 if(mBluetoothGatt!=null){

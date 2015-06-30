@@ -121,6 +121,15 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		llTab4 = findViewById(R.id.llTab4);
 		getTkActionBar();
 		setTitle("检测中心");
+		addBackImage(R.drawable.more, new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent=new Intent(ActMain.this,MoreAct.class);
+				startActivity(intent);
+				
+			}
+		});
 		ivImg = (ImageView) findViewById(R.id.ivImg);
 
 		ivImg.setOnClickListener(this);
@@ -136,7 +145,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		HistoryAdapter adapter = new HistoryAdapter(baseList);
 
 		for (int i = 0; i < 4; i++) {
-			List<Fragment> fragments0 = getFragmentList(0);
+			List<Fragment> fragments0 = getFragmentList(i);
 			VerticalPagerAdapter fragmentAdapter = new VerticalPagerAdapter(
 					getSupportFragmentManager(), fragments0);
 			VerticalViewPager page = (VerticalViewPager) baseList.get(i)

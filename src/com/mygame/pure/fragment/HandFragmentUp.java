@@ -39,6 +39,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 	private TextView tvBlueTouth;
 	private TextView tvAverage;
 	private TextView tvYestodayLabel;
+	private TextView toSeeMore;
 	ActMain main;
 	private int checkType;
 
@@ -59,12 +60,20 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		tvBlueTouth = (TextView) rootView.findViewById(R.id.tvBlueTouth);
 		tvAverage = (TextView) rootView.findViewById(R.id.tvAverage);
 		tvYestodayLabel = (TextView) rootView.findViewById(R.id.tvYestoday);
-		
+		toSeeMore=(TextView) rootView.findViewById(R.id.toSeeMore);
 		main.addRightImage(R.drawable.btn_news_bg, new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				main.startActivity(new Intent(getActivity(), ActSpecify.class));
+			}
+		});
+		toSeeMore.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				main.startActivity(new Intent(getActivity(), ActSpecify.class));
+				
 			}
 		});
 		pb.setProgressing(0.0f, tvBlueProgress);
@@ -101,36 +110,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		super.onDestroy();
 		getActivity().unregisterReceiver(mReceiver);
 	}
-	@Override
-	public void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		/*if(SelfDefineApplication.getInstance().mService!=null){
-			if(SelfDefineApplication.getInstance().mService.mConnectionState==BleService.STATE_CONNECTED){
-				tvBlueTouth.setText("已连接");
-				tvBlueTouth.setVisibility(View.VISIBLE);
-				try {
-					Thread.sleep(1000);
-					tvBlueTouth.setVisibility(View.GONE);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if(SelfDefineApplication.getInstance().mService.mConnectionState==BleService.STATE_DISCONNECTED||SelfDefineApplication.getInstance().mService.mConnectionState==BleService.STATE_CONNECTING){
-				tvBlueTouth.setText("断开连接");
-				tvBlueTouth.setVisibility(View.VISIBLE);
-				try {
-					Thread.sleep(1000);
-					tvBlueTouth.setVisibility(View.GONE);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		}*/
-	}
+	
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub

@@ -33,19 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_toRightOf="@+id/signal_strength"
-            android:text="蓝牙名字"
             android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical"
-            android:paddingRight="6dp"
-            android:text="连接状态"
-            android:textColor="@color/blue" />
+        
     </RelativeLayout>
 
     <View

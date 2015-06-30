@@ -337,9 +337,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		dataSeries1.getLinePaint().setStrokeWidth(2);
 		// dataSeries1.setLabelVisible(true);
 		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
-
+		LinkedList<String> labels=new LinkedList<String>();
 		// 设定数据源
 		chartData.add(dataSeries1);
+		chartView.setChartLabels(labels);
 		chartView.setChartData(chartData);
 		chartView.initView();
 	}
