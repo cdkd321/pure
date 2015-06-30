@@ -30,6 +30,7 @@ public class DeviceListActivity extends Activity {
 	private List<BluetoothDevice> deviceList;
 	private ListView lv;
 	private TextView bu_cancle;
+	private TextView bund_text;
 	private DeviceAdapter adapter;
 	private MyReceiver receiver = new MyReceiver();
 	private IntentFilter filter = new IntentFilter(
@@ -54,9 +55,9 @@ public class DeviceListActivity extends Activity {
 
 	private void init() {
 		deviceList = new ArrayList<BluetoothDevice>();
-
 		bu_cancle = (TextView) findViewById(R.id.cancel);
 		connectedName = (TextView) findViewById(R.id.name);
+		bund_text = (TextView) findViewById(R.id.bund_text);
 		lv = (ListView) findViewById(R.id.available_device);
 		connectedMacLayout = (RelativeLayout) findViewById(R.id.connectedMacLayout);
 		bu_cancle.setOnClickListener(new OnClickListener() {

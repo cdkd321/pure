@@ -71,10 +71,9 @@
         
         <activity android:name="com.mygame.pure.activity.ActSpecify"
             android:screenOrientation="portrait" />
-        <activity 
-            android:name="com.mygame.pure.activity.DeviceListActivity"
-            android:theme="@android:style/Theme.Dialog"
+        <activity android:name="com.mygame.pure.activity.ActAlert"
             android:screenOrientation="portrait" />
+        
         
         <activity 
             android:name="com.mygame.pure.activity.SettingAct"

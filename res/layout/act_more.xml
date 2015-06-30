@@ -49,7 +49,7 @@
     </RelativeLayout>
 
     <com.mygame.pure.view.UIItem
-        android:id="@+id/ui_settings"
+        android:id="@+id/alert_settings"
         style="@style/m_w"
         android:layout_below="@+id/head"
         app:leftIcon="@drawable/sitting_pressed"
@@ -59,7 +59,7 @@
     <RelativeLayout
         android:id="@+id/connect_device_relative"
         android:layout_width="match_parent"
-         android:layout_below="@+id/ui_settings"
+         android:layout_below="@+id/alert_settings"
         android:layout_height="wrap_content" >
 
         <com.mygame.pure.view.UIItem

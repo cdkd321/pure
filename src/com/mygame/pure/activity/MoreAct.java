@@ -28,7 +28,7 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_more);
-		UIItem ui_settings = (UIItem) findViewById(R.id.ui_settings);
+		UIItem alert_settings = (UIItem) findViewById(R.id.alert_settings);
 		UIItem ui_hufu = (UIItem) findViewById(R.id.ui_hufu);
 		UIItem ui_pwd = (UIItem) findViewById(R.id.ui_pwd);
 		UIItem ui_yijian = (UIItem) findViewById(R.id.ui_yijian);
@@ -36,11 +36,10 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		connected_text = (TextView) findViewById(R.id.connected_text);
 		cimg = (CircleImageView) findViewById(R.id.cimg);
 		registerBoradcastReceiver();
-		ui_settings.setOnClickListener(this);
+		alert_settings.setOnClickListener(this);
 		ui_hufu.setOnClickListener(this);
 		ui_pwd.setOnClickListener(this);
 		ui_yijian.setOnClickListener(this);
-		ui_settings.setOnClickListener(this);
 
 		connect_device.setOnClickListener(new OnClickListener() {
 
@@ -103,7 +102,9 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.ui_settings:
+		case R.id.alert_settings:
+			Intent intent = new Intent(MoreAct.this, ActAlert.class);
+			startActivity(intent);
 			break;
 		case R.id.ui_hufu:
 			break;
