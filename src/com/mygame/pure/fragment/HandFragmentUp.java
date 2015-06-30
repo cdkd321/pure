@@ -58,16 +58,9 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		tvBlueTouth = (TextView) rootView.findViewById(R.id.tvBlueTouth);
 		tvAverage = (TextView) rootView.findViewById(R.id.tvAverage);
 		tvYestodayLabel = (TextView) rootView.findViewById(R.id.tvYestoday);
-		main.addBackImage(R.drawable.btn_more_bg, new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				main.startActivity(new Intent(getActivity(), MoreAct.class));
-			}
-		});
 		
 		main.addRightImage(R.drawable.btn_news_bg, new OnClickListener() {
-
+			
 			@Override
 			public void onClick(View v) {
 				main.startActivity(new Intent(getActivity(), ActSpecify.class));
@@ -77,7 +70,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
 		getData(df);
 		return rootView;
-	}
+	} 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -99,7 +92,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		args.putInt("checkType", checkType);
 		f.setArguments(args);
 		return f;
-	}
+	} 
 
 	@Override
 	public void onDestroy() {
