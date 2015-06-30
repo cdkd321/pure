@@ -20,8 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+
+
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -40,10 +44,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.text.TextUtils;
 import android.util.Log;
 
 /**
- * @author longke ����������
+ * @author longke 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @SuppressLint("NewApi")
@@ -85,34 +90,35 @@ public class BleService extends Service {
 	public static final UUID REALTIME_RECEIVE_DATA_CHAR = UUID
 			.fromString("d0a2ff04-2996-d38b-e214-86515df5a1df");
 
-	// ��֪ͨUUID
+	// 锟斤拷通知UUID
 	public static final UUID UUID_DESCRIPTOR = UUID
 			.fromString("00002902-0000-1000-8000-00805f9b34fb");
 	private boolean isSendData = false;
-	public int mCommand; // 当前的指�?
+	public int mCommand; // 褰撳墠鐨勬寚锟�?
 
 	public static final int COMMAND_SYNC_SAVE = 0;
 	public static final int COMMAND_ALARM = 1;
 	public static final int COMMAND_EVENT = 2;
 	public static final int COMMAND_WEARINFO = 3;
 
-	// 产品出厂时清�?
+	// 浜у搧鍑哄巶鏃舵竻锟�?
 	public static final int COMMAND_CLEAR = 4;
-	// 步距
+	// 姝ヨ窛
 	public static final int STEP_LENGTH = 5;
-	// 久坐提醒
+	// 涔呭潗鎻愰啋
 	public static final int LONG_TIME_SLEEP = 6;
-	// 打开实时传输
+	// 鎵撳紑瀹炴椂浼犺緭
 	public static final int OPEN_REAL_TIME = 7;
-	// 关闭实时传输
+	// 鍏抽棴瀹炴椂浼犺緭
 	public static final int CLOSE_REAL_TIME = 8;
 	private String tempData = "";
+	private int TIME = 20000;
 	// Implements callback methods for GATT events that the app cares about. For
 	// example,
 	// connection change and services discovered.
 	private final BluetoothGattCallback mGattCallback = new BluetoothGattCallback() {
 
-		// 连接状�??
+		// 杩炴帴鐘讹拷??
 		@Override
 		public void onConnectionStateChange(BluetoothGatt gatt, int status,
 				int newState) {
@@ -123,7 +129,7 @@ public class BleService extends Service {
 					mConnectionState = STATE_CONNECTED;
 					broadcastUpdate(intentAction);
 					Log.i(TAG, "Connected to GATT server.");
-					
+					share.edit().putString("LAST_CONNECT_MAC", gatt.getDevice().getAddress()).commit();
 					Log.i(TAG, "Attempting to start service discovery:"
 							+ mBluetoothGatt.discoverServices());
 					
@@ -146,7 +152,7 @@ public class BleService extends Service {
 			}
 		}
 
-		// 发现服务
+		// 鍙戠幇鏈嶅姟
 		@Override
 		public void onServicesDiscovered(BluetoothGatt gatt, int status) {
 			if (status == BluetoothGatt.GATT_SUCCESS) {
@@ -169,7 +175,7 @@ public class BleService extends Service {
 						//enableNotification4(characs.get(1));
 					}
 						
-                  /*  //��ͨ��
+                  /*  //锟斤拷通锟斤拷
 					BluetoothGattCharacteristic receiveMcharac = mGattService
 							.getCharacteristic(SEND_DATA_CHAR);
 					enableNotification4(receiveMcharac);*/
@@ -184,7 +190,7 @@ public class BleService extends Service {
 			}
 		}
 
-		// 电量特征数据读取
+		// 鐢甸噺鐗瑰緛鏁版嵁璇诲彇
 		@Override
 		public void onCharacteristicRead(BluetoothGatt gatt,
 				BluetoothGattCharacteristic characteristic, int status) {
@@ -195,12 +201,12 @@ public class BleService extends Service {
 			}
 		}
 
-		// 特征数据读取
+		// 鐗瑰緛鏁版嵁璇诲彇
 		@Override
 		public void onCharacteristicChanged(BluetoothGatt gatt,
 				BluetoothGattCharacteristic characteristic) {
 			/*
-			 * Log.i(TAG, "特征"); final StringBuilder stringBuilder = new
+			 * Log.i(TAG, "鐗瑰緛"); final StringBuilder stringBuilder = new
 			 * StringBuilder( characteristic.getValue().length);
 			 * 
 			 * for (byte byteChar : characteristic.getValue()) {
@@ -222,7 +228,7 @@ public class BleService extends Service {
 				mBluetoothGatt = gatt;
 				
 				if (status == 0) {
-					// ��ʼ����notify�ȿ���
+					// 锟斤拷始锟斤拷锟斤拷notify锟饺匡拷锟斤拷
 					mCurrentTask = null;
 					mCurrentTask = new Thread() {
 						public void run() {
@@ -246,7 +252,7 @@ public class BleService extends Service {
 
 		};
 
-		// ��ȡ���ź�ǿ��
+		// 锟斤拷取锟斤拷锟脚猴拷强锟斤拷
 		public void onReadRemoteRssi(BluetoothGatt gatt, int rssi, int status) {
 
 		};
@@ -255,7 +261,7 @@ public class BleService extends Service {
 
 	
 
-	// 蓝牙扫描回调.
+	// 钃濈墮鎵弿鍥炶皟.
 	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 		@Override
 		public void onLeScan(final BluetoothDevice device, int rssi,
@@ -287,6 +293,9 @@ public class BleService extends Service {
 		super.onCreate();
 		initialize();
 		mHandler = new Handler();
+		handler.postDelayed(runnable, TIME); // 每隔1s执行
+		share = super.getSharedPreferences("longke",
+				Activity.MODE_PRIVATE); // 指定操作的文件名
 		
 	}
 
@@ -315,7 +324,7 @@ public class BleService extends Service {
 			broadcastUpdate(ACTION_START);
 		}
 		
-		Log.i(TAG, "收到" + stringBuilder.toString().trim());
+		Log.i(TAG, "鏀跺埌" + stringBuilder.toString().trim());
 
 	}
 
@@ -361,7 +370,7 @@ public class BleService extends Service {
 	private final IBinder mBinder = new LocalBinder();
 
 	/**
-	 * 初始化蓝牙�?�配�?.
+	 * 鍒濆鍖栬摑鐗欙拷?锟介厤锟�?.
 	 * 
 	 * @return Return true if the initialization is successful.
 	 */
@@ -387,7 +396,7 @@ public class BleService extends Service {
 	}
 
 	/**
-	 * 连接蓝牙服务
+	 * 杩炴帴钃濈墮鏈嶅姟
 	 * 
 	 * @param address
 	 *            The device address of the destination device.
@@ -610,7 +619,7 @@ public class BleService extends Service {
 		}
 	}// end of sendCommand
 
-	// ��������
+	// 锟斤拷锟斤拷锟斤拷锟斤拷
 	public static void sendCommand(UUID characteristicID,
 			BluetoothGattService mGattService, BluetoothGatt mBluetoothGatt,byte cmd,String json) {
 		switch (cmd) {
@@ -627,8 +636,44 @@ public class BleService extends Service {
 		for (byte byteChar : time) {
 			stringBuilder.append(String.format("%02X ", byteChar));
 		}
-		Log.i(TAG, "���ͣ�" + stringBuilder.toString().trim());
+		Log.i(TAG, "锟斤拷锟酵ｏ拷" + stringBuilder.toString().trim());
 	}
+	Handler handler = new Handler();
+	Runnable runnable = new Runnable() {
+
+		@Override
+		public void run() {
+			// handler自带方法实现定时器
+			try {
+				handler.postDelayed(this, TIME);
+                if(mBluetoothGatt!=null){
+                	if(mConnectionState != STATE_CONNECTED){
+                		if(!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+                			connect(share.getString("LAST_CONNECT_MAC", ""));
+                		}
+                		
+                	}
+                }else{
+					
+					initialize();
+					if(!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+						connect(share.getString("LAST_CONNECT_MAC", ""));
+					}
+					
+				
+				
+			     }
+				
+				
+				;
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("exception...");
+			}
+		}
+	};
 
 
 }

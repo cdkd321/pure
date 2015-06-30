@@ -21,6 +21,7 @@ import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
+import com.mygame.pure.SelfDefineApplication;
 import com.mygame.pure.activity.ActMain;
 import com.mygame.pure.activity.ActSpecify;
 import com.mygame.pure.activity.MoreAct;
@@ -130,6 +131,36 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			
 		}*/
 	}
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		/*if(SelfDefineApplication.getInstance().mService!=null){
+			if(SelfDefineApplication.getInstance().mService.mConnectionState==BleService.STATE_CONNECTED){
+				tvBlueTouth.setText("已连接");
+				tvBlueTouth.setVisibility(View.VISIBLE);
+				try {
+					Thread.sleep(1000);
+					tvBlueTouth.setVisibility(View.GONE);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(SelfDefineApplication.getInstance().mService.mConnectionState==BleService.STATE_DISCONNECTED||SelfDefineApplication.getInstance().mService.mConnectionState==BleService.STATE_CONNECTING){
+				tvBlueTouth.setText("断开连接");
+				tvBlueTouth.setVisibility(View.VISIBLE);
+				try {
+					Thread.sleep(1000);
+					tvBlueTouth.setVisibility(View.GONE);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}*/
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -181,36 +212,36 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
 				tvBlueTouth.setText("已连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
-				try {
+				/*try {
 					Thread.sleep(1000);
 					tvBlueTouth.setVisibility(View.GONE);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 
 			} else if (BleService.ACTION_GATT_DISCONNECTED.equals(action)) {
 				tvBlueTouth.setText("断开连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress);
-				try {
+				/*try {
 					Thread.sleep(1000);
 					tvBlueTouth.setVisibility(View.GONE);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 			} else if (BleService.ACTION_STATUS_WRONG.equals(action)) {
 				tvBlueTouth.setText("断开连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress);
-				try {
+				/*try {
 					Thread.sleep(1000);
 					tvBlueTouth.setVisibility(View.GONE);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 			} else if (BleService.ACTION_TIME_TOOSHORT.equals(action)) {
 				Toast.makeText(getActivity(), "请连续按住5秒", 1000).show();
 				pb.setProgressing(0.0f, tvBlueProgress);
@@ -221,7 +252,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		}
 
 	};
-
+   
 	private void getData(java.text.DecimalFormat df) {
 		DbUtils db = DbUtils.create(getActivity());
 		List<BltModel> blts;

@@ -586,8 +586,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				try {
 					tvDate.setText(df.format(getAddMonth(df.parse(dates[0])))
 							+ "~" + df.format(getAddMonth(df.parse(dates[1]))));
-					Average averagem = refreshMonthChartView(df.format(df
-							.format(getAddMonth(df.parse(dates[0])))),
+					Average averagem = refreshMonthChartView(df
+							.format(getAddMonth(df.parse(dates[0]))),
 							df.format(getAddMonth(df.parse(dates[1]))));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
 					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
@@ -1052,6 +1052,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				}
 				refreshChartView(tvDate.getText().toString());
 				reFreshDegreeView();
+				java.text.DecimalFormat dfc = new java.text.DecimalFormat("#0.00");
+				Float d = Float.parseFloat(tvAverageLevelData.getText().toString()
+						.replace("%", "")) / 60f;
+				progressBar.setProgress(Float.parseFloat(dfc.format(d)));
 
 			}
 
