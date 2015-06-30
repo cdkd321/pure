@@ -22,6 +22,7 @@ import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
 import com.mygame.pure.activity.ActMain;
+import com.mygame.pure.activity.ActSpecify;
 import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.ble.BleService;
@@ -38,6 +39,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 	private TextView tvAverage;
 	private TextView tvYestodayLabel;
 	ActMain main;
+	private int checkType;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -63,6 +65,13 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 				main.startActivity(new Intent(getActivity(), MoreAct.class));
 			}
 		});
+		main.addRightImage(R.drawable.btn_news_bg, new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				main.startActivity(new Intent(getActivity(), ActSpecify.class));
+			}
+		});
 		pb.setProgressing(0.0f, tvBlueProgress);
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
 		getData(df);
@@ -70,10 +79,25 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 	}
 
 	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		checkType = getArguments().getInt("checkType");
+	}
+
+	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		registerBoradcastReceiver();
 
+	}
+
+	public static HandFragmentUp newInstance(int checkType) {
+		HandFragmentUp f = new HandFragmentUp();
+		Bundle args = new Bundle();
+		args.putInt("checkType", checkType);
+		f.setArguments(args);
+		return f;
 	}
 
 	@Override
@@ -120,11 +144,15 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			String action = intent.getAction();
 			if (Constants.UPDATE_OK.equals(action)) {
 				int waters = intent.getIntExtra("waters", 0);
-				java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
-				pb.setProgressing(
-						Float.parseFloat(df.format(waters / 45.0f + 20.0)) / 100f,
-						tvBlueProgress);
-				getData(df);
+				int selectPostion = intent.getIntExtra("selectPostion", 0);
+				if (checkType == selectPostion) {
+					java.text.DecimalFormat df = new java.text.DecimalFormat(
+							"#0.0");
+					pb.setProgressing(
+							Float.parseFloat(df.format(waters / 45.0f + 20.0)) / 100f,
+							tvBlueProgress);
+					getData(df);
+				}
 
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
 				tvBlueTouth.setText("已连接");
@@ -175,7 +203,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		List<BltModel> blts;
 		float averageWater = 0;
 		WhereBuilder builder = WhereBuilder.b("date", "==",
-				DateUtil.getCurrentDate());
+				DateUtil.getCurrentDate()).and("modelstate", "==", checkType);
 		try {
 			blts = db.findAll(Selector.from(BltModel.class).where(builder));
 			if (blts != null) {
@@ -203,7 +231,8 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		float averageYesTodayWater = 0;
 		// 昨天的数据
 		WhereBuilder builder1 = WhereBuilder.b("date", "==",
-				DateUtil.dateAddDay(new Date(), -1));
+				DateUtil.dateAddDay(new Date(), -1)).and("modelstate", "==",
+				checkType);
 		try {
 			yesTodayBlts = db.findAll(Selector.from(BltModel.class).where(
 					builder1));
