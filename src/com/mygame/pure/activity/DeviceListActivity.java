@@ -76,7 +76,6 @@ public class DeviceListActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				finish();
 				AlertDialog dialog = new AlertDialog.Builder(
 						DeviceListActivity.this)
 						.setMessage("Do you wanna canel the device?")
@@ -86,8 +85,7 @@ public class DeviceListActivity extends Activity {
 									@Override
 									public void onClick(DialogInterface arg0,
 											int arg1) {
-										// TODO Auto-generated method stub
-										connectedName.setVisibility(View.GONE);
+										connectedMacLayout.setVisibility(View.GONE);
 										share.edit().putString("LAST_CONNECT_MAC", "").commit();
 										share.edit().putString("LAST_CONNECT_NAME", "").commit();
 									}
@@ -123,13 +121,7 @@ public class DeviceListActivity extends Activity {
 			}
 		});
 		lv.setOnItemClickListener(onItemClickListener);
-		connectedMacLayout.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
+		
 		// connectedName.setText(text)
 
 		/*

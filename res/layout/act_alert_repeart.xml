@@ -9,7 +9,8 @@
          android:id="@+id/item1" 
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:padding="10dp"
+         android:paddingLeft="10dp"
+         android:paddingRight="10dp"
          >
          <TextView 
              android:layout_width="wrap_content"
@@ -20,11 +21,11 @@
              android:textColor="@color/black"
              android:layout_centerVertical="true"
              />
-         <ImageView 
+         <CheckBox 
+             android:id="@+id/check1"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:src="@drawable/back_pressed"
-             android:visibility="gone"
+             android:checked="false"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
              />
@@ -38,7 +39,8 @@
          android:id="@+id/item2" 
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:padding="10dp"
+          android:paddingLeft="10dp"
+         android:paddingRight="10dp"
          >
          <TextView 
              android:layout_width="wrap_content"
@@ -49,11 +51,11 @@
              android:textColor="@color/black"
              android:layout_centerVertical="true"
              />
-         <ImageView 
+         <CheckBox
+             android:id="@+id/check2" 
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:src="@drawable/back_pressed"
-             android:visibility="gone"
+             android:checked="false"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
              />
@@ -67,7 +69,8 @@
          android:id="@+id/item3" 
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:padding="10dp"
+          android:paddingLeft="10dp"
+         android:paddingRight="10dp"
          >
          <TextView 
              android:layout_width="wrap_content"
@@ -78,11 +81,11 @@
              android:textColor="@color/black"
              android:layout_centerVertical="true"
              />
-         <ImageView 
+          <CheckBox
+             android:id="@+id/check3" 
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:src="@drawable/back_pressed"
-             android:visibility="gone"
+             android:checked="false"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
              />
@@ -96,7 +99,8 @@
          android:id="@+id/item4" 
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:padding="10dp"
+          android:paddingLeft="10dp"
+         android:paddingRight="10dp"
          >
          <TextView 
              android:layout_width="wrap_content"
@@ -107,11 +111,11 @@
              android:textColor="@color/black"
              android:layout_centerVertical="true"
              />
-         <ImageView 
+          <CheckBox
+              android:id="@+id/check4" 
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:src="@drawable/back_pressed"
-             android:visibility="gone"
+             android:checked="false"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
              />
@@ -125,7 +129,8 @@
          android:id="@+id/item5" 
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:padding="10dp"
+          android:paddingLeft="10dp"
+         android:paddingRight="10dp"
          >
          <TextView 
              android:layout_width="wrap_content"
@@ -136,11 +141,11 @@
              android:textColor="@color/black"
              android:layout_centerVertical="true"
              />
-         <ImageView 
+          <CheckBox
+             android:id="@+id/check5" 
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:src="@drawable/back_pressed"
-             android:visibility="gone"
+             android:checked="false"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
              />
@@ -154,7 +159,8 @@
          android:id="@+id/item6" 
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:padding="10dp"
+          android:paddingLeft="10dp"
+         android:paddingRight="10dp"
          >
          <TextView 
              android:layout_width="wrap_content"
@@ -165,11 +171,11 @@
              android:textColor="@color/black"
              android:layout_centerVertical="true"
              />
-         <ImageView 
+          <CheckBox
+              android:id="@+id/check6" 
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:src="@drawable/back_pressed"
-             android:visibility="gone"
+             android:checked="false"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
              />
@@ -183,7 +189,8 @@
          android:id="@+id/item7" 
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:padding="10dp"
+          android:paddingLeft="10dp"
+         android:paddingRight="10dp"
          >
          <TextView 
              android:layout_width="wrap_content"
@@ -194,11 +201,11 @@
              android:textColor="@color/black"
              android:layout_centerVertical="true"
              />
-         <ImageView 
+          <CheckBox
+             android:id="@+id/check7" 
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:src="@drawable/back_pressed"
-             android:visibility="gone"
+             android:checked="false"
              android:layout_alignParentRight="true"
              android:layout_centerVertical="true"
              />

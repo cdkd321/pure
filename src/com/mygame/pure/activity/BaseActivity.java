@@ -138,7 +138,7 @@ public class BaseActivity extends FragmentActivity implements
 					}
 				};
 			}
-			mTkActionBar.addRightImage(imgId, listener);
+			mTkActionBar.addRightText(imgId, listener);
 		}
 	}
 

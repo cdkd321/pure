@@ -99,6 +99,12 @@
         <activity 
             android:name="com.mygame.pure.activity.ActAlertRepeart"
             android:screenOrientation="portrait" />
+        <activity 
+            android:name="com.mygame.pure.activity.ActBell"
+            android:screenOrientation="portrait" />
+        <activity 
+            android:name="com.mygame.pure.activity.ActLable"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"

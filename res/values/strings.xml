@@ -34,5 +34,6 @@
     <string name="bundled">bundled device</string>
     <string name="disconnected">disconnecdted device</string>
     <string name="connected">connected</string>
+    <string name="save">存储</string>
 
 </resources>
