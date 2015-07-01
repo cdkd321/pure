@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:orientation="horizontal" >
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/alert_time" 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            android:text="06:46"
+            />
+        <LinearLayout 
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" 
+           android:paddingTop="6dp"
+            >
+            <TextView
+            android:id="@+id/alert_name"  
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:text="闹钟"
+            />
+            <TextView 
+            android:id="@+id/alert_time_repeat"  
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:text="每天"
+            />
+        </LinearLayout>
+    </LinearLayout>
+    <com.mygame.pure.view.AbSlidingButton
+        android:id="@+id/mSliderBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="8dip"
+        android:layout_marginRight="10dip">
+    </com.mygame.pure.view.AbSlidingButton>
+
+</RelativeLayout>

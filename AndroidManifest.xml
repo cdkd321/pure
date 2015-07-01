@@ -86,12 +86,18 @@
         
         <activity android:name="com.mygame.pure.activity.ActSpecify"
             android:screenOrientation="portrait" />
-        <activity android:name="com.mygame.pure.activity.ActAlert"
+        <activity android:name="com.mygame.pure.activity.ActAddAlert"
             android:screenOrientation="portrait" />
         
         
         <activity 
             android:name="com.mygame.pure.activity.SettingAct"
+            android:screenOrientation="portrait" />
+        <activity 
+            android:name="com.mygame.pure.activity.ActAlert"
+            android:screenOrientation="portrait" />
+        <activity 
+            android:name="com.mygame.pure.activity.ActAlertRepeart"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.mob.tools.MobUIShell"
@@ -117,25 +123,9 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         
-        <!-- share SDK UI -->
-        <activity
-			 android:name="com.mob.tools.MobUIShell"
-			 android:theme="@android:style/Theme.Translucent.NoTitleBar"
-			 android:configChanges="keyboardHidden|orientation|screenSize"
-			 android:screenOrientation="portrait"
-			 android:windowSoftInputMode="stateHidden|adjustResize" >
-			 <intent-filter>
-			 <data android:scheme="tencent100371282" />
-			 <action android:name="android.intent.action.VIEW" />
-			 <category android:name="android.intent.category.BROWSABLE" />
-			 <category android:name="android.intent.category.DEFAULT" />
-			 </intent-filter>
-		</activity>
+       
    
-		  <activity
-			 android:name="com.mygame.pure.activity.ActSpecify" 
-			 android:exported="true"
-			 android:screenOrientation="portrait" />
+		 
         
     </application>
 </manifest>
