@@ -51,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginTop="8dip"
+        android:focusable="false" 
         android:layout_marginRight="10dip">
     </com.mygame.pure.view.AbSlidingButton>
 

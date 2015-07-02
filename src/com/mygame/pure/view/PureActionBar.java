@@ -1,7 +1,5 @@
 package com.mygame.pure.view;
 
-import com.mygame.pure.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.mygame.pure.R;
 
 /**
  * 
@@ -171,8 +171,7 @@ public class PureActionBar extends RelativeLayout {
 		backBtn.setText(textId);
 		setLeftView(backBtn, listener);
 	}
- 
-	
+
 	/**
 	 * 添加actionbar右边按钮，返回按钮纯文字，没有箭头等图标
 	 * 
@@ -204,7 +203,8 @@ public class PureActionBar extends RelativeLayout {
 		TextView backBtn = (TextView) View.inflate(context,
 				R.layout.action_bar_mid_text, null);
 		backBtn.setText(textId);
-		setRightView(backBtn, listener);
+		setRightView(backBtn, null);
+		backBtn.setOnClickListener(listener);
 	}
 
 	/**
@@ -237,14 +237,16 @@ public class PureActionBar extends RelativeLayout {
 	}
 
 	public void addBackImage(int draId, final OnClickListener listener) {
-		ImageView backBtn = (ImageView) View.inflate(context, R.layout.action_bar_image_l, null);
+		ImageView backBtn = (ImageView) View.inflate(context,
+				R.layout.action_bar_image_l, null);
 		backBtn.setImageResource(draId);
 		setLeftView(backBtn, null);
 		backBtn.setOnClickListener(listener);
 	}
 
 	public void addRightImage(int draId, final OnClickListener listener) {
-		ImageView backBtn = (ImageView) View.inflate(context, R.layout.action_bar_image_r, null);
+		ImageView backBtn = (ImageView) View.inflate(context,
+				R.layout.action_bar_image_r, null);
 		backBtn.setImageResource(draId);
 		setRightView(backBtn, null);
 		backBtn.setOnClickListener(listener);
