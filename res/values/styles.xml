@@ -268,4 +268,15 @@
         <item name="android:layout_height">20dp</item>
         <item name="android:layout_gravity">center_vertical</item>
     </style>
+    
+    <style name="titleText" parent="w_w">
+        <item name="android:layout_marginTop">@dimen/ten_dp</item>
+        <item name="android:textColor">@color/theme_blue</item>
+        <item name="android:textSize">@dimen/list_text_size_2</item>
+    </style>
+    <style name="normalText" parent="w_w">
+        <item name="android:layout_marginTop">@dimen/ten_dp</item>
+        <item name="android:textColor">@color/black_555555</item>
+        <item name="android:textSize">@dimen/list_text_size_1</item>
+    </style>
 </resources>

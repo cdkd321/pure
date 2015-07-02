@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/aknow_of_water"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="top|center"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/onlysv"
+        style="@style/m_w" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/twenty_dp"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/normalText" 
+                android:text="春秋季面部 水分正常值：80%" />
+
+            <TextView
+                style="@style/normalText" 
+                android:text="夏季水分率比正常值相差 3%" />
+
+            <TextView
+                style="@style/normalText" 
+                android:text="冬季水分率比正常值相差 5%" />
+            
+            
+            <RelativeLayout 
+                style="@style/m_w" >
+                
+                <ImageView
+                   style="@style/w_w"
+                   android:src="@drawable/face" 
+                   android:contentDescription="@string/app_name"
+                   android:layout_centerInParent="true"/>                
+                
+                <TextView
+	                style="@style/normalText" 
+	                android:layout_alignParentTop="true"
+	                android:layout_alignParentLeft="true"
+	                android:layout_margin="@dimen/twenty_dp"
+	                android:gravity="center"
+	                android:text="眼 窝\n30%-80%" />
+
+	            <TextView
+	                style="@style/normalText" 
+	                android:layout_alignParentTop="true"
+	                android:layout_alignParentRight="true"
+	                android:layout_margin="@dimen/twenty_dp"
+	                android:gravity="center"
+	                android:text="脸 颊\n30%-80%" />
+	
+	            <TextView
+	                style="@style/normalText"
+	                android:layout_marginTop="300dp"
+	                android:layout_alignParentLeft="true"
+	                android:gravity="center"
+	                android:layout_marginLeft="@dimen/twenty_dp"
+	                android:text="手 部\n30%-80%" />
+                
+                <TextView
+	                style="@style/normalText"
+	                android:layout_marginTop="300dp"
+	                android:layout_alignParentRight="true"
+	                android:gravity="center"
+	                android:layout_marginRight="@dimen/twenty_dp"
+	                android:text="颈 部\n30%-80%" />
+                
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+        
+        

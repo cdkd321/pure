@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/aknow_of_skin"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="top|center"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/onlysv"
+        style="@style/m_w" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/twenty_dp"
+            android:paddingRight="@dimen/twenty_dp"
+            android:orientation="vertical" >
+
+            <TextView
+                style="@style/titleText" 
+                android:textColor="@color/theme_blue"
+                android:text="@string/key1" />
+
+            <TextView
+                style="@style/normalText" 
+                android:text="@string/value1" />
+            
+            
+            <TextView
+                style="@style/titleText" 
+                android:textColor="@color/theme_blue"
+                android:text="@string/key2" />
+
+            <TextView
+                style="@style/normalText" 
+                android:text="@string/value2" />
+            
+            <TextView
+                style="@style/titleText" 
+                android:textColor="@color/theme_blue"
+                android:text="@string/key3" />
+
+            <TextView
+                style="@style/normalText" 
+                android:text="@string/value3" />
+            
+            
+            <TextView
+                style="@style/titleText" 
+                android:textColor="@color/theme_blue"
+                android:text="@string/key4" />
+
+            <TextView
+                style="@style/normalText" 
+                android:text="@string/value4" />
+            
+            
+            <TextView
+                style="@style/titleText" 
+                android:textColor="@color/theme_blue"
+                android:text="@string/key5" />
+
+            <TextView
+                style="@style/normalText" 
+                android:text="@string/value5" />
+            
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

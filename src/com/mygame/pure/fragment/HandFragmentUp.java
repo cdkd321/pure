@@ -21,6 +21,7 @@ import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
+import com.mygame.pure.activity.ActKnowSkin;
 import com.mygame.pure.activity.ActMain;
 import com.mygame.pure.activity.ActSpecify;
 import com.mygame.pure.bean.BltModel;
@@ -63,7 +64,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				main.startActivity(new Intent(getActivity(), ActSpecify.class));
+				main.startActivity(new Intent(getActivity(), ActKnowSkin.class));
 			}
 		});
 		toSeeMore.setOnClickListener(new OnClickListener() {

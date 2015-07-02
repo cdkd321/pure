@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="top|center"
+    android:orientation="vertical" >
+    
+    <include layout="@layout/include_navigation_bar"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RadioGroup
+            android:id="@+id/rGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="14dp"
+            android:checkedButton="@+id/rbLeft"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rbLeft"
+                style="@style/styleRadioButton"
+                android:background="@drawable/btn_round_radio_left"
+                android:text="水分对照" />
+
+            <RadioButton
+                android:id="@+id/rbRight"
+                style="@style/styleRadioButton"
+                android:background="@drawable/btn_round_radio_right"
+                android:text="肤质查询" />
+        </RadioGroup>
+
+        <include
+            layout="@layout/aknow_of_skills_query"
+            android:visibility="gone" />
+
+        <include
+            layout="@layout/aknow_of_water"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</LinearLayout>
