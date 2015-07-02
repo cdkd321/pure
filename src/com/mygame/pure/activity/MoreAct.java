@@ -128,7 +128,6 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		myIntentFilter.addAction(BleService.ACTION_TIME_TOOSHORT);
 		myIntentFilter.addAction(BleService.ACTION_START);
 		myIntentFilter.addAction(Constants.SYNCHRONOUS_FAILURE);
-		myIntentFilter.addAction(Constants.OLD_UPDATE_OK);
 		myIntentFilter.addAction(Constants.CLEAR_AlL);
 		// 注册广播
 		getActivity().registerReceiver(mReceiver, myIntentFilter);

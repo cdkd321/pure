@@ -3,122 +3,112 @@ package com.mygame.pure.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
 
-import com.androidex.appformwork.wheelview.TimeWheelAdapter;
+import com.lidroid.xutils.db.sqlite.Selector;
+import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
+import com.mygame.pure.adapter.AlertAdapter;
+import com.mygame.pure.bean.Alert;
+import com.mygame.pure.utils.Constants;
+import com.mygame.pure.utils.DbUtils;
 
 public class ActAlert extends BaseActivity {
+	private ListView alert_list;
+	private AlertAdapter mAlertAdapter;
+	private TextView addAlertText;
+	private ImageButton back_btn;
+	private List<Alert> alerts;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.alert_activity);
-		initData();
-		addBackImage(R.drawable.btn_back_bg, new OnClickListener() {
+		setContentView(R.layout.act_alert);
+		alert_list = (ListView) findViewById(R.id.alert_list);
+		addAlertText = (TextView) findViewById(R.id.addAlertText);
+		back_btn = (ImageButton) findViewById(R.id.back_btn);
+		alerts = new ArrayList<Alert>();
+		mAlertAdapter = new AlertAdapter(ActAlert.this, alerts);
+		alert_list.setAdapter(mAlertAdapter);
+		registerBoradcastReceiver();
+		refreshData();
+		addAlertText.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
+				Intent intent = new Intent(ActAlert.this, ActAddAlert.class);
+				startActivity(intent);
+			}
+		});
+		back_btn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
 				finish();
 			}
 		});
-		setTitle("添加闹钟");
+		alert_list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Alert alert = alerts.get(arg2);
+				Intent intent = new Intent(ActAlert.this, ActAddAlert.class);
+				intent.putExtra("isEdit", true);
+				intent.putExtra("alert", alert);
+				startActivity(intent);
+			}
+		});
 	}
 
-	private void initData() {
-		com.androidex.appformwork.wheelview.WheelView ccwv = (com.androidex.appformwork.wheelview.WheelView) findViewById(R.id.leftwheel); // 只有一个
-		ccwv.setCyclic(true);
-		List<String> hours = new ArrayList<String>();
-		hours.add("01");
-		hours.add("02");
-		hours.add("03");
-		hours.add("04");
-		hours.add("05");
-		hours.add("06");
-		hours.add("07");
-		hours.add("08");
-		hours.add("09");
-		hours.add("10");
-		hours.add("11");
-		hours.add("12");
-		hours.add("13");
-		hours.add("14");
-		hours.add("15");
-		hours.add("16");
-		hours.add("17");
-		hours.add("18");
-		hours.add("19");
-		hours.add("20");
-		hours.add("21");
-		hours.add("22");
-		hours.add("23");
-		hours.add("24");
-		ccwv.setViewAdapter(new TimeWheelAdapter(hours, ActAlert.this));
-		com.androidex.appformwork.wheelview.WheelView ccwvRight = (com.androidex.appformwork.wheelview.WheelView) findViewById(R.id.rightwheel); // 只有一个
-		ccwvRight.setCyclic(true);
-		List<String> times = new ArrayList<String>();
-		times.add("01");
-		times.add("02");
-		times.add("03");
-		times.add("04");
-		times.add("05");
-		times.add("06");
-		times.add("07");
-		times.add("08");
-		times.add("09");
-		times.add("10");
-		times.add("11");
-		times.add("12");
-		times.add("13");
-		times.add("14");
-		times.add("15");
-		times.add("16");
-		times.add("17");
-		times.add("18");
-		times.add("19");
-		times.add("20");
-		times.add("21");
-		times.add("22");
-		times.add("23");
-		times.add("24");
-		times.add("25");
-		times.add("26");
-		times.add("27");
-		times.add("28");
-		times.add("29");
-		times.add("30");
-		times.add("31");
-		times.add("32");
-		times.add("33");
-		times.add("34");
-		times.add("35");
-		times.add("36");
-		times.add("37");
-		times.add("38");
-		times.add("39");
-		times.add("40");
-		times.add("41");
-		times.add("42");
-		times.add("43");
-		times.add("44");
-		times.add("45");
-		times.add("46");
-		times.add("47");
-		times.add("48");
-		times.add("49");
-		times.add("50");
-		times.add("51");
-		times.add("52");
-		times.add("53");
-		times.add("54");
-		times.add("55");
-		times.add("56");
-		times.add("57");
-		times.add("58");
-		times.add("59");
-		ccwvRight.setViewAdapter(new TimeWheelAdapter(times, ActAlert.this));
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(mReceiver);
 	}
+
+	private void registerBoradcastReceiver() {
+		IntentFilter myIntentFilter = new IntentFilter();
+
+		myIntentFilter.addAction(Constants.ADD_ALERT_OK);
+		// 注册广播
+		getActivity().registerReceiver(mReceiver, myIntentFilter);
+	}
+
+	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (Constants.ADD_ALERT_OK.equals(action)) {
+				refreshData();
+
+			}
+
+		}
+
+	};
+
+	private void refreshData() {
+		DbUtils db = DbUtils.create(getActivity());
+		try {
+			alerts = db.findAll(Selector.from(Alert.class));
+			if (alerts != null) {
+				mAlertAdapter.setAlerts(alerts);
+			}
+		} catch (DbException e1) {
+			e1.printStackTrace();
+		}
+	};
 
 }

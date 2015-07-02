@@ -28,6 +28,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:tag="yearwheel" />
+               
                 <com.androidex.appformwork.wheelview.WheelView
                      android:id="@+id/rightwheel"
                     android:layout_width="wrap_content"
@@ -36,6 +37,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:tag="hourtimewheel" />
+               
                
             </LinearLayout>
 
@@ -62,6 +64,30 @@
                 android:layout_marginTop="-70dp"
                 android:background="@drawable/wheel_line" >
             </LinearLayout>
+            <RelativeLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="85dp"
+                >
+               <TextView 
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentLeft="true"
+                   android:text="时"
+                   android:textSize="16sp"
+                   android:textColor="@color/black"
+                   android:paddingLeft="120dp"
+                   /> 
+                   <TextView 
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:textSize="16sp"
+                   android:textColor="@color/black"
+                   android:text="分"
+                   android:paddingRight="60dp"
+                   />
+            </RelativeLayout >
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -70,7 +96,93 @@
                 android:layout_marginTop="-100dp"
                 android:background="@drawable/wheel_line" >
             </LinearLayout>
-        </RelativeLayout>       
+            
+        </RelativeLayout> 
+         <RelativeLayout
+                android:id="@+id/alert_repeat_layout" 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:padding="10dp"
+                >
+                <TextView 
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentLeft="true"
+                   android:text="重复"
+                   android:textSize="16sp"
+                   android:textColor="@color/black"
+                   /> 
+                   <TextView 
+                   android:id="@+id/repeat_time"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:textSize="16sp"
+                   android:text="永不"
+                   />
+            </RelativeLayout>
+            <View 
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"
+                />
+             <RelativeLayout
+                android:id="@+id/labelLayout" 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                >
+                <TextView 
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentLeft="true"
+                   android:text="标签"
+                   android:textSize="16sp"
+                   android:textColor="@color/black"
+                   /> 
+                   <TextView
+                   android:id="@+id/lable_text" 
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:textSize="16sp"
+                   android:text="皮肤测试"
+                   />
+            </RelativeLayout>
+            <View 
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"
+                />
+           <RelativeLayout
+                android:id="@+id/RingLayout"  
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                >
+                <TextView 
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentLeft="true"
+                   android:text="铃声"
+                   android:textSize="16sp"
+                   android:textColor="@color/black"
+                   /> 
+                   <TextView 
+                   android:id="@+id/bellText"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:textSize="16sp"
+                   android:text="布谷鸟"
+                   />
+            </RelativeLayout>
+            <View 
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/gray"
+                />     
     </LinearLayout>
 
 </RelativeLayout>

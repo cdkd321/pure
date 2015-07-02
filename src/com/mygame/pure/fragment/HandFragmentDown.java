@@ -337,9 +337,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		dataSeries1.getLinePaint().setStrokeWidth(2);
 		// dataSeries1.setLabelVisible(true);
 		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
-
+		LinkedList<String> labels = new LinkedList<String>();
 		// 设定数据源
 		chartData.add(dataSeries1);
+		chartView.setChartLabels(labels);
 		chartView.setChartData(chartData);
 		chartView.initView();
 	}
@@ -361,12 +362,11 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 					+ dayAvera(DateUtil.getDateStr(startDate, i)).getAverage();
 			count = count
 					+ dayAvera(DateUtil.getDateStr(startDate, i)).getCount();
-			if(dayAvera(
-					DateUtil.getDateStr(startDate, i)).getAverage()!=0){
+			if (dayAvera(DateUtil.getDateStr(startDate, i)).getAverage() != 0) {
 				linePoint1.add(new PointD(i * pointd, dayAvera(
 						DateUtil.getDateStr(startDate, i)).getAverage()));
 			}
-			
+
 		}
 		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
 				179, 147, 197));
@@ -531,8 +531,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 							+ "~"
 							+ df.format(getReduceMonth(df.parse(dates[1]))));
 
-					Average averagem = refreshMonthChartView(df
-							.format(getReduceMonth(df.parse(dates[0]))),
+					Average averagem = refreshMonthChartView(
+							df.format(getReduceMonth(df.parse(dates[0]))),
 							df.format(getReduceMonth(df.parse(dates[1]))));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
 					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
@@ -586,8 +586,8 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				try {
 					tvDate.setText(df.format(getAddMonth(df.parse(dates[0])))
 							+ "~" + df.format(getAddMonth(df.parse(dates[1]))));
-					Average averagem = refreshMonthChartView(df
-							.format(getAddMonth(df.parse(dates[0]))),
+					Average averagem = refreshMonthChartView(
+							df.format(getAddMonth(df.parse(dates[0]))),
 							df.format(getAddMonth(df.parse(dates[1]))));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
 					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
@@ -959,7 +959,6 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 		myIntentFilter.addAction(BleService.ACTION_TIME_TOOSHORT);
 		myIntentFilter.addAction(BleService.ACTION_START);
 		myIntentFilter.addAction(Constants.SYNCHRONOUS_FAILURE);
-		myIntentFilter.addAction(Constants.OLD_UPDATE_OK);
 		myIntentFilter.addAction(Constants.CLEAR_AlL);
 		// 注册广播
 		getActivity().registerReceiver(mReceiver, myIntentFilter);
@@ -1052,9 +1051,10 @@ public class HandFragmentDown extends BaseFragment implements OnClickListener {
 				}
 				refreshChartView(tvDate.getText().toString());
 				reFreshDegreeView();
-				java.text.DecimalFormat dfc = new java.text.DecimalFormat("#0.00");
-				Float d = Float.parseFloat(tvAverageLevelData.getText().toString()
-						.replace("%", "")) / 60f;
+				java.text.DecimalFormat dfc = new java.text.DecimalFormat(
+						"#0.00");
+				Float d = Float.parseFloat(tvAverageLevelData.getText()
+						.toString().replace("%", "")) / 60f;
 				progressBar.setProgress(Float.parseFloat(dfc.format(d)));
 
 			}
