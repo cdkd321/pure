@@ -59,6 +59,7 @@ public class AlertAdapter extends BaseAdapter {
 		slidingBtn.setImageResource(R.drawable.btn_bottom,
 				R.drawable.btn_frame, R.drawable.btn_mask,
 				R.drawable.btn_unpressed, R.drawable.btn_pressed);
+		slidingBtn.setChecked(true);
 		Alert alert = alerts.get(position);
 		alert_name.setText(alert.getAlertName());
 		alert_time.setText(alert.getAlertTime());

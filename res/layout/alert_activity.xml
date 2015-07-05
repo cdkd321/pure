@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:background="#ffffff"
-    android:layout_height="fill_parent" >
-    
+    android:layout_height="fill_parent"
+    android:background="#ffffff" >
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:orientation="vertical" >
+
         <include layout="@layout/include_navigation_bar" />
-         <RelativeLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
@@ -23,22 +25,20 @@
                 <com.androidex.appformwork.wheelview.WheelView
                     android:id="@+id/leftwheel"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"                  
-                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:tag="yearwheel" />
-               
+
                 <com.androidex.appformwork.wheelview.WheelView
-                     android:id="@+id/rightwheel"
+                    android:id="@+id/rightwheel"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"                   
-                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:tag="hourtimewheel" />
-               
-               
             </LinearLayout>
 
             <LinearLayout
@@ -64,30 +64,30 @@
                 android:layout_marginTop="-70dp"
                 android:background="@drawable/wheel_line" >
             </LinearLayout>
-            <RelativeLayout 
+
+            <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="85dp"
-                >
-               <TextView 
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_alignParentLeft="true"
-                   android:text="时"
-                   android:textSize="16sp"
-                   android:textColor="@color/black"
-                   android:paddingLeft="120dp"
-                   /> 
-                   <TextView 
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_alignParentRight="true"
-                   android:textSize="16sp"
-                   android:textColor="@color/black"
-                   android:text="分"
-                   android:paddingRight="60dp"
-                   />
-            </RelativeLayout >
+                android:layout_marginTop="85dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:paddingLeft="120dp"
+                    android:text="时"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:paddingRight="60dp"
+                    android:text="分"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -96,93 +96,108 @@
                 android:layout_marginTop="-100dp"
                 android:background="@drawable/wheel_line" >
             </LinearLayout>
-            
-        </RelativeLayout> 
-         <RelativeLayout
-                android:id="@+id/alert_repeat_layout" 
-                android:layout_width="match_parent"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/alert_repeat_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:padding="10dp"
-                >
-                <TextView 
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_alignParentLeft="true"
-                   android:text="重复"
-                   android:textSize="16sp"
-                   android:textColor="@color/black"
-                   /> 
-                   <TextView 
-                   android:id="@+id/repeat_time"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_alignParentRight="true"
-                   android:textSize="16sp"
-                   android:text="永不"
-                   />
-            </RelativeLayout>
-            <View 
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray"
-                />
-             <RelativeLayout
-                android:id="@+id/labelLayout" 
-                android:layout_width="match_parent"
+                android:layout_alignParentLeft="true"
+                android:text="重复"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/repeat_time"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                >
-                <TextView 
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_alignParentLeft="true"
-                   android:text="标签"
-                   android:textSize="16sp"
-                   android:textColor="@color/black"
-                   /> 
-                   <TextView
-                   android:id="@+id/lable_text" 
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_alignParentRight="true"
-                   android:textSize="16sp"
-                   android:text="皮肤测试"
-                   />
-            </RelativeLayout>
-            <View 
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray"
-                />
-           <RelativeLayout
-                android:id="@+id/RingLayout"  
-                android:layout_width="match_parent"
+                android:layout_alignParentRight="true"
+                android:text="永不"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray" />
+
+        <RelativeLayout
+            android:id="@+id/labelLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                >
-                <TextView 
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_alignParentLeft="true"
-                   android:text="铃声"
-                   android:textSize="16sp"
-                   android:textColor="@color/black"
-                   /> 
-                   <TextView 
-                   android:id="@+id/bellText"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_alignParentRight="true"
-                   android:textSize="16sp"
-                   android:text="布谷鸟"
-                   />
-            </RelativeLayout>
-            <View 
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/gray"
-                />     
+                android:layout_alignParentLeft="true"
+                android:text="标签"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/lable_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="皮肤测试"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray" />
+
+        <RelativeLayout
+            android:id="@+id/RingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="铃声"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/bellText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="布谷鸟"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray" />
+
+        <TextView
+            android:id="@+id/tvDelete"
+            style="@style/m_w"
+            android:layout_height="43dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/dp_30"
+            android:background="@drawable/bg_round_corner_theme"
+            android:gravity="center"
+            android:padding="@dimen/five_dp"
+            android:text="删除闹钟"
+            android:visibility="gone"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+             />
     </LinearLayout>
 
 </RelativeLayout>

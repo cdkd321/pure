@@ -24,6 +24,14 @@
             android:layout_centerVertical="true"
             android:background="@drawable/back_pressed" />
 
+        <ImageButton
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/new_btn_common_save" />
+
         <TextView
             android:id="@+id/current_section"
             android:layout_width="wrap_content"
@@ -42,6 +50,7 @@
         android:paddingRight="25dp" >
 
         <RelativeLayout
+            android:id="@+id/uploadmyhenad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -75,13 +84,16 @@
             android:background="#e5e5e5" />
 
         <RelativeLayout
+            android:id="@+id/rel_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:gravity="center"
             android:paddingBottom="5dp"
             android:paddingTop="10dp" >
 
             <TextView
+                android:id="@+id/tv_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -90,10 +102,13 @@
                 android:textSize="16sp" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:id="@+id/mynick"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:background="@null"
+                android:layout_toRightOf="@+id/tv_show"
+                android:gravity="right"
+                android:maxLength="6"
                 android:textColor="#666666"
                 android:textSize="16sp" />
         </RelativeLayout>
@@ -185,6 +200,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/skin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

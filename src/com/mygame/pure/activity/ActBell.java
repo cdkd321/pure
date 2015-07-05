@@ -46,7 +46,7 @@ public class ActBell extends BaseActivity {
 				if (arg1) {
 					checkBox2.setChecked(false);
 					checkBox3.setChecked(false);
-					startAlarm();
+					startAlarm(0);
 				}
 				bell[0] = arg1;
 			}
@@ -58,7 +58,7 @@ public class ActBell extends BaseActivity {
 				if (arg1) {
 					checkBox1.setChecked(false);
 					checkBox3.setChecked(false);
-					startAlarm();
+					startAlarm(1);
 				}
 				bell[1] = arg1;
 			}
@@ -70,7 +70,7 @@ public class ActBell extends BaseActivity {
 				if (arg1) {
 					checkBox1.setChecked(false);
 					checkBox2.setChecked(false);
-					startAlarm();
+					startAlarm(2);
 				}
 				bell[2] = arg1;
 			}
@@ -87,13 +87,25 @@ public class ActBell extends BaseActivity {
 		setTitle("铃声");
 	}
 
-	private void startAlarm() {
+	private void startAlarm(int position) {
+		String music="bugu.mp3";
+		if(position==0){
+			music="bugu.mp3";
+		}else if(position==1){
+			music="lingdang.mp3";
+		}else if(position==2){
+			music="menghuan.mp3";
+		}
 		if (mediaPlayer == null) {
 			mediaPlayer = new MediaPlayer();
+		}else{
+			mediaPlayer.stop();
+			mediaPlayer.reset();
 		}
 		try {
+			
 			AssetFileDescriptor fileDescriptor = getAssets().openFd(
-					"longke.mp3");
+					music);
 			mediaPlayer
 					.setDataSource(fileDescriptor.getFileDescriptor(),
 							fileDescriptor.getStartOffset(),
@@ -111,5 +123,12 @@ public class ActBell extends BaseActivity {
 		}
 
 		mediaPlayer.start();
+	}
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		mediaPlayer.release();
+		mediaPlayer=null;
 	}
 }

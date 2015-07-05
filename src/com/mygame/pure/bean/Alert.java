@@ -13,6 +13,16 @@ public class Alert extends EntityBase implements Serializable {
 	private String alertmusic;
 	@Column(column = "currenttime")
 	private long currenttime;
+	@Column(column = "clockid")
+	private int clockid;
+
+	public int getClockid() {
+		return clockid;
+	}
+
+	public void setClockid(int clockid) {
+		this.clockid = clockid;
+	}
 
 	public long getCurrenttime() {
 		return currenttime;

@@ -35,5 +35,9 @@
     <string name="disconnected">disconnecdted device</string>
     <string name="connected">connected</string>
     <string name="save">存储</string>
+     <string name="_findpwd">找回密码</string>
+     <string name="_reg">用户注册</string>
+     <string name="_getnum">获取验证码</string>
+     <string name="_setpwd">设置密码</string>
 
 </resources>

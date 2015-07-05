@@ -9,7 +9,7 @@
         <item name="android:windowAnimationStyle">@style/SelfDefine.Activity</item>
         <item name="android:scrollingCache">false</item>
     </style>
-    
+
     <style name="SelfDefine.Activity" parent="@android:style/Animation">
         <item name="android:activityOpenEnterAnimation">@anim/activity_slide_right_in</item>
         <item name="android:activityOpenExitAnimation">@anim/activity_slide_left_out</item>
@@ -36,13 +36,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    
+
     <style name="w_0_weight_1">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
     </style>
-    
 
     <style name="dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowIsFloating">true</item>
@@ -117,7 +116,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginLeft">@dimen/ten_dp</item>
         <item name="android:background">@color/white</item>
-        <item name="android:maxLength">11</item>
+        <item name="android:maxLength">21</item>
         <item name="android:textSize">@dimen/operate_text_size</item>
         <item name="android:padding">@dimen/five_dp</item>
         <item name="android:layout_marginRight">@dimen/ten_dp</item>
@@ -175,7 +174,6 @@
         <item name="android:textSize">@dimen/operate_text_size</item>
     </style>
 
- 
     <style name="styleForTvBottom" parent="android:Widget.TextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/forty_dp</item>
@@ -187,6 +185,7 @@
         <item name="android:textSize">@dimen/input_size</item>
         <item name="android:visibility">gone</item>
     </style>
+
     <style name="styleCommonTip" parent="m_w">
         <item name="android:layout_marginLeft">@dimen/twenty_dp</item>
         <item name="android:layout_marginRight">@dimen/twenty_dp</item>
@@ -194,7 +193,7 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/input_size</item>
     </style>
-    
+
     <!-- 结交好友验证码 对话框主题 -->
     <style name="common_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
@@ -206,16 +205,19 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
+
     <style name="list2LevelText" parent="@style/w_w">
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:textColor">@color/item_subtitle</item>
         <item name="android:textSize">15sp</item>
     </style>
+
     <style name="styleNormalText" parent="@style/w_w">
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">18sp</item>
     </style>
+
     <style name="styleTab" parent="@style/w_w">
         <item name="android:background">@color/white</item>
         <item name="android:orientation">vertical</item>
@@ -223,6 +225,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
     </style>
+
     <style name="styleTabImg" parent="@style/w_w">
         <item name="android:background">@color/white</item>
         <item name="android:contentDescription">@string/app_name</item>
@@ -232,6 +235,7 @@
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:duplicateParentState">true</item>
     </style>
+
     <style name="styleTabText" parent="w_w">
         <item name="android:background">@null</item>
         <item name="android:textColor">@color/tab_text_color</item>
@@ -239,6 +243,7 @@
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:duplicateParentState">true</item>
     </style>
+
     <style name="styleRadioButton" parent="android:Widget.CompoundButton.RadioButton">
         <item name="android:textColor">@color/radio_button_text</item>
         <item name="android:textSize">@dimen/list_text_size</item>
@@ -248,11 +253,13 @@
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
     </style>
+
     <style name="styleCenterText" parent="w_w">
         <item name="android:textColor">@color/theme_blue</item>
         <item name="android:textSize">@dimen/list_text_size</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
+
     <style name="styleText1" parent="android:Widget.TextView">
         <item name="android:textColor">@color/black_555555</item>
         <item name="android:textSize">@dimen/input_size</item>
@@ -262,21 +269,58 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:gravity">center</item>
     </style>
+
     <style name="styleOfHalfTransLine">
         <item name="android:background">@color/theme_blue_half_trans</item>
         <item name="android:layout_width">1dp</item>
         <item name="android:layout_height">20dp</item>
         <item name="android:layout_gravity">center_vertical</item>
     </style>
-    
+
     <style name="titleText" parent="w_w">
         <item name="android:layout_marginTop">@dimen/ten_dp</item>
         <item name="android:textColor">@color/theme_blue</item>
         <item name="android:textSize">@dimen/list_text_size_2</item>
     </style>
+
     <style name="normalText" parent="w_w">
         <item name="android:layout_marginTop">@dimen/ten_dp</item>
         <item name="android:textColor">@color/black_555555</item>
         <item name="android:textSize">@dimen/list_text_size_1</item>
     </style>
+    <!-- 自定义仿IOS的ActionSheet底部Dialog的样式 ，有模糊效果 -->
+    <style name="ActionSheetDialogStyle" parent="@android:style/Theme.Dialog">
+
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/ActionSheetDialogAnimation</item>
+    </style>
+    <!-- ActionSheet进出动画 -->
+    <style name="ActionSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/actionsheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/actionsheet_dialog_out</item>
+    </style>
+    <!-- 自定义仿IOS的AlertDialog的样式 -->
+    <style name="AlertDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
 </resources>
