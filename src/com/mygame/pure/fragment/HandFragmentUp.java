@@ -60,13 +60,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 		tvAverage = (TextView) rootView.findViewById(R.id.tvAverage);
 		tvYestodayLabel = (TextView) rootView.findViewById(R.id.tvYestoday);
 		toSeeMore = (TextView) rootView.findViewById(R.id.toSeeMore);
-		main.addRightImage(R.drawable.btn_news_bg, new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				main.startActivity(new Intent(getActivity(), ActKnowSkin.class));
-			}
-		});
+		 
 		toSeeMore.setOnClickListener(new OnClickListener() {
 
 			@Override

@@ -107,6 +107,7 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			startActivity(intent);
 			break;
 		case R.id.ui_hufu:
+			startActivity(new Intent(v.getContext(), ActKnowSkin.class));
 			break;
 		case R.id.ui_pwd:
 			break;

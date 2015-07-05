@@ -42,7 +42,7 @@
 	                style="@style/normalText" 
 	                android:layout_alignParentTop="true"
 	                android:layout_alignParentLeft="true"
-	                android:layout_margin="@dimen/twenty_dp"
+	                android:layout_margin="@dimen/ten_dp"
 	                android:gravity="center"
 	                android:text="眼 窝\n30%-80%" />
 
@@ -50,24 +50,24 @@
 	                style="@style/normalText" 
 	                android:layout_alignParentTop="true"
 	                android:layout_alignParentRight="true"
-	                android:layout_margin="@dimen/twenty_dp"
+	                android:layout_margin="@dimen/ten_dp"
 	                android:gravity="center"
 	                android:text="脸 颊\n30%-80%" />
 	
 	            <TextView
 	                style="@style/normalText"
-	                android:layout_marginTop="300dp"
+	                android:layout_marginTop="400dp"
 	                android:layout_alignParentLeft="true"
 	                android:gravity="center"
-	                android:layout_marginLeft="@dimen/twenty_dp"
+	                android:layout_marginLeft="@dimen/ten_dp"
 	                android:text="手 部\n30%-80%" />
                 
                 <TextView
 	                style="@style/normalText"
-	                android:layout_marginTop="300dp"
+	                android:layout_marginTop="400dp"
 	                android:layout_alignParentRight="true"
 	                android:gravity="center"
-	                android:layout_marginRight="@dimen/twenty_dp"
+	                android:layout_marginRight="@dimen/ten_dp"
 	                android:text="颈 部\n30%-80%" />
                 
             </RelativeLayout>
