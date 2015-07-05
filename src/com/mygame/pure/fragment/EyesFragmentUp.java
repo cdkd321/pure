@@ -23,4 +23,8 @@ public class EyesFragmentUp extends BaseFragment{
 		rootView = inflater.inflate(R.layout.tab_fragment_eyes, container, false);
 		return rootView;
 	}
+
+	public static EyesFragmentUp newInstance(int type) {
+		return null;
+	}
 }

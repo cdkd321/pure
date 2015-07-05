@@ -18,53 +18,6 @@
             android:id="@+id/btnTab1"
             style="@style/styleTabText"
             android:text="@string/hand" />
-    </LinearLayout>
-    
-    <LinearLayout
-        android:id="@+id/llTab2" 
-        style="@style/styleTab">
-
-        <ImageView
-            android:id="@+id/ivTab2"
-            style="@style/styleTabImg"
-            android:src="@drawable/tab_face_bg" />
-
-        <Button
-            android:id="@+id/btnTab2"
-            style="@style/styleTabText"
-            android:text="@string/face" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llTab3" 
-        style="@style/styleTab">
-
-        <ImageView
-            android:id="@+id/ivTab3"
-            style="@style/styleTabImg"
-            android:src="@drawable/tab_eye_bg" />
-
-        <Button
-            android:id="@+id/btnTab3"
-            style="@style/styleTabText"
-            android:text="@string/eye" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llTab4"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        style="@style/styleTab" >
-
-        <ImageView
-            android:id="@+id/ivTab4"
-            style="@style/styleTabImg"
-            android:src="@drawable/tab_neck_bg" />
-
-        <Button
-            android:id="@+id/btnTab4"
-            style="@style/styleTabText"
-            android:text="@string/neck"  />
-    </LinearLayout>
+    </LinearLayout> 
 
 </LinearLayout>

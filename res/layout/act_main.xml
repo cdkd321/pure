@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LinearLayout1"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
@@ -7,23 +7,45 @@
     android:orientation="vertical" >
     
     <include layout="@layout/include_navigation_bar"/>
+    
+    <FrameLayout
+        android:id="@+id/fragment_content"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" />
+
+    <include layout="@layout/include_split" />
+
+    <android.support.v4.app.FragmentTabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white" >
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0" />
+    </android.support.v4.app.FragmentTabHost>
+    
  
-    <com.mygame.pure.view.NoScrollViewPager
-   	    android:id="@+id/check_list"
-   	    android:layout_below="@+id/actionBar"
-   	    android:layout_width="match_parent"
-   	    android:layout_height="match_parent"  />
+<!--     <com.mygame.pure.view.NoScrollViewPager -->
+<!--    	    android:id="@+id/check_list" -->
+<!--    	    android:layout_below="@+id/actionBar" -->
+<!--    	    android:layout_width="match_parent" -->
+<!--    	    android:layout_height="match_parent"  /> -->
     
-    <ImageView
-        android:id="@+id/ivImg"
-        style="@style/w_w"
-        android:layout_marginTop="@dimen/twenty_dp"
-        android:contentDescription="@string/app_name"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/back"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/sixty_dp"/>
+<!--     <ImageView -->
+<!--         android:id="@+id/ivImg" -->
+<!--         style="@style/w_w" -->
+<!--         android:layout_marginTop="@dimen/twenty_dp" -->
+<!--         android:contentDescription="@string/app_name" -->
+<!--         android:layout_centerHorizontal="true" -->
+<!--         android:background="@drawable/back" -->
+<!--         android:layout_alignParentBottom="true" -->
+<!--         android:layout_marginBottom="@dimen/sixty_dp"/> -->
     
-    <include layout="@layout/tab_item_view" android:layout_below="@+id/check_list"/>
+<!--     <include layout="@layout/tab_item_view" android:layout_below="@+id/check_list"/> -->
     
-</RelativeLayout>
+</LinearLayout>

@@ -10,8 +10,8 @@
         android:text="45"
         android:paddingLeft="30dp"
         android:textColor="@color/theme_blue"
-        android:drawableBottom="@drawable/triangle"
-        />
+        android:drawableBottom="@drawable/triangle" />
+    
     <ImageView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

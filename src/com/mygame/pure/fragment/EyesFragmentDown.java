@@ -1,14 +1,13 @@
 package com.mygame.pure.fragment;
 
-import com.mygame.pure.R;
-import com.mygame.pure.R.layout;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.mygame.pure.R;
 
 public class EyesFragmentDown extends BaseFragment{
 	
@@ -23,4 +22,5 @@ public class EyesFragmentDown extends BaseFragment{
 		rootView = inflater.inflate(R.layout.tab_fragment_eyes, container, false);
 		return rootView;
 	}
+	 
 }
