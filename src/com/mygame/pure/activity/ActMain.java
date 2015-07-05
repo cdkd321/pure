@@ -29,6 +29,7 @@ import com.mygame.pure.fragment.HandFragmentDown;
 import com.mygame.pure.fragment.HandFragmentUp;
 import com.mygame.pure.fragment.NeckFragmentDown;
 import com.mygame.pure.fragment.NeckFragmentUp;
+import com.mygame.pure.view.NoScrollViewPager;
 import com.mygame.pure.view.VerticalViewPager;
 
 /**
@@ -39,7 +40,7 @@ import com.mygame.pure.view.VerticalViewPager;
 public class ActMain extends BaseActivity implements OnClickListener {
 	protected com.mygame.pure.ble.BleService mBleService;
 	private List<View> baseList;
-	private ViewPager viewPager;
+	private NoScrollViewPager viewPager;
 	private View llTab1, llTab2, llTab3, llTab4;
 	int[] viewPageId = new int[] { R.id.check_one, R.id.check_two,
 			R.id.check_three, R.id.check_four };
@@ -139,7 +140,8 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		llTab3.setOnClickListener(this);
 		llTab4.setOnClickListener(this);
 
-		viewPager = (ViewPager) findViewById(R.id.check_list);
+		viewPager = (NoScrollViewPager) findViewById(R.id.check_list);
+		viewPager.setNoScroll(true);
 		baseList = getList();
 
 		HistoryAdapter adapter = new HistoryAdapter(baseList);
