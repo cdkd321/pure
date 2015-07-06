@@ -34,7 +34,7 @@
                     android:background="@color/bg" >
 
                     <EditText
-                        android:id="@+id/et_email"
+                        android:id="@+id/et_email_2"
                         style="@style/EtTheme"
                         android:layout_toRightOf="@+id/ivSanjiao"
                         android:background="@color/bg"

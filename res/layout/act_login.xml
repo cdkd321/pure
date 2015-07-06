@@ -40,6 +40,7 @@
                         android:background="@color/bg"
                         android:gravity="center"
                         android:hint="邮箱" >
+
                         <requestFocus />
                     </EditText>
                 </RelativeLayout>
@@ -57,7 +58,7 @@
                     android:background="@color/bg" >
 
                     <EditText
-                        android:id="@+id/etPwd"
+                        android:id="@+id/etPwd_2"
                         style="@style/EtTheme"
                         android:background="@color/bg"
                         android:gravity="center"

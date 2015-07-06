@@ -3,20 +3,26 @@ package com.mygame.pure.activity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ab.soap.AbSoapListener;
+import com.ab.soap.AbSoapParams;
+import com.ab.soap.AbSoapUtil;
 import com.mygame.pure.R;
-import com.mygame.pure.bean.Urls;
 import com.mygame.pure.http.AjaxCallBack;
 import com.mygame.pure.http.AjaxParams;
 import com.mygame.pure.view.PureActionBar;
@@ -34,6 +40,7 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 	private EditText etUname;// 邮箱
 	private EditText etPwd;// 密码
 	private String ip;
+	private AbSoapUtil mAbSoapUtil = null;
 
 	@Override
 	public PureActionBar getTkActionBar() {
@@ -45,6 +52,8 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		setTheme(R.style.AppBaseTheme);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.act_login);
 		initView();
 		getSetUp();
@@ -61,7 +70,7 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 	public void initView() {
 		setTitle("登录");
 		etUname = (EditText) findViewById(R.id.etUname);
-		etPwd = (EditText) findViewById(R.id.etPwd);
+		etPwd = (EditText) findViewById(R.id.etPwd_2);
 		btnLoad = (Button) findViewById(R.id.btnLoad);
 		findpwd = (TextView) findViewById(R.id.findpwd);
 		regist = (TextView) findViewById(R.id.regist);
@@ -77,13 +86,67 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 		switch (v.getId()) {
 
 		case R.id.btnLoad:
+			final ProgressDialog pd = new ProgressDialog(ActLogin.this);
+			pd.setCanceledOnTouchOutside(false);
+			pd.setOnCancelListener(new OnCancelListener() {
+
+				@Override
+				public void onCancel(DialogInterface dialog) {
+				}
+			});
+			pd.setMessage("登录中...");
+			pd.show();
 			// 登录
 			// getFinalHttp().post(Urls.Login_info, AjaxParams(),
 			// majaxCallback);
-			Intent intent2 = new Intent();
-			intent2.setClass(ActLogin.this, ActMain.class);
-			startActivity(intent2);
-			finish();
+			String urlString = "http://miliapp.ebms.cn/webservice/member.asmx?op=Login";
+			String nameSpace = "http://tempuri.org/";
+			String methodName = "Login";
+			AbSoapParams params = new AbSoapParams();
+			params.put("username", etUname.getText().toString());
+			// params.put(
+			// "password",
+			// new SHA1().getDigestOfString(etPwd.getText().toString()
+			// .getBytes()));
+			// params.put("password",
+			// Base64.decode(etPwd.getText().toString()));
+			params.put("password", etPwd.getText().toString());
+			mAbSoapUtil.call(urlString, nameSpace, methodName, params,
+					new AbSoapListener() {
+						@Override
+						public void onSuccess(int arg0, String arg1) {
+							// TODO Auto-generated method stub
+							pd.dismiss();
+							if (arg1 != null) {
+								String[] a = arg1.split("=");
+								String[] b = a[1].split(";");
+								if (b[0].equals("1")) {
+									Toast.makeText(getApplicationContext(),
+											"登录成功", 1).show();
+									Intent intent2 = new Intent();
+									intent2.setClass(ActLogin.this,
+											ActMain.class);
+									startActivity(intent2);
+									finish();
+								} else if (b[0].equals("-1")) {
+									Toast.makeText(getApplicationContext(),
+											"用户不存在", 1).show();
+								} else if (b[0].equals("-2")) {
+									Toast.makeText(getApplicationContext(),
+											"用户名或密码错误", 1).show();
+								}
+							}
+						}
+
+						@Override
+						public void onFailure(int arg0, String arg1,
+								Throwable arg2) {
+							pd.dismiss();
+							// TODO Auto-generated method stub
+							Toast.makeText(getApplicationContext(),
+									"请求失败" + arg1, 1).show();
+						}
+					});
 			break;
 		case R.id.findpwd:
 			// 找回密码
@@ -146,6 +209,11 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 	};
 
 	public void getSetUp() {
+		// 获取http工具类
+		mAbSoapUtil = AbSoapUtil.getInstance(this);
+		mAbSoapUtil.setTimeout(10000);
+		// get请求
+
 		// 获取wifi服务
 		WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		// 判断wifi是否开启

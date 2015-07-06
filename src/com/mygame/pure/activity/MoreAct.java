@@ -55,7 +55,7 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(MoreAct.this,
-						PersonalCenterActivity.class);
+						ActLogin.class);
 				startActivity(i);
 			}
 		});
