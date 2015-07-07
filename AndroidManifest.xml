@@ -52,18 +52,14 @@
     <application
         android:name="com.mygame.pure.SelfDefineApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/hcy_icon"
         android:label="@string/app_name"
         android:theme="@style/AppThemeStyle" >
         <activity
             android:name="com.mygame.pure.activity.ActMain"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
-              <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+             
         </activity>
 
         <service
@@ -145,6 +141,19 @@
         <activity
             android:name="com.mygame.pure.activity.ActSetPwd"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.mygame.pure.activity.FirstbootPageActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.mygame.pure.activity.SplashScreenActivity"
+            android:screenOrientation="portrait" >
+             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.mygame.pure.dialog.DialogStyle"

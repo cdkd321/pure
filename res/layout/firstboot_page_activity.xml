@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+    </android.support.v4.view.ViewPager>
+   <LinearLayout 
+            android:id="@+id/pont"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            >
+            <ImageView 
+                android:id="@+id/pont0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/blue_pont"
+                />
+            <ImageView 
+                android:id="@+id/pont1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/feishe_pont"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
+            <ImageView 
+                android:id="@+id/pont2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/feishe_pont"
+                android:layout_marginRight="10dp"
+                />
+          
+        </LinearLayout>
+</FrameLayout>

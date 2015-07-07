@@ -330,6 +330,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 				timer.schedule(task, 2000);
 			} else {
 				moveTaskToBack(false);
+				finish();
 
 				return true;
 			}
