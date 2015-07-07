@@ -3,9 +3,7 @@ package com.mygame.pure.activity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +15,6 @@ import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
 import com.mygame.pure.R;
-import com.mygame.pure.bean.Urls;
 import com.mygame.pure.http.AjaxCallBack;
 import com.mygame.pure.http.AjaxParams;
 import com.mygame.pure.view.PureActionBar;
@@ -86,7 +83,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 					params.put("user1", "APP");
 					params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
 					params.put("email", et_email.getText().toString());
-					params.put("id", "654321");
+					params.put("id", "8");
 
 					mAbSoapUtil.call(urlString, nameSpace, methodName, params,
 							new AbSoapListener() {
