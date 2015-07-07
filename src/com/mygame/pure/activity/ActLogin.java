@@ -23,6 +23,7 @@ import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
 import com.mygame.pure.R;
+import com.mygame.pure.core.MicroRecruitSettings;
 import com.mygame.pure.http.AjaxCallBack;
 import com.mygame.pure.http.AjaxParams;
 import com.mygame.pure.view.PureActionBar;
@@ -41,6 +42,8 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 	private EditText etPwd;// 密码
 	private String ip;
 	private AbSoapUtil mAbSoapUtil = null;
+	private MicroRecruitSettings settings;
+	private Context context;
 
 	@Override
 	public PureActionBar getTkActionBar() {
@@ -68,6 +71,8 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 	}
 
 	public void initView() {
+		context = this;
+		settings = new MicroRecruitSettings(context);
 		setTitle("登录");
 		etUname = (EditText) findViewById(R.id.etUname);
 		etPwd = (EditText) findViewById(R.id.etPwd_2);
@@ -123,6 +128,8 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 								if (b[0].equals("1")) {
 									Toast.makeText(getApplicationContext(),
 											"登录成功", 1).show();
+									settings.USER_NAME.setValue(etUname
+											.getText().toString());
 									Intent intent2 = new Intent();
 									intent2.setClass(ActLogin.this,
 											ActMain.class);

@@ -28,47 +28,22 @@
 
                 <include layout="@layout/include_split" />
 
-
                 <RelativeLayout
                     style="@style/InputParentTheme"
                     android:layout_width="match_parent"
                     android:background="@color/bg" >
 
                     <EditText
-                        android:id="@+id/et_pwd"
+                        android:id="@+id/mywirte"
                         style="@style/EtTheme"
                         android:layout_toRightOf="@+id/ivSanjiao"
                         android:background="@color/bg"
                         android:gravity="center"
-                        android:hint="请输入密码"
-                        android:inputType="textPassword" >
+                        android:hint="请输入邮箱验证码" >
 
                         <requestFocus />
                     </EditText>
                 </RelativeLayout>
-
-                <!-- <include layout="@layout/include_split" /> -->
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/white" />
-
-                <RelativeLayout
-                    style="@style/InputParentTheme"
-                    android:layout_width="match_parent"
-                    android:background="@color/bg" >
-
-                    <EditText
-                        android:id="@+id/et_pwdagin"
-                        style="@style/EtTheme"
-                        android:background="@color/bg"
-                        android:gravity="center"
-                        android:hint="请输入确认密码"
-                        android:inputType="textPassword" />
-                </RelativeLayout>
-
-                <include layout="@layout/include_split" />
             </LinearLayout>
 
             <!-- <Button -->
@@ -78,14 +53,14 @@
             <!-- android:text="忘记密码？" /> -->
 
             <Button
-                android:id="@+id/btn_setpwd"
+                android:id="@+id/btn_getNum_code"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/all_btn"
-                android:text="@string/_setpwd"
+                android:text="验证"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -95,6 +70,7 @@
             <!-- android:layout_width="80dp" -->
             <!-- android:onClick="onRegisterClick" -->
             <!-- android:text="注册" /> -->
+
         </LinearLayout>
     </FrameLayout>
 

@@ -9,25 +9,47 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ab.fragment.AbAlertDialogFragment.AbDialogOnClickListener;
+import com.ab.soap.AbSoapListener;
+import com.ab.soap.AbSoapParams;
+import com.ab.soap.AbSoapUtil;
+import com.ab.util.AbDialogUtil;
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
 import com.mygame.pure.ble.BleService;
+import com.mygame.pure.core.MicroRecruitSettings;
 import com.mygame.pure.utils.Constants;
 import com.mygame.pure.view.CircleImageView;
 import com.mygame.pure.view.UIItem;
+import com.squareup.picasso.Picasso;
 
 public class MoreAct extends BaseActivity implements OnClickListener {
 	private String mAddress;
 	private TextView connected_text;
 	private CircleImageView cimg;
+	private MicroRecruitSettings settings;
+	private Context context;
+	private AbSoapUtil mAbSoapUtil = null;
+	private TextView loadagin;
+	private TextView w_w;
+	private ImageButton back_btn;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_more);
+		context = this;
+		settings = new MicroRecruitSettings(context);
+		mAbSoapUtil = AbSoapUtil.getInstance(this);
+		mAbSoapUtil.setTimeout(10000);
+		w_w = (TextView) findViewById(R.id.nick);
+		back_btn = (ImageButton) findViewById(R.id.back_btn);
+		back_btn.setOnClickListener(this);
 		UIItem alert_settings = (UIItem) findViewById(R.id.alert_settings);
 		UIItem ui_hufu = (UIItem) findViewById(R.id.ui_hufu);
 		UIItem ui_pwd = (UIItem) findViewById(R.id.ui_pwd);
@@ -35,12 +57,13 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		UIItem connect_device = (UIItem) findViewById(R.id.connect_device);
 		connected_text = (TextView) findViewById(R.id.connected_text);
 		cimg = (CircleImageView) findViewById(R.id.cimg);
+		loadagin = (TextView) findViewById(R.id.loadagin);
+		loadagin.setOnClickListener(this);
 		registerBoradcastReceiver();
 		alert_settings.setOnClickListener(this);
 		ui_hufu.setOnClickListener(this);
 		ui_pwd.setOnClickListener(this);
 		ui_yijian.setOnClickListener(this);
-
 		connect_device.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -54,9 +77,14 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(MoreAct.this,
-						ActLogin.class);
-				startActivity(i);
+				if (settings.USER_NAME.getValue().equals("")) {
+					Intent i = new Intent(MoreAct.this, ActLogin.class);
+					startActivity(i);
+				} else {
+					Intent i = new Intent(MoreAct.this,
+							PersonalCenterActivity.class);
+					startActivity(i);
+				}
 			}
 		});
 
@@ -68,8 +96,30 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			}
 		});
 		setTitle("更多");
+		// isLogin();
+		if (settings.USER_NAME.getValue().equals("")) {
+			Toast.makeText(getApplicationContext(), "用户未登录", 1).show();
+		} else {
+			getHeadusername();
+		}
 
 	}
+
+	// public void isLogin() {
+	// if (settings.USER_NAME.getValue().equals("")) {
+	// // 用户未登录
+	// } else {
+	// // 获取头像和昵称
+	// new Thread(new Runnable() {
+	//
+	// @Override
+	// public void run() {
+	// // TODO Auto-generated method stub
+	// getHeadusername();
+	// }
+	// }).start();
+	// }
+	// }
 
 	@Override
 	protected void onDestroy() {
@@ -113,7 +163,12 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.ui_yijian:
 			break;
-
+		case R.id.loadagin:
+			getHeadusername();
+			break;
+		case R.id.back_btn:
+			finish();
+			break;
 		default:
 			break;
 		}
@@ -155,4 +210,72 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		}
 	};
 
+	public void getHeadusername() {
+
+		// 获取用户的相关信息
+		// String urlString =
+		// "http://miliapp.ebms.cn/webservice/member.asmx?op=GetListByUserName";
+		// String nameSpace = "http://tempuri.org/";
+		// String methodName = "GetListByUserName";
+		// AbSoapParams params = new AbSoapParams();
+		// params.put("user1", "APP");
+		// params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
+		// params.put("username", "longke1988@163.com");
+
+		String urlString3 = "http://miliapp.ebms.cn/webservice/member.asmx?op=GetListByUserName";
+		String nameSpace3 = "http://tempuri.org/";
+		String methodName3 = "GetListByUserName";
+		AbSoapParams params3 = new AbSoapParams();
+		params3.put("user1", "APP");
+		params3.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
+		params3.put("username", settings.USER_NAME.getValue());
+
+		mAbSoapUtil.call(urlString3, nameSpace3, methodName3, params3,
+				new AbSoapListener() {
+					@Override
+					public void onSuccess(int arg0, String arg1) {
+						// TODO Auto-generated method stub
+						if (arg1.indexOf("Nicheng=") != -1) {
+							String[] a = arg1.split("Nicheng=");
+							String[] b = a[1].split(";");
+							w_w.setText(b[0]);
+						}
+						if (arg1.indexOf("Touxiang=") != -1) {
+							String[] a1 = arg1.split("Touxiang=");
+							String[] b1 = a1[1].split(";");
+							Picasso.with(context)
+									.load("http://miliapp.ebms.cn/" + b1[0])
+									.placeholder(R.drawable.hcy_icon)
+									.error(R.drawable.hcy_icon).into(cimg);
+						}
+
+						// AbDialogUtil.showAlertDialog(MoreAct.this, "���ؽ��",
+						// arg1, new AbDialogOnClickListener() {
+						//
+						// @Override
+						// public void onNegativeClick() {
+						// // TODO Auto-generated method
+						// // stub
+						//
+						// }
+						//
+						// @Override
+						// public void onPositiveClick() {
+						// // TODO Auto-generated method
+						// // stub
+						//
+						// }
+						//
+						// });
+					}
+
+					@Override
+					public void onFailure(int arg0, String arg1, Throwable arg2) {
+						// TODO Auto-generated method stub
+						// Toast.makeText(getApplicationContext(), "请求失败" +
+						// arg1,
+						// 1).show();
+					}
+				});
+	}
 }

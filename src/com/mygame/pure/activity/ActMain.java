@@ -86,7 +86,6 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		 * listFragments = getThreeFragments(); break; case 3: listFragments =
 		 * getFourFragments(); break; default: break; }
 		 */
-
 		return listFragments;
 	}
 
