@@ -45,7 +45,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	protected com.mygame.pure.ble.BleService mBleService;
 	private List<View> baseList;
 	private ViewPager viewPager;
-	private View llTab1, llTab2, llTab3, llTab4;
+	public static View llTab1, llTab2, llTab3, llTab4;
 	int[] viewPageId = new int[] { R.id.check_one, R.id.check_two,
 			R.id.check_three, R.id.check_four };
 	private ImageView ivImg;
@@ -142,10 +142,10 @@ public class ActMain extends BaseActivity implements OnClickListener {
 
 		ivImg.setOnClickListener(this);
 
-		llTab1.setOnClickListener(this);
+		/*llTab1.setOnClickListener(this);
 		llTab2.setOnClickListener(this);
 		llTab3.setOnClickListener(this);
-		llTab4.setOnClickListener(this);
+		llTab4.setOnClickListener(this);*/
 		fragmentManager = getSupportFragmentManager();
 		fragmentTrasaction = fragmentManager.beginTransaction();
 		fragment = HomeRootFragment.newInstance(0);
