@@ -2,6 +2,8 @@ package com.mygame.pure.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
@@ -12,9 +14,11 @@ import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
@@ -125,9 +129,9 @@ public class ActMain extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent=new Intent(ActMain.this,MoreAct.class);
+				Intent intent = new Intent(ActMain.this, MoreAct.class);
 				startActivity(intent);
-				
+
 			}
 		});
 		ivImg = (ImageView) findViewById(R.id.ivImg);
@@ -272,4 +276,32 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			mBleService = null;
 		}
 	};
+	private Timer timer = new Timer();
+	private static Boolean isQuit = false;
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (isQuit == false) {
+				isQuit = true;
+				Toast.makeText(getBaseContext(), "再按一次返回桌面", Toast.LENGTH_SHORT)
+						.show();
+				TimerTask task = null;
+				task = new TimerTask() {
+					@Override
+					public void run() {
+						isQuit = false;
+					}
+				};
+				timer.schedule(task, 2000);
+			} else {
+				moveTaskToBack(false);
+
+				return true;
+			}
+		}
+
+		return false;
+	}
 }

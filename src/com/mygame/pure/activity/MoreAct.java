@@ -10,15 +10,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ab.fragment.AbAlertDialogFragment.AbDialogOnClickListener;
 import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
-import com.ab.util.AbDialogUtil;
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
 import com.mygame.pure.ble.BleService;
@@ -163,6 +160,30 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		case R.id.ui_pwd:
 			break;
 		case R.id.ui_yijian:
+			String toaddress;
+			// Intent intent2 = new Intent();
+			// intent2.setClass(MoreAct.this, SendEmailAct.class);
+			// startActivity(intent2);
+			if (getResources().getConfiguration().locale.getCountry().equals(
+					"CN")
+					|| getResources().getConfiguration().locale.getCountry()
+							.equals("TW")) {
+				toaddress = "customerservice@hali-Power.com";
+			} else {
+				toaddress = "cs@hali-Power.com";
+			}
+			Intent i = new Intent(Intent.ACTION_SEND);
+			i.setType("text/plain");
+
+			i.putExtra(Intent.EXTRA_EMAIL, new String[] { toaddress });
+			i.putExtra(Intent.EXTRA_SUBJECT, "产品意见反馈");
+			i.putExtra(Intent.EXTRA_TEXT, "请输入邮件反馈内容");
+			try {
+				startActivity(Intent.createChooser(i, "邮件发送中..."));
+			} catch (android.content.ActivityNotFoundException ex) {
+				Toast.makeText(MoreAct.this, "您没有安装邮件客户端", Toast.LENGTH_SHORT)
+						.show();
+			}
 			break;
 		case R.id.loadagin:
 			getHeadusername();
