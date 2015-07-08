@@ -5,7 +5,10 @@ public interface Constants {
 	public static final String DATABASE_NAME = "Band.db";// 数据库名称
 	public static final String DATABASE_PEDOMETER_MODEL_NAME = "database_pedometermodel";// 数据库当天数据表
 	public static final String DATABASE_TOTAL_TABLE_NAME = "database_total_name";// 数据库睡眠记步详情表名
-	public static final String SLEEP_NAME = "sleep";
+	public static final String SELECT_ONE = "select_one";
+	public static final String SELECT_TWO = "select_two";
+	public static final String SELECT_THREE = "select_three";
+	public static final String SELECT_FOUR = "select_four";
 	public static final String EXERCISE_NAME = "exercise";
 	public static final String EMAIL = "e_mail";// 当前用户保存地址
 

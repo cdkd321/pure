@@ -22,16 +22,18 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
+import com.mygame.pure.bean.ScanDevice;
 import com.mygame.pure.ble.BleService;
 
 public class DeviceListActivity extends Activity {
-	private List<BluetoothDevice> deviceList;
+	private List<ScanDevice> deviceList;
 	private ListView lv;
 	private TextView bu_cancle;
 	private TextView bund_text;
@@ -64,7 +66,7 @@ public class DeviceListActivity extends Activity {
 	}
 
 	private void init() {
-		deviceList = new ArrayList<BluetoothDevice>();
+		deviceList = new ArrayList<ScanDevice>();
 		bu_cancle = (TextView) findViewById(R.id.cancel);
 		connectedName = (TextView) findViewById(R.id.name);
 		bund_text = (TextView) findViewById(R.id.bund_text);
@@ -85,16 +87,24 @@ public class DeviceListActivity extends Activity {
 									@Override
 									public void onClick(DialogInterface arg0,
 											int arg1) {
-										connectedMacLayout.setVisibility(View.GONE);
-										share.edit().putString("LAST_CONNECT_MAC", "").commit();
-										share.edit().putString("LAST_CONNECT_NAME", "").commit();
+										connectedMacLayout
+												.setVisibility(View.GONE);
+										share.edit()
+												.putString("LAST_CONNECT_MAC",
+														"").commit();
+										share.edit()
+												.putString("LAST_CONNECT_NAME",
+														"").commit();
 									}
-								}).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-									
+								})
+						.setNegativeButton("cancel",
+								new DialogInterface.OnClickListener() {
+
 									@Override
-									public void onClick(DialogInterface arg0, int arg1) {
+									public void onClick(DialogInterface arg0,
+											int arg1) {
 										// TODO Auto-generated method stub
-										
+
 									}
 								}).create();
 				dialog.show();
@@ -112,7 +122,7 @@ public class DeviceListActivity extends Activity {
 				}
 			}
 		}
-		
+
 		bu_cancle.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -121,7 +131,7 @@ public class DeviceListActivity extends Activity {
 			}
 		});
 		lv.setOnItemClickListener(onItemClickListener);
-		
+
 		// connectedName.setText(text)
 
 		/*
@@ -154,19 +164,21 @@ public class DeviceListActivity extends Activity {
 	}
 
 	// ����豸
-	private void addDevice(BluetoothDevice device) {
+	private void addDevice(ScanDevice device) {
 		boolean isHave = false;
 		for (int i = 0; i < deviceList.size(); i++) {
-			if (device.getAddress().equals(deviceList.get(i).getAddress())) {
+			if (device.getDevice().getAddress()
+					.equals(deviceList.get(i).getDevice().getAddress())) {
 				isHave = true;
 			}
 		}
 		if (!isHave) {
-			if(!share.getString("LAST_CONNECT_MAC", "").equals(device.getAddress())){
+			if (!share.getString("LAST_CONNECT_MAC", "").equals(
+					device.getDevice().getAddress())) {
 				deviceList.add(device);
 				adapter.notifyDataSetChanged();
 			}
-			
+
 		}
 	}
 
@@ -177,11 +189,12 @@ public class DeviceListActivity extends Activity {
 			Intent data = new Intent();
 			Bundle b = new Bundle();
 			b.putParcelable(BluetoothDevice.EXTRA_DEVICE,
-					deviceList.get(position));
+					deviceList.get(position).getDevice());
 			data.putExtras(b);
 			connectedMacLayout.setVisibility(View.VISIBLE);
 			connectedName.setVisibility(View.VISIBLE);
-			connectedName.setText(deviceList.get(position).getName());
+			connectedName.setText(deviceList.get(position).getDevice()
+					.getName());
 			setResult(RESULT_OK, data);
 			finish();
 		}
@@ -194,19 +207,22 @@ public class DeviceListActivity extends Activity {
 			String action = intent.getAction();
 			if (BleService.ACTION_DEVICE_FOUND.equals(action)) {
 				Bundle data = intent.getExtras();
+				final ScanDevice scDevice = new ScanDevice();
 				final BluetoothDevice device = data
 						.getParcelable(BluetoothDevice.EXTRA_DEVICE);
+				scDevice.setDevice(device);
+				scDevice.setRssi(data.getInt("rssi"));
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
-						addDevice(device);
+						addDevice(scDevice);
 					}
 				});
-			}else if(BleService.ACTION_GATT_CONNECTED.endsWith(action)){
+			} else if (BleService.ACTION_GATT_CONNECTED.endsWith(action)) {
 				state.setText("connected");
-			}else if(BleService.ACTION_GATT_DISCONNECTED.endsWith(action)){
+			} else if (BleService.ACTION_GATT_DISCONNECTED.endsWith(action)) {
 				state.setText("disconnected");
-			}else if(BleService.ACTION_STATUS_WRONG.endsWith(action)){
+			} else if (BleService.ACTION_STATUS_WRONG.endsWith(action)) {
 				state.setText("disconnected");
 			}
 		}
@@ -236,22 +252,37 @@ public class DeviceListActivity extends Activity {
 			if (convertView == null) {
 				convertView = getLayoutInflater().inflate(R.layout.item, null);
 				holder = new ViewHolder();
-				// holder.signatureStrenth = (TextView)
-				// convertView.findViewById(R.id.signal_strength);
+				holder.signatureStrenth = (ImageView) convertView
+						.findViewById(R.id.signal_strength);
 				holder.name = (TextView) convertView.findViewById(R.id.name);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
+			if (deviceList.get(position).getRssi() >= 50) {
+				holder.signatureStrenth
+						.setImageResource(R.drawable.ic_rssi_3_bars);
+			} else if (deviceList.get(position).getRssi() < 50
+					&& deviceList.get(position).getRssi() >= 30) {
+				holder.signatureStrenth
+						.setImageResource(R.drawable.ic_rssi_2_bars);
+			} else if (deviceList.get(position).getRssi() < 30
+					&& deviceList.get(position).getRssi() > 10) {
+				holder.signatureStrenth
+						.setImageResource(R.drawable.ic_rssi_1_bars);
+			} else {
+				holder.signatureStrenth
+						.setImageResource(R.drawable.ic_rssi0_bars);
+			}
 			// holder.signatureStrenth.setText(itemData.get("signatureStrenth"));
-			holder.name.setText(deviceList.get(position).getName());
+			holder.name.setText(deviceList.get(position).getDevice().getName());
 			return convertView;
 		}
 
 	}
 
 	class ViewHolder {
-		// private TextView signatureStrenth;
+		private ImageView signatureStrenth;
 		private TextView name;
 	}
 }

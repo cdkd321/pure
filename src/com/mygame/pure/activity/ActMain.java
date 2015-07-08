@@ -12,8 +12,9 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,8 +23,6 @@ import android.widget.Toast;
 
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
-import com.mygame.pure.adapter.HistoryAdapter;
-import com.mygame.pure.adapter.VerticalPagerAdapter;
 import com.mygame.pure.ble.BleService;
 import com.mygame.pure.fragment.EyesFragmentDown;
 import com.mygame.pure.fragment.EyesFragmentUp;
@@ -31,8 +30,10 @@ import com.mygame.pure.fragment.FaceFragmentDown;
 import com.mygame.pure.fragment.FaceFragmentUp;
 import com.mygame.pure.fragment.HandFragmentDown;
 import com.mygame.pure.fragment.HandFragmentUp;
+import com.mygame.pure.fragment.HomeRootFragment;
 import com.mygame.pure.fragment.NeckFragmentDown;
 import com.mygame.pure.fragment.NeckFragmentUp;
+import com.mygame.pure.utils.Constants;
 import com.mygame.pure.view.VerticalViewPager;
 
 /**
@@ -48,6 +49,9 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	int[] viewPageId = new int[] { R.id.check_one, R.id.check_two,
 			R.id.check_three, R.id.check_four };
 	private ImageView ivImg;
+	private FragmentManager fragmentManager;
+	private FragmentTransaction fragmentTrasaction;
+	HomeRootFragment fragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -142,65 +146,54 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		llTab2.setOnClickListener(this);
 		llTab3.setOnClickListener(this);
 		llTab4.setOnClickListener(this);
+		fragmentManager = getSupportFragmentManager();
+		fragmentTrasaction = fragmentManager.beginTransaction();
+		fragment = HomeRootFragment.newInstance(0);
+		fragmentTrasaction.replace(R.id.fragment_content, fragment);
+		fragmentTrasaction.commit();
 
-		viewPager = (ViewPager) findViewById(R.id.check_list);
-		baseList = getList();
-
-		HistoryAdapter adapter = new HistoryAdapter(baseList);
-
-		for (int i = 0; i < 4; i++) {
-			List<Fragment> fragments0 = getFragmentList(i);
-			VerticalPagerAdapter fragmentAdapter = new VerticalPagerAdapter(
-					getSupportFragmentManager(), fragments0);
-			VerticalViewPager page = (VerticalViewPager) baseList.get(i)
-					.findViewById(viewPageId[i]);
-			page.setOnPageChangeListener(new OnPageChangeListener() {
-
-				@Override
-				public void onPageSelected(int arg0) {
-					switch (arg0) {
-					case 0:
-						setTitle("检测中心");
-						break;
-					case 1:
-						setTitle("历时数据");
-						break;
-					}
-
-				}
-
-				@Override
-				public void onPageScrolled(int arg0, float arg1, int arg2) {
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void onPageScrollStateChanged(int arg0) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-			page.setAdapter(fragmentAdapter);
-		}
-		viewPager.setAdapter(adapter);
+		/*
+		 * viewPager = (ViewPager) findViewById(R.id.check_list); baseList =
+		 * getList();
+		 * 
+		 * HistoryAdapter adapter = new HistoryAdapter(baseList);
+		 * 
+		 * for (int i = 0; i < 4; i++) { List<Fragment> fragments0 =
+		 * getFragmentList(i); VerticalPagerAdapter fragmentAdapter = new
+		 * VerticalPagerAdapter( getSupportFragmentManager(), fragments0);
+		 * VerticalViewPager page = (VerticalViewPager) baseList.get(i)
+		 * .findViewById(viewPageId[i]); page.setOnPageChangeListener(new
+		 * OnPageChangeListener() {
+		 * 
+		 * @Override public void onPageSelected(int arg0) { switch (arg0) { case
+		 * 0: setTitle("检测中心"); break; case 1: setTitle("历史数据"); break; }
+		 * 
+		 * }
+		 * 
+		 * @Override public void onPageScrolled(int arg0, float arg1, int arg2)
+		 * { // TODO Auto-generated method stub
+		 * 
+		 * }
+		 * 
+		 * @Override public void onPageScrollStateChanged(int arg0) { // TODO
+		 * Auto-generated method stub
+		 * 
+		 * } }); page.setAdapter(fragmentAdapter); }
+		 * viewPager.setAdapter(adapter);
+		 */
 		llTab1.setSelected(true);
-		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int arg0) {
-				SelfDefineApplication.getInstance().selectPostion = arg0;
-				setTabSelected(arg0);
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-			}
-		});
+		/*
+		 * viewPager.setOnPageChangeListener(new OnPageChangeListener() {
+		 * 
+		 * @Override public void onPageSelected(int arg0) {
+		 * SelfDefineApplication.getInstance().selectPostion = arg0;
+		 * setTabSelected(arg0); }
+		 * 
+		 * @Override public void onPageScrolled(int arg0, float arg1, int arg2)
+		 * { }
+		 * 
+		 * @Override public void onPageScrollStateChanged(int arg0) { } });
+		 */
 		Intent i = new Intent(this, BleService.class);
 		bindService(i, mServiceConnection, BIND_AUTO_CREATE);
 		BluetoothAdapter.getDefaultAdapter().enable();
@@ -217,19 +210,24 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.llTab1:
-			viewPager.setCurrentItem(0);
+			// viewPager.setCurrentItem(0);
 			setTabSelected(0);
+			Intent intent = new Intent(Constants.SELECT_ONE);
+			sendBroadcast(intent);
 			break;
 		case R.id.llTab2:
-			viewPager.setCurrentItem(1);
+			Intent intent1 = new Intent(Constants.SELECT_TWO);
+			sendBroadcast(intent1);
 			setTabSelected(1);
 			break;
 		case R.id.llTab3:
-			viewPager.setCurrentItem(2);
+			Intent intent2 = new Intent(Constants.SELECT_THREE);
+			sendBroadcast(intent2);
 			setTabSelected(2);
 			break;
 		case R.id.llTab4:
-			viewPager.setCurrentItem(3);
+			Intent intent3 = new Intent(Constants.SELECT_FOUR);
+			sendBroadcast(intent3);
 			setTabSelected(3);
 			// startActivity(new Intent(v.getContext(), MoreAct.class));
 			break;

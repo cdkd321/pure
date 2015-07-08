@@ -8,8 +8,8 @@
     
     <include layout="@layout/include_navigation_bar"/>
  
-    <android.support.v4.view.ViewPager
-   	    android:id="@+id/check_list"
+    <FrameLayout
+   	    android:id="@+id/fragment_content"
    	    android:layout_below="@+id/actionBar"
    	    android:layout_width="match_parent"
    	    android:layout_height="match_parent"  />
@@ -24,6 +24,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/sixty_dp"/>
     
-    <include layout="@layout/tab_item_view" android:layout_below="@+id/check_list"/>
+    <include layout="@layout/tab_item_view" android:layout_below="@+id/fragment_content"/>
     
 </RelativeLayout>
