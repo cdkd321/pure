@@ -83,6 +83,7 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 				} else {
 					Intent i = new Intent(MoreAct.this,
 							PersonalCenterActivity.class);
+					i.putExtra("isgone", "0");
 					startActivity(i);
 				}
 			}

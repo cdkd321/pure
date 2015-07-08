@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.R.integer;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -97,7 +98,16 @@ public class PersonalCenterActivity extends FragmentActivity implements
 		context = this;
 		initView();
 		setUpView();
+		getIntentmethod();
 		doPostMessage();
+	}
+
+	public void getIntentmethod() {
+		if (getIntent().getStringExtra("isgone").equals("1")) {
+			tvExit.setVisibility(View.GONE);
+		} else {
+			tvExit.setVisibility(View.VISIBLE);
+		}
 	}
 
 	public void initView() {
@@ -320,7 +330,14 @@ public class PersonalCenterActivity extends FragmentActivity implements
 			mDateDisplay.setHint("年龄");
 		} else {
 			mDateDisplay.setTextColor(Color.BLACK);
-			mDateDisplay.setText(mYear + "-" + mMonth + "-" + mDay);
+			int m = 14;
+			if (mMonth <= 11) {
+				m = mMonth + 1;
+			} else {
+				m = 1;
+			}
+
+			mDateDisplay.setText(mYear + "-" + m + "-" + mDay);
 		}
 	}
 
@@ -466,7 +483,7 @@ public class PersonalCenterActivity extends FragmentActivity implements
 		params.put("sex", sex + "");
 		params.put("birthday", ar + "");
 		// ...
-		//params.put("fuzhi", skin.getText().toString());
+		params.put("fuzhi", skin.getText().toString());
 		params.put("fuzhi", fuzhi + "");
 		params.put("username", settings.USER_NAME.getValue().toString());
 		mAbSoapUtil.call(urlString, nameSpace, methodName, params,
@@ -480,6 +497,14 @@ public class PersonalCenterActivity extends FragmentActivity implements
 							if (b[0].equals("1")) {
 								Toast.makeText(getApplicationContext(), "成功", 1)
 										.show();
+								if (getIntent().getStringExtra("isgone")
+										.equals("1")) {
+									Intent intent = new Intent();
+									intent.setClass(
+											PersonalCenterActivity.this,
+											ActMain.class);
+									startActivity(intent);
+								}
 							} else if (b[0].equals("0")) {
 								Toast.makeText(getApplicationContext(), "失败", 1)
 										.show();
@@ -544,6 +569,21 @@ public class PersonalCenterActivity extends FragmentActivity implements
 
 							mDateDisplay.setText(AbDateUtil.getStringByFormat(
 									ms1, "yyyy-MM-dd"));
+						}
+						if (arg1.indexOf("Fuzhi=") != -1) {
+							String[] a3 = arg1.split("Fuzhi=");
+							String[] b3 = a3[1].split(";");
+							if (b3[0].equals("1")) {
+								skin.setText("中性皮肤");
+							} else if (b3[0].equals("2")) {
+								skin.setText("干性皮肤");
+							} else if (b3[0].equals("3")) {
+								skin.setText("油性皮肤");
+							} else if (b3[0].equals("4")) {
+								skin.setText("混合皮肤");
+							} else if (b3[0].equals("5")) {
+								skin.setText("敏感性皮肤");
+							}
 						}
 
 						// AbDialogUtil.showAlertDialog(MoreAct.this, "���ؽ��",

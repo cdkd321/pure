@@ -170,7 +170,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 		AbSoapParams params = new AbSoapParams();
 		params.put("user1", "APP");
 		params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
-		params.put("username", getIntent().getStringExtra("userName"));
+		params.put("username", et_email_2.getText().toString());
 
 		mAbSoapUtil.call(urlString, nameSpace, methodName, params,
 				new AbSoapListener() {

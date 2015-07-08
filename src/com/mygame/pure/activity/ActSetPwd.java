@@ -16,6 +16,7 @@ import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
 import com.mygame.pure.R;
+import com.mygame.pure.core.MicroRecruitSettings;
 import com.mygame.pure.view.PureActionBar;
 
 public class ActSetPwd extends BaseActivity implements OnClickListener {
@@ -24,6 +25,7 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 	private EditText et_pwdagin, et_pwd;
 	private AbSoapUtil mAbSoapUtil = null;
 	private ProgressDialog pd = null;
+	private MicroRecruitSettings settings;
 
 	@Override
 	public PureActionBar getTkActionBar() {
@@ -46,6 +48,7 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 		setTheme(R.style.AppBaseTheme);
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.act_setpassword);
+		settings = new MicroRecruitSettings(getApplicationContext());
 		initView();
 	}
 
@@ -130,6 +133,9 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 							if (b[0].equals("1")) {
 								pd.dismiss();
 								Intent intent = new Intent();
+								settings.USER_NAME.setValue(getIntent()
+										.getStringExtra("userName"));
+								intent.putExtra("isgone", "1");
 								intent.setClass(getApplicationContext(),
 										PersonalCenterActivity.class);
 								startActivity(intent);
