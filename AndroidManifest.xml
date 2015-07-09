@@ -141,6 +141,10 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.mygame.pure.activity.ActFAQ"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.mygame.pure.activity.ActSetPwd"
             android:screenOrientation="portrait" >
         </activity>

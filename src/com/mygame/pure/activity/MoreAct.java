@@ -49,7 +49,7 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		back_btn.setOnClickListener(this);
 		UIItem alert_settings = (UIItem) findViewById(R.id.alert_settings);
 		UIItem ui_hufu = (UIItem) findViewById(R.id.ui_hufu);
-		UIItem ui_pwd = (UIItem) findViewById(R.id.ui_pwd);
+		UIItem ui_FAQ = (UIItem) findViewById(R.id.FAQ);
 		UIItem ui_yijian = (UIItem) findViewById(R.id.ui_yijian);
 		UIItem connect_device = (UIItem) findViewById(R.id.connect_device);
 		connected_text = (TextView) findViewById(R.id.connected_text);
@@ -59,7 +59,7 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		registerBoradcastReceiver();
 		alert_settings.setOnClickListener(this);
 		ui_hufu.setOnClickListener(this);
-		ui_pwd.setOnClickListener(this);
+		ui_FAQ.setOnClickListener(this);
 		ui_yijian.setOnClickListener(this);
 		connect_device.setOnClickListener(new OnClickListener() {
 
@@ -157,7 +157,8 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		case R.id.ui_hufu:
 			startActivity(new Intent(v.getContext(), ActKnowSkin.class));
 			break;
-		case R.id.ui_pwd:
+		case R.id.FAQ:
+			startActivity(new Intent(v.getContext(), ActFAQ.class));
 			break;
 		case R.id.ui_yijian:
 			String toaddress;

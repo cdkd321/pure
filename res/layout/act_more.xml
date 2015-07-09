@@ -129,7 +129,7 @@
         app:leftText1="护肤知识" />
 
     <com.mygame.pure.view.UIItem
-        android:id="@+id/ui_pwd"
+        android:id="@+id/FAQ"
         style="@style/m_w"
         android:layout_below="@+id/ui_hufu"
         app:leftIcon="@drawable/password_pressed"
@@ -139,7 +139,7 @@
     <com.mygame.pure.view.UIItem
         android:id="@+id/ui_yijian"
         style="@style/m_w"
-        android:layout_below="@+id/ui_pwd"
+        android:layout_below="@+id/FAQ"
         app:leftIcon="@drawable/feedback_pressed"
         app:leftIcon_visible="0"
         app:leftText1="意见反馈" />
