@@ -26,7 +26,7 @@
             android:textSize="60dp"
             android:textColor="@color/white"
              />
-        <TextView
+        <com.mygame.pure.view.MyTextView
             android:id="@+id/tvBlueTouth"
             style="@style/styleNormalText"
             android:layout_alignParentBottom="true"
@@ -36,10 +36,11 @@
             android:text="蓝牙已连接" />
     </RelativeLayout>
 
-    <TextView
+    <com.mygame.pure.view.MyTextView
         android:id="@+id/toSeeMore"
         style="@style/styleNormalText"
         android:layout_marginTop="38dp"
+        android:visibility="invisible"
         android:gravity="center_vertical"
         android:layout_gravity="center_horizontal"
         android:text="查看详细结果" />

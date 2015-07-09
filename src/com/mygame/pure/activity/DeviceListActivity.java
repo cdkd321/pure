@@ -47,6 +47,7 @@ public class DeviceListActivity extends Activity {
 	private TextView connectedName;
 	private RelativeLayout connectedMacLayout;
 	private SharedPreferences share;
+	private ImageView signal_strength;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class DeviceListActivity extends Activity {
 		bund_text = (TextView) findViewById(R.id.bund_text);
 		state = (TextView) findViewById(R.id.state);
 		lv = (ListView) findViewById(R.id.available_device);
+		signal_strength=(ImageView) findViewById(R.id.signal_strength);
 		connectedMacLayout = (RelativeLayout) findViewById(R.id.connectedMacLayout);
 		connectedMacLayout.setOnClickListener(new OnClickListener() {
 
@@ -175,8 +177,14 @@ public class DeviceListActivity extends Activity {
 		if (!isHave) {
 			if (!share.getString("LAST_CONNECT_MAC", "").equals(
 					device.getDevice().getAddress())) {
-				deviceList.add(device);
-				adapter.notifyDataSetChanged();
+				if (device.getDevice().getName() != null) {
+					if (device.getDevice().equals("MILI")) {
+						deviceList.add(device);
+						adapter.notifyDataSetChanged();
+
+					}
+				}
+				
 			}
 
 		}
@@ -220,10 +228,13 @@ public class DeviceListActivity extends Activity {
 				});
 			} else if (BleService.ACTION_GATT_CONNECTED.endsWith(action)) {
 				state.setText("connected");
+				signal_strength.setImageResource(R.drawable.ic_rssi_3_bars);
 			} else if (BleService.ACTION_GATT_DISCONNECTED.endsWith(action)) {
 				state.setText("disconnected");
+				signal_strength.setImageResource(R.drawable.ic_rssi0_bars);
 			} else if (BleService.ACTION_STATUS_WRONG.endsWith(action)) {
 				state.setText("disconnected");
+				signal_strength.setImageResource(R.drawable.ic_rssi0_bars);
 			}
 		}
 
@@ -261,18 +272,20 @@ public class DeviceListActivity extends Activity {
 			}
 			if (deviceList.get(position).getRssi() >= 50) {
 				holder.signatureStrenth
-						.setImageResource(R.drawable.ic_rssi_3_bars);
+						.setImageResource(R.drawable.ic_rssi0_bars);
 			} else if (deviceList.get(position).getRssi() < 50
 					&& deviceList.get(position).getRssi() >= 30) {
 				holder.signatureStrenth
-						.setImageResource(R.drawable.ic_rssi_2_bars);
+						.setImageResource(R.drawable.ic_rssi_1_bars);
 			} else if (deviceList.get(position).getRssi() < 30
 					&& deviceList.get(position).getRssi() > 10) {
 				holder.signatureStrenth
-						.setImageResource(R.drawable.ic_rssi_1_bars);
+						.setImageResource(R.drawable.ic_rssi_2_bars);
+
 			} else {
 				holder.signatureStrenth
-						.setImageResource(R.drawable.ic_rssi0_bars);
+						.setImageResource(R.drawable.ic_rssi_3_bars);
+
 			}
 			// holder.signatureStrenth.setText(itemData.get("signatureStrenth"));
 			holder.name.setText(deviceList.get(position).getDevice().getName());

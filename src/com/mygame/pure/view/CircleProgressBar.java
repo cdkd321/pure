@@ -82,13 +82,15 @@ public class CircleProgressBar extends View {
 	 */
 	
 	public void setProgressing(float progress,TextView progressText){
+		i=i+0.002f;
 		if(progress==0){
 			i=0;
 		}
+		//postInvalidate();
 		this.allPoint = progress;
 		this.progressText=progressText;
 		//invalidate();
-		
+		handler.removeCallbacks(runnable);
 		handler.postDelayed(runnable, TIME); 
 	}
 

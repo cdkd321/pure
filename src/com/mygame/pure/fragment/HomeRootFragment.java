@@ -50,6 +50,7 @@ import com.mygame.pure.utils.DbUtils;
 import com.mygame.pure.utils.ToastHelper;
 import com.mygame.pure.view.CircleProgressBar;
 import com.mygame.pure.view.CircleProgressBarBlue;
+import com.mygame.pure.view.MyTextView;
 import com.mygame.pure.view.MyrogressBar;
 import com.mygame.pure.view.SplineChart03View;
 import com.mygame.pure.view.VerticalViewPager;
@@ -64,10 +65,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 	private ArrayList<View> viewPageList;
 	private CircleProgressBar pb;
 	private TextView tvBlueProgress;
-	private TextView tvBlueTouth;
+	private MyTextView tvBlueTouth;
 	private TextView tvAverage;
 	private TextView tvYestodayLabel;
-	private TextView toSeeMore;
+	private MyTextView toSeeMore;
 	private View cell_bottom;
 	private View  cell_top;
 	private ActMain actActivity;
@@ -212,10 +213,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 	public void initUPView(View view) {
 		pb = (CircleProgressBar) view.findViewById(R.id.cpbUp);
 		tvBlueProgress = (TextView) view.findViewById(R.id.tvBlueProgress);
-		tvBlueTouth = (TextView) view.findViewById(R.id.tvBlueTouth);
+		tvBlueTouth = (MyTextView) view.findViewById(R.id.tvBlueTouth);
 		tvAverage = (TextView) view.findViewById(R.id.tvAverage);
 		tvYestodayLabel = (TextView) view.findViewById(R.id.tvYestoday);
-		toSeeMore = (TextView) view.findViewById(R.id.toSeeMore);
+		toSeeMore = (MyTextView) view.findViewById(R.id.toSeeMore);
 		 
 		toSeeMore.setOnClickListener(new OnClickListener() {
 
@@ -255,7 +256,6 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 			blts = db.findAll(Selector.from(BltModel.class).where(builder));
 			if (blts != null) {
 				int totalWater = 0;
-
 				for (int i = 0; i < blts.size(); i++) {
 					totalWater = totalWater
 							+ Integer.parseInt(blts.get(i).getWater());
@@ -266,6 +266,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 					// averageWater=Float.parseFloat(df.format(averageWater/45.0f+20.0))/100f;
 					tvAverage.setText(Float.parseFloat(df
 							.format(averageWater / 45.0f + 20.0)) + "%");
+				}else{
+					tvAverage.setText("0.0" + "%");
 				}
 
 			}
@@ -303,13 +305,16 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (averageWater - averageYesTodayWater >= 0) {
+		if (averageWater - averageYesTodayWater >0) {
 			tvYestodayLabel
 					.setText("+"
 							+ Float.parseFloat(df
 									.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
 							+ "%");
-		} else {
+		} else if(averageWater - averageYesTodayWater == 0){
+			tvYestodayLabel
+			.setText("0.0%");
+		}else {
 			tvYestodayLabel
 					.setText("-"
 							+ Float.parseFloat(df
@@ -338,6 +343,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 			String action = intent.getAction();
 			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
 			if (Constants.UPDATE_OK.equals(action)) {
+				
 				int waters = intent.getIntExtra("waters", 0);
 				int selectPostion = intent.getIntExtra("selectPostion", 0);
 				if (checkType == selectPostion) {
@@ -346,6 +352,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 							Float.parseFloat(df.format(waters / 45.0f + 20.0)) / 100f,
 							tvBlueProgress);
 					getData(df);
+					toSeeMore.setText("查看详细结果");
+					toSeeMore.setVisibility(View.VISIBLE);
 				}
 
 				int waters1 = intent.getIntExtra("waters", 0);
@@ -438,8 +446,9 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 			
 
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
-				tvBlueTouth.setText("已连接");
+				tvBlueTouth.setMyText("已连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
+				
 				/*
 				 * try { Thread.sleep(1000);
 				 * tvBlueTouth.setVisibility(View.GONE); } catch
@@ -448,9 +457,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 				 */
 
 			} else if (BleService.ACTION_GATT_DISCONNECTED.equals(action)) {
-				tvBlueTouth.setText("断开连接");
+				tvBlueTouth.setMyText("断开连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress);
+				toSeeMore.setVisibility(View.INVISIBLE);
 				/*
 				 * try { Thread.sleep(1000);
 				 * tvBlueTouth.setVisibility(View.GONE); } catch
@@ -458,9 +468,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 				 * e.printStackTrace(); }
 				 */
 			} else if (BleService.ACTION_STATUS_WRONG.equals(action)) {
-				tvBlueTouth.setText("断开连接");
+				tvBlueTouth.setMyText("断开连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress);
+				toSeeMore.setVisibility(View.INVISIBLE);
 				/*
 				 * try { Thread.sleep(1000);
 				 * tvBlueTouth.setVisibility(View.GONE); } catch

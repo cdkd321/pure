@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
@@ -39,21 +41,19 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		// 等级图形高
 		int height = 200;
 		// 各等级段的颜色
-		int[] color = new int[] { Color.rgb(71, 190, 222),
-				Color.rgb(153, 234, 71), Color.rgb(153, 234, 71),
-				Color.rgb(249, 135, 65), Color.rgb(249, 135, 65),
-				Color.rgb(249, 135, 65) };
+		int[] color = new int[] { Color.rgb(223, 117, 8),
+				Color.rgb(35, 196, 125), Color.rgb(55, 162, 236)
+				 };
 		// 假如 每段的百分比 2 3 2 1 1 1
-		float[] part = new float[] { 2, 3, 2, 1, 1, 1 };
+		float[] part = new float[] { 3.75f, 2.5f, 3.75f };
 		// 各等级段的值
-		float[] partValue = new float[] { 12.1f, 15.0f, 20.0f, 30.0f, 50.0f,
-				60.0f };
+		float[] partValue = new float[] { 20.0f, 35.0f, 45.0f};
 		// 当前值
-		String textValue = "126/76";
+		String textValue = "28.9%";
 		// 当前值描述
 		String textDesc = "正常";
 		// 当前值的等级
-		int textlevelIndex = 2;
+		int textlevelIndex = 1;
 		// 当前值文字大小
 		int textLevelSize = 30;
 		// 当前值文字与顶部的距离
@@ -72,8 +72,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		int textDescSize = 22;
 
 		// 要显示图形的View
-		// LinearLayout chartLayout = (LinearLayout)
-		// findViewById(R.id.chartLayout);
+		LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
 
 		AbLevelSeriesRenderer renderer = new AbLevelSeriesRenderer();
 
@@ -100,6 +99,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		AbLevelView mAbLevelView = AbLevelChartFactory.getLevelChartView(this,
 				mDataset, renderer);
 		setTitle("详情");
+		chartLayout.addView(mAbLevelView, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 	}
 
 	private void showShare() {

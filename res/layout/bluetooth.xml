@@ -77,7 +77,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-			android:src="@drawable/ic_rssi_3_bars"/>
+			android:src="@drawable/ic_rssi0_bars"/>
 
         <TextView
             android:id="@+id/name"
