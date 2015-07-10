@@ -2,86 +2,89 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-     android:background="@color/white"
+    android:background="@color/white"
     android:orientation="vertical" >
-    <include layout="@layout/include_navigation_bar"/>
+
+    <include layout="@layout/include_navigation_bar" />
+
     <ScrollView
         android:id="@+id/onlysv"
         style="@style/m_w" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/twenty_dp"
-            android:paddingRight="@dimen/twenty_dp"
-            android:orientation="vertical" >
+       
 
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key1" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/twenty_dp"
+                android:paddingRight="@dimen/twenty_dp" >
 
-            <TextView
-                style="@style/normalText" 
-                android:text="@string/value1" />
-            
-            
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key2" />
+                <TextView
+                    style="@style/titleText"
+                    android:text="@string/faq_key1"
+                    android:textColor="@color/theme_blue" />
 
-            <TextView
-                style="@style/normalText" 
-                android:text="@string/value2" />
-            
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key3" />
+                <TextView
+                    style="@style/normalText"
+                    android:text="@string/faq_value1" />
 
-            <TextView
-                style="@style/normalText" 
-                android:text="@string/value3" />
-            
-            
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key4" />
+                <TextView
+                    style="@style/titleText"
+                    android:text="@string/faq_key2"
+                    android:textColor="@color/theme_blue" />
 
-            <TextView
-                style="@style/normalText" 
-                android:text="@string/value4" />
-            
-            
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key5" />
+                <TextView
+                    style="@style/normalText"
+                    android:text="@string/faq_value2" />
 
-            <TextView
-                style="@style/normalText" 
-                android:text="@string/value5" />
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key5" />
+                <TextView
+                    style="@style/titleText"
+                    android:text="@string/faq_key3"
+                    android:textColor="@color/theme_blue" />
 
-            <TextView
-                style="@style/normalText" 
-                android:text="@string/value5" />
-            
-            
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key7" />
+                <TextView
+                    style="@style/normalText"
+                    android:text="@string/faq_value3" />
 
-            <TextView
-                style="@style/normalText" 
-                android:text="@string/value7" />
-            
+                <TextView
+                    style="@style/titleText"
+                    android:text="@string/faq_key4"
+                    android:textColor="@color/theme_blue" />
+
+                <TextView
+                    style="@style/normalText"
+                    android:text="@string/faq_value4" />
+
+                <TextView
+                    style="@style/titleText"
+                    android:text="@string/faq_key5"
+                    android:textColor="@color/theme_blue" />
+
+                <TextView
+                    style="@style/normalText"
+                    android:text="手部：30%～38%	\n脸部：32%～42%	\n眼部：35%～45%	\n颈部：35%～45%" />
+
+                <TextView
+                    style="@style/titleText"
+                    android:text="@string/faq_key6"
+                    android:textColor="@color/theme_blue" />
+
+                <TextView
+                    style="@style/normalText"
+                    android:text="@string/faq_value6" />
+
+                <TextView
+                    style="@style/titleText"
+                    android:text="@string/faq_key7"
+                    android:textColor="@color/theme_blue" />
+
+                <TextView
+                    style="@style/normalText"
+                    android:text="@string/faq_value7" />
+           
+
+           
         </LinearLayout>
     </ScrollView>
 

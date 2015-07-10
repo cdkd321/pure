@@ -48,7 +48,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	public static View llTab1, llTab2, llTab3, llTab4;
 	int[] viewPageId = new int[] { R.id.check_one, R.id.check_two,
 			R.id.check_three, R.id.check_four };
-	private ImageView ivImg;
+	public static ImageView ivImg;
 	private FragmentManager fragmentManager;
 	private FragmentTransaction fragmentTrasaction;
 	HomeRootFragment fragment;
@@ -140,12 +140,10 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		});
 		ivImg = (ImageView) findViewById(R.id.ivImg);
 
-		ivImg.setOnClickListener(this);
-
-		/*llTab1.setOnClickListener(this);
-		llTab2.setOnClickListener(this);
-		llTab3.setOnClickListener(this);
-		llTab4.setOnClickListener(this);*/
+		/*
+		 * llTab1.setOnClickListener(this); llTab2.setOnClickListener(this);
+		 * llTab3.setOnClickListener(this); llTab4.setOnClickListener(this);
+		 */
 		fragmentManager = getSupportFragmentManager();
 		fragmentTrasaction = fragmentManager.beginTransaction();
 		fragment = HomeRootFragment.newInstance(0);
@@ -246,6 +244,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 				vPager.setCurrentItem(0);
 			}
 			break;
+
 		default:
 			break;
 		}

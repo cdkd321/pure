@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="key1">1）MiLi Pure对手机系统及蓝牙有什么要求？</string>
-    <string name="value1">答：\n 1. IOS系统：IOS7以上，蓝牙4.0以上；\n 2. Android系统：Android 4.3以上，蓝牙4.0以上。 </string>
-    <string name="key2">2）MiLi Pure如何与手机连接？	</string>
-    <string name="value2">答：\n 1.轻触MiLi Pure底部开关，此时设备LED灯闪亮；\n 2.打开手机 MiLi Pure APP（确认手机系统蓝牙已打开，请勿在此连接设备，蓝牙4.0无需配对连接，直接打开APP连接设备即可）；\n 3.第一次进去会有蓝牙选择页面，点击MILI信号绑定（APP显示蓝牙已连接，设备LED灯常亮）.后续此设备自动绑定手机APP，若更换设备重新选择绑定即可。	</string>
-    <string name="key3">3）MiLi Pure如何使用？</string>
-    <string name="value3">答：\n1.将盖帽按图示方向旋转，拧开盖帽； \n	 2.轻触设备底部开关，打开手机APP连接；\n  3.当提示蓝牙连接成功后，将金属探头垂直贴在待检测部位大约5S；\n4.请保证金属探头有效接触皮肤，测试完成后，数据分析结果将显示在手机上。</string>
-    <string name="key4">4）为什么产品指示灯一直闪烁？</string>
-    <string name="value4"> 若设备开启后，产品指示灯一直闪烁，表示蓝牙未连接成功，请尝试重启MiLi Pure，同时确认手机蓝牙已开启。</string>
-    <string name="key5">5）肌肤水份参考值是多少？	</string>
-    <string name="value5"> 手部：30%%rr.～38%%rr.	\n脸部：32%%rr.～42%%rr.	\n 眼部：35%%rr.～45%%rr.	\n 颈部：35%%rr.～45%%rr.	</string>
-    <string name="key6">6）MiLi Pure如何激活及保修？	</string>
-    <string name="value6">MILI系列产品具有自购买之日起一年内的保修，深圳市哈里通实业有限公司承担一切由产品材料及做工方面引发的问题，\n	购买者需在产品购买之日起7天内前往公司官方网站，在线激活保修。</string>
-    <string name="key7">7）如何联系我们？</string>
-    <string name="value7">如您在使用产品过程中有任何问题，请马上联系我们，谢谢\n 国内电邮：customerservice@hali-power.com 国内网址：www.mymili.cn\n 国外电邮:cs@hali-power.com\n 国外网址：www.mymili.com\n				
+    <string name="faq_key1">1）MiLi Pure对手机系统及蓝牙有什么要求？</string>
+    <string name="faq_value1">答：\n1. IOS系统：IOS7以上，蓝牙4.0以上；\n2. Android系统：Android 4.3以上，蓝牙4.0以上。 </string>
+    <string name="faq_key2">2）MiLi Pure如何与手机连接？	</string>
+    <string name="faq_value2">答：\n1.轻触MiLi Pure底部开关，此时设备LED灯闪亮；\n2.打开手机 MiLi Pure APP（确认手机系统蓝牙已打开，请勿在此连接设备，蓝牙4.0无需配对连接，直接打开APP连接设备即可）；\n3.第一次进去会有蓝牙选择页面，点击MILI信号绑定（APP显示蓝牙已连接，设备LED灯常亮）.后续此设备自动绑定手机APP，若更换设备重新选择绑定即可。	</string>
+    <string name="faq_key3">3）MiLi Pure如何使用？</string>
+    <string name="faq_value3">答：\n1.将盖帽按图示方向旋转，拧开盖帽； \n	2.轻触设备底部开关，打开手机APP连接；\n3.当提示蓝牙连接成功后，将金属探头垂直贴在待检测部位大约5S；\n4.请保证金属探头有效接触皮肤，测试完成后，数据分析结果将显示在手机上。</string>
+    <string name="faq_key4">4）为什么产品指示灯一直闪烁？</string>
+    <string name="faq_value4"> 若设备开启后，产品指示灯一直闪烁，表示蓝牙未连接成功，请尝试重启MiLi Pure，同时确认手机蓝牙已开启。</string>
+    <string name="faq_key5">5）肌肤水份参考值是多少？	</string>
+    <string name="faq_value5" formatted="false">占比%2s  %%</string>
+  <!--   <string name="faq_value5"> 手部：%30.～38%%	\n脸部：32%%rr.～42%%rr.	\n 眼部：35%%rr.～45%%rr.	\n 颈部：35%%rr.～45%%rr.	</string> -->
+    <string name="faq_key6">6）MiLi Pure如何激活及保修？	</string>
+    <string name="faq_value6">MILI系列产品具有自购买之日起一年内的保修，深圳市哈里通实业有限公司承担一切由产品材料及做工方面引发的问题，\n购买者需在产品购买之日起7天内前往公司官方网站，在线激活保修。</string>
+    <string name="faq_key7">7）如何联系我们？</string>
+    <string name="faq_value7">如您在使用产品过程中有任何问题，请马上联系我们，谢谢\n国内电邮：customerservice@hali-power.com 国内网址：www.mymili.cn\n国外电邮:cs@hali-power.com\n国外网址：www.mymili.com\n				
 	</string>
 
 </resources>

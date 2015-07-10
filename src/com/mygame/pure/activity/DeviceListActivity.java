@@ -73,7 +73,7 @@ public class DeviceListActivity extends Activity {
 		bund_text = (TextView) findViewById(R.id.bund_text);
 		state = (TextView) findViewById(R.id.state);
 		lv = (ListView) findViewById(R.id.available_device);
-		signal_strength=(ImageView) findViewById(R.id.signal_strength);
+		signal_strength = (ImageView) findViewById(R.id.signal_strength);
 		connectedMacLayout = (RelativeLayout) findViewById(R.id.connectedMacLayout);
 		connectedMacLayout.setOnClickListener(new OnClickListener() {
 
@@ -178,13 +178,13 @@ public class DeviceListActivity extends Activity {
 			if (!share.getString("LAST_CONNECT_MAC", "").equals(
 					device.getDevice().getAddress())) {
 				if (device.getDevice().getName() != null) {
-					if (device.getDevice().equals("MILI")) {
+					if (device.getDevice().getName().equals("MILI")) {
 						deviceList.add(device);
 						adapter.notifyDataSetChanged();
 
 					}
 				}
-				
+
 			}
 
 		}

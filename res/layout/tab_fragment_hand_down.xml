@@ -108,6 +108,7 @@
                 android:paddingRight="@dimen/margin_of_cell" >
 
                 <TextView
+                    android:id="@+id/shunengdu_title"
                     style="@style/styleCenterText"
                     android:layout_centerVertical="true"
                     android:text="脸部的肌肤水嫩度" />

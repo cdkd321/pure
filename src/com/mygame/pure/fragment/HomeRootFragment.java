@@ -23,15 +23,18 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
@@ -48,6 +51,7 @@ import com.mygame.pure.utils.Constants;
 import com.mygame.pure.utils.DateUtil;
 import com.mygame.pure.utils.DbUtils;
 import com.mygame.pure.utils.ToastHelper;
+import com.mygame.pure.view.AbOuterScrollView;
 import com.mygame.pure.view.CircleProgressBar;
 import com.mygame.pure.view.CircleProgressBarBlue;
 import com.mygame.pure.view.MyTextView;
@@ -55,7 +59,7 @@ import com.mygame.pure.view.MyrogressBar;
 import com.mygame.pure.view.SplineChart03View;
 import com.mygame.pure.view.VerticalViewPager;
 
-public class HomeRootFragment extends Fragment implements OnClickListener{
+public class HomeRootFragment extends Fragment implements OnClickListener {
 
 	private Bundle savedInstanceState;
 	private FragmentManager fragmentManager;
@@ -70,7 +74,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 	private TextView tvYestodayLabel;
 	private MyTextView toSeeMore;
 	private View cell_bottom;
-	private View  cell_top;
+	private View cell_top;
 	private ActMain actActivity;
 
 	public static HomeRootFragment newInstance(int checkType) {
@@ -80,19 +84,21 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		f.setArguments(args);
 		return f;
 	}
+
 	@Override
 	public void onAttach(Activity activity) {
 		// TODO Auto-generated method stub
 		super.onAttach(activity);
-		this.actActivity=(ActMain) activity;
+		this.actActivity = (ActMain) activity;
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
-		
+
 	}
+
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
@@ -110,49 +116,49 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		viewPager = (VerticalViewPager) view.findViewById(R.id.vertical_page);
 		registerBoradcastReceiver();
 		actActivity.llTab1.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				setTabSelected(0);
-				SelfDefineApplication.getInstance().selectPostion=0;
-				checkType=0;
+				SelfDefineApplication.getInstance().selectPostion = 0;
+				checkType = 0;
 				initDownView(cell_bottom);
 				initUPView(cell_top);
 			}
 		});
 		actActivity.llTab2.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				setTabSelected(1);
-				SelfDefineApplication.getInstance().selectPostion=1;
-				checkType=1;
+				SelfDefineApplication.getInstance().selectPostion = 1;
+				checkType = 1;
 				initDownView(cell_bottom);
 				initUPView(cell_top);
 			}
 		});
 		actActivity.llTab3.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				setTabSelected(2);
-				SelfDefineApplication.getInstance().selectPostion=2;
-				checkType=2;
+				SelfDefineApplication.getInstance().selectPostion = 2;
+				checkType = 2;
 				initDownView(cell_bottom);
 				initUPView(cell_top);
 			}
 		});
 		actActivity.llTab4.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
 				setTabSelected(3);
-				SelfDefineApplication.getInstance().selectPostion=3;
-				checkType=3;
+				SelfDefineApplication.getInstance().selectPostion = 3;
+				checkType = 3;
 				initDownView(cell_bottom);
 				initUPView(cell_top);
 			}
@@ -167,9 +173,9 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 				R.layout.tab_fragment_hand_down, null);
 		initDownView(cell_bottom);
 		viewPageList.add(cell_bottom);
-		
+		actActivity.ivImg.setOnClickListener(this);
 		viewPager.setAdapter(new PagerAdapter() {
-			
+
 			@Override
 			public void destroyItem(ViewGroup container, int position,
 					Object object) {
@@ -178,14 +184,14 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 				container.removeView(viewPageList.get(position
 						% viewPageList.size()));
 			}
+
 			@Override
 			public int getCount() {
 				return viewPageList.size();
 			}
 
 			@Override
-			public Object instantiateItem(ViewGroup container,
-					int position) {
+			public Object instantiateItem(ViewGroup container, int position) {
 
 				container.addView(viewPageList.get(position
 						% viewPageList.size()));
@@ -197,19 +203,50 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 				return view == object;
 			}
 		});
+		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int arg0) {
+				if (arg0 == 0) {
+					actActivity.ivImg.setBackgroundResource(R.drawable.back);
+					actActivity.setTitle("检测中心");
+					actActivity.ivImg.setVisibility(View.VISIBLE);
+				} else {
+					actActivity.ivImg
+							.setBackgroundResource(R.drawable.arrow_up);
+					actActivity.setTitle("历史记录");
+					actActivity.ivImg.setVisibility(View.VISIBLE);
+				}
+
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+
+			}
+		});
 
 		return view;
 	}
+
 	private void setTabSelected(int i) {
 		actActivity.llTab1.setSelected(i == 0);
 		actActivity.llTab2.setSelected(i == 1);
 		actActivity.llTab3.setSelected(i == 2);
 		actActivity.llTab4.setSelected(i == 3);
 	}
-    /**
-     * 初始化上面Page
-     * @param view
-     */
+
+	/**
+	 * 鍒濆鍖栦笂闈age
+	 * 
+	 * @param view
+	 */
 	public void initUPView(View view) {
 		pb = (CircleProgressBar) view.findViewById(R.id.cpbUp);
 		tvBlueProgress = (TextView) view.findViewById(R.id.tvBlueProgress);
@@ -217,15 +254,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		tvAverage = (TextView) view.findViewById(R.id.tvAverage);
 		tvYestodayLabel = (TextView) view.findViewById(R.id.tvYestoday);
 		toSeeMore = (MyTextView) view.findViewById(R.id.toSeeMore);
-		 
-		toSeeMore.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View arg0) {
-				startActivity(new Intent(getActivity(), ActSpecify.class));
-
-			}
-		});
 		pb.setProgressing(0.0f, tvBlueProgress);
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
 		getData(df);
@@ -242,10 +271,12 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 	public void onDestroyView() {
 		super.onDestroyView();
 	}
-   /**
-    * 获取上面page的数据
-    * @param df
-    */
+
+	/**
+	 * 鑾峰彇涓婇潰page鐨勬暟鎹�
+	 * 
+	 * @param df
+	 */
 	private void getData(java.text.DecimalFormat df) {
 		DbUtils db = DbUtils.create(getActivity());
 		List<BltModel> blts;
@@ -266,7 +297,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 					// averageWater=Float.parseFloat(df.format(averageWater/45.0f+20.0))/100f;
 					tvAverage.setText(Float.parseFloat(df
 							.format(averageWater / 45.0f + 20.0)) + "%");
-				}else{
+				} else {
 					tvAverage.setText("0.0" + "%");
 				}
 
@@ -278,7 +309,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 
 		List<BltModel> yesTodayBlts;
 		float averageYesTodayWater = 0;
-		// 昨天的数据
+		// 鏄ㄥぉ鐨勬暟鎹�
 		WhereBuilder builder1 = WhereBuilder.b("date", "==",
 				DateUtil.dateAddDay(new Date(), -1)).and("modelstate", "==",
 				checkType);
@@ -305,16 +336,15 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (averageWater - averageYesTodayWater >0) {
+		if (averageWater - averageYesTodayWater > 0) {
 			tvYestodayLabel
 					.setText("+"
 							+ Float.parseFloat(df
 									.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
 							+ "%");
-		} else if(averageWater - averageYesTodayWater == 0){
-			tvYestodayLabel
-			.setText("0.0%");
-		}else {
+		} else if (averageWater - averageYesTodayWater == 0) {
+			tvYestodayLabel.setText("0.0%");
+		} else {
 			tvYestodayLabel
 					.setText("-"
 							+ Float.parseFloat(df
@@ -322,6 +352,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 							+ "%");
 		}
 	}
+
 	private void registerBoradcastReceiver() {
 		IntentFilter myIntentFilter = new IntentFilter();
 		myIntentFilter.addAction(Constants.UPDATE_OK);
@@ -333,7 +364,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		myIntentFilter.addAction(BleService.ACTION_START);
 		myIntentFilter.addAction(Constants.SYNCHRONOUS_FAILURE);
 		myIntentFilter.addAction(Constants.CLEAR_AlL);
-		// 注册广播
+		// 娉ㄥ唽骞挎挱
 		getActivity().registerReceiver(mReceiver, myIntentFilter);
 	}
 
@@ -341,18 +372,45 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
+			final java.text.DecimalFormat df = new java.text.DecimalFormat(
+					"#0.0");
 			if (Constants.UPDATE_OK.equals(action)) {
-				
-				int waters = intent.getIntExtra("waters", 0);
+
+				final int waters = intent.getIntExtra("waters", 0);
 				int selectPostion = intent.getIntExtra("selectPostion", 0);
 				if (checkType == selectPostion) {
-					
+
 					pb.setProgressing(
 							Float.parseFloat(df.format(waters / 45.0f + 20.0)) / 100f,
 							tvBlueProgress);
 					getData(df);
-					toSeeMore.setText("查看详细结果");
+					if (checkType == 0) {
+						if (Float.parseFloat(df.format(waters / 45.0f + 20.0)) < 30) {
+							tvBlueTouth.setMyText("干燥");
+							tvBlueTouth.setVisibility(View.VISIBLE);
+						} else if (Float.parseFloat(df
+								.format(waters / 45.0f + 20.0)) > 38) {
+							tvBlueTouth.setMyText("湿润");
+							tvBlueTouth.setVisibility(View.VISIBLE);
+						} else {
+							tvBlueTouth.setMyText("正常");
+							tvBlueTouth.setVisibility(View.VISIBLE);
+						}
+					}
+					toSeeMore.setText("查看检测结果");
+					toSeeMore.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View arg0) {
+							Intent intent = new Intent(getActivity(),
+									ActSpecify.class);
+							intent.putExtra("progress", Float.parseFloat(df
+									.format(waters / 45.0f + 20.0)));
+							intent.putExtra("checkType", checkType);
+							startActivity(intent);
+
+						}
+					});
 					toSeeMore.setVisibility(View.VISIBLE);
 				}
 
@@ -393,7 +451,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 
 				List<BltModel> yesTodayBlts;
 				float averageYesTodayWater = 0;
-				// 昨天的数据
+				// 鏄ㄥぉ鐨勬暟鎹�
 				WhereBuilder builder1 = WhereBuilder.b("date", "==",
 						DateUtil.dateAddDay(new Date(), -1)).and("modelstate",
 						"==", checkType);
@@ -443,12 +501,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 						.toString().replace("%", "")) / 60f;
 				progressBar.setProgress(Float.parseFloat(dfc.format(d)));
 
-			
-
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
 				tvBlueTouth.setMyText("已连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
-				
+
 				/*
 				 * try { Thread.sleep(1000);
 				 * tvBlueTouth.setVisibility(View.GONE); } catch
@@ -488,6 +544,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		}
 
 	};
+
 	private void reFreshDegreeView() {
 		CircleProgressBarBlue pb = (CircleProgressBarBlue) cell_bottom
 				.findViewById(R.id.cpb);
@@ -497,6 +554,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 				.replace("%", "")) / 100f);
 		tvDegreeText.setText(tvAverageLevelData.getText().toString());
 	}
+
 	private ImageView clickPageLeft;
 	private ImageView clickPageRight;
 	private RadioGroup rGroup;
@@ -509,14 +567,18 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 	private TextView tvThanLastDayData;
 	private MyrogressBar progressBar;
 	private int selectFlag;
+	private TextView shunengdu_title;
+
 	private void initDownView(final View view) {
 		ViewPager vpager = (ViewPager) view.findViewById(R.id.vPager);
+		AbOuterScrollView scroll = (AbOuterScrollView) view
+				.findViewById(R.id.onlysv);
 		clickPageLeft = (ImageView) view.findViewById(R.id.clickPageLeft);
 		clickPageRight = (ImageView) view.findViewById(R.id.clickPageRight);
 		rGroup = (RadioGroup) view.findViewById(R.id.rGroup);
 		detectionTimes = (TextView) view.findViewById(R.id.detection_times);
-		chartView = (SplineChart03View) view
-				.findViewById(R.id.spline_chart);
+		shunengdu_title = (TextView) view.findViewById(R.id.shunengdu_title);
+		chartView = (SplineChart03View) view.findViewById(R.id.spline_chart);
 
 		clickPageLeft.setOnClickListener(this);
 		clickPageRight.setOnClickListener(this);
@@ -536,8 +598,36 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.00");
 		Float d = Float.parseFloat(tvAverageLevelData.getText().toString()
 				.replace("%", "")) / 60f;
+		if (checkType == 0) {
+			shunengdu_title.setText("手部的肌肤水嫩度");
+		} else if (checkType == 1) {
+			shunengdu_title.setText("脸部的肌肤水嫩度");
+		} else if (checkType == 2) {
+			shunengdu_title.setText("眼部的肌肤水嫩度");
+		} else {
+			shunengdu_title.setText("颈部的肌肤水嫩度");
+		}
 		progressBar.setProgress(Float.parseFloat(df.format(d)));
 		refreshChartView(tvDate.getText().toString());
+		scroll.setOnTouchListener(new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				int eventAction = event.getAction();
+				switch (eventAction) {
+				case MotionEvent.ACTION_UP:
+					actActivity.ivImg.setVisibility(View.VISIBLE);
+					break;
+				case MotionEvent.ACTION_DOWN:
+					actActivity.ivImg.setVisibility(View.GONE);
+					break;
+				default:
+					break;
+				}
+				return false;
+			}
+		});
 		/*
 		 * DbUtils db = DbUtils.create(getActivity()); List<BltModel> blts;
 		 * float averageWater = 0; java.text.DecimalFormat df = new
@@ -557,8 +647,6 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 
 		viewList.add(date_record);
 		rGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			
 
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -611,16 +699,17 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		HistoryAdapter adapter = new HistoryAdapter(viewList);
 		reFreshDegreeView(view);
 		vpager.setAdapter(adapter);
-		//registerBoradcastReceiver();
+		// registerBoradcastReceiver();
 	}
+
 	@Override
 	public void onClick(View v) {
 		java.text.DecimalFormat dfDec = new java.text.DecimalFormat("#0.00");
 		switch (v.getId()) {
-		case R.id.abarLeft: // 左边更多按钮
+		case R.id.abarLeft: // 宸﹁竟鏇村鎸夐挳
 			ToastHelper.ToastSht("you click left", getActivity());
 			break;
-		case R.id.abarRight: // 右边检测按钮
+		case R.id.abarRight: // 鍙宠竟妫�祴鎸夐挳
 			ToastHelper.ToastSht("you click right", getActivity());
 			break;
 		case R.id.clickPageLeft:
@@ -720,27 +809,38 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 					.replace("%", "")) / 60f;
 			progressBar.setProgress(Float.parseFloat(dfDec.format(dr)));
 			break;
+		case R.id.ivImg:
+
+			if (viewPager.getCurrentItem() > 0) {
+				viewPager.setCurrentItem(0);
+				actActivity.ivImg.setBackgroundResource(R.drawable.back);
+				actActivity.ivImg.setVisibility(View.VISIBLE);
+			} else {
+				viewPager.setCurrentItem(1);
+				actActivity.ivImg.setBackgroundResource(R.drawable.arrow_up);
+				actActivity.ivImg.setVisibility(View.VISIBLE);
+			}
+
+			break;
 		default:
 			break;
 		}
 	}
 
-
 	private void reFreshDegreeView(View view) {
 		CircleProgressBarBlue pb = (CircleProgressBarBlue) view
 				.findViewById(R.id.cpb);
-		TextView tvDegreeText = (TextView) view
-				.findViewById(R.id.tvDegreeText);
+		TextView tvDegreeText = (TextView) view.findViewById(R.id.tvDegreeText);
 		pb.setProgress(Float.parseFloat(tvAverageLevelData.getText().toString()
 				.replace("%", "")) / 100f);
 		tvDegreeText.setText(tvAverageLevelData.getText().toString());
 	}
 
 	/**
-	 * 刷新图表
+	 * 鍒锋柊鍥捐〃
 	 */
 	private void refreshChartView(String date) {
-		// 线1的数据集
+		// 绾�鐨勬暟鎹泦
 		List<PointD> linePoint1 = new ArrayList<PointD>();
 		if (hourAvera(DateUtil.getCurrentDate(), "01") != 0) {
 			linePoint1.add(new PointD(4d, hourAvera(DateUtil.getCurrentDate(),
@@ -863,12 +963,12 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		}
 		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
 				179, 147, 197));
-		// 把线弄细点
+		// 鎶婄嚎寮勭粏鐐�
 		dataSeries1.getLinePaint().setStrokeWidth(2);
 		// dataSeries1.setLabelVisible(true);
 		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
 		LinkedList<String> labels = new LinkedList<String>();
-		// 设定数据源
+		// 璁惧畾鏁版嵁婧�
 		chartData.add(dataSeries1);
 		chartView.setChartLabels(labels);
 		chartView.setChartData(chartData);
@@ -876,7 +976,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 	}
 
 	/**
-	 * 刷新月图表
+	 * 鍒锋柊鏈堝浘琛�
 	 */
 
 	private Average refreshMonthChartView(String startDate, String endDate) {
@@ -900,7 +1000,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		}
 		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
 				179, 147, 197));
-		// 把线弄细点
+		// 鎶婄嚎寮勭粏鐐�
 		dataSeries1.getLinePaint().setStrokeWidth(2);
 		// dataSeries1.setLabelVisible(true);
 		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
@@ -908,7 +1008,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		chartLabels.add("1");
 		chartLabels.add("15");
 		chartLabels.add("30");
-		// 设定数据源
+		// 璁惧畾鏁版嵁婧�
 		chartData.add(dataSeries1);
 		chartView.setChartData(chartData);
 		chartView.setChartLabels(chartLabels);
@@ -922,7 +1022,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 	 * 刷新周图表
 	 */
 	private Average refreshWeekChartView(String date) {
-		// 线1的数据集
+		// 绾�鐨勬暟鎹泦
 		Average averageEntity = new Average();
 		float average = 0;
 		int count = 0;
@@ -981,7 +1081,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		}
 		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
 				179, 147, 197));
-		// 把线弄细点
+		// 鎶婄嚎寮勭粏鐐�
 		dataSeries1.getLinePaint().setStrokeWidth(2);
 		// dataSeries1.setLabelVisible(true);
 		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
@@ -993,7 +1093,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		chartLabels.add("四");
 		chartLabels.add("五");
 		chartLabels.add("六");
-		// 设定数据源
+		// 璁惧畾鏁版嵁婧�
 		chartData.add(dataSeries1);
 		chartView.setChartData(chartData);
 		chartView.setChartLabels(chartLabels);
@@ -1002,6 +1102,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 		averageEntity.setCount(count);
 		return averageEntity;
 	}
+
 	/**
 	 * 今天的时间和前面的时间比较
 	 * 
@@ -1047,7 +1148,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 
 		List<BltModel> yesTodayBlts;
 		float averageYesTodayWater = 0;
-		// 昨天的数据
+		// 鏄ㄥぉ鐨勬暟鎹�
 		WhereBuilder builder1 = WhereBuilder.b("date", "==", lastDay).and(
 				"modelstate", "==", checkType);
 		try {
@@ -1125,7 +1226,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 
 		List<BltModel> yesTodayBlts;
 		float averageYesTodayWater = 0;
-		// 昨天的数据
+		// 鏄ㄥぉ鐨勬暟鎹�
 		WhereBuilder builder1 = WhereBuilder.b("date", "==", lastDay).and(
 				"modelstate", "==", checkType);
 		try {
@@ -1344,6 +1445,5 @@ public class HomeRootFragment extends Fragment implements OnClickListener{
 
 		return cal.getTime();
 	}
-
 
 }

@@ -21,13 +21,34 @@ import com.mygame.pure.R;
  * @author tom
  */
 public class ActSpecify extends BaseActivity implements OnClickListener {
+	private Float progress;
+	private String checkState;
+	int textlevelIndex;
+	private int checkType;
+	private String textDesc;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_specify_2);
 		addBackImage(R.drawable.back_pressed, null);
-
+		progress = getIntent().getFloatExtra("progress", 20);
+		checkType = getIntent().getIntExtra("checkType", 0);
+		if (checkType == 0) {
+			if (progress < 30) {
+				textlevelIndex = 0;
+				// 当前值描述
+				textDesc = "干燥";
+			} else if (progress > 38) {
+				textlevelIndex = 2;
+				// 当前值描述
+				textDesc = "湿润";
+			} else {
+				textlevelIndex = 1;
+				// 当前值描述
+				textDesc = "正常";
+			}
+		}
 		addRightImage(R.drawable.bg_btn_share, new View.OnClickListener() {
 
 			@Override
@@ -42,18 +63,14 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		int height = 200;
 		// 各等级段的颜色
 		int[] color = new int[] { Color.rgb(223, 117, 8),
-				Color.rgb(35, 196, 125), Color.rgb(55, 162, 236)
-				 };
+				Color.rgb(35, 196, 125), Color.rgb(55, 162, 236) };
 		// 假如 每段的百分比 2 3 2 1 1 1
 		float[] part = new float[] { 3.75f, 2.5f, 3.75f };
 		// 各等级段的值
-		float[] partValue = new float[] { 20.0f, 35.0f, 45.0f};
-		// 当前值
-		String textValue = "28.9%";
-		// 当前值描述
-		String textDesc = "正常";
+		float[] partValue = new float[] { 20.0f, 35.0f, 45.0f };
+
 		// 当前值的等级
-		int textlevelIndex = 1;
+
 		// 当前值文字大小
 		int textLevelSize = 30;
 		// 当前值文字与顶部的距离
@@ -70,7 +87,8 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		int partTextSize = 15;
 		// 等级说明文字大小
 		int textDescSize = 22;
-
+		// 当前值
+		String textValue = progress + "%";
 		// 要显示图形的View
 		LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
 
@@ -99,7 +117,8 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		AbLevelView mAbLevelView = AbLevelChartFactory.getLevelChartView(this,
 				mDataset, renderer);
 		setTitle("详情");
-		chartLayout.addView(mAbLevelView, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		chartLayout.addView(mAbLevelView, new LinearLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 	}
 
 	private void showShare() {
