@@ -26,9 +26,10 @@ public class CircleProgressBar extends View {
 	private float STROKE_W = 10;
 	private float point;
 	private float allPoint;
-	public static long TIME=5;
+	public static long TIME=3;
 	private float i;
 	private TextView progressText;
+	private boolean isSleep=true;
 	
 	public CircleProgressBar(Context context) {
 		super(context, null);
@@ -81,8 +82,9 @@ public class CircleProgressBar extends View {
 	 * 必须在主线程里调用
 	 */
 	
-	public void setProgressing(float progress,TextView progressText){
-		i=i+0.002f;
+	public void setProgressing(float progress,TextView progressText,boolean isSleep){
+		this.isSleep=isSleep;
+		//i=i+0.002f;
 		if(progress==0){
 			i=0;
 		}
@@ -119,7 +121,12 @@ public class CircleProgressBar extends View {
             		handler.postDelayed(this, TIME);
             		setProgress(i);
             		//postInvalidate();
-            		i=i+0.001f;
+            		if(isSleep){
+            			i=i+0.001f;
+            		}else{
+            			i=i+0.002f;
+            		}
+            		
             	}else{
             		i=0;
             		handler.removeCallbacks(this);

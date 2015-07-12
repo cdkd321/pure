@@ -57,8 +57,8 @@ public class DeviceListActivity extends Activity {
 		filter.addAction(BleService.ACTION_GATT_CONNECTED);
 		filter.addAction(BleService.ACTION_GATT_DISCONNECTED);
 		filter.addAction(BleService.ACTION_STATUS_WRONG);
-		String uid = getIntent().getExtras().getString("uid");
-		share = super.getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
+		filter.addAction(BleService.ACTION_CLEAR);
+		share = getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
 
 		// if (uid != null){
 		// uuid = UUID.fromString(uid);
@@ -97,6 +97,10 @@ public class DeviceListActivity extends Activity {
 										share.edit()
 												.putString("LAST_CONNECT_NAME",
 														"").commit();
+										if(SelfDefineApplication.getInstance().mService!=null){
+											SelfDefineApplication.getInstance().mService.disconnect();
+										}
+										
 									}
 								})
 						.setNegativeButton("cancel",
@@ -117,10 +121,13 @@ public class DeviceListActivity extends Activity {
 			connectedName.setVisibility(View.VISIBLE);
 			connectedName.setText(share.getString("LAST_CONNECT_NAME", ""));
 			if (SelfDefineApplication.getInstance().mService != null) {
-				if (SelfDefineApplication.getInstance().mService.mConnectionState == BleService.STATE_CONNECTED) {
-					state.setText("connected");
-				} else {
+				if (SelfDefineApplication.getInstance().mService.mConnectionState == BleService.STATE_DISCONNECTED) {
+					
 					state.setText("disconnected");
+					signal_strength.setImageResource(R.drawable.ic_rssi0_bars);
+				} else {
+					state.setText("connected");
+					signal_strength.setImageResource(R.drawable.ic_rssi_3_bars);
 				}
 			}
 		}
@@ -171,6 +178,10 @@ public class DeviceListActivity extends Activity {
 		for (int i = 0; i < deviceList.size(); i++) {
 			if (device.getDevice().getAddress()
 					.equals(deviceList.get(i).getDevice().getAddress())) {
+				if(device.getRssi()<-80){
+					deviceList.remove(device);
+					adapter.notifyDataSetChanged();
+				}
 				isHave = true;
 			}
 		}
@@ -203,6 +214,7 @@ public class DeviceListActivity extends Activity {
 			connectedName.setVisibility(View.VISIBLE);
 			connectedName.setText(deviceList.get(position).getDevice()
 					.getName());
+			SelfDefineApplication.getInstance().mService.disconnect();
 			setResult(RESULT_OK, data);
 			finish();
 		}
@@ -226,15 +238,18 @@ public class DeviceListActivity extends Activity {
 						addDevice(scDevice);
 					}
 				});
-			} else if (BleService.ACTION_GATT_CONNECTED.endsWith(action)) {
+			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
 				state.setText("connected");
 				signal_strength.setImageResource(R.drawable.ic_rssi_3_bars);
-			} else if (BleService.ACTION_GATT_DISCONNECTED.endsWith(action)) {
+			} else if (BleService.ACTION_GATT_DISCONNECTED.equals(action)) {
 				state.setText("disconnected");
 				signal_strength.setImageResource(R.drawable.ic_rssi0_bars);
-			} else if (BleService.ACTION_STATUS_WRONG.endsWith(action)) {
+			} else if (BleService.ACTION_STATUS_WRONG.equals(action)) {
 				state.setText("disconnected");
 				signal_strength.setImageResource(R.drawable.ic_rssi0_bars);
+			}else if(BleService.ACTION_CLEAR.equals(action)){
+				deviceList.clear();
+				adapter.notifyDataSetChanged();
 			}
 		}
 
@@ -270,15 +285,15 @@ public class DeviceListActivity extends Activity {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			if (deviceList.get(position).getRssi() >= 50) {
+			if (deviceList.get(position).getRssi() <- 80) {
 				holder.signatureStrenth
 						.setImageResource(R.drawable.ic_rssi0_bars);
-			} else if (deviceList.get(position).getRssi() < 50
-					&& deviceList.get(position).getRssi() >= 30) {
+			} else if (deviceList.get(position).getRssi() < -80
+					&& deviceList.get(position).getRssi() >= -60) {
 				holder.signatureStrenth
 						.setImageResource(R.drawable.ic_rssi_1_bars);
-			} else if (deviceList.get(position).getRssi() < 30
-					&& deviceList.get(position).getRssi() > 10) {
+			} else if (deviceList.get(position).getRssi() <- 60
+					&& deviceList.get(position).getRssi() > -50) {
 				holder.signatureStrenth
 						.setImageResource(R.drawable.ic_rssi_2_bars);
 

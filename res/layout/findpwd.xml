@@ -40,7 +40,6 @@
                         android:background="@color/bg"
                         android:gravity="center"
                         android:hint="请输入邮箱" >
-                        <requestFocus />
                     </EditText>
                 </RelativeLayout>
             </LinearLayout>

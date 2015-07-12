@@ -224,6 +224,7 @@
 	                android:src="@drawable/cry"/>
                 
                 <TextView
+                    android:id="@+id/pingjun_tishi"
 	                style="@style/styleCenterText"
 	                android:layout_marginLeft="@dimen/ten_dp"
 	                android:layout_gravity="center_vertical" 

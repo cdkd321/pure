@@ -6,7 +6,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -61,6 +63,12 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		ui_hufu.setOnClickListener(this);
 		ui_FAQ.setOnClickListener(this);
 		ui_yijian.setOnClickListener(this);
+		share = getActivity().getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
+		if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+			Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+			intent.putExtra("uid", "");
+			startActivityForResult(intent, 0);
+		};
 		connect_device.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -118,7 +126,13 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 	// }).start();
 	// }
 	// }
-
+	private SharedPreferences share;
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+	}
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -134,7 +148,10 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 					BluetoothDevice.EXTRA_DEVICE);
 			mAddress = device.getAddress();
 			if (SelfDefineApplication.getInstance().mService != null) {
-				SelfDefineApplication.getInstance().mService.connect(mAddress);
+				if (resultCode == Activity.RESULT_OK) {
+					SelfDefineApplication.getInstance().mService.connect(mAddress);
+				}
+				
 			}
 		} else if (requestCode == 1) { //
 			if (resultCode == Activity.RESULT_OK) {

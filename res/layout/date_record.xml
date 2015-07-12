@@ -64,7 +64,7 @@
             <TextView
                 android:id="@+id/tvThanLastDay"
                 style="@style/styleCenterText" 
-                android:text="比前一天" />
+                android:text="前一天" />
 
             <TextView
                 android:id="@+id/tvThanLastDayData"

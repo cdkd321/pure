@@ -6,12 +6,12 @@
     <dimen name="operate_text_size">14sp</dimen>
     <dimen name="activity_title_text_size">16sp</dimen>
     <dimen name="input_size">11sp</dimen>
-    <dimen name="list_text_size_1">18sp</dimen>
-    <dimen name="list_text_size_2">20sp</dimen>
+    <dimen name="list_text_size_1">14sp</dimen>
+    <dimen name="list_text_size_2">16sp</dimen>
     <dimen name="list_text_size">15sp</dimen>
     <dimen name="actionbar_padding">13dp</dimen>
     <dimen name="margin_of_cell">18dp</dimen>
-    <dimen name="ten_dp">10dp</dimen> 
+    <dimen name="ten_dp">3dp</dimen> 
     <dimen name="five_dp">5dp</dimen>
     <dimen name="three_dp">3dp</dimen>
     <dimen name="twenty_dp">20dp</dimen>

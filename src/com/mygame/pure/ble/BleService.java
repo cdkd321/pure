@@ -59,6 +59,7 @@ public class BleService extends Service {
 	private String mBluetoothDeviceAddress;
 	private BluetoothGatt mBluetoothGatt;
 	private BluetoothGattService mGattService;
+	private ArrayList<BluetoothDevice>  devices;
 	public int mConnectionState = STATE_DISCONNECTED;
 	private Runnable mCurrentTask;
 	private long tempTime, tempTime1;
@@ -76,6 +77,7 @@ public class BleService extends Service {
 	public final static String ACTION_STATUS_WRONG = "com.example.bluetooth.le.ACTION_STATUS_WRONG";
 	public final static String ACTION_TIME_TOOSHORT = "com.example.bluetooth.le.ACTION_TIME_TOOSHORT";
 	public final static String ACTION_START = "com.example.bluetooth.le.ACTION_START";
+	public final static String ACTION_CLEAR = "com.example.bluetooth.le.ACTION_CLEAR";
 
 	public static final UUID MAIN_SERVICE = UUID
 			.fromString("0000ffe0-0000-1000-8000-00805f9b34fb");
@@ -112,7 +114,7 @@ public class BleService extends Service {
 	// 閸忔娊妫寸�圭偞妞傛导鐘虹翻
 	public static final int CLOSE_REAL_TIME = 8;
 	private String tempData = "";
-	private int TIME = 20000;
+	private int TIME = 5000;
 	// Implements callback methods for GATT events that the app cares about. For
 	// example,
 	// connection change and services discovered.
@@ -147,6 +149,7 @@ public class BleService extends Service {
 				}
 			} else {
 				intentAction=ACTION_STATUS_WRONG;
+				mConnectionState = STATE_DISCONNECTED;
 				broadcastUpdate(intentAction);
 				Log.w(TAG, "onConnectionStateChange: " + status);
 				operateStatusWrong();
@@ -186,6 +189,7 @@ public class BleService extends Service {
 					disconnect();
 				}
 			} else {
+				mConnectionState = STATE_DISCONNECTED;
 				Log.w(TAG, "onServicesDiscovered received: " + status);
 				operateStatusWrong();
 			}
@@ -268,6 +272,9 @@ public class BleService extends Service {
 		public void onLeScan(final BluetoothDevice device, int rssi,
 				byte[] scanRecord) {
 			Log.d(TAG, "onScanResult() - device=" + device + ", rssi=" + rssi);
+			if(!devices.contains(device)){
+				devices.add(device);
+			}
 			String name = device.getName();
 			Bundle data = new Bundle();
 			data.putParcelable(BluetoothDevice.EXTRA_DEVICE, device);
@@ -276,6 +283,7 @@ public class BleService extends Service {
 			i.putExtras(data);
 			sendBroadcast(i);
 		}
+		
 	};
 
 	private Handler mHandler;
@@ -294,6 +302,7 @@ public class BleService extends Service {
 		super.onCreate();
 		initialize();
 		mHandler = new Handler();
+		devices=new ArrayList<BluetoothDevice>();
 		handler.postDelayed(runnable, TIME); // 姣忛殧1s鎵ц
 		share = super.getSharedPreferences("longke",
 				Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
@@ -546,6 +555,9 @@ public class BleService extends Service {
 			Log.e(TAG, "clientConfig is null");
 			return false;
 		}
+		String intentAction = ACTION_GATT_CONNECTED;
+		mConnectionState = STATE_CONNECTED;
+		broadcastUpdate(intentAction);
 		clientConfig
 				.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
 		return mBluetoothGatt.writeDescriptor(clientConfig);
@@ -648,7 +660,10 @@ public class BleService extends Service {
 			try {
 				handler.postDelayed(this, TIME);
                 if(mBluetoothGatt!=null){
-                	if(mConnectionState != STATE_CONNECTED){
+                	broadcastUpdate(ACTION_CLEAR);
+                	mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                	mBluetoothAdapter.startLeScan(mLeScanCallback);
+                	if(mConnectionState == STATE_DISCONNECTED){
                 		if(!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
                 			connect(share.getString("LAST_CONNECT_MAC", ""));
                 		}
@@ -657,6 +672,9 @@ public class BleService extends Service {
                 }else{
 					
 					initialize();
+					broadcastUpdate(ACTION_CLEAR);
+                	mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                	mBluetoothAdapter.startLeScan(mLeScanCallback);
 					if(!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
 						connect(share.getString("LAST_CONNECT_MAC", ""));
 					}

@@ -46,7 +46,7 @@
 					    android:id="@+id/chartLayout"
 					    android:orientation="vertical"
 	                    android:layout_width="match_parent"
-	                    android:layout_height="80dp"
+	                    android:layout_height="120dp"
 	                    android:gravity="center"
 	                    android:layout_marginRight="10dp"
 	                    android:layout_marginTop="30dp"
@@ -54,6 +54,7 @@
 					
 					
 					<TextView
+					    android:id="@+id/pingjun_text"
                         style="@style/w_w"
                         android:text="同龄人群平均值32.5%"
                         android:paddingBottom="20dp"
@@ -65,6 +66,7 @@
 	                    android:background="@color/gray" />
 					<TextView
 		                style="@style/w_w"
+		                android:id="@+id/tishi_title"
 		                android:layout_margin="@dimen/twenty_dp"
 		                android:layout_width="match_parent" 
 		                android:layout_height="wrap_content"

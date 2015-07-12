@@ -171,6 +171,7 @@
         </activity>
         <activity
             android:name=".activity.ActReceiveAlarm"
+            android:launchMode="singleInstance"
             android:excludeFromRecents="true" >
         </activity>
  -

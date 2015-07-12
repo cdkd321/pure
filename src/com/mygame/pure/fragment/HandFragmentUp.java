@@ -69,7 +69,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 
 			}
 		});
-		pb.setProgressing(0.0f, tvBlueProgress);
+		pb.setProgressing(0.0f, tvBlueProgress,true);
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
 		getData(df);
 		return rootView;
@@ -171,7 +171,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 							"#0.0");
 					pb.setProgressing(
 							Float.parseFloat(df.format(waters / 45.0f + 20.0)) / 100f,
-							tvBlueProgress);
+							tvBlueProgress,true);
 					getData(df);
 				}
 
@@ -188,7 +188,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			} else if (BleService.ACTION_GATT_DISCONNECTED.equals(action)) {
 				tvBlueTouth.setText("断开连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
-				pb.setProgressing(0.0f, tvBlueProgress);
+				pb.setProgressing(0.0f, tvBlueProgress,true);
 				/*
 				 * try { Thread.sleep(1000);
 				 * tvBlueTouth.setVisibility(View.GONE); } catch
@@ -198,7 +198,7 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 			} else if (BleService.ACTION_STATUS_WRONG.equals(action)) {
 				tvBlueTouth.setText("断开连接");
 				tvBlueTouth.setVisibility(View.VISIBLE);
-				pb.setProgressing(0.0f, tvBlueProgress);
+				pb.setProgressing(0.0f, tvBlueProgress,true);
 				/*
 				 * try { Thread.sleep(1000);
 				 * tvBlueTouth.setVisibility(View.GONE); } catch
@@ -207,9 +207,9 @@ public class HandFragmentUp extends BaseFragment implements OnClickListener {
 				 */
 			} else if (BleService.ACTION_TIME_TOOSHORT.equals(action)) {
 				Toast.makeText(getActivity(), "请连续按住5秒", 1000).show();
-				pb.setProgressing(0.0f, tvBlueProgress);
+				pb.setProgressing(0.0f, tvBlueProgress,true);
 			} else if (BleService.ACTION_START.equals(action)) {
-				pb.setProgressing(0.3f, tvBlueProgress);
+				pb.setProgressing(0.3f, tvBlueProgress,true);
 			}
 
 		}

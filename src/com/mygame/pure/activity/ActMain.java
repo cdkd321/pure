@@ -5,16 +5,20 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -58,6 +62,8 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_main);
 		initTab();
+		share = getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
+		
 	}
 
 	public List<View> getList() {
@@ -70,6 +76,14 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			mList.add(view1);
 		}
 		return mList;
+	}
+	private SharedPreferences share;
+	private String mAddress;
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
 	}
 
 	public List<Fragment> getFragmentList(int type) {
@@ -134,7 +148,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ActMain.this, MoreAct.class);
-				startActivity(intent);
+				startActivityForResult(intent, 0);
 
 			}
 		});
@@ -203,7 +217,35 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		llTab3.setSelected(i == 2);
 		llTab4.setSelected(i == 3);
 	}
-
+    @Override
+    protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+    	// TODO Auto-generated method stub
+    	super.onActivityResult(arg0, arg1, arg2);
+    	if(arg0==0){
+    		if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+    			Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+    			intent.putExtra("uid", "");
+				startActivityForResult(intent, 1);
+    		};
+    	}else{
+    		
+    		if ( arg2 != null) {
+    			BluetoothDevice device = arg2.getExtras().getParcelable(
+    					BluetoothDevice.EXTRA_DEVICE);
+    			mAddress = device.getAddress();
+    			if (SelfDefineApplication.getInstance().mService != null) {
+    				if (arg1 == Activity.RESULT_OK) {
+    					SelfDefineApplication.getInstance().mService.connect(mAddress);
+    				}
+    				
+    			}
+    		} 
+    	}
+    	/*if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+			Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+			startActivity(intent);
+		};*/
+    }
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -263,6 +305,11 @@ public class ActMain extends BaseActivity implements OnClickListener {
 				// Log.e(TAG, "Unable to initialize Bluetooth");
 				finish();
 			}
+			if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+				Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+				intent.putExtra("uid", "");
+				startActivityForResult(intent, 1);
+			};
 			// Automatically connects to the device upon successful start-up
 			// initialization.
 			// mBleService.connect(mDeviceAddress);

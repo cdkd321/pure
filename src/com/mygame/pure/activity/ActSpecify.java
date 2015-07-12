@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
@@ -26,6 +27,15 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 	int textlevelIndex;
 	private int checkType;
 	private String textDesc;
+	private String textValue;
+	private float[] part;
+	private float[] partValue;
+	private TextView pingjun_text;
+	private TextView tishi_text;
+	private String[] hand_skin_share;
+	private String[] the_neck_share;
+	private String[] the_face_share;
+	private String[] the_eye_share;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +44,19 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		addBackImage(R.drawable.back_pressed, null);
 		progress = getIntent().getFloatExtra("progress", 20);
 		checkType = getIntent().getIntExtra("checkType", 0);
+		textValue=getIntent().getStringExtra("progressText");
+		pingjun_text=(TextView) findViewById(R.id.pingjun_text);
+		tishi_text=(TextView) findViewById(R.id.tishi_title);
+		hand_skin_share=getResources().getStringArray(R.array.hand_skin_share);
+		the_neck_share=getResources().getStringArray(R.array.the_neck_share);
+		the_face_share=getResources().getStringArray(R.array.the_face_share);
+		the_eye_share=getResources().getStringArray(R.array.the_eye_share);
 		if (checkType == 0) {
-			if (progress < 30) {
+			if (progress < 0.30) {
 				textlevelIndex = 0;
 				// 当前值描述
 				textDesc = "干燥";
-			} else if (progress > 38) {
+			} else if (progress > 0.38) {
 				textlevelIndex = 2;
 				// 当前值描述
 				textDesc = "湿润";
@@ -48,6 +65,71 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				// 当前值描述
 				textDesc = "正常";
 			}
+			// 假如 每段的百分比 2 3 2 1 1 1
+			 part = new float[] { 2.50f, 2.00f, 5.50f };
+			 pingjun_text.setText("同龄人群平均值32.5%");
+			// 各等级段的值
+			 partValue = new float[] { 20.0f, 30.0f, 38.0f };
+			 tishi_text.setText(hand_skin_share[(int)(Math.random()*hand_skin_share.length)]);
+		}else if(checkType==1){
+			if (progress < 0.32) {
+				textlevelIndex = 0;
+				// 当前值描述
+				textDesc = "干燥";
+			} else if (progress > 0.42) {
+				textlevelIndex = 2;
+				// 当前值描述
+				textDesc = "湿润";
+			} else {
+				textlevelIndex = 1;
+				// 当前值描述
+				textDesc = "正常";
+			}
+			pingjun_text.setText("同龄人群平均值36.70%");
+			// 假如 每段的百分比 2 3 2 1 1 1
+			 part = new float[] { 3.00f, 2.50f, 4.50f };
+			// 各等级段的值
+			 partValue = new float[] { 20.0f, 32.0f, 42.0f };
+			 tishi_text.setText(the_face_share[(int)(Math.random()*the_face_share.length)]);
+		}else if(checkType==2){
+			if (progress < 0.35) {
+				textlevelIndex = 0;
+				// 当前值描述
+				textDesc = "干燥";
+			} else if (progress > 0.45) {
+				textlevelIndex = 2;
+				// 当前值描述
+				textDesc = "湿润";
+			} else {
+				textlevelIndex = 1;
+				// 当前值描述
+				textDesc = "正常";
+			}
+			pingjun_text.setText("同龄人群平均值41.10%");
+			// 假如 每段的百分比 2 3 2 1 1 1
+			 part = new float[] { 3.75f, 2.5f, 3.75f };
+			// 各等级段的值
+			 partValue = new float[] { 20.0f, 35.0f, 45.0f };
+			 tishi_text.setText(the_eye_share[(int)(Math.random()*the_eye_share.length)]);
+		}else if(checkType==3){
+			if (progress < 0.35) {
+				textlevelIndex = 0;
+				// 当前值描述
+				textDesc = "干燥";
+			} else if (progress > 0.45) {
+				textlevelIndex = 2;
+				// 当前值描述
+				textDesc = "湿润";
+			} else {
+				textlevelIndex = 1;
+				// 当前值描述
+				textDesc = "正常";
+			}
+			// 假如 每段的百分比 2 3 2 1 1 1
+			 part = new float[] { 3.75f, 2.5f, 3.75f };
+			// 各等级段的值
+			 partValue = new float[] { 20.0f, 35.0f, 45.0f };
+			 tishi_text.setText(the_neck_share[(int)(Math.random()*the_neck_share.length)]);
 		}
 		addRightImage(R.drawable.bg_btn_share, new View.OnClickListener() {
 
@@ -64,10 +146,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		// 各等级段的颜色
 		int[] color = new int[] { Color.rgb(223, 117, 8),
 				Color.rgb(35, 196, 125), Color.rgb(55, 162, 236) };
-		// 假如 每段的百分比 2 3 2 1 1 1
-		float[] part = new float[] { 3.75f, 2.5f, 3.75f };
-		// 各等级段的值
-		float[] partValue = new float[] { 20.0f, 35.0f, 45.0f };
+		
 
 		// 当前值的等级
 
@@ -87,8 +166,9 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		int partTextSize = 15;
 		// 等级说明文字大小
 		int textDescSize = 22;
-		// 当前值
-		String textValue = progress + "%";
+		/*// 当前值
+		java.text.DecimalFormat   df=new   java.text.DecimalFormat("#0.0"); 
+		String textValue = df.format(progress*100)+"%";*/
 		// 要显示图形的View
 		LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
 

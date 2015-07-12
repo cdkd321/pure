@@ -121,7 +121,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 		AbSoapParams params = new AbSoapParams();
 		params.put("user1", "APP");
 		params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
-		params.put("username", et_email_2.getText().toString());
+		params.put("username", et_email_2.getText().toString().trim());
 		params.put("id", "10");
 
 		mAbSoapUtil.call(urlString, nameSpace, methodName, params,
@@ -170,7 +170,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 		AbSoapParams params = new AbSoapParams();
 		params.put("user1", "APP");
 		params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
-		params.put("username", et_email_2.getText().toString());
+		params.put("username", et_email_2.getText().toString().trim());
 
 		mAbSoapUtil.call(urlString, nameSpace, methodName, params,
 				new AbSoapListener() {
@@ -208,7 +208,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 		AbSoapParams params = new AbSoapParams();
 		params.put("user1", "APP");
 		params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
-		params.put("email", et_email_2.getText().toString());
+		params.put("email", et_email_2.getText().toString().trim());
 		params.put("id", "8");
 
 		mAbSoapUtil.call(urlString, nameSpace, methodName, params,
@@ -227,7 +227,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 								Intent intent = new Intent();
 								intent.putExtra("updatepwd", "0");
 								intent.putExtra("userName", et_email_2
-										.getText().toString());
+										.getText().toString().trim());
 								intent.setClass(ActFindPwd.this,
 										ActWriteYz.class);
 								startActivity(intent);

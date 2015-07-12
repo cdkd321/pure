@@ -43,7 +43,7 @@
         android:visibility="invisible"
         android:gravity="center_vertical"
         android:layout_gravity="center_horizontal"
-        android:text="查看详细结果" />
+         />
     
     
     <RelativeLayout
@@ -72,7 +72,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/tvAverageLabel"
             android:layout_marginRight="36dp"
-            android:text="较前一天" />
+            android:text="前一天" />
         
         <TextView
             android:id="@+id/tvYestoday"
@@ -80,7 +80,7 @@
             android:layout_below="@+id/tvYestodayLabel"
             android:layout_alignParentRight="true"
             android:textSize="25sp"
-            android:layout_marginRight="43dp"
+            android:layout_marginRight="36dp"
             android:text="+0.0%" />
     </RelativeLayout>
 
