@@ -56,7 +56,6 @@
 					<TextView
 					    android:id="@+id/pingjun_text"
                         style="@style/w_w"
-                        android:text="同龄人群平均值32.5%"
                         android:paddingBottom="20dp"
                         android:textColor="@color/theme_blue" />
                     

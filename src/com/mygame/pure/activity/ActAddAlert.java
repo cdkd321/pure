@@ -147,6 +147,8 @@ public class ActAddAlert extends BaseActivity {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					Intent intent1 = new Intent(Constants.ADD_ALERT_OK);
+					sendBroadcast(intent1);
 					finish();
 				}
 			});

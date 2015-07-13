@@ -57,7 +57,7 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/psb"
+            android:src="@drawable/hcy_icon"
             app:border_color="@color/gray"
             app:border_width="2dp" />
 
@@ -67,22 +67,11 @@
             android:layout_below="@+id/cimg"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/ten_dp"
-            android:text="小红"
+            android:text="未登录"
             android:textColor="@color/text_black"
             android:textSize="@dimen/list_text_size" />
 
-        <!--
-             <TextView
-            style="@style/w_w"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/twenty_dp"
-            android:background="@drawable/bg_round_corner_theme"
-            android:padding="@dimen/five_dp"
-            android:text="已连接"
-            android:textColor="@color/white"
-            android:textSize="@dimen/input_size" />
-        -->
+       
     </RelativeLayout>
 
     <com.mygame.pure.view.UIItem

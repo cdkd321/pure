@@ -20,12 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
-
+import com.mygame.pure.SelfDefineApplication;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -59,7 +60,7 @@ public class BleService extends Service {
 	private String mBluetoothDeviceAddress;
 	private BluetoothGatt mBluetoothGatt;
 	private BluetoothGattService mGattService;
-	private ArrayList<BluetoothDevice>  devices;
+	private ArrayList<BluetoothDevice> devices;
 	public int mConnectionState = STATE_DISCONNECTED;
 	private Runnable mCurrentTask;
 	private long tempTime, tempTime1;
@@ -131,11 +132,14 @@ public class BleService extends Service {
 					mConnectionState = STATE_CONNECTED;
 					broadcastUpdate(intentAction);
 					Log.i(TAG, "Connected to GATT server.");
-					share.edit().putString("LAST_CONNECT_MAC", gatt.getDevice().getAddress()).commit();
-					share.edit().putString("LAST_CONNECT_NAME", gatt.getDevice().getName()).commit();
+					share.edit()
+							.putString("LAST_CONNECT_MAC",
+									gatt.getDevice().getAddress()).commit();
+					share.edit()
+							.putString("LAST_CONNECT_NAME",
+									gatt.getDevice().getName()).commit();
 					Log.i(TAG, "Attempting to start service discovery:"
 							+ mBluetoothGatt.discoverServices());
-					
 
 					// Attempts to discover services after successful
 					// connection.
@@ -148,7 +152,7 @@ public class BleService extends Service {
 					broadcastUpdate(intentAction);
 				}
 			} else {
-				intentAction=ACTION_STATUS_WRONG;
+				intentAction = ACTION_STATUS_WRONG;
 				mConnectionState = STATE_DISCONNECTED;
 				broadcastUpdate(intentAction);
 				Log.w(TAG, "onConnectionStateChange: " + status);
@@ -164,25 +168,27 @@ public class BleService extends Service {
 				List<BluetoothGattService> list = gatt.getServices();
 				mGattService = mBluetoothGatt.getService(MAIN_SERVICE);
 				if (mGattService != null) {
-					
-					final ArrayList<BluetoothGattCharacteristic> characs=(ArrayList<BluetoothGattCharacteristic>) mGattService.getCharacteristics();
-					if(characs.get(0)!=null){
-						
+
+					final ArrayList<BluetoothGattCharacteristic> characs = (ArrayList<BluetoothGattCharacteristic>) mGattService
+							.getCharacteristics();
+					if (characs.get(0) != null) {
+
 						mHandler.postDelayed(new Runnable() {
-							
+
 							@Override
 							public void run() {
 								enableNotification4(characs.get(0));
 							}
 						}, 1000);
-						
-						//enableNotification4(characs.get(1));
+
+						// enableNotification4(characs.get(1));
 					}
-						
-                  /*  //閿熸枻鎷烽�氶敓鏂ゆ嫹
-					BluetoothGattCharacteristic receiveMcharac = mGattService
-							.getCharacteristic(SEND_DATA_CHAR);
-					enableNotification4(receiveMcharac);*/
+
+					/*
+					 * //閿熸枻鎷烽�氶敓鏂ゆ嫹 BluetoothGattCharacteristic receiveMcharac
+					 * = mGattService .getCharacteristic(SEND_DATA_CHAR);
+					 * enableNotification4(receiveMcharac);
+					 */
 
 				} else {
 					broadcastUpdate(ACTION_GATT_NOTIFICATION_INEXISTENCE);
@@ -231,13 +237,14 @@ public class BleService extends Service {
 			if (status == BluetoothGatt.GATT_SUCCESS) {
 				final UUID uuid = descriptor.getCharacteristic().getUuid();
 				mBluetoothGatt = gatt;
-				
+
 				if (status == 0) {
 					// 閿熸枻鎷峰閿熸枻鎷烽敓鏂ゆ嫹notify閿熼ズ鍖℃嫹閿熸枻鎷�
 					mCurrentTask = null;
 					mCurrentTask = new Thread() {
 						public void run() {
-						  //ComMandContoller.sendGetHostoryDateCommand(SEND_DATA_CHAR, mGattService, gatt);
+							// ComMandContoller.sendGetHostoryDateCommand(SEND_DATA_CHAR,
+							// mGattService, gatt);
 						}
 
 					};
@@ -250,7 +257,7 @@ public class BleService extends Service {
 				operateStatusWrong();
 			}
 		};
-		
+
 		// write data success callback
 		public void onCharacteristicWrite(BluetoothGatt gatt,
 				BluetoothGattCharacteristic characteristic, int status) {
@@ -264,15 +271,13 @@ public class BleService extends Service {
 
 	};
 
-	
-
 	// 閽冩繄澧幍顐ｅ伎閸ョ偠鐨�.
 	private BluetoothAdapter.LeScanCallback mLeScanCallback = new BluetoothAdapter.LeScanCallback() {
 		@Override
 		public void onLeScan(final BluetoothDevice device, int rssi,
 				byte[] scanRecord) {
 			Log.d(TAG, "onScanResult() - device=" + device + ", rssi=" + rssi);
-			if(!devices.contains(device)){
+			if (!devices.contains(device)) {
 				devices.add(device);
 			}
 			String name = device.getName();
@@ -283,13 +288,15 @@ public class BleService extends Service {
 			i.putExtras(data);
 			sendBroadcast(i);
 		}
-		
+
 	};
 
 	private Handler mHandler;
 	private ArrayList<Byte> mCache;
 	private int mChecksum;
 	private SharedPreferences share;
+	private String packageName;
+	private ActivityManager activityManager;
 
 	private void operateStatusWrong() {
 		close();
@@ -302,11 +309,41 @@ public class BleService extends Service {
 		super.onCreate();
 		initialize();
 		mHandler = new Handler();
-		devices=new ArrayList<BluetoothDevice>();
+		devices = new ArrayList<BluetoothDevice>();
 		handler.postDelayed(runnable, TIME); // 姣忛殧1s鎵ц
-		share = super.getSharedPreferences("longke",
-				Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
+		activityManager = (ActivityManager) this
+				.getSystemService(Context.ACTIVITY_SERVICE);
+		new Thread() {
+			public void run() {
+				try {
+					while (true) {
+						Thread.sleep(1000);
+						if (isAppOnForeground()) {
+							Log.i(TAG, "true");
+						} else {
+							if(mConnectionState != STATE_DISCONNECTED){
+								disconnect();
+							}
+							
+							Log.i(TAG, "false");
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}.start();
+		packageName = this.getPackageName();
+		share = super.getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
+
+	}
+
+	@Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		// TODO Auto-generated method stub
+
 		
+		return super.onStartCommand(intent, flags, startId);
 	}
 
 	private void broadcastUpdate(final String action) {
@@ -318,22 +355,22 @@ public class BleService extends Service {
 			final BluetoothGattCharacteristic characteristic,
 			final BluetoothGatt gatt) {
 		final byte[] data = characteristic.getValue();
-		final StringBuilder stringBuilder = new StringBuilder(
-				data.length);
-		
+		final StringBuilder stringBuilder = new StringBuilder(data.length);
+
 		for (byte byteChar : data) {
 			stringBuilder.append(String.format("%02X ", byteChar));
 		}
-		if(stringBuilder.toString().startsWith("CC")){
-			BleParserLoader.waterParser(data,getBaseContext(),gatt.getDevice().getAddress());
+		if (stringBuilder.toString().startsWith("CC")) {
+			BleParserLoader.waterParser(data, getBaseContext(), gatt
+					.getDevice().getAddress());
 		}
-		if(stringBuilder.toString().startsWith("55")){
+		if (stringBuilder.toString().startsWith("55")) {
 			broadcastUpdate(ACTION_TIME_TOOSHORT);
 		}
-		if(stringBuilder.toString().startsWith("AA")){
+		if (stringBuilder.toString().startsWith("AA")) {
 			broadcastUpdate(ACTION_START);
 		}
-		
+
 		Log.i(TAG, "閺�璺哄煂" + stringBuilder.toString().trim());
 
 	}
@@ -428,7 +465,7 @@ public class BleService extends Service {
 			Log.w(TAG, "Device not found.  Unable to connect.");
 			return false;
 		}
-		
+
 		// We want to directly connect to the device, so we are setting the
 		// autoConnect
 		// parameter to false.
@@ -614,6 +651,7 @@ public class BleService extends Service {
 			// reSetIsConnect();
 		}
 	}
+
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 	@SuppressLint("NewApi")
 	public static void sendCommand(UUID characteristicID,
@@ -634,10 +672,11 @@ public class BleService extends Service {
 
 	// 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
 	public static void sendCommand(UUID characteristicID,
-			BluetoothGattService mGattService, BluetoothGatt mBluetoothGatt,byte cmd,String json) {
+			BluetoothGattService mGattService, BluetoothGatt mBluetoothGatt,
+			byte cmd, String json) {
 		switch (cmd) {
 		case 0x40:
-			
+
 			break;
 
 		default:
@@ -651,6 +690,7 @@ public class BleService extends Service {
 		}
 		Log.i(TAG, "閿熸枻鎷烽敓閰碉綇鎷�" + stringBuilder.toString().trim());
 	}
+
 	Handler handler = new Handler();
 	Runnable runnable = new Runnable() {
 
@@ -659,31 +699,33 @@ public class BleService extends Service {
 			// handler鑷甫鏂规硶瀹炵幇瀹氭椂鍣�
 			try {
 				handler.postDelayed(this, TIME);
-                if(mBluetoothGatt!=null){
-                	broadcastUpdate(ACTION_CLEAR);
-                	mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                	mBluetoothAdapter.startLeScan(mLeScanCallback);
-                	if(mConnectionState == STATE_DISCONNECTED){
-                		if(!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
-                			connect(share.getString("LAST_CONNECT_MAC", ""));
-                		}
-                		
-                	}
-                }else{
-					
+				if (mBluetoothGatt != null) {
+					broadcastUpdate(ACTION_CLEAR);
+					mBluetoothAdapter.stopLeScan(mLeScanCallback);
+					mBluetoothAdapter.startLeScan(mLeScanCallback);
+					if (mConnectionState == STATE_DISCONNECTED) {
+						if (isAppOnForeground()) {
+							if (!TextUtils.isEmpty(share.getString(
+									"LAST_CONNECT_MAC", ""))) {
+								connect(share.getString("LAST_CONNECT_MAC", ""));
+							}
+						}
+
+					}
+				} else {
+
 					initialize();
 					broadcastUpdate(ACTION_CLEAR);
-                	mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                	mBluetoothAdapter.startLeScan(mLeScanCallback);
-					if(!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+					mBluetoothAdapter.stopLeScan(mLeScanCallback);
+					mBluetoothAdapter.startLeScan(mLeScanCallback);
+
+					if (!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC",
+							"")) && isAppOnForeground()) {
 						connect(share.getString("LAST_CONNECT_MAC", ""));
 					}
-					
-				
-				
-			     }
-				
-				
+
+				}
+
 				;
 
 			} catch (Exception e) {
@@ -694,5 +736,29 @@ public class BleService extends Service {
 		}
 	};
 
+	private boolean isAppOnForeground() {
+		// Returns a list of application processes that are running on the
+		// device
+		List<RunningAppProcessInfo> appProcesses = activityManager
+				.getRunningAppProcesses();
+		if (appProcesses == null)
+			return false;
+		for (RunningAppProcessInfo appProcess : appProcesses) {
+			// importance:
+			// The relative importance level that the system places
+			// on this process.
+			// May be one of IMPORTANCE_FOREGROUND, IMPORTANCE_VISIBLE,
+			// IMPORTANCE_SERVICE, IMPORTANCE_BACKGROUND, or IMPORTANCE_EMPTY.
+			// These constants are numbered so that "more important" values are
+			// always smaller than "less important" values.
+			// processName:
+			// The name of the process that this object is associated with.
+			if (appProcess.processName.equals(packageName)
+					&& appProcess.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

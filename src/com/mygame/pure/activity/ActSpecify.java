@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import cn.sharesdk.framework.ShareSDK;
@@ -15,6 +16,7 @@ import com.ab.view.level.AbLevelSeriesDataset;
 import com.ab.view.level.AbLevelSeriesRenderer;
 import com.ab.view.level.AbLevelView;
 import com.mygame.pure.R;
+import com.mygame.pure.core.MicroRecruitSettings;
 
 /**
  * 关于界面
@@ -36,6 +38,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 	private String[] the_neck_share;
 	private String[] the_face_share;
 	private String[] the_eye_share;
+	private MicroRecruitSettings settings;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		textValue=getIntent().getStringExtra("progressText");
 		pingjun_text=(TextView) findViewById(R.id.pingjun_text);
 		tishi_text=(TextView) findViewById(R.id.tishi_title);
+		settings = new MicroRecruitSettings(ActSpecify.this);
 		hand_skin_share=getResources().getStringArray(R.array.hand_skin_share);
 		the_neck_share=getResources().getStringArray(R.array.the_neck_share);
 		the_face_share=getResources().getStringArray(R.array.the_face_share);
@@ -67,7 +71,12 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 			}
 			// 假如 每段的百分比 2 3 2 1 1 1
 			 part = new float[] { 2.50f, 2.00f, 5.50f };
-			 pingjun_text.setText("同龄人群平均值32.5%");
+			// isLogin();
+			 
+				if (!settings.USER_NAME.getValue().equals("")) {
+					 pingjun_text.setText("同龄人群平均值32.5%");
+				} 
+			
 			// 各等级段的值
 			 partValue = new float[] { 20.0f, 30.0f, 38.0f };
 			 tishi_text.setText(hand_skin_share[(int)(Math.random()*hand_skin_share.length)]);
@@ -85,7 +94,10 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				// 当前值描述
 				textDesc = "正常";
 			}
-			pingjun_text.setText("同龄人群平均值36.70%");
+			if (!settings.USER_NAME.getValue().equals("")) {
+				pingjun_text.setText("同龄人群平均值36.70%");
+			}
+			
 			// 假如 每段的百分比 2 3 2 1 1 1
 			 part = new float[] { 3.00f, 2.50f, 4.50f };
 			// 各等级段的值
@@ -105,7 +117,10 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				// 当前值描述
 				textDesc = "正常";
 			}
-			pingjun_text.setText("同龄人群平均值41.10%");
+			if (!settings.USER_NAME.getValue().equals("")) {
+				pingjun_text.setText("同龄人群平均值41.10%");
+			}
+			
 			// 假如 每段的百分比 2 3 2 1 1 1
 			 part = new float[] { 3.75f, 2.5f, 3.75f };
 			// 各等级段的值
@@ -124,6 +139,9 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				textlevelIndex = 1;
 				// 当前值描述
 				textDesc = "正常";
+			}
+			if (!settings.USER_NAME.getValue().equals("")) {
+				pingjun_text.setText("同龄人群平均值41.10%");
 			}
 			// 假如 每段的百分比 2 3 2 1 1 1
 			 part = new float[] { 3.75f, 2.5f, 3.75f };

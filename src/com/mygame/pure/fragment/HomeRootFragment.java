@@ -672,12 +672,73 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				String[] tishijiaohao=getResources().getStringArray(R.array.water_suggestion_jiaogao);
 				String[] water_suggestion_feichanggao=getResources().getStringArray(R.array.water_suggestion_feichanggao);
 				refreshTishi(tishi, tishijiaohao, water_suggestion_feichanggao);
+				
 				refreshChartView(tvDate.getText().toString());
 				reFreshDegreeView();
 				java.text.DecimalFormat dfc = new java.text.DecimalFormat(
 						"#0.00");
 				Float d = Float.parseFloat(tvAverageLevelData.getText()
 						.toString().replace("%", "")) / 60f;
+				if (checkType == 0) {
+					if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) < 30) {
+
+						tvJzzkData.setText("干燥");
+
+					} else if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) > 38) {
+						tvJzzkData.setText("湿润");
+						
+
+					} else {
+						tvJzzkData.setText("正常");
+
+					}
+				} else if (checkType == 1) {
+					if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", ""))< 32) {
+
+						tvJzzkData.setText("干燥");
+
+					} else if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) > 42) {
+
+						tvJzzkData.setText("湿润");
+
+					} else {
+						tvJzzkData.setText("正常");
+
+					}
+				} else if (checkType == 2) {
+					if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) < 35) {
+
+						tvJzzkData.setText("干燥");
+
+					} else if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) > 45) {
+						tvJzzkData.setText("湿润");
+
+					} else {
+						tvJzzkData.setText("正常");
+
+					}
+				} else if (checkType == 3) {
+					if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) < 35) {
+
+						tvJzzkData.setText("干燥");
+
+					} else if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) > 45) {
+
+						tvJzzkData.setText("湿润");
+
+					} else {
+						tvJzzkData.setText("正常");
+
+					}
+				}
 				progressBar.setProgress(Float.parseFloat(dfc.format(d)));
 
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
@@ -750,6 +811,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 	private MyrogressBar progressBar;
 	private int selectFlag;
 	private TextView shunengdu_title;
+	private TextView tvJzzkData;
 
 	private void initDownView(final View view) {
 		String[] tishi=getResources().getStringArray(R.array.water_suggestion);
@@ -770,6 +832,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		List<View> viewList = new ArrayList<View>();
 		date_record = View.inflate(getActivity(), R.layout.date_record, null);
 		tvDate = (TextView) date_record.findViewById(R.id.tvDate);
+		tvJzzkData = (TextView) date_record.findViewById(R.id.tvJzzkData);
 		tvAverageLevelData = (TextView) date_record
 				.findViewById(R.id.tvAverageLevelData);
 		tvThanLastDay = (TextView) date_record.findViewById(R.id.tvThanLastDay);
@@ -837,6 +900,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					biJiaoToday(
 							DateUtil.getDateStr(DateUtil.getCurrentDate(), -1),
 							DateUtil.getCurrentDate(), tvThanLastDayData);
+					
 					break;
 				case R.id.rbRight:
 					selectFlag = 2;
@@ -868,6 +932,66 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 						"#0.00");
 				Float d = Float.parseFloat(tvAverageLevelData.getText()
 						.toString().replace("%", "")) / 60f;
+				if (checkType == 0) {
+					if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) < 30) {
+
+						tvJzzkData.setText("干燥");
+
+					} else if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) > 38) {
+						tvJzzkData.setText("湿润");
+						
+
+					} else {
+						tvJzzkData.setText("正常");
+
+					}
+				} else if (checkType == 1) {
+					if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", ""))< 32) {
+
+						tvJzzkData.setText("干燥");
+
+					} else if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) > 42) {
+
+						tvJzzkData.setText("湿润");
+
+					} else {
+						tvJzzkData.setText("正常");
+
+					}
+				} else if (checkType == 2) {
+					if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) < 35) {
+
+						tvJzzkData.setText("干燥");
+
+					} else if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) > 45) {
+						tvJzzkData.setText("湿润");
+
+					} else {
+						tvJzzkData.setText("正常");
+
+					}
+				} else if (checkType == 3) {
+					if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) < 35) {
+
+						tvJzzkData.setText("干燥");
+
+					} else if (Float.parseFloat(tvAverageLevelData.getText()
+							.toString().replace("%", "")) > 45) {
+
+						tvJzzkData.setText("湿润");
+
+					} else {
+						tvJzzkData.setText("正常");
+
+					}
+				}
 				progressBar.setProgress(Float.parseFloat(dfd.format(d)));
 				reFreshDegreeView(view);
 			}

@@ -56,7 +56,8 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	private FragmentManager fragmentManager;
 	private FragmentTransaction fragmentTrasaction;
 	HomeRootFragment fragment;
-
+	private boolean isBind = false ;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,10 +80,29 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	}
 	private SharedPreferences share;
 	private String mAddress;
+	private boolean  isStop;
 	@Override
 	public void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
+		
+	}
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		
+		/*if(isBind){
+			if(mServiceConnection!=null){
+				unbindService(mServiceConnection);
+			}
+			isBind=false;
+		}*/
+		
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		
 		
 	}
 
@@ -207,7 +227,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		 * @Override public void onPageScrollStateChanged(int arg0) { } });
 		 */
 		Intent i = new Intent(this, BleService.class);
-		bindService(i, mServiceConnection, BIND_AUTO_CREATE);
+		isBind=bindService(i, mServiceConnection, BIND_AUTO_CREATE);
 		BluetoothAdapter.getDefaultAdapter().enable();
 	}
 
