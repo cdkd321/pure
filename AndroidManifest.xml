@@ -106,6 +106,9 @@
             android:name="com.mygame.pure.activity.ActLable"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.mygame.pure.activity.ZXInfoAct"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"
@@ -171,22 +174,20 @@
         </activity>
         <activity
             android:name=".activity.ActReceiveAlarm"
-            android:launchMode="singleInstance"
-            android:excludeFromRecents="true" >
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance" >
         </activity>
- -
+ -
         <receiver android:name=".activity.AlarmReceiver" >
 
             <!-- Reveiver名称，如果是内部类静态注册广播，请在内部类前加$ -->
- -
+ -
             <intent-filter android:priority="1000" >
                 <action android:name="android.intent.action.ALARM_RECEIVER" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-
-       
     </application>
     <!-- 获取手机ip地址 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" >
