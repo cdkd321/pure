@@ -284,6 +284,7 @@ public class PersonalCenterActivity extends FragmentActivity implements
 		case R.id.save_btn:
 			// 更改用户资料
 			updateInfo();
+			updateFuzhiInfo();
 			finish();
 			break;
 		case R.id.back_btn:
@@ -483,8 +484,8 @@ public class PersonalCenterActivity extends FragmentActivity implements
 		params.put("sex", sex + "");
 		params.put("birthday", ar + "");
 		// ...
-		params.put("fuzhi", skin.getText().toString());
-		params.put("fuzhi", fuzhi + "");
+		//params.put("fuzhi", skin.getText().toString());
+		//params.put("Fuzhi", fuzhi + "");
 		params.put("username", settings.USER_NAME.getValue().toString());
 		mAbSoapUtil.call(urlString, nameSpace, methodName, params,
 				new AbSoapListener() {
@@ -520,6 +521,64 @@ public class PersonalCenterActivity extends FragmentActivity implements
 					}
 				});
 
+	}
+	public void updateFuzhiInfo() {
+		int fuzhi = 9;
+		double ar = 0;
+		if (skin.getText().toString().equals("中性皮肤")) {
+			fuzhi = 1;
+		} else if (skin.getText().toString().equals("干性皮肤")) {
+			fuzhi = 2;
+		} else if (skin.getText().toString().equals("油性皮肤")) {
+			fuzhi = 3;
+		} else if (skin.getText().toString().equals("混合皮肤")) {
+			fuzhi = 4;
+		} else if (skin.getText().toString().equals("敏感性皮肤")) {
+			fuzhi = 5;
+		}
+		String urlString = "http://miliapp.ebms.cn/webservice/member.asmx?op=UpdateFuzhi";
+		String nameSpace = "http://tempuri.org/";
+		String methodName = "UpdateFuzhi";
+		AbSoapParams params = new AbSoapParams();
+		params.put("user1", "APP");
+		params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
+		
+		params.put("fuzhi", fuzhi + "");
+		params.put("username", settings.USER_NAME.getValue().toString());
+		mAbSoapUtil.call(urlString, nameSpace, methodName, params,
+				new AbSoapListener() {
+			@Override
+			public void onSuccess(int arg0, String arg1) {
+				// TODO Auto-generated method stub
+				/*if (arg1 != null) {
+					String[] a = arg1.split("=");
+					String[] b = a[1].split(";");
+					if (b[0].equals("1")) {
+						Toast.makeText(getApplicationContext(), "成功", 1)
+						.show();
+						if (getIntent().getStringExtra("isgone")
+								.equals("1")) {
+							Intent intent = new Intent();
+							intent.setClass(
+									PersonalCenterActivity.this,
+									ActMain.class);
+							startActivity(intent);
+						}
+					} else if (b[0].equals("0")) {
+						Toast.makeText(getApplicationContext(), "失败", 1)
+						.show();
+					}
+				}*/
+			}
+			
+			@Override
+			public void onFailure(int arg0, String arg1, Throwable arg2) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), "请求失败" + arg1,
+						1).show();
+			}
+		});
+		
 	}
 
 	public void doPostMessage() {

@@ -910,7 +910,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					tvDate.setText(df.format(getFirstDayOfMonth(new Date()))
 							+ "~" + df.format(getLastDayOfMonth(new Date())));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
-					tvThanLastDay.setText("前一周");
+					tvThanLastDay.setText("前一月");
 					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
 					break;
 				case R.id.rbMid:
@@ -921,7 +921,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 							df.format(getFirstDayOfWeek(new Date())), -1)
 							+ "~" + df.format(getLastDayOfWeek(new Date())));
 					tvAverageLevelData.setText(average.getAverage() + "%");
-					tvThanLastDay.setText("前一月");
+					tvThanLastDay.setText("前一周");
 					detectionTimes.setText("检测次数 " + average.getCount() + "次");
 					break;
 
@@ -932,6 +932,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 						"#0.00");
 				Float d = Float.parseFloat(tvAverageLevelData.getText()
 						.toString().replace("%", "")) / 60f;
+				String[] tishi=getResources().getStringArray(R.array.water_suggestion);
+				String[] tishijiaohao=getResources().getStringArray(R.array.water_suggestion_jiaogao);
+				String[] water_suggestion_feichanggao=getResources().getStringArray(R.array.water_suggestion_feichanggao);
+				refreshTishi(tishi, tishijiaohao, water_suggestion_feichanggao);
 				if (checkType == 0) {
 					if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) < 30) {
@@ -1281,6 +1285,9 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		java.text.DecimalFormat dfDec = new java.text.DecimalFormat("#0.00");
+		String[] tishi=getResources().getStringArray(R.array.water_suggestion);
+		String[] tishijiaohao=getResources().getStringArray(R.array.water_suggestion_jiaogao);
+		String[] water_suggestion_feichanggao=getResources().getStringArray(R.array.water_suggestion_feichanggao);
 		switch (v.getId()) {
 		case R.id.abarLeft: // 宸﹁竟鏇村鎸夐挳
 			ToastHelper.ToastSht("you click left", getActivity());
@@ -1324,9 +1331,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					e.printStackTrace();
 				}
 			}
-
+             
 			Float dl = Float.parseFloat(tvAverageLevelData.getText().toString()
 					.replace("%", "")) / 60f;
+			refreshTishi(tishi, tishijiaohao, water_suggestion_feichanggao);
 			reFreshDegreeView(cell_bottom);
 			progressBar.setProgress(Float.parseFloat(dfDec.format(dl)));
 			break;
@@ -1383,6 +1391,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			reFreshDegreeView(cell_bottom);
 			Float dr = Float.parseFloat(tvAverageLevelData.getText().toString()
 					.replace("%", "")) / 60f;
+			refreshTishi(tishi, tishijiaohao, water_suggestion_feichanggao);
 			progressBar.setProgress(Float.parseFloat(dfDec.format(dr)));
 			break;
 		case R.id.ivImg:

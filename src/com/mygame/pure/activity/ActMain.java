@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
@@ -22,6 +23,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -57,15 +59,28 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	private FragmentTransaction fragmentTrasaction;
 	HomeRootFragment fragment;
 	private boolean isBind = false ;
+	private ContentResolver mContentResolver;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.act_main);
 		initTab();
+		mContentResolver = getContentResolver();  
+	    setLockPatternEnabled(false);
 		share = getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
 		
 	}
+	   
+ public void setLockPatternEnabled(boolean enabled) {  
+     setBoolean(android.provider.Settings.System.LOCK_PATTERN_ENABLED,  
+             enabled);  
+ }  
+ private void setBoolean(String systemSettingKey, boolean enabled) {  
+     android.provider.Settings.System.putInt(mContentResolver,  
+             systemSettingKey, enabled ? 1 : 0);  
+ }  
 
 	public List<View> getList() {
 
