@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="最新资讯"
+            android:text=""
             android:textColor="@color/top_bg" />
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="护肤技巧" />
+            android:text="" />
 
         <TextView
             android:id="@+id/tv_zx3"
@@ -65,7 +65,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="美妆技巧" />
+            android:text="" />
 
         <TextView
             android:id="@+id/tv_zx4"
@@ -73,14 +73,20 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="产品评测" />
+            android:text="" />
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="140dp" />
+
+    <LinearLayout
         android:id="@+id/tab_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/lienar_top" />
+        android:layout_below="@+id/banner"
+        android:orientation="horizontal" />
 
 </LinearLayout>

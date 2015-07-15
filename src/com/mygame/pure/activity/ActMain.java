@@ -187,6 +187,15 @@ public class ActMain extends BaseActivity implements OnClickListener {
 
 			}
 		});
+		addRightImage(R.drawable.news_pressed, new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(ActMain.this, ZXInfoAct.class);
+				startActivity(intent);
+			}
+		});
 		ivImg = (ImageView) findViewById(R.id.ivImg);
 
 		/*

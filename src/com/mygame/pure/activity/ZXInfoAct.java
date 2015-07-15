@@ -1,15 +1,25 @@
 package com.mygame.pure.activity;
 
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +29,13 @@ import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
 import com.ab.util.AbDialogUtil;
 import com.mygame.pure.R;
+import com.mygame.pure.adapter.PagerView;
+import com.mygame.pure.bean.Banner;
 import com.mygame.pure.fragment.AFragment;
 import com.mygame.pure.fragment.BFragment;
 import com.mygame.pure.fragment.CFragment;
 import com.mygame.pure.fragment.DFragment;
+import com.squareup.picasso.Picasso;
 
 /**
  * 
@@ -35,32 +48,40 @@ import com.mygame.pure.fragment.DFragment;
  */
 public class ZXInfoAct extends BaseActivity implements OnClickListener {
 	private TextView tv_zx1, tv_zx2, tv_zx3, tv_zx4;
-	private ViewPager tab_pager;
+	private LinearLayout tab_pager;
 	SlidePagerAdapter mPagerAdapter;
 	static final int NUM_ITEMS = 4;
 	private ImageButton back_btn;
 	private AbSoapUtil mAbSoapUtil = null;
+	private FragmentManager mFM = null;
+	public static ViewPager banner;
+	private static ImageHandler handler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_zx_main);
+		handler = new ImageHandler(new WeakReference<ZXInfoAct>(this));
 		initView();
 		mAbSoapUtil = AbSoapUtil.getInstance(this);
 		mAbSoapUtil.setTimeout(10000);
-		// sendPost();
+		sendPost();
+		getTopG();
 		// getId();
 		// gettob();
 		// getListIDByType();
-		getlisttobbyId();
-	}
+		// getlisttobbyId();
+
+		changePerson();
+
+	}// end of onCreate
 
 	public void initView() {
-		tab_pager = (ViewPager) findViewById(R.id.tab_pager);
+		banner = (ViewPager) findViewById(R.id.banner);
+		tab_pager = (LinearLayout) findViewById(R.id.tab_pager);
 		mPagerAdapter = new SlidePagerAdapter(getSupportFragmentManager());
 		back_btn = (ImageButton) findViewById(R.id.back_btn);
-		tab_pager.setAdapter(mPagerAdapter);
 		tv_zx1 = (TextView) findViewById(R.id.tv_zx1);
 		tv_zx2 = (TextView) findViewById(R.id.tv_zx2);
 		tv_zx3 = (TextView) findViewById(R.id.tv_zx3);
@@ -73,48 +94,6 @@ public class ZXInfoAct extends BaseActivity implements OnClickListener {
 		tv_zx2.setTextColor(Color.BLACK);
 		tv_zx3.setTextColor(Color.BLACK);
 		tv_zx4.setTextColor(Color.BLACK);
-		tab_pager.setCurrentItem(0);
-		tab_pager.setOnPageChangeListener(new OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int arg0) {
-				// TODO Auto-generated method stub
-				if (arg0 == 0) {
-					tv_zx1.setTextColor(Color.parseColor("#00abc6"));
-					tv_zx2.setTextColor(Color.BLACK);
-					tv_zx3.setTextColor(Color.BLACK);
-					tv_zx4.setTextColor(Color.BLACK);
-				} else if (arg0 == 1) {
-					tv_zx1.setTextColor(Color.BLACK);
-					tv_zx2.setTextColor(Color.parseColor("#00abc6"));
-					tv_zx3.setTextColor(Color.BLACK);
-					tv_zx4.setTextColor(Color.BLACK);
-				} else if (arg0 == 2) {
-					tv_zx1.setTextColor(Color.BLACK);
-					tv_zx2.setTextColor(Color.BLACK);
-					tv_zx3.setTextColor(Color.parseColor("#00abc6"));
-					tv_zx4.setTextColor(Color.BLACK);
-				} else {
-					tv_zx1.setTextColor(Color.BLACK);
-					tv_zx2.setTextColor(Color.BLACK);
-					tv_zx3.setTextColor(Color.BLACK);
-					tv_zx4.setTextColor(Color.parseColor("#00abc6"));
-				}
-
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-				// TODO Auto-generated method stub
-
-			}
-		});
 		back_btn.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -154,41 +133,84 @@ public class ZXInfoAct extends BaseActivity implements OnClickListener {
 		}
 	}
 
+	private View last, now;
+	View v1, v2;
+
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.tv_zx1:
+			now = tab_pager.getChildAt(0);
 			tv_zx1.setTextColor(Color.parseColor("#00abc6"));
 			tv_zx2.setTextColor(Color.BLACK);
 			tv_zx3.setTextColor(Color.BLACK);
 			tv_zx4.setTextColor(Color.BLACK);
-			tab_pager.setCurrentItem(0);
+			changePerson();
 			break;
 		case R.id.tv_zx2:
+			now = tab_pager.getChildAt(1);
+			changeBussiness();
 			tv_zx1.setTextColor(Color.BLACK);
 			tv_zx2.setTextColor(Color.parseColor("#00abc6"));
 			tv_zx3.setTextColor(Color.BLACK);
 			tv_zx4.setTextColor(Color.BLACK);
-			tab_pager.setCurrentItem(1);
 			break;
 		case R.id.tv_zx3:
+			now = tab_pager.getChildAt(2);
+			thrBussiness();
 			tv_zx1.setTextColor(Color.BLACK);
 			tv_zx2.setTextColor(Color.BLACK);
 			tv_zx3.setTextColor(Color.parseColor("#00abc6"));
 			tv_zx4.setTextColor(Color.BLACK);
-			tab_pager.setCurrentItem(2);
 			break;
 		case R.id.tv_zx4:
+			now = tab_pager.getChildAt(3);
+			FouBussiness();
 			tv_zx1.setTextColor(Color.BLACK);
 			tv_zx2.setTextColor(Color.BLACK);
 			tv_zx3.setTextColor(Color.BLACK);
 			tv_zx4.setTextColor(Color.parseColor("#00abc6"));
-			tab_pager.setCurrentItem(3);
 			break;
 		default:
 			break;
 		}
+	}
+
+	private void changePerson() {
+		Fragment f = new AFragment();
+		if (null == mFM)
+			mFM = getSupportFragmentManager();
+		FragmentTransaction ft = mFM.beginTransaction();
+		ft.replace(R.id.tab_pager, f);
+		ft.commit();
+	}
+
+	private void changeBussiness() {
+		Fragment f = new BFragment();
+		if (null == mFM)
+			mFM = getSupportFragmentManager();
+		FragmentTransaction ft = mFM.beginTransaction();
+		ft.replace(R.id.tab_pager, f);
+		ft.commit();
+	}
+
+	private void thrBussiness() {
+		Fragment f = new CFragment();
+		if (null == mFM)
+			mFM = getSupportFragmentManager();
+		FragmentTransaction ft = mFM.beginTransaction();
+		ft.replace(R.id.tab_pager, f);
+		ft.commit();
+	}
+
+	private void FouBussiness() {
+		Fragment f = new DFragment();
+		if (null == mFM)
+			mFM = getSupportFragmentManager();
+		FragmentTransaction ft = mFM.beginTransaction();
+		ft.replace(R.id.tab_pager, f);
+		ft.commit();
 	}
 
 	/*
@@ -209,6 +231,27 @@ public class ZXInfoAct extends BaseActivity implements OnClickListener {
 						// TODO Auto-generated method stub
 						@SuppressWarnings("unused")
 						String arString = arg1;
+						String a = arg1.replaceAll("Table1=anyType", "/");
+						String[] bStrings = a.split("/");
+						String[] aStrings = bStrings[1].split("Title=");
+						String[] cStrings = aStrings[1].split(";");
+						String[] aStrings1 = bStrings[2].split("Title=");
+						String[] cStrings1 = aStrings1[1].split(";");
+						String[] aStrings11 = bStrings[3].split("Title=");
+						String[] cStrings11 = aStrings11[1].split(";");
+						String[] aStrings111 = bStrings[4].split("Title=");
+						String[] cStrings111 = aStrings111[1].split(";");
+						tv_zx1.setText(cStrings[0]);
+						tv_zx2.setText(cStrings1[0]);
+						tv_zx3.setText(cStrings11[0]);
+						tv_zx4.setText(cStrings111[0]);
+						/*try {
+							Thread.sleep(3000);
+							
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}*/
 					}
 
 					@Override
@@ -216,6 +259,74 @@ public class ZXInfoAct extends BaseActivity implements OnClickListener {
 
 					}
 				});
+
+	}
+
+	/*
+	 * 首先取得列表项,将列表项填充到顶部,获得每个列表项对应的id
+	 */
+	public void getTopG() {
+
+		String urlString3 = "http://miliapp.ebms.cn/webservice/newsbanner.asmx?op=GetList";
+		String nameSpace3 = "http://tempuri.org/";
+		String methodName3 = "GetList";
+		AbSoapParams params3 = new AbSoapParams();
+		params3.put("user1", "APP");
+		params3.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
+		params3.put("appid", "3");
+		mAbSoapUtil.call(urlString3, nameSpace3, methodName3, params3,
+				new AbSoapListener() {
+					@Override
+					public void onSuccess(int arg0, final String arg1) {
+						// TODO Auto-generated method stub
+						@SuppressWarnings("unused")
+						String arString = arg1;
+
+						// AbDialogUtil.showAlertDialog(getActivity(),
+						// "���ؽ��",
+						// arg1, new AbDialogOnClickListener() {
+						//
+						// @Override
+						// public void onNegativeClick() {
+						// TODO Auto-generated method
+						// stub
+						LayoutInflater inflater = LayoutInflater
+								.from(getApplicationContext());
+						
+						String str=arg1.replace("Table1=anyType{", ">");
+						String[] arry=str.split(">");
+						ArrayList<Banner> banners=new ArrayList<Banner>();
+						ArrayList<View> views = new ArrayList<View>();
+						for(int i=1;i<arry.length;i++){
+							View view1 = (View) inflater.inflate(R.layout.item1,
+									null);
+							ImageView img_tb = (ImageView) view1
+									.findViewById(R.id.img_tb);
+							TextView tv_text = (TextView) view1
+									.findViewById(R.id.tv_text);
+							
+							Banner banner=new Banner();
+							String[] tab=arry[i].split(";");
+							String image=tab[3].replace("Image=", "").trim();
+							String url=tab[9].replace("Url=", "");
+							banner.setImage(image);
+							banner.setUrl(url);
+							banners.add(banner);
+							Picasso.with(getApplicationContext())
+							.load("http://miliapp.ebms.cn" + image)
+							.into(img_tb);
+							views.add(view1);
+						}
+						
+						banner.setAdapter(new PagerView(views));
+					
+					}
+
+					@Override
+					public void onFailure(int arg0, String arg1, Throwable arg2) {
+					}
+				});
+
 	}
 
 	/*
@@ -389,5 +500,72 @@ public class ZXInfoAct extends BaseActivity implements OnClickListener {
 						Toast.makeText(getApplicationContext(), arg1, 1).show();
 					}
 				});
+	}
+
+	private static class ImageHandler extends Handler {
+
+		/**
+		 * 请求更新显示的View。
+		 */
+		protected static final int MSG_UPDATE_IMAGE = 1;
+		/**
+		 * 请求暂停轮播。
+		 */
+		protected static final int MSG_KEEP_SILENT = 2;
+		/**
+		 * 请求恢复轮播。
+		 */
+		protected static final int MSG_BREAK_SILENT = 3;
+		/**
+		 * 记录最新的页号，当用户手动滑动时需要记录新页号，否则会使轮播的页面出错。
+		 * 例如当前如果在第一页，本来准备播放的是第二页，而这时候用户滑动到了末页，
+		 * 则应该播放的是第一页，如果继续按照原来的第二页播放，则逻辑上有问题。
+		 */
+		protected static final int MSG_PAGE_CHANGED = 4;
+
+		// 轮播间隔时间
+		protected static final long MSG_DELAY = 3000;
+
+		// 使用弱引用避免Handler泄露.这里的泛型参数可以不是Activity，也可以是Fragment等
+		private WeakReference<ZXInfoAct> weakReference;
+		private int currentItem = 0;
+
+		protected ImageHandler(WeakReference<ZXInfoAct> wk) {
+			weakReference = wk;
+		}
+
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			ZXInfoAct activity = weakReference.get();
+			if (activity == null) {
+				// Activity已经回收，无需再处理UI了
+				return;
+			}
+			// 检查消息队列并移除未发送的消息，这主要是避免在复杂环境下消息出现重复等问题。
+			if (activity.handler.hasMessages(MSG_UPDATE_IMAGE)) {
+				activity.handler.removeMessages(MSG_UPDATE_IMAGE);
+			}
+			switch (msg.what) {
+			case MSG_UPDATE_IMAGE:
+				currentItem++;
+				banner.setCurrentItem(currentItem);
+				// 准备下次播放
+				handler.sendEmptyMessageDelayed(MSG_UPDATE_IMAGE, MSG_DELAY);
+				break;
+			case MSG_KEEP_SILENT:
+				// 只要不发送消息就暂停了
+				break;
+			case MSG_BREAK_SILENT:
+				handler.sendEmptyMessageDelayed(MSG_UPDATE_IMAGE, MSG_DELAY);
+				break;
+			case MSG_PAGE_CHANGED:
+				// 记录当前的页号，避免播放的时候页面显示不正确。
+				currentItem = msg.arg1;
+				break;
+			default:
+				break;
+			}
+		}
 	}
 }

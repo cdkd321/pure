@@ -5,25 +5,27 @@
     android:background="@color/bg"
     android:gravity="top|center"
     android:orientation="vertical" >
-    
-    <include layout="@layout/include_navigation_bar"/>
- 
+
+    <include layout="@layout/include_navigation_bar" />
+
     <FrameLayout
-   	    android:id="@+id/fragment_content"
-   	    android:layout_below="@+id/actionBar"
-   	    android:layout_width="match_parent"
-   	    android:layout_height="match_parent"  />
-    
+        android:id="@+id/fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/actionBar" />
+
     <ImageView
         android:id="@+id/ivImg"
         style="@style/w_w"
-        android:layout_marginTop="@dimen/twenty_dp"
-        android:contentDescription="@string/app_name"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/back"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/sixty_dp"/>
-    
-    <include layout="@layout/tab_item_view" android:layout_below="@+id/fragment_content"/>
-    
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/sixty_dp"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:background="@drawable/back"
+        android:contentDescription="@string/app_name" />
+
+    <include
+        android:layout_below="@+id/fragment_content"
+        layout="@layout/tab_item_view" />
+
 </RelativeLayout>

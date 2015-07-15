@@ -110,15 +110,13 @@
                 <TextView
                     android:id="@+id/shunengdu_title"
                     style="@style/styleCenterText"
-                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:text="脸部的肌肤水嫩度" />
 
                 <com.mygame.pure.view.MyrogressBar
                     android:id="@+id/myProgress"
-                    android:layout_toRightOf="@+id/shunengdu_title"
-                    android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
                      />
 
@@ -214,7 +212,7 @@
             
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/sixty_dp"
                 android:paddingLeft="@dimen/twenty_dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
@@ -232,7 +230,6 @@
 	                style="@style/styleCenterText"
 	                android:layout_marginLeft="@dimen/ten_dp"
 	                android:layout_gravity="center_vertical" 
-	                
 	                android:text="抱歉现在您还没有数据" />
             </LinearLayout>
         </LinearLayout>

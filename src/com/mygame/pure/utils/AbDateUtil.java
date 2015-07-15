@@ -565,48 +565,46 @@ public class AbDateUtil {
 
 	/**
 	 * 取指定日期为星期几.
-	 * 
-	 * @param strDate
-	 *            指定日期
-	 * @param inFormat
-	 *            指定日期格式
-	 * @return String 星期几
+	 *
+	 * @param strDate 指定日期
+	 * @param inFormat 指定日期格式
+	 * @return String   星期几
 	 */
-	public static String getWeekNumber(String strDate, String inFormat) {
-		String week = "星期日";
-		Calendar calendar = new GregorianCalendar();
-		DateFormat df = new SimpleDateFormat(inFormat);
-		try {
-			calendar.setTime(df.parse(strDate));
-		} catch (Exception e) {
-			return "错误";
-		}
-		int intTemp = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-		switch (intTemp) {
-		case 0:
-			week = "星期日";
-			break;
-		case 1:
-			week = "星期一";
-			break;
-		case 2:
-			week = "星期二";
-			break;
-		case 3:
-			week = "星期三";
-			break;
-		case 4:
-			week = "星期四";
-			break;
-		case 5:
-			week = "星期五";
-			break;
-		case 6:
-			week = "星期六";
-			break;
-		}
-		return week;
-	}
+    public static int getWeekNumber(String strDate,String inFormat) {
+      String week = "星期日";
+      Calendar calendar = new GregorianCalendar();
+      DateFormat df = new SimpleDateFormat(inFormat);
+      try {
+		   calendar.setTime(df.parse(strDate));
+	  } catch (Exception e) {
+		  return 0;
+	  }
+      int intTemp = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+      switch (intTemp){
+        case 0:
+          week = "星期日";
+          break;
+        case 1:
+          week = "星期一";
+          break;
+        case 2:
+          week = "星期二";
+          break;
+        case 3:
+          week = "星期三";
+          break;
+        case 4:
+          week = "星期四";
+          break;
+        case 5:
+          week = "星期五";
+          break;
+        case 6:
+          week = "星期六";
+          break;
+      }
+      return intTemp;
+    }
 
 	/**
 	 * 根据给定的日期判断是否为上下午.
