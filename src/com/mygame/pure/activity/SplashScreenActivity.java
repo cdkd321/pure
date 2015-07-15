@@ -9,7 +9,9 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 
+import com.ab.util.AbSharedUtil;
 import com.mygame.pure.R;
+import com.mygame.pure.utils.Constants;
 
 public class SplashScreenActivity extends Activity {
 	private ImageView ivSplash;
@@ -35,10 +37,20 @@ public class SplashScreenActivity extends Activity {
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
-
-				Intent intent = new Intent(SplashScreenActivity.this,
-						FirstbootPageActivity.class);
-				startActivity(intent); //
+				if (AbSharedUtil.getBoolean(SplashScreenActivity.this,
+						Constants.FIRST_START, true)) {
+					AbSharedUtil.putBoolean(SplashScreenActivity.this,
+							Constants.FIRST_START, false);
+					Intent intent = new Intent(SplashScreenActivity.this,
+							FirstbootPageActivity.class);
+					startActivity(intent); //
+				} else {
+					AbSharedUtil.putBoolean(SplashScreenActivity.this,
+							Constants.FIRST_START, false);
+					Intent intent = new Intent(SplashScreenActivity.this,
+							FirstbootPageActivity.class);
+					startActivity(intent); //
+				}
 				// startActivityByKey(IntentAction.ACTION_HOME);
 				finish();
 

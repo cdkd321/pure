@@ -1,20 +1,13 @@
 package com.mygame.pure.activity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
@@ -22,7 +15,6 @@ import android.widget.TextView;
 
 import com.androidex.appformwork.wheelview.TimeWheelAdapter;
 import com.androidex.appformwork.wheelview.WheelView;
-import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
 import com.mygame.pure.R;
@@ -76,63 +68,7 @@ public class ActAddAlert extends BaseActivity {
 				public void onClick(View arg0) {
 					// TODO Auto-generated method stub
 					alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-					Intent intent = new Intent(
-							"android.intent.action.ALARM_RECEIVER");
-					for (int i = 0; i < reReart.length; i++) {
-						if (reReart[i]) {
-
-							switch (i) {
-							case 0:
-								operation = PendingIntent.getBroadcast(
-										ActAddAlert.this,
-										alertEdit.getClockid(), intent, 0);
-								alarmManager.cancel(operation);
-								break;
-							case 1:
-								operation = PendingIntent.getBroadcast(
-										ActAddAlert.this,
-										alertEdit.getClockid() + 1, intent, 0);
-								alarmManager.cancel(operation);
-								break;
-							case 2:
-								operation = PendingIntent.getBroadcast(
-										ActAddAlert.this,
-										alertEdit.getClockid() + 2, intent, 0);
-								alarmManager.cancel(operation);
-
-								break;
-							case 3:
-								operation = PendingIntent.getBroadcast(
-										ActAddAlert.this,
-										alertEdit.getClockid() + 3, intent, 0);
-								alarmManager.cancel(operation);
-
-								break;
-							case 4:
-								operation = PendingIntent.getBroadcast(
-										ActAddAlert.this,
-										alertEdit.getClockid() + 4, intent, 0);
-								alarmManager.cancel(operation);
-								break;
-							case 5:
-								operation = PendingIntent.getBroadcast(
-										ActAddAlert.this,
-										alertEdit.getClockid() + 5, intent, 0);
-								alarmManager.cancel(operation);
-
-								break;
-							case 6:
-								operation = PendingIntent.getBroadcast(
-										ActAddAlert.this,
-										alertEdit.getClockid() + 6, intent, 0);
-								alarmManager.cancel(operation);
-								break;
-
-							}
-
-						}
-
-					}
+					clearAlarm();
 					DbUtils db = DbUtils.create(ActAddAlert.this);
 					db.configAllowTransaction(true);
 					db.configDebug(true);
@@ -151,6 +87,7 @@ public class ActAddAlert extends BaseActivity {
 					sendBroadcast(intent1);
 					finish();
 				}
+
 			});
 			String[] rePeats = alertEdit.getAlertRepeat().split(",");
 			String repeat = "";
@@ -232,7 +169,9 @@ public class ActAddAlert extends BaseActivity {
 			public void onClick(View v) {
 				// 获取AlarmManager对象
 				alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
+				if (alertEdit != null) {
+					clearAlarm();
+				}
 				DbUtils db = DbUtils.create(ActAddAlert.this);
 				db.configAllowTransaction(true);
 				db.configDebug(true);
@@ -250,13 +189,20 @@ public class ActAddAlert extends BaseActivity {
 				for (int i = 0; i < reReart.length; i++) {
 					if (reReart[i]) {
 						Calendar cal = Calendar.getInstance();
-						System.out.println("今天的日期: " + cal.getTime());
+
+						System.out.println("今天的分钟: "
+								+ Integer.parseInt(hours.get(leftWheel
+										.getCurrentItem())));
+						System.out.println("今天的秒钟: "
+								+ Integer.parseInt(times.get(rightWheel
+										.getCurrentItem())));
 						int day_of_week = cal.get(Calendar.DAY_OF_WEEK) - 1;
 						cal.add(Calendar.DATE, -day_of_week);
 						cal.set(Calendar.MINUTE, Integer.parseInt(hours
 								.get(leftWheel.getCurrentItem())));
 						cal.set(Calendar.SECOND, Integer.parseInt(times
 								.get(rightWheel.getCurrentItem())));
+						System.out.println("今天的日期: " + cal.getTime());
 						long alertTime = cal.getTimeInMillis();
 						switch (i) {
 						case 0:
@@ -289,7 +235,7 @@ public class ActAddAlert extends BaseActivity {
 							operation = PendingIntent.getBroadcast(
 									ActAddAlert.this, alert.getClockid() + 2,
 									intentAlarm2, 0);
-                    
+
 							alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
 									alertTime + 86400000 * 2, 86400000 * 7,
 									operation);
@@ -421,6 +367,61 @@ public class ActAddAlert extends BaseActivity {
 			}
 		});
 		setTitle("添加闹钟");
+	}
+
+	/**
+	 * 取消闹钟
+	 */
+	private void clearAlarm() {
+		Intent intent = new Intent("android.intent.action.ALARM_RECEIVER");
+		for (int i = 0; i < reReart.length; i++) {
+			if (reReart[i]) {
+
+				switch (i) {
+				case 0:
+					operation = PendingIntent.getBroadcast(ActAddAlert.this,
+							alertEdit.getClockid(), intent, 0);
+					alarmManager.cancel(operation);
+					break;
+				case 1:
+					operation = PendingIntent.getBroadcast(ActAddAlert.this,
+							alertEdit.getClockid() + 1, intent, 0);
+					alarmManager.cancel(operation);
+					break;
+				case 2:
+					operation = PendingIntent.getBroadcast(ActAddAlert.this,
+							alertEdit.getClockid() + 2, intent, 0);
+					alarmManager.cancel(operation);
+
+					break;
+				case 3:
+					operation = PendingIntent.getBroadcast(ActAddAlert.this,
+							alertEdit.getClockid() + 3, intent, 0);
+					alarmManager.cancel(operation);
+
+					break;
+				case 4:
+					operation = PendingIntent.getBroadcast(ActAddAlert.this,
+							alertEdit.getClockid() + 4, intent, 0);
+					alarmManager.cancel(operation);
+					break;
+				case 5:
+					operation = PendingIntent.getBroadcast(ActAddAlert.this,
+							alertEdit.getClockid() + 5, intent, 0);
+					alarmManager.cancel(operation);
+
+					break;
+				case 6:
+					operation = PendingIntent.getBroadcast(ActAddAlert.this,
+							alertEdit.getClockid() + 6, intent, 0);
+					alarmManager.cancel(operation);
+					break;
+
+				}
+
+			}
+
+		}
 	}
 
 	private void initData() {
