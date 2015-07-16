@@ -84,6 +84,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 	private ActMain actActivity;
 	private Handler mHandler;
 	Float perProgres;
+	private boolean isResume;
+	private int selectPositon;
 
 	public static HomeRootFragment newInstance(int checkType) {
 		HomeRootFragment f = new HomeRootFragment();
@@ -113,7 +115,18 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		super.onDestroy();
 		getActivity().unregisterReceiver(mReceiver);
 	}
-
+    @Override
+    public void onResume() {
+    	// TODO Auto-generated method stub
+    	super.onResume();
+    	SelfDefineApplication.getInstance().isResume=true;
+    }
+    @Override
+    public void onPause() {
+    	// TODO Auto-generated method stub
+    	super.onPause();
+    	SelfDefineApplication.getInstance().isResume=false;
+    }
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -224,12 +237,12 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 			@Override
 			public void onPageSelected(int arg0) {
+				SelfDefineApplication.getInstance().viewpagerPositon=arg0;
 				if (arg0 == 0) {
 					actActivity.ivImg.setBackgroundResource(R.drawable.back);
 					actActivity.getTkActionBar();
 					actActivity.setTitle("检测中心");
 					actActivity.ivImg.setVisibility(View.VISIBLE);
-					
 					actActivity.addRightImage(R.drawable.news_pressed, new OnClickListener() {
 						
 						@Override
@@ -241,7 +254,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					
 				} else {
 					actActivity.ivImg
-							.setBackgroundResource(R.drawable.arrow_up);
+							.setBackgroundResource(R.drawable.arrow_down);
 					actActivity.setTitle("历史记录");
 					actActivity.ivImg.setVisibility(View.VISIBLE);
 					View view=new View(actActivity);
@@ -295,6 +308,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		checkType = getArguments().getInt("checkType");
+		
 	}
 
 	@Override
@@ -411,7 +425,6 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			final java.text.DecimalFormat df = new java.text.DecimalFormat(
 					"#0.0");
 			if (Constants.UPDATE_OK.equals(action)) {
-
 				final int waters = intent.getIntExtra("waters", 0);
 				int selectPostion = intent.getIntExtra("selectPostion", 0);
 				perProgres = Float.parseFloat(df.format(waters / 45.0f + 20.0)) / 100f;
@@ -754,6 +767,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					}
 				}
 				progressBar.setProgress(Float.parseFloat(dfc.format(d)));
+				actActivity.touming.setVisibility(View.GONE);
 
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
 				tvBlueTouth.setMyText("已连接");
@@ -771,6 +785,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress, false);
 				toSeeMore.setVisibility(View.INVISIBLE);
+				actActivity.touming.setVisibility(View.GONE);
 				/*
 				 * try { Thread.sleep(1000);
 				 * tvBlueTouth.setVisibility(View.GONE); } catch
@@ -782,6 +797,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress, false);
 				toSeeMore.setVisibility(View.INVISIBLE);
+				actActivity.touming.setVisibility(View.GONE);
 				/*
 				 * try { Thread.sleep(1000);
 				 * tvBlueTouth.setVisibility(View.GONE); } catch
@@ -789,12 +805,19 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				 * e.printStackTrace(); }
 				 */
 			} else if (BleService.ACTION_TIME_TOOSHORT.equals(action)) {
-				Toast.makeText(getActivity(), "请连续按住5秒", 1000).show();
-				pb.setProgressing(0.0f, tvBlueProgress, false);
+				if(SelfDefineApplication.getInstance().viewpagerPositon==0&&SelfDefineApplication.getInstance().isResume){
+					Toast.makeText(getActivity(), "请连续按住5秒", 1000).show();
+					pb.setProgressing(0.0f, tvBlueProgress, false);
+				}
+				actActivity.touming.setVisibility(View.GONE);
 			} else if (BleService.ACTION_START.equals(action)) {
-				pb.setProgressing(0.5f, tvBlueProgress, true);
-				tvBlueTouth.setText("");
-				toSeeMore.setText("");
+				if(SelfDefineApplication.getInstance().viewpagerPositon==0&&SelfDefineApplication.getInstance().isResume){
+					pb.setProgressing(0.5f, tvBlueProgress, true);
+					tvBlueTouth.setText("");
+					toSeeMore.setText("");
+					actActivity.touming.setVisibility(View.VISIBLE);
+				}
+				
 			}
 
 		}
@@ -1416,7 +1439,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				actActivity.ivImg.setVisibility(View.VISIBLE);
 			} else {
 				viewPager.setCurrentItem(1);
-				actActivity.ivImg.setBackgroundResource(R.drawable.arrow_up);
+				actActivity.ivImg.setBackgroundResource(R.drawable.arrow_down);
 				actActivity.ivImg.setVisibility(View.VISIBLE);
 			}
 

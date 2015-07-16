@@ -15,32 +15,34 @@ import com.mygame.pure.utils.DbUtils;
 
 public class BleParserLoader {
 	public static int waterParser(byte[] bytes, Context context, String mac) {
-		byte[] water = new byte[2];
-		water[0] = bytes[2];
-		water[1] = bytes[1];
-		int waters = byteArrayToInt(water);
-		DbUtils db = DbUtils.create(context);
-		db.configAllowTransaction(true);
-		db.configDebug(true);
-		BltModel model = new BltModel();
-		model.setDate(DateUtil.getCurrentDate());
-		model.setWater(waters + "");
-		model.setBltid(mac);
-		model.setModelstate(SelfDefineApplication.getInstance().selectPostion);
-		SimpleDateFormat df = new SimpleDateFormat("HH");
-		model.setHour(df.format(new Date()));
-		try {
-			db.saveBindingId(model);
-		} catch (DbException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		if(SelfDefineApplication.getInstance().viewpagerPositon==0&&SelfDefineApplication.getInstance().isResume){
+			byte[] water = new byte[2];
+			water[0] = bytes[2];
+			water[1] = bytes[1];
+			int waters = byteArrayToInt(water);
+			DbUtils db = DbUtils.create(context);
+			db.configAllowTransaction(true);
+			db.configDebug(true);
+			BltModel model = new BltModel();
+			model.setDate(DateUtil.getCurrentDate());
+			model.setWater(waters + "");
+			model.setBltid(mac);
+			model.setModelstate(SelfDefineApplication.getInstance().selectPostion);
+			SimpleDateFormat df = new SimpleDateFormat("HH");
+			model.setHour(df.format(new Date()));
+			try {
+				db.saveBindingId(model);
+			} catch (DbException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		Intent intent = new Intent(Constants.UPDATE_OK);
-		intent.putExtra("selectPostion",
-				SelfDefineApplication.getInstance().selectPostion);
-		intent.putExtra("waters", waters);
-		context.sendBroadcast(intent);
+			Intent intent = new Intent(Constants.UPDATE_OK);
+			intent.putExtra("selectPostion",
+					SelfDefineApplication.getInstance().selectPostion);
+			intent.putExtra("waters", waters);
+			context.sendBroadcast(intent);
+		}
 		return 0;
 
 	}

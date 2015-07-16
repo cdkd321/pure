@@ -27,5 +27,11 @@
     <include
         android:layout_below="@+id/fragment_content"
         layout="@layout/tab_item_view" />
+    <View 
+        android:id="@+id/touming"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        />
 
 </RelativeLayout>

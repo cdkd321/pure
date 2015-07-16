@@ -10,6 +10,8 @@ import com.mygame.pure.utils.DeviceConfiger;
 public class SelfDefineApplication extends Application {
 	public BleService mService;
 	public static  boolean  isStop;
+	public static boolean isResume;
+	public static int viewpagerPositon;
 	public static boolean finishLogin;
 	private static SelfDefineApplication application;
 	private static FinalHttp finalHttp;

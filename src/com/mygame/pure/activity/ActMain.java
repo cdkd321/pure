@@ -21,10 +21,13 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.mygame.pure.R;
@@ -60,6 +63,8 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	HomeRootFragment fragment;
 	private boolean isBind = false ;
 	private ContentResolver mContentResolver;
+	private RelativeLayout LinearLayout1;
+	public static View touming;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +181,24 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		llTab2 = findViewById(R.id.llTab2);
 		llTab3 = findViewById(R.id.llTab3);
 		llTab4 = findViewById(R.id.llTab4);
+		LinearLayout1=(RelativeLayout) findViewById(R.id.LinearLayout1);
+		touming=findViewById(R.id.touming);
+		touming.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				
+			}
+		});
+		LinearLayout1.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
+		
 		getTkActionBar();
 		setTitle("检测中心");
 		addBackImage(R.drawable.more, new OnClickListener() {

@@ -106,7 +106,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 						 pingjun_text.setText("同龄人群手部水分平均值30.2%");
 					 }
 					 getHeadusername();
-					 w_w.setText(settings.USER_NAME.getValue().toString());
+					 w_w.setText(settings.USER_nick.getValue().toString());
 				}else{
 					pingjun_text.setText("登录后可查看同龄人群平均值");
 					
@@ -151,7 +151,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				 
 				//pingjun_text.setText("同龄人群脸部水分平均值36.70%");
 				 getHeadusername();
-				 w_w.setText(settings.USER_NAME.getValue().toString());
+				 w_w.setText(settings.USER_nick.getValue().toString());
 			}else{
 				pingjun_text.setText("登录后可查看同龄人群平均值");
 			} 
@@ -196,7 +196,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				}
 				
 				getHeadusername();
-				 w_w.setText(settings.USER_NAME.getValue().toString());
+				 w_w.setText(settings.USER_nick.getValue().toString());
 			}else{
 				pingjun_text.setText("登录后可查看同龄人群平均值");
 			} 
@@ -241,7 +241,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				}
 				 
 				getHeadusername();
-				 w_w.setText(settings.USER_NAME.getValue().toString());
+				 w_w.setText(settings.USER_nick.getValue().toString());
 			}else{
 				pingjun_text.setText("登录后可查看同龄人群平均值");
 			} 
