@@ -2,6 +2,7 @@ package com.mygame.pure.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -11,12 +12,17 @@ import android.widget.TextView;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
+import com.ab.soap.AbSoapListener;
+import com.ab.soap.AbSoapParams;
+import com.ab.soap.AbSoapUtil;
 import com.ab.view.level.AbLevelChartFactory;
 import com.ab.view.level.AbLevelSeriesDataset;
 import com.ab.view.level.AbLevelSeriesRenderer;
 import com.ab.view.level.AbLevelView;
 import com.mygame.pure.R;
 import com.mygame.pure.core.MicroRecruitSettings;
+import com.mygame.pure.view.CircleImageView;
+import com.squareup.picasso.Picasso;
 
 /**
  * 关于界面
@@ -34,11 +40,15 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 	private float[] partValue;
 	private TextView pingjun_text;
 	private TextView tishi_text;
+	private TextView nick_name_text;
+	private TextView w_w;
 	private String[] hand_skin_share;
 	private String[] the_neck_share;
 	private String[] the_face_share;
 	private String[] the_eye_share;
 	private MicroRecruitSettings settings;
+	private AbSoapUtil mAbSoapUtil;
+	private CircleImageView user_logo;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +60,9 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		textValue=getIntent().getStringExtra("progressText");
 		pingjun_text=(TextView) findViewById(R.id.pingjun_text);
 		tishi_text=(TextView) findViewById(R.id.tishi_title);
+		w_w=(TextView) findViewById(R.id.nick_name_text);
+		user_logo=(CircleImageView) findViewById(R.id.user_logo);
+		mAbSoapUtil = AbSoapUtil.getInstance(this);
 		settings = new MicroRecruitSettings(ActSpecify.this);
 		hand_skin_share=getResources().getStringArray(R.array.hand_skin_share);
 		the_neck_share=getResources().getStringArray(R.array.the_neck_share);
@@ -74,7 +87,29 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 			// isLogin();
 			 
 				if (!settings.USER_NAME.getValue().equals("")) {
-					 pingjun_text.setText("同龄人群平均值32.5%");
+					 if(!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())){
+						 int age=Integer.parseInt(settings.USER_AGE.getValue().toString());
+						 if(age>=0&&age<=16){
+							 pingjun_text.setText("同龄人群手部水分平均值33.9%");
+						 }else if(age>=17&&age<=23){
+							 pingjun_text.setText("同龄人群手部水分平均值31.2%");
+						 }else if(age>=24&&age<=27){
+							 pingjun_text.setText("同龄人群手部水分平均值30.2%");
+						 }else if(age>=28&&age<=34){
+							 pingjun_text.setText("同龄人群手部水分平均值29.6%");
+						 }else if(age>=35&&age<=44){
+							 pingjun_text.setText("同龄人群手部水分平均值28.5%");
+						 }else if(age>=45){
+							 pingjun_text.setText("同龄人群手部水分平均值27.8%");
+						 }
+					 }else{
+						 pingjun_text.setText("同龄人群手部水分平均值30.2%");
+					 }
+					 getHeadusername();
+					 w_w.setText(settings.USER_NAME.getValue().toString());
+				}else{
+					pingjun_text.setText("登录后可查看同龄人群平均值");
+					
 				} 
 			
 			// 各等级段的值
@@ -95,8 +130,31 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				textDesc = "正常";
 			}
 			if (!settings.USER_NAME.getValue().equals("")) {
-				pingjun_text.setText("同龄人群平均值36.70%");
-			}
+				 if(!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())){
+					 int age=Integer.parseInt(settings.USER_AGE.getValue().toString());
+					 if(age>=0&&age<=16){
+						 pingjun_text.setText("同龄人群脸部水分平均值39.5%");
+					 }else if(age>=17&&age<=23){
+						 pingjun_text.setText("同龄人群脸部水分平均值37.8%");
+					 }else if(age>=24&&age<=27){
+						 pingjun_text.setText("同龄人群脸部水分平均值36.7%");
+					 }else if(age>=28&&age<=34){
+						 pingjun_text.setText("同龄人群脸部水分平均值35.8%");
+					 }else if(age>=35&&age<=44){
+						 pingjun_text.setText("同龄人群脸部水分平均值34.2%");
+					 }else if(age>=45){
+						 pingjun_text.setText("同龄人群脸部水分平均值33.3%");
+					 }  
+				 }else{
+					 pingjun_text.setText("同龄人群脸部水分平均值35.8%");
+				 }
+				 
+				//pingjun_text.setText("同龄人群脸部水分平均值36.70%");
+				 getHeadusername();
+				 w_w.setText(settings.USER_NAME.getValue().toString());
+			}else{
+				pingjun_text.setText("登录后可查看同龄人群平均值");
+			} 
 			
 			// 假如 每段的百分比 2 3 2 1 1 1
 			 part = new float[] { 3.00f, 2.50f, 4.50f };
@@ -118,8 +176,30 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				textDesc = "正常";
 			}
 			if (!settings.USER_NAME.getValue().equals("")) {
-				pingjun_text.setText("同龄人群平均值41.10%");
-			}
+				if(!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())){
+					int age=Integer.parseInt(settings.USER_AGE.getValue().toString());
+					 if(age>=0&&age<=16){
+						 pingjun_text.setText("同龄人群脸部水分平均值44.6%");
+					 }else if(age>=17&&age<=23){
+						 pingjun_text.setText("同龄人群脸部水分平均值43.3%");
+					 }else if(age>=24&&age<=27){
+						 pingjun_text.setText("同龄人群脸部水分平均值41.1%");
+					 }else if(age>=28&&age<=34){
+						 pingjun_text.setText("同龄人群脸部水分平均值39.7%");
+					 }else if(age>=35&&age<=44){
+						 pingjun_text.setText("同龄人群脸部水分平均值37.2%");
+					 }else if(age>=45){
+						 pingjun_text.setText("同龄人群脸部水分平均值36.3%");
+					 }
+				}else{
+					 pingjun_text.setText("同龄人群脸部水分平均值41.1%");
+				}
+				
+				getHeadusername();
+				 w_w.setText(settings.USER_NAME.getValue().toString());
+			}else{
+				pingjun_text.setText("登录后可查看同龄人群平均值");
+			} 
 			
 			// 假如 每段的百分比 2 3 2 1 1 1
 			 part = new float[] { 3.75f, 2.5f, 3.75f };
@@ -141,8 +221,30 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				textDesc = "正常";
 			}
 			if (!settings.USER_NAME.getValue().equals("")) {
-				pingjun_text.setText("同龄人群平均值41.10%");
-			}
+				if(!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())){
+					int age=Integer.parseInt(settings.USER_AGE.getValue().toString());
+					 if(age>=0&&age<=16){
+						 pingjun_text.setText("同龄人群脸部水分平均值44.6%");
+					 }else if(age>=17&&age<=23){
+						 pingjun_text.setText("同龄人群脸部水分平均值43.3%");
+					 }else if(age>=24&&age<=27){
+						 pingjun_text.setText("同龄人群脸部水分平均值41.1%");
+					 }else if(age>=28&&age<=34){
+						 pingjun_text.setText("同龄人群脸部水分平均值39.7%");
+					 }else if(age>=35&&age<=44){
+						 pingjun_text.setText("同龄人群脸部水分平均值37.2%");
+					 }else if(age>=45){
+						 pingjun_text.setText("同龄人群脸部水分平均值36.3%");
+					 }
+				}else{
+					pingjun_text.setText("同龄人群脸部水分平均值41.1%");
+				}
+				 
+				getHeadusername();
+				 w_w.setText(settings.USER_NAME.getValue().toString());
+			}else{
+				pingjun_text.setText("登录后可查看同龄人群平均值");
+			} 
 			// 假如 每段的百分比 2 3 2 1 1 1
 			 part = new float[] { 3.75f, 2.5f, 3.75f };
 			// 各等级段的值
@@ -252,6 +354,57 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 
+	}
+	public void getHeadusername() {
+
+		// 获取用户的相关信息
+		// String urlString =
+		// "http://miliapp.ebms.cn/webservice/member.asmx?op=GetListByUserName";
+		// String nameSpace = "http://tempuri.org/";
+		// String methodName = "GetListByUserName";
+		// AbSoapParams params = new AbSoapParams();
+		// params.put("user1", "APP");
+		// params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
+		// params.put("username", "longke1988@163.com");
+
+		String urlString3 = "http://miliapp.ebms.cn/webservice/member.asmx?op=GetListByUserName";
+		String nameSpace3 = "http://tempuri.org/";
+		String methodName3 = "GetListByUserName";
+		AbSoapParams params3 = new AbSoapParams();
+		params3.put("user1", "APP");
+		params3.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
+		params3.put("username", settings.USER_NAME.getValue());
+
+		mAbSoapUtil.call(urlString3, nameSpace3, methodName3, params3,
+				new AbSoapListener() {
+					@Override
+					public void onSuccess(int arg0, String arg1) {
+						// TODO Auto-generated method stub
+						if (arg1.indexOf("Nicheng=") != -1) {
+							String[] a = arg1.split("Nicheng=");
+							String[] b = a[1].split(";");
+							w_w.setText(b[0]);
+						}
+						if (arg1.indexOf("Touxiang=") != -1) {
+							String[] a1 = arg1.split("Touxiang=");
+							String[] b1 = a1[1].split(";");
+							Picasso.with(ActSpecify.this)
+									.load("http://miliapp.ebms.cn/" + b1[0])
+									.placeholder(R.drawable.hcy_icon)
+									.error(R.drawable.hcy_icon).into(user_logo);
+						}
+
+					
+					}
+
+					@Override
+					public void onFailure(int arg0, String arg1, Throwable arg2) {
+						// TODO Auto-generated method stub
+						// Toast.makeText(getApplicationContext(), "请求失败" +
+						// arg1,
+						// 1).show();
+					}
+				});
 	}
 
 }

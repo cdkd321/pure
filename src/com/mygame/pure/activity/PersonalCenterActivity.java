@@ -43,6 +43,7 @@ import com.ab.soap.AbSoapUtil;
 import com.mygame.pure.R;
 import com.mygame.pure.core.MicroRecruitSettings;
 import com.mygame.pure.utils.AbDateUtil;
+import com.mygame.pure.utils.DateUtil;
 import com.mygame.pure.view.ActionSheetDialog;
 import com.mygame.pure.view.ActionSheetDialog.OnSheetItemClickListener;
 import com.mygame.pure.view.ActionSheetDialog.SheetItemColor;
@@ -337,7 +338,8 @@ public class PersonalCenterActivity extends FragmentActivity implements
 			} else {
 				m = 1;
 			}
-
+			String date[]= DateUtil.getCurrentDate().split("-");
+			settings.USER_AGE.setValue((Integer.parseInt(date[0])-mYear)+"");
 			mDateDisplay.setText(mYear + "-" + m + "-" + mDay);
 		}
 	}

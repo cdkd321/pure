@@ -99,6 +99,7 @@
 
             <include layout="@layout/include_split" />
 
+            
             <RelativeLayout
                 android:id="@+id/rlWater"
                 style="@style/m_w"
@@ -110,13 +111,15 @@
                 <TextView
                     android:id="@+id/shunengdu_title"
                     style="@style/styleCenterText"
+                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="脸部的肌肤水嫩度" />
+                    android:text="手部的肌肤水嫩度" />
 
                 <com.mygame.pure.view.MyrogressBar
                     android:id="@+id/myProgress"
+                    android:layout_toRightOf="@+id/shunengdu_title"
+                    android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
-                    android:layout_alignParentRight="true"
                     android:layout_height="wrap_content"
                      />
 
@@ -209,10 +212,9 @@
                 android:layout_height="0.5dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/gray" />
-            
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/sixty_dp"
+                android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/twenty_dp"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
@@ -232,6 +234,7 @@
 	                android:layout_gravity="center_vertical" 
 	                android:text="抱歉现在您还没有数据" />
             </LinearLayout>
+           
         </LinearLayout>
     </com.mygame.pure.view.AbOuterScrollView>
 

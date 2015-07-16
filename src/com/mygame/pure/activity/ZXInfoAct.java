@@ -4,6 +4,7 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -245,13 +247,12 @@ public class ZXInfoAct extends BaseActivity implements OnClickListener {
 						tv_zx2.setText(cStrings1[0]);
 						tv_zx3.setText(cStrings11[0]);
 						tv_zx4.setText(cStrings111[0]);
-						/*try {
-							Thread.sleep(3000);
-							
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}*/
+						/*
+						 * try { Thread.sleep(3000);
+						 * 
+						 * } catch (InterruptedException e) { // TODO
+						 * Auto-generated catch block e.printStackTrace(); }
+						 */
 					}
 
 					@Override
@@ -292,34 +293,44 @@ public class ZXInfoAct extends BaseActivity implements OnClickListener {
 						// stub
 						LayoutInflater inflater = LayoutInflater
 								.from(getApplicationContext());
-						
-						String str=arg1.replace("Table1=anyType{", ">");
-						String[] arry=str.split(">");
-						ArrayList<Banner> banners=new ArrayList<Banner>();
+
+						String str = arg1.replace("Table1=anyType{", ">");
+						String[] arry = str.split(">");
+						final ArrayList<Banner> banners = new ArrayList<Banner>();
 						ArrayList<View> views = new ArrayList<View>();
-						for(int i=1;i<arry.length;i++){
-							View view1 = (View) inflater.inflate(R.layout.item1,
-									null);
+						for (int i = 1; i < arry.length; i++) {
+							View view1 = (View) inflater.inflate(
+									R.layout.item1, null);
 							ImageView img_tb = (ImageView) view1
 									.findViewById(R.id.img_tb);
 							TextView tv_text = (TextView) view1
 									.findViewById(R.id.tv_text);
-							
-							Banner banner=new Banner();
-							String[] tab=arry[i].split(";");
-							String image=tab[3].replace("Image=", "").trim();
-							String url=tab[9].replace("Url=", "");
+
+							Banner banner = new Banner();
+							String[] tab = arry[i].split(";");
+							String image = tab[3].replace("Image=", "").trim();
+							final String url = tab[9].replace("Url=", "");
 							banner.setImage(image);
 							banner.setUrl(url);
 							banners.add(banner);
 							Picasso.with(getApplicationContext())
-							.load("http://miliapp.ebms.cn" + image)
-							.into(img_tb);
+									.load("http://miliapp.ebms.cn" + image)
+									.into(img_tb);
+							view1.setOnClickListener(new OnClickListener() {
+
+								@Override
+								public void onClick(View arg0) {
+									Intent intent = new Intent(ZXInfoAct.this,
+											AboutActivity.class);
+									intent.putExtra("url",url);
+									startActivity(intent);
+								}
+							});
 							views.add(view1);
 						}
-						
+
 						banner.setAdapter(new PagerView(views));
-					
+
 					}
 
 					@Override

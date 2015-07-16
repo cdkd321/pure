@@ -23,5 +23,6 @@ public class MicroRecruitSettings extends AppSettings {
 	public StringPreference USER_NAME = new StringPreference("username", "");// 用户名
 	public StringPreference USER_head = new StringPreference("userhead", "");// 头像地址
 	public StringPreference USER_nick = new StringPreference("usernick", "");// 昵称
+	public StringPreference USER_AGE = new StringPreference("age", "");// 昵称
 
 }

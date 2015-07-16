@@ -104,6 +104,7 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		setTitle("更多");
 		// isLogin();
 		if (settings.USER_NAME.getValue().equals("")) {
+			w_w.setText("未登录");
 			Toast.makeText(getApplicationContext(), "用户未登录", 1).show();
 		} else {
 			getHeadusername();

@@ -47,6 +47,7 @@ import com.mygame.pure.SelfDefineApplication;
 import com.mygame.pure.activity.ActMain;
 import com.mygame.pure.activity.ActSpecify;
 import com.mygame.pure.activity.DeviceListActivity;
+import com.mygame.pure.activity.ZXInfoAct;
 import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.bean.Average;
 import com.mygame.pure.bean.BltModel;
@@ -225,13 +226,26 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			public void onPageSelected(int arg0) {
 				if (arg0 == 0) {
 					actActivity.ivImg.setBackgroundResource(R.drawable.back);
+					actActivity.getTkActionBar();
 					actActivity.setTitle("检测中心");
 					actActivity.ivImg.setVisibility(View.VISIBLE);
+					
+					actActivity.addRightImage(R.drawable.news_pressed, new OnClickListener() {
+						
+						@Override
+						public void onClick(View arg0) {
+							Intent intent = new Intent(getActivity(), ZXInfoAct.class);
+							startActivity(intent);
+						}
+					});
+					
 				} else {
 					actActivity.ivImg
 							.setBackgroundResource(R.drawable.arrow_up);
 					actActivity.setTitle("历史记录");
 					actActivity.ivImg.setVisibility(View.VISIBLE);
+					View view=new View(actActivity);
+					actActivity.getTkActionBar().setRightView(view, null);
 				}
 
 			}
@@ -1568,6 +1582,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		Average averageEntity = new Average();
 		float average = 0;
 		int count = 0;
+		double m=0;
 		List<PointD> linePoint1 = new ArrayList<PointD>();
 		String ends[] = endDate.split("-");
 		int totalDay = Integer.parseInt(ends[2]);
@@ -1580,6 +1595,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			if (dayAvera(DateUtil.getDateStr(startDate, i)).getAverage() != 0) {
 				linePoint1.add(new PointD(i * pointd, dayAvera(
 						DateUtil.getDateStr(startDate, i)).getAverage()));
+				m++;
 			}
 
 		}
@@ -1597,7 +1613,13 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		chartData.add(dataSeries1);
 		chartView.setChartData(chartData);
 		chartView.setChartLabels(chartLabels);
-		averageEntity.setAverage(average);
+		if(m!=0){
+			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
+			averageEntity.setAverage(Float.parseFloat(df.format(average/m)));
+		}else{
+			averageEntity.setAverage(0.0f);
+		}
+		//averageEntity.setAverage(average);
 		averageEntity.setCount(count);
 		chartView.initView();
 		return averageEntity;
@@ -1609,13 +1631,15 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 	private Average refreshWeekChartView(String date) {
 		// 绾�鐨勬暟鎹泦
 		Average averageEntity = new Average();
-		float average = 0;
+		double average = 0;
 		int count = 0;
+		double i=0;
 		List<PointD> linePoint1 = new ArrayList<PointD>();
 		if (dayAvera(date).getAverage() != 0) {
 			average = average + dayAvera(date).getAverage();
 			count = count + dayAvera(date).getCount();
 			linePoint1.add(new PointD(14d, dayAvera(date).getAverage()));
+			i++;
 		}
 		if (dayAvera(DateUtil.getDateStr(date, 1)).getAverage() != 0) {
 			average = average
@@ -1623,6 +1647,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			count = count + dayAvera(DateUtil.getDateStr(date, 1)).getCount();
 			linePoint1.add(new PointD(28d, dayAvera(
 					DateUtil.getDateStr(date, 1)).getAverage()));
+			i++;
 		}
 		if (dayAvera(DateUtil.getDateStr(date, 2)).getAverage() != 0) {
 			average = average
@@ -1630,6 +1655,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			count = count + dayAvera(DateUtil.getDateStr(date, 2)).getCount();
 			linePoint1.add(new PointD(42d, dayAvera(
 					DateUtil.getDateStr(date, 2)).getAverage()));
+			i++;
 
 		}
 		if (dayAvera(DateUtil.getDateStr(date, 3)).getAverage() != 0) {
@@ -1638,6 +1664,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			count = count + dayAvera(DateUtil.getDateStr(date, 3)).getCount();
 			linePoint1.add(new PointD(56d, dayAvera(
 					DateUtil.getDateStr(date, 3)).getAverage()));
+			i++;
 
 		}
 		if (dayAvera(DateUtil.getDateStr(date, 4)).getAverage() != 0) {
@@ -1646,6 +1673,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			count = count + dayAvera(DateUtil.getDateStr(date, 4)).getCount();
 			linePoint1.add(new PointD(70d, dayAvera(
 					DateUtil.getDateStr(date, 4)).getAverage()));
+			i++;
 
 		}
 		if (dayAvera(DateUtil.getDateStr(date, 5)).getAverage() != 0) {
@@ -1654,6 +1682,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			count = count + dayAvera(DateUtil.getDateStr(date, 5)).getCount();
 			linePoint1.add(new PointD(84d, dayAvera(
 					DateUtil.getDateStr(date, 5)).getAverage()));
+			i++;
 
 		}
 		if (dayAvera(DateUtil.getDateStr(date, 6)).getAverage() != 0) {
@@ -1662,6 +1691,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			count = count + dayAvera(DateUtil.getDateStr(date, 6)).getCount();
 			linePoint1.add(new PointD(98d, dayAvera(
 					DateUtil.getDateStr(date, 6)).getAverage()));
+			i++;
 
 		}
 		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
@@ -1683,7 +1713,13 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		chartView.setChartData(chartData);
 		chartView.setChartLabels(chartLabels);
 		chartView.initView();
-		averageEntity.setAverage(average);
+		if(i!=0){
+			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
+			averageEntity.setAverage(Float.parseFloat(df.format(average/i)));
+		}else{
+			averageEntity.setAverage(0.0f);
+		}
+		
 		averageEntity.setCount(count);
 		return averageEntity;
 	}

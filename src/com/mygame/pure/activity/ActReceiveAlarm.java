@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import com.mygame.pure.R;
 import com.mygame.pure.bean.Alert;
+import com.mygame.pure.utils.DateUtil;
 
 import android.app.Activity;
 import android.content.Context;
@@ -64,8 +65,7 @@ public class ActReceiveAlarm extends Activity {
 				});
 		
 		long time = getIntent().getLongExtra("TIME", 0);
-		((TextView) findViewById(R.id.tvTimeRecAct)).setText(alert
-				.getAlertTime() + "");
+		((TextView) findViewById(R.id.tvTimeRecAct)).setText(DateUtil.getHm());
 		// ((TextView)findViewById(R.id.tvTimeRecAct)).setTypeface(Typeface.createFromAsset(getAssets(),
 		// "fonts/Raleway-Regular.ttf"));
 		shake = AnimationUtils.loadAnimation(getApplicationContext(),

@@ -149,7 +149,7 @@ public class ActAddAlert extends BaseActivity {
 			}
 			leftWheel.setCurrentItem(hourIndex - 1);
 			int miniteIndex = 0;
-			if (times[1].startsWith("0")) {
+			if (times[1].startsWith("0")&&!times[1].equals("0")) {
 				miniteIndex = Integer.parseInt(times[1].replace("0", ""));
 			} else {
 				miniteIndex = Integer.parseInt(times[1]);
@@ -190,20 +190,25 @@ public class ActAddAlert extends BaseActivity {
 				for (int i = 0; i < reReart.length; i++) {
 					if (reReart[i]) {
 						Calendar cal = Calendar.getInstance();
-
+						System.out.println("今天的日期:>>>>>>>"+cal.getTime());
 						System.out.println("今天的分钟: "
 								+ Integer.parseInt(hours.get(leftWheel
 										.getCurrentItem())));
 						System.out.println("今天的秒钟: "
 								+ Integer.parseInt(times.get(rightWheel
 										.getCurrentItem())));
-						cal.set(Calendar.HOUR, Integer.parseInt(hours
+						String date[]=DateUtil.getCurrentDate().split("-");
+						cal.set(Calendar.YEAR, Integer.parseInt(date[0]));
+						cal.set(Calendar.MONTH, Integer.parseInt(date[1])-1);
+						cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[2]));
+						cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours
 								.get(leftWheel.getCurrentItem())));
 						cal.set(Calendar.MINUTE, Integer.parseInt(times
 								.get(rightWheel.getCurrentItem())));
 						cal.set(Calendar.SECOND, 0);
-						int week=AbDateUtil.getWeekNumber(DateUtil.getCurrentDate(),"yyyy-MM-dd");
 						System.out.println("今天的日期: " + cal.getTime());
+						int week=AbDateUtil.getWeekNumber(DateUtil.getCurrentDate(),"yyyy-MM-dd");
+						
 						long alertTime = cal.getTimeInMillis();
 						System.out.println("alertTime>>>>>>>"+alertTime);
 						System.out.println("System>>>>>>>"+System.currentTimeMillis()+50000);

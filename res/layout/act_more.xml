@@ -67,7 +67,6 @@
             android:layout_below="@+id/cimg"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/ten_dp"
-            android:text="未登录"
             android:textColor="@color/text_black"
             android:textSize="@dimen/list_text_size" />
 
@@ -91,7 +90,7 @@
         <com.mygame.pure.view.UIItem
             android:id="@+id/connect_device"
             style="@style/m_w"
-            app:leftIcon="@drawable/drop_pressed"
+            app:leftIcon="@drawable/lanya_tubiao"
             app:leftIcon_visible="0"
             app:leftText1="连接设备" />
 
@@ -121,7 +120,7 @@
         android:id="@+id/FAQ"
         style="@style/m_w"
         android:layout_below="@+id/ui_hufu"
-        app:leftIcon="@drawable/password_pressed"
+        app:leftIcon="@drawable/faq_tubiao"
         app:leftIcon_visible="0"
         app:leftText1="FAQ" />
 

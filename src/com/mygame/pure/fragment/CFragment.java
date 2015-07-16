@@ -5,14 +5,17 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.ab.fragment.AbAlertDialogFragment.AbDialogOnClickListener;
 import com.ab.soap.AbSoapListener;
@@ -20,6 +23,7 @@ import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
 import com.ab.util.AbDialogUtil;
 import com.mygame.pure.R;
+import com.mygame.pure.activity.AboutActivity;
 import com.mygame.pure.activity.MoreAct;
 import com.mygame.pure.adapter.PagerView;
 import com.mygame.pure.adapter.ZiZunAdapter;
@@ -46,6 +50,17 @@ public class CFragment extends BaseFragment {
 		ziXunBeans=new ArrayList<ZiXunBean>();
 		mAdapter=new ZiZunAdapter(getActivity(),ziXunBeans);
 		gridView.setAdapter(mAdapter);
+		gridView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				Intent intent = new Intent(getActivity(),
+						AboutActivity.class);
+				intent.putExtra("data",ziXunBeans.get(arg2).getContent());
+				startActivity(intent);
+			}
+		});
 		dopost();
 		return root;
 	}
@@ -60,7 +75,7 @@ public class CFragment extends BaseFragment {
 		// GetNewInfo();
 	}
 
-	// 通过id获得到所选项中所有的信息
+	 // 通过id获得到所选项中所有的信息
 	public void getInfo() {
 		String urlString3 = "http://miliapp.ebms.cn/webservice/news.asmx?op=GetListByType";
 		String nameSpace3 = "http://tempuri.org/";
@@ -77,8 +92,8 @@ public class CFragment extends BaseFragment {
 						// TODO Auto-generated method stub
 						@SuppressWarnings("unused")
 						String arString = arg1;
-						String str=arg1.replace("Table1=anyType{", "   ");
-						String[] arry=str.split("   ");
+						String str=arg1.replace("Table1=anyType{", "ooo");
+						String[] arry=str.split("ooo");
 						for(int i=1;i<arry.length;i++){
 							ZiXunBean zixun =new ZiXunBean();
 							String[] tab=arry[i].split(";");
@@ -86,6 +101,7 @@ public class CFragment extends BaseFragment {
 							String title=tab[1].replace("Title=", "");
 							zixun.setId(id);
 							zixun.setTitle(title);
+							zixun.setContent(arry[i].substring(arry[i].indexOf("Content="), arry[i].indexOf("; State=")).replace("Content=","").replace("src=\"","src=\"http://miliapp.ebms.cn"));
 							GetNewInfo(zixun);
 						}
 						
