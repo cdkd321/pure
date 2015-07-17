@@ -58,9 +58,9 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 
 	public void initView() {
 		if (getIntent().getStringExtra("type").equals("1")) {
-			setTitle("找回密码");
+			setTitle(R.string._findpwd);
 		} else if (getIntent().getStringExtra("type").equals("2")) {
-			setTitle("注册");
+			setTitle(R.string.Register);
 		}
 
 		btn_getNum = (Button) findViewById(R.id.btn_getNum);
@@ -88,14 +88,15 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 						public void onCancel(DialogInterface dialog) {
 						}
 					});
-					pd.setMessage("验证中...");
+					pd.setMessage(getResources().getString(R.string.yzing));
 					pd.show();
 					// 判断邮箱是否已经被注册
 					Isregist();
 				}
 
 			} else {
-				Toast.makeText(getApplicationContext(), "请输入邮箱地址", 1).show();
+				Toast.makeText(getApplicationContext(),
+						R.string.InvalidUsernameoradd, 1).show();
 			}
 			break;
 
@@ -112,7 +113,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 			public void onCancel(DialogInterface dialog) {
 			}
 		});
-		pd.setMessage("验证码发送中...");
+		pd.setMessage(getResources().getString(R.string.senging));
 		pd.show();
 		// 发送验证码
 		String urlString = "http://miliapp.ebms.cn/webservice/member.asmx?op=FindPassword";
@@ -134,21 +135,21 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 							String[] a = arg1.split("=");
 							String[] b = a[1].split(";");
 							if (b[0].equals("0")) {
-								Toast.makeText(getApplicationContext(), "失败", 1)
-										.show();
+								Toast.makeText(getApplicationContext(),
+										R.string.LoadingFailed, 1).show();
 							} else if (b[0].equals("-1")) {
 								Toast.makeText(getApplicationContext(),
-										"接口验证错误", 1).show();
+										R.string.DearyoualreError, 1).show();
 							} else if (b[0].equals("-3")) {
 								Toast.makeText(getApplicationContext(),
-										"用户不存在", 1).show();
+										R.string.UserNotExist, 1).show();
 							} else if (b[0].equals("1")) {
 								Toast.makeText(getApplicationContext(),
-										"邮件发送成功", 1).show();
+										R.string.emailsuccess, 1).show();
 								finish();
 							} else if (b[0].equals("-2")) {
 								Toast.makeText(getApplicationContext(),
-										"邮件发送失败", 1).show();
+										R.string.emailfail, 1).show();
 							}
 						}
 					}
@@ -156,8 +157,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 					@Override
 					public void onFailure(int arg0, String arg1, Throwable arg2) {
 						// TODO Auto-generated method stub
-						Toast.makeText(getApplicationContext(), "请求失败" + arg1,
-								1).show();
+						Toast.makeText(getApplicationContext(), arg1, 1).show();
 						pd.dismiss();
 					}
 				});
@@ -184,7 +184,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 								setYzM();
 							} else if (b[0].equals("0")) {
 								Toast.makeText(getApplicationContext(),
-										"该邮箱已经被注册", 1).show();
+										R.string.isgone, 1).show();
 								pd.dismiss();
 							}
 						}
@@ -193,8 +193,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 					@Override
 					public void onFailure(int arg0, String arg1, Throwable arg2) {
 						// TODO Auto-generated method stub
-						Toast.makeText(getApplicationContext(), "请求失败" + arg1,
-								1).show();
+						Toast.makeText(getApplicationContext(), arg1, 1).show();
 						pd.dismiss();
 					}
 				});
@@ -221,8 +220,8 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 							String[] a = arg1.split("=");
 							String[] b = a[1].split(";");
 							if (b[0].equals("0")) {
-								Toast.makeText(getApplicationContext(), "失败", 1)
-										.show();
+								Toast.makeText(getApplicationContext(),
+										R.string.LoadingFailed, 1).show();
 							} else if (b[0].equals("1")) {
 								Intent intent = new Intent();
 								intent.putExtra("updatepwd", "0");
@@ -233,10 +232,10 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 								startActivity(intent);
 							} else if (b[0].equals("-1")) {
 								Toast.makeText(getApplicationContext(),
-										"该邮箱已经发送过邮件", 1).show();
+										R.string.issended, 1).show();
 							} else if (b[0].equals("-2")) {
 								Toast.makeText(getApplicationContext(),
-										"邮件发送失败", 1).show();
+										R.string.emailfail, 1).show();
 							}
 						}
 					}
@@ -244,8 +243,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 					@Override
 					public void onFailure(int arg0, String arg1, Throwable arg2) {
 						// TODO Auto-generated method stub
-						Toast.makeText(getApplicationContext(), "请求失败" + arg1,
-								1).show();
+						Toast.makeText(getApplicationContext(), arg1, 1).show();
 						pd.dismiss();
 					}
 				});

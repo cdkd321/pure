@@ -52,7 +52,7 @@ public class ActWriteYz extends BaseActivity implements OnClickListener {
 	}
 
 	public void initView() {
-		setTitle("验证邮箱");
+		setTitle(R.string.yzyx);
 		pd = new ProgressDialog(ActWriteYz.this);
 		mywrite = (EditText) findViewById(R.id.mywirte);
 		btn_getNum_code = (Button) findViewById(R.id.btn_getNum_code);
@@ -79,7 +79,7 @@ public class ActWriteYz extends BaseActivity implements OnClickListener {
 			public void onCancel(DialogInterface dialog) {
 			}
 		});
-		pd.setMessage("处理中...");
+		pd.setMessage(getResources().getString(R.string.isdoing));
 		pd.show();
 		String urlString = "http://miliapp.ebms.cn/webservice/emailAndyanzhen.asmx?op=SecurityEmial";
 		String nameSpace = "http://tempuri.org/";
@@ -100,12 +100,12 @@ public class ActWriteYz extends BaseActivity implements OnClickListener {
 							String[] b = a[1].split(";");
 							if (b[0].equals("0")) {
 								Toast.makeText(getApplicationContext(),
-										"邮箱不存在,或验证有误,请重试", 1).show();
+										R.string.Pol, 1).show();
 								pd.dismiss();
 								return;
 							} else if (b[0].equals("1")) {
 								Toast.makeText(getApplicationContext(),
-										"邮箱验证通过,正在进行注册操作", 1).show();
+										R.string.Pleasehss, 1).show();
 								Intent intent = new Intent();
 								intent.putExtra("userName", getIntent()
 										.getStringExtra("userName"));
@@ -119,8 +119,7 @@ public class ActWriteYz extends BaseActivity implements OnClickListener {
 					@Override
 					public void onFailure(int arg0, String arg1, Throwable arg2) {
 						// TODO Auto-generated method stub
-						Toast.makeText(getApplicationContext(), "请求失败" + arg1,
-								1).show();
+						Toast.makeText(getApplicationContext(), arg1, 1).show();
 						pd.dismiss();
 					}
 				});

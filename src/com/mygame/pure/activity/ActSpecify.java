@@ -57,199 +57,211 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		addBackImage(R.drawable.back_pressed, null);
 		progress = getIntent().getFloatExtra("progress", 20);
 		checkType = getIntent().getIntExtra("checkType", 0);
-		textValue=getIntent().getStringExtra("progressText");
-		pingjun_text=(TextView) findViewById(R.id.pingjun_text);
-		tishi_text=(TextView) findViewById(R.id.tishi_title);
-		w_w=(TextView) findViewById(R.id.nick_name_text);
-		user_logo=(CircleImageView) findViewById(R.id.user_logo);
+		textValue = getIntent().getStringExtra("progressText");
+		pingjun_text = (TextView) findViewById(R.id.pingjun_text);
+		tishi_text = (TextView) findViewById(R.id.tishi_title);
+		w_w = (TextView) findViewById(R.id.nick_name_text);
+		user_logo = (CircleImageView) findViewById(R.id.user_logo);
 		mAbSoapUtil = AbSoapUtil.getInstance(this);
 		settings = new MicroRecruitSettings(ActSpecify.this);
-		hand_skin_share=getResources().getStringArray(R.array.hand_skin_share);
-		the_neck_share=getResources().getStringArray(R.array.the_neck_share);
-		the_face_share=getResources().getStringArray(R.array.the_face_share);
-		the_eye_share=getResources().getStringArray(R.array.the_eye_share);
+		hand_skin_share = getResources()
+				.getStringArray(R.array.hand_skin_share);
+		the_neck_share = getResources().getStringArray(R.array.the_neck_share);
+		the_face_share = getResources().getStringArray(R.array.the_face_share);
+		the_eye_share = getResources().getStringArray(R.array.the_eye_share);
 		if (checkType == 0) {
 			if (progress < 0.30) {
 				textlevelIndex = 0;
 				// 当前值描述
-				textDesc = "干燥";
+				textDesc = getResources().getString(R.string.Dry);
 			} else if (progress > 0.38) {
 				textlevelIndex = 2;
 				// 当前值描述
-				textDesc = "湿润";
+				textDesc = getResources().getString(R.string.Hydrated);
 			} else {
 				textlevelIndex = 1;
 				// 当前值描述
-				textDesc = "正常";
+				textDesc = getResources().getString(R.string.nomal);
 			}
 			// 假如 每段的百分比 2 3 2 1 1 1
-			 part = new float[] { 2.50f, 2.00f, 5.50f };
+			part = new float[] { 2.50f, 2.00f, 5.50f };
 			// isLogin();
-			 
-				if (!settings.USER_NAME.getValue().equals("")) {
-					 if(!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())){
-						 int age=Integer.parseInt(settings.USER_AGE.getValue().toString());
-						 if(age>=0&&age<=16){
-							 pingjun_text.setText("同龄人群手部水分平均值33.9%");
-						 }else if(age>=17&&age<=23){
-							 pingjun_text.setText("同龄人群手部水分平均值31.2%");
-						 }else if(age>=24&&age<=27){
-							 pingjun_text.setText("同龄人群手部水分平均值30.2%");
-						 }else if(age>=28&&age<=34){
-							 pingjun_text.setText("同龄人群手部水分平均值29.6%");
-						 }else if(age>=35&&age<=44){
-							 pingjun_text.setText("同龄人群手部水分平均值28.5%");
-						 }else if(age>=45){
-							 pingjun_text.setText("同龄人群手部水分平均值27.8%");
-						 }
-					 }else{
-						 pingjun_text.setText("同龄人群手部水分平均值30.2%");
-					 }
-					 getHeadusername();
-					 w_w.setText(settings.USER_nick.getValue().toString());
-				}else{
-					pingjun_text.setText("登录后可查看同龄人群平均值");
-					
-				} 
-			
+
+			if (!settings.USER_NAME.getValue().equals("")) {
+				if (!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())) {
+					int age = Integer.parseInt(settings.USER_AGE.getValue()
+							.toString());
+					if (age >= 0 && age <= 16) {
+						pingjun_text.setText(R.string.remark1);
+					} else if (age >= 17 && age <= 23) {
+						pingjun_text.setText(R.string.remark2);
+					} else if (age >= 24 && age <= 27) {
+						pingjun_text.setText(R.string.remark6);
+					} else if (age >= 28 && age <= 34) {
+						pingjun_text.setText(R.string.remark3);
+					} else if (age >= 35 && age <= 44) {
+						pingjun_text.setText(R.string.remark4);
+					} else if (age >= 45) {
+						pingjun_text.setText(R.string.remark5);
+					}
+				} else {
+					pingjun_text.setText(R.string.remark5);
+				}
+				getHeadusername();
+				w_w.setText(settings.USER_nick.getValue().toString());
+			} else {
+				pingjun_text.setText(R.string.remark7);
+
+			}
+
 			// 各等级段的值
-			 partValue = new float[] { 20.0f, 30.0f, 38.0f };
-			 tishi_text.setText(hand_skin_share[(int)(Math.random()*hand_skin_share.length)]);
-		}else if(checkType==1){
+			partValue = new float[] { 20.0f, 30.0f, 38.0f };
+			tishi_text
+					.setText(hand_skin_share[(int) (Math.random() * hand_skin_share.length)]);
+		} else if (checkType == 1) {
 			if (progress < 0.32) {
 				textlevelIndex = 0;
 				// 当前值描述
-				textDesc = "干燥";
+				textDesc = getResources().getString(R.string.Dry);
 			} else if (progress > 0.42) {
 				textlevelIndex = 2;
 				// 当前值描述
-				textDesc = "湿润";
+				textDesc = getResources().getString(R.string.Hydrated);
 			} else {
 				textlevelIndex = 1;
 				// 当前值描述
-				textDesc = "正常";
+				textDesc = getResources().getString(R.string.nomal);
 			}
 			if (!settings.USER_NAME.getValue().equals("")) {
-				 if(!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())){
-					 int age=Integer.parseInt(settings.USER_AGE.getValue().toString());
-					 if(age>=0&&age<=16){
-						 pingjun_text.setText("同龄人群脸部水分平均值39.5%");
-					 }else if(age>=17&&age<=23){
-						 pingjun_text.setText("同龄人群脸部水分平均值37.8%");
-					 }else if(age>=24&&age<=27){
-						 pingjun_text.setText("同龄人群脸部水分平均值36.7%");
-					 }else if(age>=28&&age<=34){
-						 pingjun_text.setText("同龄人群脸部水分平均值35.8%");
-					 }else if(age>=35&&age<=44){
-						 pingjun_text.setText("同龄人群脸部水分平均值34.2%");
-					 }else if(age>=45){
-						 pingjun_text.setText("同龄人群脸部水分平均值33.3%");
-					 }  
-				 }else{
-					 pingjun_text.setText("同龄人群脸部水分平均值35.8%");
-				 }
-				 
-				//pingjun_text.setText("同龄人群脸部水分平均值36.70%");
-				 getHeadusername();
-				 w_w.setText(settings.USER_nick.getValue().toString());
-			}else{
-				pingjun_text.setText("登录后可查看同龄人群平均值");
-			} 
-			
+				if (!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())) {
+					int age = Integer.parseInt(settings.USER_AGE.getValue()
+							.toString());
+					if (age >= 0 && age <= 16) {
+						pingjun_text.setText(R.string.face1);
+					} else if (age >= 17 && age <= 23) {
+						pingjun_text.setText(R.string.face2);
+					} else if (age >= 24 && age <= 27) {
+						pingjun_text.setText(R.string.face3);
+					} else if (age >= 28 && age <= 34) {
+						pingjun_text.setText(R.string.face4);
+					} else if (age >= 35 && age <= 44) {
+						pingjun_text.setText(R.string.face5);
+					} else if (age >= 45) {
+						pingjun_text.setText(R.string.face6);
+					}
+				} else {
+					pingjun_text.setText(R.string.face7);
+				}
+
+				// pingjun_text.setText("同龄人群脸部水分平均值36.70%");
+				getHeadusername();
+				w_w.setText(settings.USER_nick.getValue().toString());
+			} else {
+				pingjun_text
+						.setText(R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup);
+			}
+
 			// 假如 每段的百分比 2 3 2 1 1 1
-			 part = new float[] { 3.00f, 2.50f, 4.50f };
+			part = new float[] { 3.00f, 2.50f, 4.50f };
 			// 各等级段的值
-			 partValue = new float[] { 20.0f, 32.0f, 42.0f };
-			 tishi_text.setText(the_face_share[(int)(Math.random()*the_face_share.length)]);
-		}else if(checkType==2){
+			partValue = new float[] { 20.0f, 32.0f, 42.0f };
+			tishi_text
+					.setText(the_face_share[(int) (Math.random() * the_face_share.length)]);
+		} else if (checkType == 2) {
 			if (progress < 0.35) {
 				textlevelIndex = 0;
 				// 当前值描述
-				textDesc = "干燥";
+				textDesc = getResources().getString(R.string.Dry);
 			} else if (progress > 0.45) {
 				textlevelIndex = 2;
 				// 当前值描述
-				textDesc = "湿润";
+				textDesc = getResources().getString(R.string.Hydrated);
 			} else {
 				textlevelIndex = 1;
 				// 当前值描述
-				textDesc = "正常";
+				textDesc = getResources().getString(R.string.nomal);
 			}
 			if (!settings.USER_NAME.getValue().equals("")) {
-				if(!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())){
-					int age=Integer.parseInt(settings.USER_AGE.getValue().toString());
-					 if(age>=0&&age<=16){
-						 pingjun_text.setText("同龄人群脸部水分平均值44.6%");
-					 }else if(age>=17&&age<=23){
-						 pingjun_text.setText("同龄人群脸部水分平均值43.3%");
-					 }else if(age>=24&&age<=27){
-						 pingjun_text.setText("同龄人群脸部水分平均值41.1%");
-					 }else if(age>=28&&age<=34){
-						 pingjun_text.setText("同龄人群脸部水分平均值39.7%");
-					 }else if(age>=35&&age<=44){
-						 pingjun_text.setText("同龄人群脸部水分平均值37.2%");
-					 }else if(age>=45){
-						 pingjun_text.setText("同龄人群脸部水分平均值36.3%");
-					 }
-				}else{
-					 pingjun_text.setText("同龄人群脸部水分平均值41.1%");
+				if (!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())) {
+					int age = Integer.parseInt(settings.USER_AGE.getValue()
+							.toString());
+					if (age >= 0 && age <= 16) {
+						pingjun_text.setText(R.string.Type1);
+					} else if (age >= 17 && age <= 23) {
+						pingjun_text.setText(R.string.Type2);
+					} else if (age >= 24 && age <= 27) {
+						pingjun_text.setText(R.string.Type3);
+					} else if (age >= 28 && age <= 34) {
+						pingjun_text.setText(R.string.Type4);
+					} else if (age >= 35 && age <= 44) {
+						pingjun_text.setText(R.string.Type5);
+					} else if (age >= 45) {
+						pingjun_text.setText(R.string.Type6);
+					}
+				} else {
+					pingjun_text.setText(R.string.Type7);
 				}
-				
+
 				getHeadusername();
-				 w_w.setText(settings.USER_nick.getValue().toString());
-			}else{
-				pingjun_text.setText("登录后可查看同龄人群平均值");
-			} 
-			
+				w_w.setText(settings.USER_nick.getValue().toString());
+			} else {
+				pingjun_text
+						.setText(R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup);
+			}
+
 			// 假如 每段的百分比 2 3 2 1 1 1
-			 part = new float[] { 3.75f, 2.5f, 3.75f };
+			part = new float[] { 3.75f, 2.5f, 3.75f };
 			// 各等级段的值
-			 partValue = new float[] { 20.0f, 35.0f, 45.0f };
-			 tishi_text.setText(the_eye_share[(int)(Math.random()*the_eye_share.length)]);
-		}else if(checkType==3){
+			partValue = new float[] { 20.0f, 35.0f, 45.0f };
+			tishi_text
+					.setText(the_eye_share[(int) (Math.random() * the_eye_share.length)]);
+		} else if (checkType == 3) {
 			if (progress < 0.35) {
 				textlevelIndex = 0;
 				// 当前值描述
-				textDesc = "干燥";
+				textDesc = getResources().getString(R.string.Dry);
 			} else if (progress > 0.45) {
 				textlevelIndex = 2;
 				// 当前值描述
-				textDesc = "湿润";
+				textDesc = getResources().getString(R.string.Hydrated);
 			} else {
 				textlevelIndex = 1;
 				// 当前值描述
-				textDesc = "正常";
+				textDesc = getResources().getString(R.string.nomal);
 			}
 			if (!settings.USER_NAME.getValue().equals("")) {
-				if(!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())){
-					int age=Integer.parseInt(settings.USER_AGE.getValue().toString());
-					 if(age>=0&&age<=16){
-						 pingjun_text.setText("同龄人群脸部水分平均值44.6%");
-					 }else if(age>=17&&age<=23){
-						 pingjun_text.setText("同龄人群脸部水分平均值43.3%");
-					 }else if(age>=24&&age<=27){
-						 pingjun_text.setText("同龄人群脸部水分平均值41.1%");
-					 }else if(age>=28&&age<=34){
-						 pingjun_text.setText("同龄人群脸部水分平均值39.7%");
-					 }else if(age>=35&&age<=44){
-						 pingjun_text.setText("同龄人群脸部水分平均值37.2%");
-					 }else if(age>=45){
-						 pingjun_text.setText("同龄人群脸部水分平均值36.3%");
-					 }
-				}else{
-					pingjun_text.setText("同龄人群脸部水分平均值41.1%");
+				if (!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())) {
+					int age = Integer.parseInt(settings.USER_AGE.getValue()
+							.toString());
+					if (age >= 0 && age <= 16) {
+						pingjun_text.setText(R.string.Type1);
+					} else if (age >= 17 && age <= 23) {
+						pingjun_text.setText(R.string.Type2);
+					} else if (age >= 24 && age <= 27) {
+						pingjun_text.setText(R.string.Type3);
+					} else if (age >= 28 && age <= 34) {
+						pingjun_text.setText(R.string.Type4);
+					} else if (age >= 35 && age <= 44) {
+						pingjun_text.setText(R.string.Type5);
+					} else if (age >= 45) {
+						pingjun_text.setText(R.string.Type6);
+					}
+				} else {
+					pingjun_text.setText(R.string.Type7);
 				}
-				 
+
 				getHeadusername();
-				 w_w.setText(settings.USER_nick.getValue().toString());
-			}else{
-				pingjun_text.setText("登录后可查看同龄人群平均值");
-			} 
+				w_w.setText(settings.USER_nick.getValue().toString());
+			} else {
+				pingjun_text
+						.setText(R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup);
+			}
 			// 假如 每段的百分比 2 3 2 1 1 1
-			 part = new float[] { 3.75f, 2.5f, 3.75f };
+			part = new float[] { 3.75f, 2.5f, 3.75f };
 			// 各等级段的值
-			 partValue = new float[] { 20.0f, 35.0f, 45.0f };
-			 tishi_text.setText(the_neck_share[(int)(Math.random()*the_neck_share.length)]);
+			partValue = new float[] { 20.0f, 35.0f, 45.0f };
+			tishi_text
+					.setText(the_neck_share[(int) (Math.random() * the_neck_share.length)]);
 		}
 		addRightImage(R.drawable.bg_btn_share, new View.OnClickListener() {
 
@@ -266,7 +278,6 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		// 各等级段的颜色
 		int[] color = new int[] { Color.rgb(223, 117, 8),
 				Color.rgb(35, 196, 125), Color.rgb(55, 162, 236) };
-		
 
 		// 当前值的等级
 
@@ -286,9 +297,11 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		int partTextSize = 15;
 		// 等级说明文字大小
 		int textDescSize = 22;
-		/*// 当前值
-		java.text.DecimalFormat   df=new   java.text.DecimalFormat("#0.0"); 
-		String textValue = df.format(progress*100)+"%";*/
+		/*
+		 * // 当前值 java.text.DecimalFormat df=new
+		 * java.text.DecimalFormat("#0.0"); String textValue =
+		 * df.format(progress*100)+"%";
+		 */
 		// 要显示图形的View
 		LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
 
@@ -316,7 +329,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		AbLevelSeriesDataset mDataset = new AbLevelSeriesDataset();
 		AbLevelView mAbLevelView = AbLevelChartFactory.getLevelChartView(this,
 				mDataset, renderer);
-		setTitle("详情");
+		setTitle(R.string.Details);
 		chartLayout.addView(mAbLevelView, new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 	}
@@ -335,13 +348,13 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
 		oks.setTitleUrl("http://sharesdk.cn");
 		// text是分享文本，所有平台都需要这个字段
-		oks.setText("我是分享文本");
+		oks.setText(getResources().getString(R.string.content));
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
 		oks.setImagePath("/sdcard/test.jpg");// 确保SDcard下面存在此张图片
 		// url仅在微信（包括好友和朋友圈）中使用
 		oks.setUrl("http://sharesdk.cn");
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
-		oks.setComment("我是测试评论文本");
+		oks.setComment(getResources().getString(R.string.shark));
 		// site是分享此内容的网站名称，仅在QQ空间使用
 		oks.setSite(getString(R.string.app_name));
 		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
@@ -355,6 +368,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 	public void onClick(View v) {
 
 	}
+
 	public void getHeadusername() {
 
 		// 获取用户的相关信息
@@ -394,7 +408,6 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 									.error(R.drawable.hcy_icon).into(user_logo);
 						}
 
-					
 					}
 
 					@Override

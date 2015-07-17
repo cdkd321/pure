@@ -25,7 +25,7 @@ public class ActKnowSkin extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.act_aknow_of_skills);
 		addBackImage(R.drawable.back_pressed, null);
 		 
-		setTitle("护肤知识");
+		setTitle(R.string.SkincareKnowledge);
 		
 		layout1 = findViewById(R.id.aknow_of_water);
 		layout2 = findViewById(R.id.aknow_of_skin);

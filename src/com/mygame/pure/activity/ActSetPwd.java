@@ -53,7 +53,7 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 	}
 
 	public void initView() {
-		setTitle("登录密码设置");
+		setTitle(R.string.SetLoginPassword);
 		pd = new ProgressDialog(ActSetPwd.this);
 		btn_setpwd = (Button) findViewById(R.id.btn_setpwd);
 		btn_setpwd.setOnClickListener(this);
@@ -79,7 +79,7 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 					public void onCancel(DialogInterface dialog) {
 					}
 				});
-				pd.setMessage("处理中...");
+				pd.setMessage(getResources().getString(R.string.isdoing));
 				pd.show();
 				// if (getIntent().getStringExtra("updatepwd").equals("0")) {
 
@@ -100,7 +100,8 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 				// getFinalHttp().post(Urls.checkEmail_istrue,
 				// AjaxParamsbyEmail(), majaxCallback);
 			} else {
-				Toast.makeText(getApplicationContext(), "输入有误", 1).show();
+				Toast.makeText(getApplicationContext(), R.string.editError, 1)
+						.show();
 			}
 			break;
 
@@ -124,8 +125,8 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 				new AbSoapListener() {
 					@Override
 					public void onSuccess(int arg0, String arg1) {
-						Toast.makeText(getApplicationContext(), "注册成功", 1)
-								.show();
+						Toast.makeText(getApplicationContext(),
+								R.string.RegistrationSuccessful, 1).show();
 						// TODO Auto-generated method stub
 						if (arg1 != null) {
 							String[] a = arg1.split("=");
@@ -142,8 +143,8 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 								ActSetPwd.this.finish();
 
 							} else if (b[0].equals("0")) {
-								Toast.makeText(getApplicationContext(), "失败", 1)
-										.show();
+								Toast.makeText(getApplicationContext(),
+										R.string.LoadingFailed, 1).show();
 								pd.dismiss();
 							}
 						}
@@ -152,8 +153,7 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 					@Override
 					public void onFailure(int arg0, String arg1, Throwable arg2) {
 						// TODO Auto-generated method stub
-						Toast.makeText(getApplicationContext(), "请求失败" + arg1,
-								1).show();
+						Toast.makeText(getApplicationContext(), arg1, 1).show();
 						pd.dismiss();
 					}
 				});

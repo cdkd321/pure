@@ -322,7 +322,7 @@ public class ZXInfoAct extends BaseActivity implements OnClickListener {
 								public void onClick(View arg0) {
 									Intent intent = new Intent(ZXInfoAct.this,
 											AboutActivity.class);
-									intent.putExtra("url",url);
+									intent.putExtra("url", url);
 									startActivity(intent);
 								}
 							});

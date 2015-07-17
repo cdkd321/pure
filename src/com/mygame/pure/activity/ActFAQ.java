@@ -14,7 +14,7 @@ public class ActFAQ extends BaseActivity {
 		setContentView(R.layout.act_faq);
 		addBackImage(R.drawable.back_pressed, null);
 		getTkActionBar().setRightView(new View(ActFAQ.this), null);
-		setTitle("FAQ");
+		setTitle(R.string.faq);
 	}
 
 }

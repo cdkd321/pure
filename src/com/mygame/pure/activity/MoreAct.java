@@ -63,12 +63,14 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 		ui_hufu.setOnClickListener(this);
 		ui_FAQ.setOnClickListener(this);
 		ui_yijian.setOnClickListener(this);
-		share = getActivity().getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
-		if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
-			Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+		share = getActivity().getSharedPreferences("longke",
+				Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
+		if (TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))) {
+			Intent intent = new Intent(getActivity(), DeviceListActivity.class);
 			intent.putExtra("uid", "");
 			startActivityForResult(intent, 0);
-		};
+		}
+		;
 		connect_device.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -101,11 +103,12 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 				finish();
 			}
 		});
-		setTitle("更多");
+		setTitle(R.string.more);
 		// isLogin();
 		if (settings.USER_NAME.getValue().equals("")) {
-			w_w.setText("未登录");
-			Toast.makeText(getApplicationContext(), "用户未登录", 1).show();
+			w_w.setText(R.string.NotLoggedin);
+			Toast.makeText(getApplicationContext(), R.string.NotLoggedin, 1)
+					.show();
 		} else {
 			getHeadusername();
 		}
@@ -128,12 +131,14 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 	// }
 	// }
 	private SharedPreferences share;
+
 	@Override
 	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
+
 	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -150,9 +155,10 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			mAddress = device.getAddress();
 			if (SelfDefineApplication.getInstance().mService != null) {
 				if (resultCode == Activity.RESULT_OK) {
-					SelfDefineApplication.getInstance().mService.connect(mAddress);
+					SelfDefineApplication.getInstance().mService
+							.connect(mAddress);
 				}
-				
+
 			}
 		} else if (requestCode == 1) { //
 			if (resultCode == Activity.RESULT_OK) {
@@ -195,13 +201,14 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			i.setType("text/plain");
 
 			i.putExtra(Intent.EXTRA_EMAIL, new String[] { toaddress });
-			i.putExtra(Intent.EXTRA_SUBJECT, "产品意见反馈");
-			i.putExtra(Intent.EXTRA_TEXT, "请输入邮件反馈内容");
+			i.putExtra(Intent.EXTRA_SUBJECT, R.string.suggestion);
+			i.putExtra(Intent.EXTRA_TEXT, R.string.emailcontent);
 			try {
-				startActivity(Intent.createChooser(i, "邮件发送中..."));
+				startActivity(Intent.createChooser(i,
+						getResources().getString(R.string.reDetector)));
 			} catch (android.content.ActivityNotFoundException ex) {
-				Toast.makeText(MoreAct.this, "您没有安装邮件客户端", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(MoreAct.this, R.string.rector,
+						Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.loadagin:
@@ -236,15 +243,15 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
 			String action = intent.getAction();
 			if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
-				connected_text.setText("已连接");
+				connected_text.setText(R.string.Connected);
 				connected_text.setVisibility(View.VISIBLE);
 			}
 			if (BleService.ACTION_GATT_DISCONNECTED.equals(action)) {
-				connected_text.setText("断开连接");
+				connected_text.setText(R.string.UnConnected);
 				connected_text.setVisibility(View.VISIBLE);
 			}
 			if (BleService.ACTION_STATUS_WRONG.equals(action)) {
-				connected_text.setText("断开连接");
+				connected_text.setText(R.string.UnConnected);
 				connected_text.setVisibility(View.VISIBLE);
 			}
 

@@ -61,31 +61,33 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	private FragmentManager fragmentManager;
 	private FragmentTransaction fragmentTrasaction;
 	HomeRootFragment fragment;
-	private boolean isBind = false ;
+	private boolean isBind = false;
 	private ContentResolver mContentResolver;
 	private RelativeLayout LinearLayout1;
 	public static View touming;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+				WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.act_main);
 		initTab();
-		mContentResolver = getContentResolver();  
-	    setLockPatternEnabled(false);
+		mContentResolver = getContentResolver();
+		setLockPatternEnabled(false);
 		share = getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
-		
+
 	}
-	   
- public void setLockPatternEnabled(boolean enabled) {  
-     setBoolean(android.provider.Settings.System.LOCK_PATTERN_ENABLED,  
-             enabled);  
- }  
- private void setBoolean(String systemSettingKey, boolean enabled) {  
-     android.provider.Settings.System.putInt(mContentResolver,  
-             systemSettingKey, enabled ? 1 : 0);  
- }  
+
+	public void setLockPatternEnabled(boolean enabled) {
+		setBoolean(android.provider.Settings.System.LOCK_PATTERN_ENABLED,
+				enabled);
+	}
+
+	private void setBoolean(String systemSettingKey, boolean enabled) {
+		android.provider.Settings.System.putInt(mContentResolver,
+				systemSettingKey, enabled ? 1 : 0);
+	}
 
 	public List<View> getList() {
 
@@ -98,32 +100,33 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		}
 		return mList;
 	}
+
 	private SharedPreferences share;
 	private String mAddress;
-	private boolean  isStop;
+	private boolean isStop;
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 	}
+
 	@Override
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
-		
-		/*if(isBind){
-			if(mServiceConnection!=null){
-				unbindService(mServiceConnection);
-			}
-			isBind=false;
-		}*/
-		
+
+		/*
+		 * if(isBind){ if(mServiceConnection!=null){
+		 * unbindService(mServiceConnection); } isBind=false; }
+		 */
+
 	}
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		
-		
+
 	}
 
 	public List<Fragment> getFragmentList(int type) {
@@ -181,26 +184,26 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		llTab2 = findViewById(R.id.llTab2);
 		llTab3 = findViewById(R.id.llTab3);
 		llTab4 = findViewById(R.id.llTab4);
-		LinearLayout1=(RelativeLayout) findViewById(R.id.LinearLayout1);
-		touming=findViewById(R.id.touming);
+		LinearLayout1 = (RelativeLayout) findViewById(R.id.LinearLayout1);
+		touming = findViewById(R.id.touming);
 		touming.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
-				
+
 			}
 		});
 		LinearLayout1.setOnTouchListener(new OnTouchListener() {
-			
+
 			@Override
 			public boolean onTouch(View arg0, MotionEvent arg1) {
 				// TODO Auto-generated method stub
 				return false;
 			}
 		});
-		
+
 		getTkActionBar();
-		setTitle("检测中心");
+		setTitle(R.string.TestCentre);
 		addBackImage(R.drawable.more, new OnClickListener() {
 
 			@Override
@@ -211,7 +214,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			}
 		});
 		addRightImage(R.drawable.news_pressed, new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
@@ -274,7 +277,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		 * @Override public void onPageScrollStateChanged(int arg0) { } });
 		 */
 		Intent i = new Intent(this, BleService.class);
-		isBind=bindService(i, mServiceConnection, BIND_AUTO_CREATE);
+		isBind = bindService(i, mServiceConnection, BIND_AUTO_CREATE);
 		BluetoothAdapter.getDefaultAdapter().enable();
 	}
 
@@ -284,35 +287,41 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		llTab3.setSelected(i == 2);
 		llTab4.setSelected(i == 3);
 	}
-    @Override
-    protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-    	// TODO Auto-generated method stub
-    	super.onActivityResult(arg0, arg1, arg2);
-    	if(arg0==0){
-    		if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
-    			Intent intent=new Intent(getActivity(),DeviceListActivity.class);
-    			intent.putExtra("uid", "");
+
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(arg0, arg1, arg2);
+		if (arg0 == 0) {
+			if (TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))) {
+				Intent intent = new Intent(getActivity(),
+						DeviceListActivity.class);
+				intent.putExtra("uid", "");
 				startActivityForResult(intent, 1);
-    		};
-    	}else{
-    		
-    		if ( arg2 != null) {
-    			BluetoothDevice device = arg2.getExtras().getParcelable(
-    					BluetoothDevice.EXTRA_DEVICE);
-    			mAddress = device.getAddress();
-    			if (SelfDefineApplication.getInstance().mService != null) {
-    				if (arg1 == Activity.RESULT_OK) {
-    					SelfDefineApplication.getInstance().mService.connect(mAddress);
-    				}
-    				
-    			}
-    		} 
-    	}
-    	/*if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
-			Intent intent=new Intent(getActivity(),DeviceListActivity.class);
-			startActivity(intent);
-		};*/
-    }
+			}
+			;
+		} else {
+
+			if (arg2 != null) {
+				BluetoothDevice device = arg2.getExtras().getParcelable(
+						BluetoothDevice.EXTRA_DEVICE);
+				mAddress = device.getAddress();
+				if (SelfDefineApplication.getInstance().mService != null) {
+					if (arg1 == Activity.RESULT_OK) {
+						SelfDefineApplication.getInstance().mService
+								.connect(mAddress);
+					}
+
+				}
+			}
+		}
+		/*
+		 * if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+		 * Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+		 * startActivity(intent); };
+		 */
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -372,11 +381,13 @@ public class ActMain extends BaseActivity implements OnClickListener {
 				// Log.e(TAG, "Unable to initialize Bluetooth");
 				finish();
 			}
-			if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
-				Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+			if (TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))) {
+				Intent intent = new Intent(getActivity(),
+						DeviceListActivity.class);
 				intent.putExtra("uid", "");
 				startActivityForResult(intent, 1);
-			};
+			}
+			;
 			// Automatically connects to the device upon successful start-up
 			// initialization.
 			// mBleService.connect(mDeviceAddress);
@@ -396,8 +407,8 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (isQuit == false) {
 				isQuit = true;
-				Toast.makeText(getBaseContext(), "再按一次返回桌面", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getBaseContext(), R.string.exittoast,
+						Toast.LENGTH_SHORT).show();
 				TimerTask task = null;
 				task = new TimerTask() {
 					@Override

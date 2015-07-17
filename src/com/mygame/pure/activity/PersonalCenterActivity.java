@@ -187,7 +187,8 @@ public class PersonalCenterActivity extends FragmentActivity implements
 					.builder()
 					.setCancelable(false)
 					.setCanceledOnTouchOutside(false)
-					.addSheetItem("拍照", SheetItemColor.Blue,
+					.addSheetItem(getResources().getString(R.string.takepick),
+							SheetItemColor.Blue,
 							new OnSheetItemClickListener() {
 								@Override
 								public void onClick(int which) {
@@ -203,7 +204,9 @@ public class PersonalCenterActivity extends FragmentActivity implements
 									startActivityForResult(intent, 2);
 								}
 							})
-					.addSheetItem("从相册中选择", SheetItemColor.Blue,
+					.addSheetItem(
+							getResources().getString(R.string.takepickfrom),
+							SheetItemColor.Blue,
 							new OnSheetItemClickListener() {
 								@Override
 								public void onClick(int which) {
@@ -223,18 +226,20 @@ public class PersonalCenterActivity extends FragmentActivity implements
 					.builder()
 					.setCancelable(false)
 					.setCanceledOnTouchOutside(false)
-					.addSheetItem("男", SheetItemColor.Blue,
+					.addSheetItem(getString(R.string.Male),
+							SheetItemColor.Blue,
 							new OnSheetItemClickListener() {
 								@Override
 								public void onClick(int which) {
-									sex_text.setText("男");
+									sex_text.setText(getString(R.string.Male));
 								}
 							})
-					.addSheetItem("女", SheetItemColor.Blue,
+					.addSheetItem(getString(R.string.Female),
+							SheetItemColor.Blue,
 							new OnSheetItemClickListener() {
 								@Override
 								public void onClick(int which) {
-									sex_text.setText("女");
+									sex_text.setText(getString(R.string.Female));
 								}
 							}).show();
 			break;
@@ -246,39 +251,44 @@ public class PersonalCenterActivity extends FragmentActivity implements
 					.builder()
 					.setCancelable(false)
 					.setCanceledOnTouchOutside(false)
-					.addSheetItem("敏感性皮肤", SheetItemColor.Blue,
+					.addSheetItem(getString(R.string.SensitiveSkin),
+							SheetItemColor.Blue,
 							new OnSheetItemClickListener() {
 								@Override
 								public void onClick(int which) {
-									skin.setText("敏感性皮肤");
+									skin.setText(getString(R.string.SensitiveSkin));
 								}
 							})
-					.addSheetItem("混合皮肤", SheetItemColor.Blue,
+					.addSheetItem(getString(R.string.MixedSkin),
+							SheetItemColor.Blue,
 							new OnSheetItemClickListener() {
 								@Override
 								public void onClick(int which) {
-									skin.setText("混合皮肤");
+									skin.setText(getString(R.string.MixedSkin));
 								}
 							})
-					.addSheetItem("油性皮肤", SheetItemColor.Blue,
+					.addSheetItem(getString(R.string.OilySkin),
+							SheetItemColor.Blue,
 							new OnSheetItemClickListener() {
 								@Override
 								public void onClick(int which) {
-									skin.setText("油性皮肤");
+									skin.setText(getString(R.string.OilySkin));
 								}
 							})
-					.addSheetItem("干性皮肤", SheetItemColor.Blue,
+					.addSheetItem(getString(R.string.DrySkin),
+							SheetItemColor.Blue,
 							new OnSheetItemClickListener() {
 								@Override
 								public void onClick(int which) {
-									skin.setText("干性皮肤");
+									skin.setText(getString(R.string.DrySkin));
 								}
 							})
-					.addSheetItem("中性皮肤", SheetItemColor.Blue,
+					.addSheetItem(getString(R.string.NeutralSkin),
+							SheetItemColor.Blue,
 							new OnSheetItemClickListener() {
 								@Override
 								public void onClick(int which) {
-									skin.setText("中性皮肤");
+									skin.setText(getString(R.string.NeutralSkin));
 								}
 							}).show();
 			break;
@@ -293,24 +303,30 @@ public class PersonalCenterActivity extends FragmentActivity implements
 			break;
 		case R.id.tvExit:
 			// 退出登录
-			new AlertDialog(context).builder().setTitle("退出当前账号")
-					.setMsg("退出登录后需要重新登录，确定退出？")
-					.setPositiveButton("确认退出", new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							settings.USER_NAME.setValue("");// 重置用户名
-							Intent intent = new Intent();
-							intent.setClass(PersonalCenterActivity.this,
-									ActLogin.class);
-							startActivity(intent);
-							finish();
-						}
-					}).setNegativeButton("取消", new OnClickListener() {
-						@Override
-						public void onClick(View v) {
+			new AlertDialog(context)
+					.builder()
+					.setTitle(getString(R.string.exit))
+					.setMsg(getString(R.string.issure))
+					.setPositiveButton(getString(R.string.sure),
+							new OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									settings.USER_NAME.setValue("");// 重置用户名
+									Intent intent = new Intent();
+									intent.setClass(
+											PersonalCenterActivity.this,
+											ActLogin.class);
+									startActivity(intent);
+									finish();
+								}
+							})
+					.setNegativeButton(getString(R.string.Cancel),
+							new OnClickListener() {
+								@Override
+								public void onClick(View v) {
 
-						}
-					}).show();
+								}
+							}).show();
 			break;
 		default:
 			break;
@@ -329,7 +345,7 @@ public class PersonalCenterActivity extends FragmentActivity implements
 
 	private void updateDisplay() {
 		if (tempage <= 0) {
-			mDateDisplay.setHint("年龄");
+			mDateDisplay.setHint(getString(R.string.age));
 		} else {
 			mDateDisplay.setTextColor(Color.BLACK);
 			int m = 14;
@@ -338,8 +354,9 @@ public class PersonalCenterActivity extends FragmentActivity implements
 			} else {
 				m = 1;
 			}
-			String date[]= DateUtil.getCurrentDate().split("-");
-			settings.USER_AGE.setValue((Integer.parseInt(date[0])-mYear)+"");
+			String date[] = DateUtil.getCurrentDate().split("-");
+			settings.USER_AGE
+					.setValue((Integer.parseInt(date[0]) - mYear) + "");
 			mDateDisplay.setText(mYear + "-" + m + "-" + mDay);
 		}
 	}
@@ -448,20 +465,25 @@ public class PersonalCenterActivity extends FragmentActivity implements
 		double ar = 0;
 		// soap处理
 		// 获取用户的相关信息
-		if (sex_text.getText().toString().equals("男")) {
+		if (sex_text.getText().toString().equals(getString(R.string.Male))) {
 			sex = 1;
-		} else if (sex_text.getText().toString().equals("女")) {
+		} else if (sex_text.getText().toString()
+				.equals(getString(R.string.Female))) {
 			sex = 2;
 		}
-		if (skin.getText().toString().equals("中性皮肤")) {
+		if (skin.getText().toString().equals(getString(R.string.NeutralSkin))) {
 			fuzhi = 1;
-		} else if (skin.getText().toString().equals("干性皮肤")) {
+		} else if (skin.getText().toString()
+				.equals(getString(R.string.DrySkin))) {
 			fuzhi = 2;
-		} else if (skin.getText().toString().equals("油性皮肤")) {
+		} else if (skin.getText().toString()
+				.equals(getString(R.string.OilySkin))) {
 			fuzhi = 3;
-		} else if (skin.getText().toString().equals("混合皮肤")) {
+		} else if (skin.getText().toString()
+				.equals(getString(R.string.MixedSkin))) {
 			fuzhi = 4;
-		} else if (skin.getText().toString().equals("敏感性皮肤")) {
+		} else if (skin.getText().toString()
+				.equals(getString(R.string.SensitiveSkin))) {
 			fuzhi = 5;
 		}
 
@@ -486,8 +508,8 @@ public class PersonalCenterActivity extends FragmentActivity implements
 		params.put("sex", sex + "");
 		params.put("birthday", ar + "");
 		// ...
-		//params.put("fuzhi", skin.getText().toString());
-		//params.put("Fuzhi", fuzhi + "");
+		// params.put("fuzhi", skin.getText().toString());
+		// params.put("Fuzhi", fuzhi + "");
 		params.put("username", settings.USER_NAME.getValue().toString());
 		mAbSoapUtil.call(urlString, nameSpace, methodName, params,
 				new AbSoapListener() {
@@ -498,8 +520,8 @@ public class PersonalCenterActivity extends FragmentActivity implements
 							String[] a = arg1.split("=");
 							String[] b = a[1].split(";");
 							if (b[0].equals("1")) {
-								Toast.makeText(getApplicationContext(), "成功", 1)
-										.show();
+								Toast.makeText(getApplicationContext(),
+										R.string.success, 1).show();
 								if (getIntent().getStringExtra("isgone")
 										.equals("1")) {
 									Intent intent = new Intent();
@@ -509,7 +531,8 @@ public class PersonalCenterActivity extends FragmentActivity implements
 									startActivity(intent);
 								}
 							} else if (b[0].equals("0")) {
-								Toast.makeText(getApplicationContext(), "失败", 1)
+								Toast.makeText(getApplicationContext(),
+										getString(R.string.LoadingFailed), 1)
 										.show();
 							}
 						}
@@ -518,24 +541,28 @@ public class PersonalCenterActivity extends FragmentActivity implements
 					@Override
 					public void onFailure(int arg0, String arg1, Throwable arg2) {
 						// TODO Auto-generated method stub
-						Toast.makeText(getApplicationContext(), "请求失败" + arg1,
-								1).show();
+						Toast.makeText(getApplicationContext(), arg1, 1).show();
 					}
 				});
 
 	}
+
 	public void updateFuzhiInfo() {
 		int fuzhi = 9;
 		double ar = 0;
-		if (skin.getText().toString().equals("中性皮肤")) {
+		if (skin.getText().toString().equals(getString(R.string.NeutralSkin))) {
 			fuzhi = 1;
-		} else if (skin.getText().toString().equals("干性皮肤")) {
+		} else if (skin.getText().toString()
+				.equals(getString(R.string.DrySkin))) {
 			fuzhi = 2;
-		} else if (skin.getText().toString().equals("油性皮肤")) {
+		} else if (skin.getText().toString()
+				.equals(getString(R.string.OilySkin))) {
 			fuzhi = 3;
-		} else if (skin.getText().toString().equals("混合皮肤")) {
+		} else if (skin.getText().toString()
+				.equals(getString(R.string.MixedSkin))) {
 			fuzhi = 4;
-		} else if (skin.getText().toString().equals("敏感性皮肤")) {
+		} else if (skin.getText().toString()
+				.equals(getString(R.string.SensitiveSkin))) {
 			fuzhi = 5;
 		}
 		String urlString = "http://miliapp.ebms.cn/webservice/member.asmx?op=UpdateFuzhi";
@@ -544,43 +571,35 @@ public class PersonalCenterActivity extends FragmentActivity implements
 		AbSoapParams params = new AbSoapParams();
 		params.put("user1", "APP");
 		params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
-		
+
 		params.put("fuzhi", fuzhi + "");
 		params.put("username", settings.USER_NAME.getValue().toString());
 		mAbSoapUtil.call(urlString, nameSpace, methodName, params,
 				new AbSoapListener() {
-			@Override
-			public void onSuccess(int arg0, String arg1) {
-				// TODO Auto-generated method stub
-				/*if (arg1 != null) {
-					String[] a = arg1.split("=");
-					String[] b = a[1].split(";");
-					if (b[0].equals("1")) {
-						Toast.makeText(getApplicationContext(), "成功", 1)
-						.show();
-						if (getIntent().getStringExtra("isgone")
-								.equals("1")) {
-							Intent intent = new Intent();
-							intent.setClass(
-									PersonalCenterActivity.this,
-									ActMain.class);
-							startActivity(intent);
-						}
-					} else if (b[0].equals("0")) {
-						Toast.makeText(getApplicationContext(), "失败", 1)
-						.show();
+					@Override
+					public void onSuccess(int arg0, String arg1) {
+						// TODO Auto-generated method stub
+						/*
+						 * if (arg1 != null) { String[] a = arg1.split("=");
+						 * String[] b = a[1].split(";"); if (b[0].equals("1")) {
+						 * Toast.makeText(getApplicationContext(), "成功", 1)
+						 * .show(); if (getIntent().getStringExtra("isgone")
+						 * .equals("1")) { Intent intent = new Intent();
+						 * intent.setClass( PersonalCenterActivity.this,
+						 * ActMain.class); startActivity(intent); } } else if
+						 * (b[0].equals("0")) {
+						 * Toast.makeText(getApplicationContext(), "失败", 1)
+						 * .show(); } }
+						 */
 					}
-				}*/
-			}
-			
-			@Override
-			public void onFailure(int arg0, String arg1, Throwable arg2) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), "请求失败" + arg1,
-						1).show();
-			}
-		});
-		
+
+					@Override
+					public void onFailure(int arg0, String arg1, Throwable arg2) {
+						// TODO Auto-generated method stub
+						Toast.makeText(getApplicationContext(), arg1, 1).show();
+					}
+				});
+
 	}
 
 	public void doPostMessage() {
@@ -617,9 +636,9 @@ public class PersonalCenterActivity extends FragmentActivity implements
 							String[] a2 = arg1.split("Sex=");
 							String[] b2 = a2[1].split(";");
 							if (b2[0].equals("1")) {
-								sex_text.setText("男");
+								sex_text.setText(getString(R.string.Male));
 							} else if (b2[0].equals("2")) {
-								sex_text.setText("女");
+								sex_text.setText(getString(R.string.Female));
 							}
 						}
 						if (arg1.indexOf("Birthday=") != -1) {
@@ -635,15 +654,15 @@ public class PersonalCenterActivity extends FragmentActivity implements
 							String[] a3 = arg1.split("Fuzhi=");
 							String[] b3 = a3[1].split(";");
 							if (b3[0].equals("1")) {
-								skin.setText("中性皮肤");
+								skin.setText(getString(R.string.NeutralSkin));
 							} else if (b3[0].equals("2")) {
-								skin.setText("干性皮肤");
+								skin.setText(getString(R.string.DrySkin));
 							} else if (b3[0].equals("3")) {
-								skin.setText("油性皮肤");
+								skin.setText(getString(R.string.OilySkin));
 							} else if (b3[0].equals("4")) {
-								skin.setText("混合皮肤");
+								skin.setText(getString(R.string.MixedSkin));
 							} else if (b3[0].equals("5")) {
-								skin.setText("敏感性皮肤");
+								skin.setText(getString(R.string.SensitiveSkin));
 							}
 						}
 
@@ -713,14 +732,14 @@ public class PersonalCenterActivity extends FragmentActivity implements
 							String[] a = arg1.split("=");
 							String[] b = a[1].split(";");
 							if (b[0].equals("1")) {
-								Toast.makeText(getApplicationContext(), "成功", 1)
-										.show();
+								Toast.makeText(getApplicationContext(),
+										R.string.success, 1).show();
 							} else if (b[0].equals("0")) {
-								Toast.makeText(getApplicationContext(), "失败", 1)
-										.show();
+								Toast.makeText(getApplicationContext(),
+										R.string.LoadingFailed, 1).show();
 							} else if (b[0].equals("-2")) {
 								Toast.makeText(getApplicationContext(),
-										"头像上传失败", 1).show();
+										getString(R.string.headfial), 1).show();
 							}
 						}
 					}
@@ -728,8 +747,7 @@ public class PersonalCenterActivity extends FragmentActivity implements
 					@Override
 					public void onFailure(int arg0, String arg1, Throwable arg2) {
 						// TODO Auto-generated method stub
-						Toast.makeText(getApplicationContext(), "请求失败" + arg1,
-								1).show();
+						Toast.makeText(getApplicationContext(), arg1, 1).show();
 					}
 				});
 

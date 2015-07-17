@@ -97,25 +97,25 @@ public class ActAddAlert extends BaseActivity {
 				if ("1".equals(rePeats[i])) {
 					switch (i) {
 					case 0:
-						repeat = repeat + "周日";
+						repeat = repeat + R.string.Sun;
 						break;
 					case 1:
-						repeat = repeat + "周一";
+						repeat = repeat + R.string.Mon;
 						break;
 					case 2:
-						repeat = repeat + "周二";
+						repeat = repeat + R.string.Tue;
 						break;
 					case 3:
-						repeat = repeat + "周三";
+						repeat = repeat + R.string.Wed;
 						break;
 					case 4:
-						repeat = repeat + "周四";
+						repeat = repeat + R.string.Thu;
 						break;
 					case 5:
-						repeat = repeat + "周五";
+						repeat = repeat + R.string.Fri;
 						break;
 					case 6:
-						repeat = repeat + "周六";
+						repeat = repeat + R.string.Sat;
 						break;
 
 					}
@@ -127,29 +127,29 @@ public class ActAddAlert extends BaseActivity {
 			repeat_time.setText(repeat);
 			lable_text.setText(alertEdit.getAlertName());
 			if ("1".equals(alertEdit.getAlertmusic())) {
-				bellText.setText("布谷鸟");
+				bellText.setText(R.string.Cuckoo);
 				bell[0] = true;
 			}
 			if ("1".equals(alertEdit.getAlertmusic())) {
-				bellText.setText("叮当");
+				bellText.setText(R.string.Dingdong);
 				bell[1] = true;
 				bell[0] = false;
 			}
 			if ("1".equals(alertEdit.getAlertmusic())) {
-				bellText.setText("梦幻");
+				bellText.setText(R.string.Fantasy);
 				bell[2] = true;
 				bell[0] = false;
 			}
 			String[] times = alertEdit.getAlertTime().split(":");
 			int hourIndex = 0;
-			if (times[0].startsWith("0")&&!times[0].equals("0")) {
+			if (times[0].startsWith("0") && !times[0].equals("0")) {
 				hourIndex = Integer.parseInt(times[0].replace("0", ""));
 			} else {
 				hourIndex = Integer.parseInt(times[0]);
 			}
 			leftWheel.setCurrentItem(hourIndex - 1);
 			int miniteIndex = 0;
-			if (times[1].startsWith("0")&&!times[1].equals("0")) {
+			if (times[1].startsWith("0") && !times[1].equals("0")) {
 				miniteIndex = Integer.parseInt(times[1].replace("0", ""));
 			} else {
 				miniteIndex = Integer.parseInt(times[1]);
@@ -190,28 +190,31 @@ public class ActAddAlert extends BaseActivity {
 				for (int i = 0; i < reReart.length; i++) {
 					if (reReart[i]) {
 						Calendar cal = Calendar.getInstance();
-						System.out.println("今天的日期:>>>>>>>"+cal.getTime());
-						System.out.println("今天的分钟: "
-								+ Integer.parseInt(hours.get(leftWheel
-										.getCurrentItem())));
-						System.out.println("今天的秒钟: "
-								+ Integer.parseInt(times.get(rightWheel
-										.getCurrentItem())));
-						String date[]=DateUtil.getCurrentDate().split("-");
+						// System.out.println("今天的日期:>>>>>>>" + cal.getTime());
+						// System.out.println("今天的分钟: "
+						// + Integer.parseInt(hours.get(leftWheel
+						// .getCurrentItem())));
+						// System.out.println("今天的秒钟: "
+						// + Integer.parseInt(times.get(rightWheel
+						// .getCurrentItem())));
+						String date[] = DateUtil.getCurrentDate().split("-");
 						cal.set(Calendar.YEAR, Integer.parseInt(date[0]));
-						cal.set(Calendar.MONTH, Integer.parseInt(date[1])-1);
-						cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(date[2]));
+						cal.set(Calendar.MONTH, Integer.parseInt(date[1]) - 1);
+						cal.set(Calendar.DAY_OF_MONTH,
+								Integer.parseInt(date[2]));
 						cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours
 								.get(leftWheel.getCurrentItem())));
 						cal.set(Calendar.MINUTE, Integer.parseInt(times
 								.get(rightWheel.getCurrentItem())));
 						cal.set(Calendar.SECOND, 0);
-						System.out.println("今天的日期: " + cal.getTime());
-						int week=AbDateUtil.getWeekNumber(DateUtil.getCurrentDate(),"yyyy-MM-dd");
-						
+						// System.out.println("今天的日期: " + cal.getTime());
+						int week = AbDateUtil.getWeekNumber(
+								DateUtil.getCurrentDate(), "yyyy-MM-dd");
+
 						long alertTime = cal.getTimeInMillis();
-						System.out.println("alertTime>>>>>>>"+alertTime);
-						System.out.println("System>>>>>>>"+System.currentTimeMillis()+50000);
+						// System.out.println("alertTime>>>>>>>" + alertTime);
+						// System.out.println("System>>>>>>>"
+						// + System.currentTimeMillis() + 50000);
 						switch (i) {
 						case 0:
 							// 创建Intent对象，action为android.intent.action.ALARM_RECEIVER
@@ -223,41 +226,55 @@ public class ActAddAlert extends BaseActivity {
 									intentAlarm, 0);
 							switch (week) {
 							case 0:
-								if(alertTime>System.currentTimeMillis()){
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime, 86400000 * 7, operation);
-								}else{
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime+86400000 * 7, 86400000 * 7, operation);
+								if (alertTime > System.currentTimeMillis()) {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP, alertTime,
+											86400000 * 7, operation);
+								} else {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP,
+											alertTime + 86400000 * 7,
+											86400000 * 7, operation);
 								}
 								break;
 							case 1:
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime+86400000 * 6, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 6, 86400000 * 7,
+										operation);
 							case 2:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 5, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 5, 86400000 * 7,
+										operation);
 								break;
 							case 3:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 4, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 4, 86400000 * 7,
+										operation);
 								break;
 							case 4:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 3, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 3, 86400000 * 7,
+										operation);
 								break;
 							case 5:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 2, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 2, 86400000 * 7,
+										operation);
 								break;
 							case 6:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 1, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 1, 86400000 * 7,
+										operation);
 								break;
 
-							
 							}
-							
+
 							break;
 						case 1:
 							Intent intentAlarm1 = new Intent(
@@ -268,41 +285,55 @@ public class ActAddAlert extends BaseActivity {
 									intentAlarm1, 0);
 							switch (week) {
 							case 0:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 , 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000, 86400000 * 7,
+										operation);
 								break;
 							case 1:
-								if(alertTime>System.currentTimeMillis()){
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime, 86400000 * 7, operation);
-								}else{
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime+86400000 * 7, 86400000 * 7, operation);
+								if (alertTime > System.currentTimeMillis()) {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP, alertTime,
+											86400000 * 7, operation);
+								} else {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP,
+											alertTime + 86400000 * 7,
+											86400000 * 7, operation);
 								}
 							case 2:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*6 , 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 6, 86400000 * 7,
+										operation);
 								break;
 							case 3:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 5, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 5, 86400000 * 7,
+										operation);
 								break;
 							case 4:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 4, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 4, 86400000 * 7,
+										operation);
 								break;
 							case 5:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 3, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 3, 86400000 * 7,
+										operation);
 								break;
 							case 6:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 2, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 2, 86400000 * 7,
+										operation);
 								break;
 
-							
 							}
-							
+
 							break;
 						case 2:
 							Intent intentAlarm2 = new Intent(
@@ -313,42 +344,55 @@ public class ActAddAlert extends BaseActivity {
 									intentAlarm2, 0);
 							switch (week) {
 							case 0:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000* 2 , 86400000* 7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 2, 86400000 * 7,
+										operation);
 								break;
 							case 1:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 , 86400000* 7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000, 86400000 * 7,
+										operation);
 							case 2:
-								if(alertTime>System.currentTimeMillis()){
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime, 86400000 * 7, operation);
-								}else{
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime+86400000 * 7, 86400000 * 7, operation);
+								if (alertTime > System.currentTimeMillis()) {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP, alertTime,
+											86400000 * 7, operation);
+								} else {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP,
+											alertTime + 86400000 * 7,
+											86400000 * 7, operation);
 								}
-								
+
 								break;
 							case 3:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 6, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 6, 86400000 * 7,
+										operation);
 								break;
 							case 4:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 5, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 5, 86400000 * 7,
+										operation);
 								break;
 							case 5:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 4, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 4, 86400000 * 7,
+										operation);
 								break;
 							case 6:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 3, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 3, 86400000 * 7,
+										operation);
 								break;
 
-							
 							}
-							
 
 							break;
 						case 3:
@@ -360,43 +404,57 @@ public class ActAddAlert extends BaseActivity {
 									intentAlarm3, 0);
 							switch (week) {
 							case 0:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000* 3 , 86400000*7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 3, 86400000 * 7,
+										operation);
 								break;
 							case 1:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*2 , 86400000*7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 2, 86400000 * 7,
+										operation);
 							case 2:
-								
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 , 86400000 * 7, operation);
+
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000, 86400000 * 7,
+										operation);
 								break;
 							case 3:
-								if(alertTime>System.currentTimeMillis()){
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime, 86400000 * 7, operation);
-								}else{
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime+86400000 * 7, 86400000 * 7, operation);
+								if (alertTime > System.currentTimeMillis()) {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP, alertTime,
+											86400000 * 7, operation);
+								} else {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP,
+											alertTime + 86400000 * 7,
+											86400000 * 7, operation);
 								}
-								
+
 								break;
 							case 4:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 6, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 6, 86400000 * 7,
+										operation);
 								break;
 							case 5:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 5, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 5, 86400000 * 7,
+										operation);
 								break;
 							case 6:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 4, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 4, 86400000 * 7,
+										operation);
 								break;
 
-							
 							}
-							
+
 							break;
 						case 4:
 							Intent intentAlarm4 = new Intent(
@@ -407,44 +465,57 @@ public class ActAddAlert extends BaseActivity {
 									intentAlarm4, 0);
 							switch (week) {
 							case 0:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000* 4, 86400000*7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 4, 86400000 * 7,
+										operation);
 								break;
 							case 1:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*3 , 86400000*7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 3, 86400000 * 7,
+										operation);
 							case 2:
-								
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*2 , 86400000 * 7, operation);
+
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 2, 86400000 * 7,
+										operation);
 								break;
 							case 3:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 , 86400000 * 7, operation);
-								
-								
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000, 86400000 * 7,
+										operation);
+
 								break;
 							case 4:
-								if(alertTime>System.currentTimeMillis()){
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime, 86400000 * 7, operation);
-								}else{
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime+86400000 * 7, 86400000 * 7, operation);
+								if (alertTime > System.currentTimeMillis()) {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP, alertTime,
+											86400000 * 7, operation);
+								} else {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP,
+											alertTime + 86400000 * 7,
+											86400000 * 7, operation);
 								}
 								break;
 							case 5:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 6, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 6, 86400000 * 7,
+										operation);
 								break;
 							case 6:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 5, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 5, 86400000 * 7,
+										operation);
 								break;
 
-							
 							}
-							
+
 							break;
 						case 5:
 							Intent intentAlarm5 = new Intent(
@@ -455,45 +526,58 @@ public class ActAddAlert extends BaseActivity {
 									intentAlarm5, 0);
 							switch (week) {
 							case 0:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000* 5, 86400000*7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 5, 86400000 * 7,
+										operation);
 								break;
 							case 1:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*4 , 86400000*7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 4, 86400000 * 7,
+										operation);
 							case 2:
-								
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*3 , 86400000 * 7, operation);
+
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 3, 86400000 * 7,
+										operation);
 								break;
 							case 3:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*2 , 86400000 * 7, operation);
-								
-								
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 2, 86400000 * 7,
+										operation);
+
 								break;
 							case 4:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 , 86400000 * 7, operation);
-								
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000, 86400000 * 7,
+										operation);
+
 								break;
 							case 5:
-								if(alertTime>System.currentTimeMillis()){
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime, 86400000 * 7, operation);
-								}else{
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime+86400000 * 7, 86400000 * 7, operation);
+								if (alertTime > System.currentTimeMillis()) {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP, alertTime,
+											86400000 * 7, operation);
+								} else {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP,
+											alertTime + 86400000 * 7,
+											86400000 * 7, operation);
 								}
 								break;
 							case 6:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 * 6, 86400000 * 7, operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 6, 86400000 * 7,
+										operation);
 								break;
 
-							
 							}
-							
+
 							break;
 						case 6:
 							Intent intentAlarm6 = new Intent(
@@ -504,44 +588,57 @@ public class ActAddAlert extends BaseActivity {
 									intentAlarm6, 0);
 							switch (week) {
 							case 0:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000* 6, 86400000*7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 6, 86400000 * 7,
+										operation);
 								break;
 							case 1:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*5 , 86400000*7 , operation);
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 5, 86400000 * 7,
+										operation);
 							case 2:
-								
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*4 , 86400000 * 7, operation);
+
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 4, 86400000 * 7,
+										operation);
 								break;
 							case 3:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*3 , 86400000 * 7, operation);
-								
-								
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 3, 86400000 * 7,
+										operation);
+
 								break;
 							case 4:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000*2 , 86400000 * 7, operation);
-								
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000 * 2, 86400000 * 7,
+										operation);
+
 								break;
 							case 5:
-								alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-										alertTime+86400000 , 86400000 * 7, operation);
-								
+								alarmManager.setRepeating(
+										AlarmManager.RTC_WAKEUP,
+										alertTime + 86400000, 86400000 * 7,
+										operation);
+
 								break;
 							case 6:
-								if(alertTime>System.currentTimeMillis()){
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime, 86400000 * 7, operation);
-								}else{
-									alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-											alertTime+86400000 * 7, 86400000 * 7, operation);
+								if (alertTime > System.currentTimeMillis()) {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP, alertTime,
+											86400000 * 7, operation);
+								} else {
+									alarmManager.setRepeating(
+											AlarmManager.RTC_WAKEUP,
+											alertTime + 86400000 * 7,
+											86400000 * 7, operation);
 								}
 								break;
 
-							
 							}
 							break;
 
@@ -619,7 +716,7 @@ public class ActAddAlert extends BaseActivity {
 				startActivityForResult(intent, 1);
 			}
 		});
-		setTitle("添加闹钟");
+		setTitle(R.string.addn);
 	}
 
 	/**
@@ -784,27 +881,26 @@ public class ActAddAlert extends BaseActivity {
 				if (reReart[i]) {
 					switch (i) {
 					case 0:
-						repeat = repeat + "周日  ";
+						repeat = repeat + R.string.Sun;
 						break;
 					case 1:
-						repeat = repeat + "周一  ";
+						repeat = repeat + R.string.Mon;
 						break;
 					case 2:
-						repeat = repeat + "周二  ";
+						repeat = repeat + R.string.Tue;
 						break;
 					case 3:
-						repeat = repeat + "周三  ";
+						repeat = repeat + R.string.Wed;
 						break;
 					case 4:
-						repeat = repeat + "周四  ";
+						repeat = repeat + R.string.Thu;
 						break;
 					case 5:
-						repeat = repeat + "周五  ";
+						repeat = repeat + R.string.Fri;
 						break;
 					case 6:
-						repeat = repeat + "周六  ";
+						repeat = repeat + R.string.Sat;
 						break;
-
 					}
 				}
 			}
@@ -816,13 +912,13 @@ public class ActAddAlert extends BaseActivity {
 				if (bell[i]) {
 					switch (i) {
 					case 0:
-						bells = bells + "布谷鸟  ";
+						bells = bells + R.string.Cuckoo;
 						break;
 					case 1:
-						bells = bells + "叮当  ";
+						bells = bells + R.string.Dingdong;
 						break;
 					case 2:
-						bells = bells + "梦幻  ";
+						bells = bells + R.string.Fantasy;
 						break;
 
 					}

@@ -73,7 +73,7 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 	public void initView() {
 		context = this;
 		settings = new MicroRecruitSettings(context);
-		setTitle("登录");
+		setTitle(R.string.login);
 		etUname = (EditText) findViewById(R.id.etUname);
 		etPwd = (EditText) findViewById(R.id.etPwd_2);
 		btnLoad = (Button) findViewById(R.id.btnLoad);
@@ -99,7 +99,7 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 				public void onCancel(DialogInterface dialog) {
 				}
 			});
-			pd.setMessage("登录中...");
+			pd.setMessage(getResources().getString(R.string.loginggg));
 			pd.show();
 			// 登录
 			// getFinalHttp().post(Urls.Login_info, AjaxParams(),
@@ -127,7 +127,7 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 								String[] b = a[1].split(";");
 								if (b[0].equals("1")) {
 									Toast.makeText(getApplicationContext(),
-											"登录成功", 1).show();
+											R.string.Loginsuccessful, 1).show();
 									settings.USER_NAME.setValue(etUname
 											.getText().toString());
 									Intent intent2 = new Intent();
@@ -137,10 +137,11 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 									finish();
 								} else if (b[0].equals("-1")) {
 									Toast.makeText(getApplicationContext(),
-											"用户不存在", 1).show();
+											R.string.UserNotExist, 1).show();
 								} else if (b[0].equals("-2")) {
 									Toast.makeText(getApplicationContext(),
-											"用户名或密码错误", 1).show();
+											R.string.InvalidUsernameorPassword,
+											1).show();
 								}
 							}
 						}
@@ -150,8 +151,8 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 								Throwable arg2) {
 							pd.dismiss();
 							// TODO Auto-generated method stub
-							Toast.makeText(getApplicationContext(),
-									"请求失败" + arg1, 1).show();
+							Toast.makeText(getApplicationContext(), arg1, 1)
+									.show();
 						}
 					});
 			break;

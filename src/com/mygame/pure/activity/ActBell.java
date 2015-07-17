@@ -84,7 +84,7 @@ public class ActBell extends BaseActivity {
 				finish();
 			}
 		});
-		setTitle("铃声");
+		setTitle(R.string.Ringtone);
 	}
 
 	private void startAlarm(int position) {
