@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.webkit.ValueCallback;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageButton;
@@ -18,7 +19,7 @@ public class AboutActivity extends Activity {
 	private ImageButton btn;
 	private ImageButton mBackIB, mXIB;
 	private TextView tvAbout;
-	private String about, url,data;
+	private String about, url, data;
 	private WebView mWebView;
 	private String tempcoor = "gcj02";
 	private SharedPreferences share;
@@ -42,14 +43,30 @@ public class AboutActivity extends Activity {
 		mWebView = (WebView) findViewById(R.id.mWebView);
 		about = getIntent().getStringExtra("about");
 		data = getIntent().getStringExtra("data");
-         
+
 		url = getIntent().getStringExtra("url");
 		// url=share.getString("url", url);
 		mWebView.getSettings().setJavaScriptEnabled(true);
+		WebSettings settings = mWebView.getSettings();
 
+		settings.setJavaScriptEnabled(true);
+		settings.setJavaScriptCanOpenWindowsAutomatically(false);
 
-		mWebView.requestFocus();
+		// Various plug-ins
 
+		settings.setPluginState(WebSettings.PluginState.ON);
+
+		// Viewing preferences
+		settings.setBuiltInZoomControls(true);
+		settings.setNeedInitialFocus(false);
+		settings.setLoadWithOverviewMode(true);
+		settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+		settings.setLoadsImagesAutomatically(true);
+
+		// Cache
+		settings.setAppCacheEnabled(true);
+		settings.setDomStorageEnabled(true);
+		settings.setAllowFileAccess(true);
 		// mWebView.getSettings().setDefaultTextEncodingName("utf-8");
 
 		// mWebView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
@@ -77,15 +94,14 @@ public class AboutActivity extends Activity {
 				super.onReceivedError(view, errorCode, description, failingUrl);
 			}
 		});
-		
-		if(url!=null){
-			mWebView.loadUrl(url);
-		}else{
-			mWebView.loadDataWithBaseURL("", data,"text/html", "utf-8", null);
-		}
-		
-	}
 
+		if (url != null) {
+			mWebView.loadUrl(url);
+		} else {
+			mWebView.loadDataWithBaseURL("", data, "text/html", "utf-8", null);
+		}
+
+	}
 
 	/**
 	 * �ֻ�IMEI��
