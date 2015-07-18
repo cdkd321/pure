@@ -2,67 +2,85 @@ package com.mygame.pure.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.TabHost.TabSpec;
+import android.widget.Toast;
 
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
 import com.mygame.pure.ble.BleService;
-import com.mygame.pure.fragment.EyesFragment;
 import com.mygame.pure.fragment.EyesFragmentDown;
 import com.mygame.pure.fragment.EyesFragmentUp;
-import com.mygame.pure.fragment.FaceFragment;
 import com.mygame.pure.fragment.FaceFragmentDown;
 import com.mygame.pure.fragment.FaceFragmentUp;
-import com.mygame.pure.fragment.HandFragment;
-import com.mygame.pure.fragment.NeckFragment;
+import com.mygame.pure.fragment.HandFragmentDown;
+import com.mygame.pure.fragment.HandFragmentUp;
+import com.mygame.pure.fragment.HomeRootFragment;
 import com.mygame.pure.fragment.NeckFragmentDown;
 import com.mygame.pure.fragment.NeckFragmentUp;
+import com.mygame.pure.utils.Constants;
+import com.mygame.pure.view.VerticalViewPager;
 
 /**
- * 主界面 使用ViewPager + VerticalViewPager 作为程序主框架 主界面就可以上下左右滑动
+ * 涓荤晫闈� 浣跨敤ViewPager + VerticalViewPager 浣滀负绋嬪簭涓绘鏋� 涓荤晫闈㈠氨鍙互涓婁笅宸﹀彸婊戝姩
  * 
  * @author tom
  */
 public class ActMain extends BaseActivity implements OnClickListener {
 	protected com.mygame.pure.ble.BleService mBleService;
-//	private List<View> baseList;
-//	private NoScrollViewPager viewPager;
-//	private View llTab1, llTab2, llTab3, llTab4;
-//	int[] viewPageId = new int[] { R.id.check_one, R.id.check_two,
-//			R.id.check_three, R.id.check_four };
-//	private ImageView ivImg;
-	String[] text = new  String[]{
-		"手", "脸", "眼", "颈"
-	};
+	private List<View> baseList;
+	private ViewPager viewPager;
+	public static View llTab1, llTab2, llTab3, llTab4;
+	int[] viewPageId = new int[] { R.id.check_one, R.id.check_two,
+			R.id.check_three, R.id.check_four };
+	public static ImageView ivImg;
+	private FragmentManager fragmentManager;
+	private FragmentTransaction fragmentTrasaction;
+	HomeRootFragment fragment;
+	private boolean isBind = false ;
+	private ContentResolver mContentResolver;
 	
-	int[] tabIcons = new int[]{R.drawable.tab_hand_bg, R.drawable.tab_face_bg,
-			R.drawable.tab_eye_bg, R.drawable.tab_neck_bg
-	};
-	
-	private FragmentTabHost mTabHost;
-	private Class<?> fragmentArray[] = { HandFragment.class, FaceFragment.class, 
-			EyesFragment.class, NeckFragment.class };
-	
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		setContentView(R.layout.act_main);
 		initTab();
+		mContentResolver = getContentResolver();  
+	    setLockPatternEnabled(false);
+		share = getSharedPreferences("longke", Activity.MODE_PRIVATE); // 鎸囧畾鎿嶄綔鐨勬枃浠跺悕
+		
 	}
+	   
+ public void setLockPatternEnabled(boolean enabled) {  
+     setBoolean(android.provider.Settings.System.LOCK_PATTERN_ENABLED,  
+             enabled);  
+ }  
+ private void setBoolean(String systemSettingKey, boolean enabled) {  
+     android.provider.Settings.System.putInt(mContentResolver,  
+             systemSettingKey, enabled ? 1 : 0);  
+ }  
 
 	public List<View> getList() {
 
@@ -75,10 +93,37 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		}
 		return mList;
 	}
+	private SharedPreferences share;
+	private String mAddress;
+	private boolean  isStop;
+	@Override
+	public void onResume() {
+		super.onResume();
+		
+	}
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		
+		/*if(isBind){
+			if(mServiceConnection!=null){
+				unbindService(mServiceConnection);
+			}
+			isBind=false;
+		}*/
+		
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		
+		
+	}
 
 	public List<Fragment> getFragmentList(int type) {
 		List<Fragment> listFragments = new ArrayList<Fragment>();
-//		listFragments = getOneFragments(type);
+		listFragments = getOneFragments(type);
 		/*
 		 * switch (type) { case 0: listFragments = getOneFragments(); break;
 		 * case 1: listFragments = getTwoFragments(); break; case 2:
@@ -89,6 +134,15 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		return listFragments;
 	}
 
+	private List<Fragment> getOneFragments(int type) {
+		List<Fragment> listFragments = new ArrayList<Fragment>();
+		HandFragmentUp fragment = HandFragmentUp.newInstance(type);
+		listFragments.add(fragment);
+		HandFragmentDown fragment2 = HandFragmentDown.newInstance(type);
+		listFragments.add(fragment2);
+		return listFragments;
+	}
+
 	public List<Fragment> getTwoFragments() {
 		List<Fragment> listFragments = new ArrayList<Fragment>();
 		FaceFragmentUp fragment = new FaceFragmentUp();
@@ -96,6 +150,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		FaceFragmentDown fragment2 = new FaceFragmentDown();
 		listFragments.add(fragment2);
 		return listFragments;
+
 	}
 
 	public List<Fragment> getThreeFragments() {
@@ -117,171 +172,169 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	}
 
 	private void initTab() {
-//		llTab1 = findViewById(R.id.llTab1);
-//		llTab2 = findViewById(R.id.llTab2);
-//		llTab3 = findViewById(R.id.llTab3);
-//		llTab4 = findViewById(R.id.llTab4);
+		llTab1 = findViewById(R.id.llTab1);
+		llTab2 = findViewById(R.id.llTab2);
+		llTab3 = findViewById(R.id.llTab3);
+		llTab4 = findViewById(R.id.llTab4);
 		getTkActionBar();
 		setTitle("检测中心");
 		addBackImage(R.drawable.more, new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent=new Intent(ActMain.this,MoreAct.class);
-				startActivity(intent);
-				
+//				Intent intent = new Intent(ActMain.this, MoreAct.class);
+				Intent intent = new Intent(ActMain.this, ActSpecify.class);
+				startActivityForResult(intent, 0);
+
 			}
 		});
-		
-		// 实例化TabHost对象，得到TabHost
-		mTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
-		mTabHost.setup(this, getSupportFragmentManager(), R.id.fragment_content);
+		addRightImage(R.drawable.news_pressed, new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(ActMain.this, ZXInfoAct.class);
+				startActivity(intent);
+			}
+		});
+		ivImg = (ImageView) findViewById(R.id.ivImg);
 
-		// 得到fragment的个数
+		/*
+		 * llTab1.setOnClickListener(this); llTab2.setOnClickListener(this);
+		 * llTab3.setOnClickListener(this); llTab4.setOnClickListener(this);
+		 */
+		fragmentManager = getSupportFragmentManager();
+		fragmentTrasaction = fragmentManager.beginTransaction();
+		fragment = HomeRootFragment.newInstance(0);
+		fragmentTrasaction.replace(R.id.fragment_content, fragment);
+		fragmentTrasaction.commit();
 
-		for (int i = 0; i < fragmentArray.length; i++) {
-			// 为每一个Tab按钮设置图标、文字和内容
-			TabSpec tabSpec = mTabHost.newTabSpec(text[i]).setIndicator(getTabItemView(i));
-			// 将Tab按钮添加进Tab选项卡中
-			mTabHost.addTab(tabSpec, fragmentArray[i], null);
-		}
-//		ivImg = (ImageView) findViewById(R.id.ivImg);
-//
-//		ivImg.setOnClickListener(this);
-//
-//		llTab1.setOnClickListener(this);
-//		llTab2.setOnClickListener(this);
-//		llTab3.setOnClickListener(this);
-//		llTab4.setOnClickListener(this);
-//
-//		viewPager = (NoScrollViewPager) findViewById(R.id.check_list);
-//		viewPager.setNoScroll(true);
-//		baseList = getList();
-
-//		HistoryAdapter adapter = new HistoryAdapter(baseList);
-
-//		for (int i = 0; i < 4; i++) {
-//			List<Fragment> fragments0 = getFragmentList(i);
-//			VerticalPagerAdapter fragmentAdapter = new VerticalPagerAdapter(
-//					getSupportFragmentManager(), fragments0);
-//			VerticalViewPager page = (VerticalViewPager) baseList.get(i)
-//					.findViewById(viewPageId[i]);
-//			page.setOnPageChangeListener(new OnPageChangeListener() {
-//
-//				@Override
-//				public void onPageSelected(int arg0) {
-//					switch (arg0) {
-//					case 0:
-//						setTitle("检测中心");
-//						break;
-//					case 1:
-//						setTitle("历史记录");
-//						break;
-//					}
-//
-//				}
-//
-//				@Override
-//				public void onPageScrolled(int arg0, float arg1, int arg2) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//
-//				@Override
-//				public void onPageScrollStateChanged(int arg0) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//			});
-//			page.setAdapter(fragmentAdapter);
-//		}
-//		viewPager.setAdapter(adapter);
-//		llTab1.setSelected(true);
-//		viewPager.setOnPageChangeListener(new OnPageChangeListener() {
-//
-//			@Override
-//			public void onPageSelected(int arg0) {
-//				SelfDefineApplication.getInstance().selectPostion = arg0;
-//				setTabSelected(arg0);
-//			}
-//
-//			@Override
-//			public void onPageScrolled(int arg0, float arg1, int arg2) {
-//			}
-//
-//			@Override
-//			public void onPageScrollStateChanged(int arg0) {
-//			}
-//		});
+		/*
+		 * viewPager = (ViewPager) findViewById(R.id.check_list); baseList =
+		 * getList();
+		 * 
+		 * HistoryAdapter adapter = new HistoryAdapter(baseList);
+		 * 
+		 * for (int i = 0; i < 4; i++) { List<Fragment> fragments0 =
+		 * getFragmentList(i); VerticalPagerAdapter fragmentAdapter = new
+		 * VerticalPagerAdapter( getSupportFragmentManager(), fragments0);
+		 * VerticalViewPager page = (VerticalViewPager) baseList.get(i)
+		 * .findViewById(viewPageId[i]); page.setOnPageChangeListener(new
+		 * OnPageChangeListener() {
+		 * 
+		 * @Override public void onPageSelected(int arg0) { switch (arg0) { case
+		 * 0: setTitle("检测中心"); break; case 1: setTitle("历史数据"); break; }
+		 * 
+		 * }
+		 * 
+		 * @Override public void onPageScrolled(int arg0, float arg1, int arg2)
+		 * { // TODO Auto-generated method stub
+		 * 
+		 * }
+		 * 
+		 * @Override public void onPageScrollStateChanged(int arg0) { // TODO
+		 * Auto-generated method stub
+		 * 
+		 * } }); page.setAdapter(fragmentAdapter); }
+		 * viewPager.setAdapter(adapter);
+		 */
+		llTab1.setSelected(true);
+		/*
+		 * viewPager.setOnPageChangeListener(new OnPageChangeListener() {
+		 * 
+		 * @Override public void onPageSelected(int arg0) {
+		 * SelfDefineApplication.getInstance().selectPostion = arg0;
+		 * setTabSelected(arg0); }
+		 * 
+		 * @Override public void onPageScrolled(int arg0, float arg1, int arg2)
+		 * { }
+		 * 
+		 * @Override public void onPageScrollStateChanged(int arg0) { } });
+		 */
 		Intent i = new Intent(this, BleService.class);
-		bindService(i, mServiceConnection, BIND_AUTO_CREATE);
+		isBind=bindService(i, mServiceConnection, BIND_AUTO_CREATE);
 		BluetoothAdapter.getDefaultAdapter().enable();
 	}
 
-//	private void setTabSelected(int i) {
-//		llTab1.setSelected(i == 0);
-//		llTab2.setSelected(i == 1);
-//		llTab3.setSelected(i == 2);
-//		llTab4.setSelected(i == 3);
-//	}
-	
-	
-	/**
-	 * 给Tab按钮设置图标和文字
-	 */
-	private View getTabItemView(int index) {
-		View view = View.inflate(this, R.layout.tab_item_view, null);
-
-		 ImageView imageView = (ImageView) view.findViewById(R.id.ivTab1);
-		 imageView.setImageResource(tabIcons[index]);
-
-		Button btnTab = (Button) view.findViewById(R.id.btnTab1);
-		btnTab.setText(text[index]);
-
-//		btnTab.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(mImageViewArray[index]), null,
-//				null);
-
-		return view;
+	private void setTabSelected(int i) {
+		llTab1.setSelected(i == 0);
+		llTab2.setSelected(i == 1);
+		llTab3.setSelected(i == 2);
+		llTab4.setSelected(i == 3);
 	}
-
+    @Override
+    protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+    	// TODO Auto-generated method stub
+    	super.onActivityResult(arg0, arg1, arg2);
+    	if(arg0==0){
+    		if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+    			Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+    			intent.putExtra("uid", "");
+				startActivityForResult(intent, 1);
+    		};
+    	}else{
+    		
+    		if ( arg2 != null) {
+    			BluetoothDevice device = arg2.getExtras().getParcelable(
+    					BluetoothDevice.EXTRA_DEVICE);
+    			mAddress = device.getAddress();
+    			if (SelfDefineApplication.getInstance().mService != null) {
+    				if (arg1 == Activity.RESULT_OK) {
+    					SelfDefineApplication.getInstance().mService.connect(mAddress);
+    				}
+    				
+    			}
+    		} 
+    	}
+    	/*if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+			Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+			startActivity(intent);
+		};*/
+    }
 	@Override
 	public void onClick(View v) {
-//		switch (v.getId()) {
-//		case R.id.llTab1:
-//			viewPager.setCurrentItem(0);
-//			setTabSelected(0);
-//			break;
-//		case R.id.llTab2:
-//			viewPager.setCurrentItem(1);
-//			setTabSelected(1);
-//			break;
-//		case R.id.llTab3:
-//			viewPager.setCurrentItem(2);
-//			setTabSelected(2);
-//			break;
-//		case R.id.llTab4:
-//			viewPager.setCurrentItem(3);
-//			setTabSelected(3);
-//			// startActivity(new Intent(v.getContext(), MoreAct.class));
-//			break;
-//		case R.id.ivImg:
-//			VerticalViewPager vPager = (VerticalViewPager) viewPager
-//					.findViewById(viewPageId[viewPager.getCurrentItem()]);
-//			if (vPager.getChildCount() > 0) {
-//				if (vPager.getCurrentItem() > 0) {
-//					vPager.setCurrentItem(0);
-//					ivImg.setBackgroundResource(R.drawable.back);
-//				} else {
-//					vPager.setCurrentItem(1);
-//					ivImg.setBackgroundResource(R.drawable.arrow_up);
-//				}
-//			} else {
-//				vPager.setCurrentItem(0);
-//			}
-//			break;
-//		default:
-//			break;
-//		}
+		switch (v.getId()) {
+		case R.id.llTab1:
+			// viewPager.setCurrentItem(0);
+			setTabSelected(0);
+			Intent intent = new Intent(Constants.SELECT_ONE);
+			sendBroadcast(intent);
+			break;
+		case R.id.llTab2:
+			Intent intent1 = new Intent(Constants.SELECT_TWO);
+			sendBroadcast(intent1);
+			setTabSelected(1);
+			break;
+		case R.id.llTab3:
+			Intent intent2 = new Intent(Constants.SELECT_THREE);
+			sendBroadcast(intent2);
+			setTabSelected(2);
+			break;
+		case R.id.llTab4:
+			Intent intent3 = new Intent(Constants.SELECT_FOUR);
+			sendBroadcast(intent3);
+			setTabSelected(3);
+			// startActivity(new Intent(v.getContext(), MoreAct.class));
+			break;
+		case R.id.ivImg:
+			VerticalViewPager vPager = (VerticalViewPager) viewPager
+					.findViewById(viewPageId[viewPager.getCurrentItem()]);
+			if (vPager.getChildCount() > 0) {
+				if (vPager.getCurrentItem() > 0) {
+					vPager.setCurrentItem(0);
+					ivImg.setBackgroundResource(R.drawable.back);
+				} else {
+					vPager.setCurrentItem(1);
+					ivImg.setBackgroundResource(R.drawable.arrow_up);
+				}
+			} else {
+				vPager.setCurrentItem(0);
+			}
+			break;
+
+		default:
+			break;
+		}
 	}
 
 	// Code to manage Service lifecycle.
@@ -297,6 +350,11 @@ public class ActMain extends BaseActivity implements OnClickListener {
 				// Log.e(TAG, "Unable to initialize Bluetooth");
 				finish();
 			}
+			if(TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))){
+				Intent intent=new Intent(getActivity(),DeviceListActivity.class);
+				intent.putExtra("uid", "");
+				startActivityForResult(intent, 1);
+			};
 			// Automatically connects to the device upon successful start-up
 			// initialization.
 			// mBleService.connect(mDeviceAddress);
@@ -307,4 +365,32 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			mBleService = null;
 		}
 	};
+	private Timer timer = new Timer();
+	private static Boolean isQuit = false;
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (isQuit == false) {
+				isQuit = true;
+				Toast.makeText(getBaseContext(), "再按一次返回桌面", Toast.LENGTH_SHORT)
+						.show();
+				TimerTask task = null;
+				task = new TimerTask() {
+					@Override
+					public void run() {
+						isQuit = false;
+					}
+				};
+				timer.schedule(task, 2000);
+			} else {
+				moveTaskToBack(false);
+
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
