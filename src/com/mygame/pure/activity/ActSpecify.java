@@ -308,33 +308,33 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		// 要显示图形的View
 		LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
 
-		AbLevelSeriesRenderer renderer = new AbLevelSeriesRenderer();
-
-		renderer.setWidth(width);
-		renderer.setHeight(height);
-		renderer.setColor(color);
-		renderer.setPart(part);
-		renderer.setPartValue(partValue);
-		renderer.setTextValue(textValue);
-		renderer.setTextDesc(textDesc);
-		renderer.setTextlevelIndex(textlevelIndex);
-		renderer.setTextLevelSize(textLevelSize);
-		renderer.setMarginTop(marginTop);
-		renderer.setArrowWidth(arrowWidth);
-		renderer.setArrowHeight(arrowHeight);
-		renderer.setArrowMarginTop(arrowMarginTop);
-		renderer.setLevelHeight(levelHeight);
-		renderer.setPartTextSize(partTextSize);
-		renderer.setTextDescSize(textDescSize);
-		renderer.setTextRectWidth(120);
-		renderer.setTextRectHeight(50);
-
-		AbLevelSeriesDataset mDataset = new AbLevelSeriesDataset();
-		AbLevelView mAbLevelView = AbLevelChartFactory.getLevelChartView(this,
-				mDataset, renderer);
-		setTitle(R.string.Details);
-		chartLayout.addView(mAbLevelView, new LinearLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+//		AbLevelSeriesRenderer renderer = new AbLevelSeriesRenderer();
+//
+//		renderer.setWidth(width);
+//		renderer.setHeight(height);
+//		renderer.setColor(color);
+//		renderer.setPart(part);
+//		renderer.setPartValue(partValue);
+//		renderer.setTextValue(textValue);
+//		renderer.setTextDesc(textDesc);
+//		renderer.setTextlevelIndex(textlevelIndex);
+//		renderer.setTextLevelSize(textLevelSize);
+//		renderer.setMarginTop(marginTop);
+//		renderer.setArrowWidth(arrowWidth);
+//		renderer.setArrowHeight(arrowHeight);
+//		renderer.setArrowMarginTop(arrowMarginTop);
+//		renderer.setLevelHeight(levelHeight);
+//		renderer.setPartTextSize(partTextSize);
+//		renderer.setTextDescSize(textDescSize);
+//		renderer.setTextRectWidth(120);
+//		renderer.setTextRectHeight(50);
+//
+//		AbLevelSeriesDataset mDataset = new AbLevelSeriesDataset();
+//		AbLevelView mAbLevelView = AbLevelChartFactory.getLevelChartView(this,
+//				mDataset, renderer);
+//		setTitle(R.string.Details);
+//		chartLayout.addView(mAbLevelView, new LinearLayout.LayoutParams(
+//				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 	}
 
 	private void showShare() {
