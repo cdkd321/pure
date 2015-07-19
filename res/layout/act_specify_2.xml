@@ -49,8 +49,8 @@
                     android:id="@+id/chartLayout"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginTop="30dp"
                     android:gravity="center"
                     android:orientation="vertical" />
@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/twenty_dp"
-                    android:text="\t\t坚持每天用食盐洗脸，不但可以美白，去角质，最重要的是脸上不再油油的哦，脸上一出油，就会显得很脏，相信坚持一段时间，你一定能看到效果的。"
+                    android:text="@string/upips"
                     android:textColor="@color/black_555555" />
             </LinearLayout>
         </LinearLayout>
