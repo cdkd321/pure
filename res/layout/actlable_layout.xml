@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="@null"
-        android:text="皮肤测试"
+        android:text="@string/SkinTest"
         />
     <View 
         android:layout_width="match_parent"

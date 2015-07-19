@@ -13,58 +13,54 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/twenty_dp"
-            android:paddingRight="@dimen/twenty_dp"
-            android:orientation="vertical" >
+            android:paddingRight="@dimen/twenty_dp" >
 
             <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key1" />
+                style="@style/titleText"
+                android:text="@string/key1"
+                android:textColor="@color/theme_blue" />
 
             <TextView
-                style="@style/normalText" 
+                style="@style/normalText"
                 android:text="@string/value1" />
-            
-            
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key2" />
 
             <TextView
-                style="@style/normalText" 
+                style="@style/titleText"
+                android:text="@string/key2"
+                android:textColor="@color/theme_blue" />
+
+            <TextView
+                style="@style/normalText"
                 android:text="@string/value2" />
-            
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key3" />
 
             <TextView
-                style="@style/normalText" 
+                style="@style/titleText"
+                android:text="@string/key3"
+                android:textColor="@color/theme_blue" />
+
+            <TextView
+                style="@style/normalText"
                 android:text="@string/value3" />
-            
-            
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key4" />
 
             <TextView
-                style="@style/normalText" 
+                style="@style/titleText"
+                android:text="@string/key4"
+                android:textColor="@color/theme_blue" />
+
+            <TextView
+                style="@style/normalText"
                 android:text="@string/value4" />
-            
-            
-            <TextView
-                style="@style/titleText" 
-                android:textColor="@color/theme_blue"
-                android:text="@string/key5" />
 
             <TextView
-                style="@style/normalText" 
+                style="@style/titleText"
+                android:text="@string/key5"
+                android:textColor="@color/theme_blue" />
+
+            <TextView
+                style="@style/normalText"
                 android:text="@string/value5" />
-            
         </LinearLayout>
     </ScrollView>
 

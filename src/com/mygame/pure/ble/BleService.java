@@ -156,7 +156,7 @@ public class BleService extends Service {
 				mConnectionState = STATE_DISCONNECTED;
 				broadcastUpdate(intentAction);
 				Log.w(TAG, "onConnectionStateChange: " + status);
-				operateStatusWrong();
+				//operateStatusWrong();
 			}
 		}
 
@@ -319,6 +319,7 @@ public class BleService extends Service {
 					while (true) {
 						Thread.sleep(1000);
 						if (isAppOnForeground()) {
+							
 							Log.i(TAG, "true");
 						} else {
 							if(mConnectionState != STATE_DISCONNECTED){

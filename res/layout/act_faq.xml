@@ -63,7 +63,7 @@
 
                 <TextView
                     style="@style/normalText"
-                    android:text="手部：30%～38%	\n脸部：32%～42%	\n眼部：35%～45%	\n颈部：35%～45%" />
+                    android:text="@string/faq_value10" />
 
                 <TextView
                     style="@style/titleText"

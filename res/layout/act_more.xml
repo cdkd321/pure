@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="刷新"
+            android:text="@string/bnew"
             android:textColor="#fff"
             android:textSize="18sp" />
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="更多"
+            android:text="@string/more"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </RelativeLayout>
@@ -69,8 +69,6 @@
             android:layout_marginTop="@dimen/ten_dp"
             android:textColor="@color/text_black"
             android:textSize="@dimen/list_text_size" />
-
-       
     </RelativeLayout>
 
     <com.mygame.pure.view.UIItem
@@ -79,7 +77,7 @@
         android:layout_below="@+id/head"
         app:leftIcon="@drawable/sitting_pressed"
         app:leftIcon_visible="0"
-        app:leftText1="提醒设置" />
+        app:leftText1="@string/ReminderSettings" />
 
     <RelativeLayout
         android:id="@+id/connect_device_relative"
@@ -92,7 +90,7 @@
             style="@style/m_w"
             app:leftIcon="@drawable/lanya_tubiao"
             app:leftIcon_visible="0"
-            app:leftText1="连接设备" />
+            app:leftText1="@string/divercon" />
 
         <TextView
             android:id="@+id/connected_text"
@@ -102,7 +100,7 @@
             android:layout_marginRight="60dp"
             android:background="@drawable/bg_round_corner_theme"
             android:padding="@dimen/five_dp"
-            android:text="已连接"
+            android:text="@string/Pureconnected"
             android:textColor="@color/white"
             android:textSize="@dimen/input_size"
             android:visibility="gone" />
@@ -114,7 +112,7 @@
         android:layout_below="@+id/connect_device_relative"
         app:leftIcon="@drawable/drop_pressed"
         app:leftIcon_visible="0"
-        app:leftText1="护肤知识" />
+        app:leftText1="@string/SkincareKnowledge" />
 
     <com.mygame.pure.view.UIItem
         android:id="@+id/FAQ"
@@ -130,6 +128,6 @@
         android:layout_below="@+id/FAQ"
         app:leftIcon="@drawable/feedback_pressed"
         app:leftIcon_visible="0"
-        app:leftText1="意见反馈" />
+        app:leftText1="@string/Feedback" />
 
 </RelativeLayout>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.sharesdk.framework.ShareSDK;
@@ -15,10 +16,17 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
+import com.ab.view.level.AbLevelChartFactory;
+import com.ab.view.level.AbLevelSeriesDataset;
+import com.ab.view.level.AbLevelSeriesRenderer;
+import com.ab.view.level.AbLevelView;
 import com.mygame.pure.R;
 import com.mygame.pure.core.MicroRecruitSettings;
 import com.mygame.pure.utils.ShareUtil;
 import com.mygame.pure.view.CircleImageView;
+import com.mygame.pure.view.PureProgress1;
+import com.mygame.pure.view.PureProgress2;
+import com.mygame.pure.view.PureProgress3;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -59,6 +67,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		tishi_text = (TextView) findViewById(R.id.tishi_title);
 		w_w = (TextView) findViewById(R.id.nick_name_text);
 		user_logo = (CircleImageView) findViewById(R.id.user_logo);
+		LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
 		mAbSoapUtil = AbSoapUtil.getInstance(this);
 		settings = new MicroRecruitSettings(ActSpecify.this);
 		hand_skin_share = getResources()
@@ -66,9 +75,13 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		the_neck_share = getResources().getStringArray(R.array.the_neck_share);
 		the_face_share = getResources().getStringArray(R.array.the_face_share);
 		the_eye_share = getResources().getStringArray(R.array.the_eye_share);
+		
 		if (checkType == 0) {
+			PureProgress1 pure=new PureProgress1(this);
+			
 			if (progress < 0.30) {
 				textlevelIndex = 0;
+				
 				// 当前值描述
 				textDesc = getResources().getString(R.string.Dry);
 			} else if (progress > 0.38) {
@@ -80,6 +93,9 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				// 当前值描述
 				textDesc = getResources().getString(R.string.nomal);
 			}
+			pure.setProgress(progress,textlevelIndex,textValue);
+			chartLayout.addView(pure, new LinearLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			// 假如 每段的百分比 2 3 2 1 1 1
 			part = new float[] { 2.50f, 2.00f, 5.50f };
 			// isLogin();
@@ -116,6 +132,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 			tishi_text
 					.setText(hand_skin_share[(int) (Math.random() * hand_skin_share.length)]);
 		} else if (checkType == 1) {
+			PureProgress2 pure=new PureProgress2(this);
 			if (progress < 0.32) {
 				textlevelIndex = 0;
 				// 当前值描述
@@ -149,7 +166,9 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				} else {
 					pingjun_text.setText(R.string.face7);
 				}
-
+				pure.setProgress(progress,textlevelIndex,textValue);
+				chartLayout.addView(pure, new LinearLayout.LayoutParams(
+						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 				// pingjun_text.setText("同龄人群脸部水分平均值36.70%");
 				getHeadusername();
 				w_w.setText(settings.USER_nick.getValue().toString());
@@ -165,6 +184,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 			tishi_text
 					.setText(the_face_share[(int) (Math.random() * the_face_share.length)]);
 		} else if (checkType == 2) {
+			PureProgress3 pure=new PureProgress3(this);
 			if (progress < 0.35) {
 				textlevelIndex = 0;
 				// 当前值描述
@@ -205,7 +225,9 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				pingjun_text
 						.setText(R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup);
 			}
-
+			pure.setProgress(progress,textlevelIndex,textValue);
+			chartLayout.addView(pure, new LinearLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			// 假如 每段的百分比 2 3 2 1 1 1
 			part = new float[] { 3.75f, 2.5f, 3.75f };
 			// 各等级段的值
@@ -213,6 +235,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 			tishi_text
 					.setText(the_eye_share[(int) (Math.random() * the_eye_share.length)]);
 		} else if (checkType == 3) {
+			PureProgress3 pure=new PureProgress3(this);
 			if (progress < 0.35) {
 				textlevelIndex = 0;
 				// 当前值描述
@@ -253,6 +276,9 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				pingjun_text
 						.setText(R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup);
 			}
+			pure.setProgress(progress,textlevelIndex,textValue);
+			chartLayout.addView(pure, new LinearLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			// 假如 每段的百分比 2 3 2 1 1 1
 			part = new float[] { 3.75f, 2.5f, 3.75f };
 			// 各等级段的值
@@ -268,7 +294,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				showShare();
 			}
 		});
-		// 等级图形宽
+		/*// 等级图形宽
 		int width = 300;
 		// 等级图形高
 		int height = 200;
@@ -293,42 +319,42 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		// 等级坐标文字大小
 		int partTextSize = 15;
 		// 等级说明文字大小
-		int textDescSize = 22;
+		int textDescSize = 22;*/
 		/*
 		 * // 当前值 java.text.DecimalFormat df=new
 		 * java.text.DecimalFormat("#0.0"); String textValue =
 		 * df.format(progress*100)+"%";
 		 */
 		// 要显示图形的View
-		LinearLayout chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
+		
 
-//		AbLevelSeriesRenderer renderer = new AbLevelSeriesRenderer();
-//
-//		renderer.setWidth(width);
-//		renderer.setHeight(height);
-//		renderer.setColor(color);
-//		renderer.setPart(part);
-//		renderer.setPartValue(partValue);
-//		renderer.setTextValue(textValue);
-//		renderer.setTextDesc(textDesc);
-//		renderer.setTextlevelIndex(textlevelIndex);
-//		renderer.setTextLevelSize(textLevelSize);
-//		renderer.setMarginTop(marginTop);
-//		renderer.setArrowWidth(arrowWidth);
-//		renderer.setArrowHeight(arrowHeight);
-//		renderer.setArrowMarginTop(arrowMarginTop);
-//		renderer.setLevelHeight(levelHeight);
-//		renderer.setPartTextSize(partTextSize);
-//		renderer.setTextDescSize(textDescSize);
-//		renderer.setTextRectWidth(120);
-//		renderer.setTextRectHeight(50);
-//
-//		AbLevelSeriesDataset mDataset = new AbLevelSeriesDataset();
-//		AbLevelView mAbLevelView = AbLevelChartFactory.getLevelChartView(this,
-//				mDataset, renderer);
-//		setTitle(R.string.Details);
-//		chartLayout.addView(mAbLevelView, new LinearLayout.LayoutParams(
-//				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+		/*AbLevelSeriesRenderer renderer = new AbLevelSeriesRenderer();
+
+		renderer.setWidth(width);
+		renderer.setHeight(height);
+		renderer.setColor(color);
+		renderer.setPart(part);
+		renderer.setPartValue(partValue);
+		renderer.setTextValue(textValue);
+		renderer.setTextDesc(textDesc);
+		renderer.setTextlevelIndex(textlevelIndex);
+		renderer.setTextLevelSize(textLevelSize);
+		renderer.setMarginTop(marginTop);
+		renderer.setArrowWidth(arrowWidth);
+		renderer.setArrowHeight(arrowHeight);
+		renderer.setArrowMarginTop(arrowMarginTop);
+		renderer.setLevelHeight(levelHeight);
+		renderer.setPartTextSize(partTextSize);
+		renderer.setTextDescSize(textDescSize);
+		renderer.setTextRectWidth(120);
+		renderer.setTextRectHeight(50);
+
+		AbLevelSeriesDataset mDataset = new AbLevelSeriesDataset();
+		AbLevelView mAbLevelView = AbLevelChartFactory.getLevelChartView(this,
+				mDataset, renderer);*/
+		
+		setTitle(R.string.Details);
+		
 	}
 
 	private void showShare() {
@@ -360,7 +386,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		oks.setTitle(getString(R.string.share));
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		oks.setTitleUrl("http://sharesdk.cn");
+		//oks.setTitleUrl("http://sharesdk.cn");
 		// text是分享文本，所有平台都需要这个字段
 		oks.setText(getResources().getString(R.string.content));
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数

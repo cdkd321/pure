@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="key1">干性肌肤：</string>
+	<string name="value1">肤质细腻、较薄、毛孔不明显、皮脂分泌少而均匀、没有油腻感觉、细腻美观、皮脂分泌量少、白皙、缺少光泽、毛孔细小、容易产生细小皱纹、毛细血管表浅、对外界刺激较敏感、PH值约5.5-6.0。</string>
+	<string name="key2">油性肌肤：</string>
+	<string name="value2">皮脂分泌旺盛，多数人肤色偏深，毛孔粗大、皮肤油腻光亮，PH值在5.6-6.6，容易粘附污物，引起皮肤痤疮等。这类皮肤对外界刺激耐受性强，不容易产生过敏反应。</string>
+	<string name="key3">中性肌肤：</string>
+	<string name="value3">肌肤细腻、光滑、富有弹性、水嫩嫩的、白里透红。其特点是皮肤构造细腻、油脂及水分分泌均衡的弱酸性皮肤，毛细孔细致。且具光泽、富弹性，它是健康的理想皮肤。</string>
+	<string name="key4">混合性肌肤：</string>
+	<string name="value4">混合性肌肤是皮肤的一种类型，它是指在脸部的不同区域，具有较大差异性的肤质特性，最常见的是T字部位呈现油性肤质，而脸颊部位则为中性或干性肤质。</string>
+	<string name="key5">敏感性肌肤：</string>
+	<string name="value5">皮肤较薄，容易看到红血丝，温度过冷或过热皮肤容易泛红，发热。容易受环境因素、季节变化及面部保养品刺激，并可能伴有全身皮肤敏感。</string>
+</resources>

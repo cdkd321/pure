@@ -48,7 +48,7 @@ public class SplashScreenActivity extends Activity {
 					AbSharedUtil.putBoolean(SplashScreenActivity.this,
 							Constants.FIRST_START, false);
 					Intent intent = new Intent(SplashScreenActivity.this,
-							FirstbootPageActivity.class);
+							ActMain.class);
 					startActivity(intent); //
 				}
 				// startActivityByKey(IntentAction.ACTION_HOME);

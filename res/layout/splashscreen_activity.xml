@@ -22,7 +22,7 @@
         <TextView 
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="最智能的肌肤水分测试仪"
+            android:text="@string/tips"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:textSize="18sp"

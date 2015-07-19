@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:paddingLeft="120dp"
-                    android:text="时"
+                    android:text="@string/time"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:paddingRight="60dp"
-                    android:text="分"
+                    android:text="@string/muinite"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </RelativeLayout>
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="重复"
+                android:text="@string/Repeat"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="永不"
+                android:text="@string/Never"
                 android:textSize="16sp" />
         </RelativeLayout>
 
@@ -137,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="标签"
+                android:text="@string/Tag"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -146,7 +146,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="皮肤测试"
+                android:text="@string/SkinTest"
                 android:textSize="16sp" />
         </RelativeLayout>
 
@@ -165,7 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="铃声"
+                android:text="@string/Ringtone"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -174,7 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="布谷鸟"
+                android:text="@string/Cuckoo"
                 android:textSize="16sp" />
         </RelativeLayout>
 
@@ -193,11 +193,10 @@
             android:background="@drawable/bg_round_corner_theme"
             android:gravity="center"
             android:padding="@dimen/five_dp"
-            android:text="删除闹钟"
-            android:visibility="gone"
-            android:textSize="18sp"
+            android:text="@string/delnz"
             android:textColor="@color/white"
-             />
+            android:textSize="18sp"
+            android:visibility="gone" />
     </LinearLayout>
 
 </RelativeLayout>

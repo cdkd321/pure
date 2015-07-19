@@ -53,5 +53,8 @@
     <color name="actionsheet_blue">#037BFF</color>
     <color name="actionsheet_red">#FD4A2E</color>
     <color name="actionsheet_gray">#8F8F8F</color>
+    <color name="progress1">#E38A0B</color>
+    <color name="progress2">#16CD8E</color>
+    <color name="progress3">#3CB4F2</color>
 
 </resources>

@@ -39,7 +39,7 @@
                         android:layout_toRightOf="@+id/ivSanjiao"
                         android:background="@color/bg"
                         android:gravity="center"
-                        android:hint="邮箱" >
+                        android:hint="@string/EmailAddress" >
 
                         <requestFocus />
                     </EditText>
@@ -62,7 +62,7 @@
                         style="@style/EtTheme"
                         android:background="@color/bg"
                         android:gravity="center"
-                        android:hint="密码"
+                        android:hint="@string/Password"
                         android:inputType="textPassword" />
                 </RelativeLayout>
 

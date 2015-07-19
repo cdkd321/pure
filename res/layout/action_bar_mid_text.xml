@@ -7,7 +7,7 @@
     android:focusable="true"
     android:gravity="center"
     android:padding="10dp"
-    android:text="返回"
+    android:text="@string/back"
     android:textColor="@color/white"
     android:textSize="21sp" />
  

@@ -208,8 +208,8 @@ public class ActMain extends BaseActivity implements OnClickListener {
 
 			@Override
 			public void onClick(View v) {
-//				Intent intent = new Intent(ActMain.this, MoreAct.class);
-				Intent intent = new Intent(ActMain.this, ActSpecify.class);
+				Intent intent = new Intent(ActMain.this, MoreAct.class);
+				//Intent intent = new Intent(ActMain.this, ActSpecify.class);
 				startActivityForResult(intent, 0);
 
 			}

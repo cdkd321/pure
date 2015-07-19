@@ -4,389 +4,448 @@
     <string name="app_name">MILI PURE</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="button_jump">立即开始体验</string>
-    <string name="logining">登录中</string>
+    <string name="button_jump">Immediately begin to experience</string>
+    <string name="logining">logining</string>
     <string name="digits_abc_number">0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
-    <string name="back">返回</string>
-    <string name="login_userinfo_not_exist">登录用户信息不存在</string>
-    <string name="xlistview_header_hint_normal">下拉刷新</string>
-    <string name="xlistview_header_hint_ready">松开刷新数据</string>
-    <string name="xlistview_header_hint_loading">正在加载...</string>
-    <string name="xlistview_header_last_time">上次更新时间：</string>
-    <string name="xlistview_footer_hint_normal">查看更多</string>
-    <string name="xlistview_footer_hint_ready">松开载入更多</string>
-    <string name="good_friends">好友</string>
-    <string name="no_data">抱歉没有数据，请稍后再试试!</string>
-    <string name="login">登录</string>
-    <string name="loginggg">登录中...</string>
-    <string name="username_empty">用户名为空</string>
-    <string name="pwd_empty">密码为空</string>
-    <string name="username_limit">用户名长度在16个字符以内哦</string>
-    <string name="pwd_length_limit">密码长度在6-16个字符以内哦</string>
-    <string name="hand">手</string>
-    <string name="face">脸</string>
-    <string name="eye">眼</string>
-    <string name="neck">颈</string>
-    <string name="_settings">设置</string>
+    <string name="back">back</string>
+    <string name="login_userinfo_not_exist">Login user information does not exist</string>
+    <string name="xlistview_header_hint_normal">Drop down</string>
+    <string name="xlistview_header_hint_ready">Release refresh data</string>
+    <string name="xlistview_header_hint_loading">Loading...</string>
+    <string name="xlistview_header_last_time">Last update time:</string>
+    <string name="xlistview_footer_hint_normal">See more</string>
+    <string name="xlistview_footer_hint_ready">Release more</string>
+    <string name="good_friends">friends</string>
+    <string name="no_data">Sorry no data. Please try again later!</string>
+    <string name="login">login</string>
+    <string name="loginggg">Login...</string>
+    <string name="username_empty">User name is empty</string>
+    <string name="pwd_empty">Password is empty</string>
+    <string name="username_limit">User name length in 16 characters or less oh</string>
+    <string name="pwd_length_limit">Password length in the 6-16 characters or less oh</string>
+    <string name="hand">hand</string>
+    <string name="face">face</string>
+    <string name="eye">eye</string>
+    <string name="neck">Neck</string>
+    <string name="_settings">setting</string>
     <string name="space">" "</string>
-    <string name="more">更多</string>
+    <string name="more">more</string>
     <string name="title">My Bluetooth</string>
     <string name="bundled">bundled device</string>
     <string name="disconnected">disconnecdted device</string>
     <string name="connected">connected</string>
-    <string name="save">存储</string>
-    <string name="_findpwd">找回密码</string>
-    <string name="_reg">用户注册</string>
-    <string name="_getnum">获取验证码</string>
-    <string name="_setpwd">设置密码</string>
+    <string name="save">Storage</string>
+    <string name="_findpwd">Retrieve password</string>
+    <string name="_reg">User registration</string>
+    <string name="_getnum">Get verification code</string>
+    <string name="_setpwd">Set password</string>
 
     <string-array name="hand_skin_share">
-        <item>别以为脸上皮肤才需要去角质，我们的双手也是老旧角质堆积的地方哦！要选择含有蛋白质的磨砂膏混和手部护理乳液，按摩手背和掌部，蛋白质及磨砂粒能帮助漂白及深层洁净皮肤，去除死皮和促进细胞新陈代谢。 </item>
-        <item>用有舒缓作用的手部修护乳涂抹于手部，注意选择含有维他命及蛋白质的产品，能帮助促进细胞新陈代谢及迅速改善皮肤弹性，令皮肤回复柔软润泽。</item>
-        <item>选择较油性的滋润护肤膏涂搽于手背上的指节及粗糙位置，用手指轻轻按摩，可软化粗糙皮肤及关节位，还能充分滋润防护。再混和护手霜及手部按摩油按摩双手。</item>
-        <item>涂上手膜后，用保鲜纸、热毛巾或棉手套包裹约十分钟，有助巩固皮下组织及深层滋润肌肤。</item>
-        <item>用50克芝麻油或色拉油，30克蜂蜜，1只鸡蛋清，混合调匀，把双手浸泡其中10分钟左右。然后，将手冲洗干净，即可获得满意的滋养效果。剩下的护手油可装在玻璃瓶内，置于冰箱，隔两日再浸泡1次。每周调配1次护手油，坚持护理1个月，你的双手就会明显润滑许多。</item>
-        <item>取30克橄榄油，加几滴玫瑰花香水、半汤匙蜂蜜和少量纯净水，调匀后装入小瓶，每日早晚涂抹于手背手指上，双手再互相搓揉至吸收。此法尤其适合手部皮肤粗糙开裂者。</item>
-        <item>取半条黄瓜捣烂滤汁，在黄瓜汁里加入1只鸡蛋清、1汤匙橄榄油，搅匀。晚上入睡前涂在手背上，然后戴上手套，以免弄脏床褥。第二天清晨起床后，将双手冲洗干净，涂上润手霜。用养手膏护理过的手，皮肤马上变得细腻光滑。</item>
-        <item>用一只鸡蛋去蛋黄取蛋清，加入适量牛奶、蜂蜜调和均匀后敷在手上，15分钟左右洗净双手，再抹护手霜。每星期做一次对双手有去皱、美白的功效。</item>
-        <item>喝完牛奶或酸奶后，将剩下的牛奶或者酸奶充分利用，将瓶子里剩下的奶抹到手上，约15分钟后用温水洗净双手，坚持一段时间，双手就会嫩滑无比。</item>
-        <item>苹果含有的叶酸对人体有非常大的好处。用榨汁后的苹果泥来做手膜，也会具镇静及柔软功能，令粗糙的双手回复幼滑。把新鲜的苹果泥加水煮至完全熔解，待冷后滴点麻油，将它薄薄的涂一层在手背上，你会感觉十分温软，这款手膜在手上敷15分钟，会变干至透明色，这时可以直接撕下来，然后再用温水把手洗净便可。</item>
-        <item>草莓的消毒和收敛作用俱佳，是美容的好材料。但是它又十分不容易存放，稍不注意就会变得不新鲜。但是，不新鲜的草莓也可以拿来做手膜，消炎又美白。把草莓捣碎与面粉混合搅匀，最好加入一些蜂蜜。把草莓手膜均匀的涂好，然后戴上一次性手套或保鲜膜，再套上皮筋，20分钟后取下来，同样的方法也可以用在护理脚、腿、胳膊上，效果一样有效。</item>
+        <item>Do not think that the face of the skin to the need to scrub, our hands are also a place of old horny accumulation oh! To choose scrub contains protein mixed hand care lotion, massage the back of the hand and palm, protein and scratching particles can help bleaching and deep clean the skin, removing dead skin and promote cell metabolism. </item>
+        <item>With a soothing hand repair cream smear on the hand, pay attention to choose products containing vitamins and protein, can help promote cell metabolism and rapid improvement in skin elasticity, make skin soft reply moist.</item>
+        <item>Choose more oily moisturizing the skin creams besmear is put on the back of the hand on the knuckles and the rough location, massage gently with finger, can soften rough skin and joint spaces, but also adequate moisture protection. And then blending hand cream and hand massage oil massage hands.</item>
+        <item>Coated with the film, with fresh paper, hot towel or cotton gloves wrapped about ten minutes, to help strengthen the skin tissue and deep moisture.</item>
+        <item>With 50 grams of sesame oil or salad oil, 30 grams of honey, 1 egg, mix and mix thoroughly, put his hands soak them for about 10 minutes. Then, the hand washing clean, you can get a satisfactory effect of the nourishing. Left hand cream can be packed in glass bottles, placed in the refrigerator, and then soak for 1 times every two days. The 1 week deployment of hand cream, adhere to care for 1 months, your hands will be evident in many lubrication.</item>
+        <item>Take 30 grams of olive oil, add a few drops of rose perfume, half a teaspoon of honey and a small amount of purified water, and mix thoroughly into the vial, the daily morning and evening daub on the dorsum of the fingers with both hands and then rub each other to absorb. This method is especially suitable for the skin of the hand skin rough cracked.</item>
+        <item>Take half of the filter smashed cucumber juice, cucumber juice, add 1 egg, 1 tablespoon olive oil, stir well. The evening before going to sleep in the back of the hand painted, and then put on gloves, so as not to dirty mattress. The second day early in the morning after getting up, washing your hands clean, painted with hand cream. Hand cream with the hands, the skin immediately becomes smooth and delicate.</item>
+        <item>With egg yolk egg white, added to the amount of milk and honey to reconcile evenly deposited in the hands, about 15 minutes to wash hands, wipe again hand cream. Do one of their hands with wrinkle, whitening every week.</item>
+        <item>After drinking milk or yogurt, full use of the remaining milk or yogurt, will be left in the bottle of milk to wipe hands, about 15 minutes after the wash your hands with warm water, adhere to the period of time, the hands will be tender and incomparably.</item>
+        <item>Apple contains a great benefit to the human body. To do with the film after juicing apple puree, also with calm and soft function, make skin smooth rough hands. The fresh apple mud with water to cook until completely melted, until the cold drops of sesame oil. It a thin coating layer on the back of the hand, you will feel very pleasantly warm, this film for 15 minutes deposited in the hands, will dry to a transparent color, then you can directly torn and then handle with warm water wash net can be.</item>
+        <item>The role of disinfection and convergence and taste of strawberry, is a good material for beauty. But it is not easy to store, a little attention will become not fresh. However, no fresh strawberry can also be used to do film, anti-inflammatory and whitening. The strawberry mashed with flour mixed evenly, the best add some honey. Put the strawberries in military uniform film coating, and then wear disposable gloves or plastic wrap, and then set a rubber band, 20 minutes after take off, the same method can also used in nursing on the feet, legs, arms, the effect is the same.</item>
     </string-array>
     <string-array name="the_neck_share">
-        <item>因为颈部的皮脂腺较少，很容易会出现皮肤干燥的现象。这个时候，可以用橄榄油直接涂在颈部，让干燥的皮肤得到保湿。在涂抹橄榄油之前，应把橄榄油倒在手心上摩擦至温热，然后由下往上，轻柔均匀地涂抹。 </item>
-        <item>颈部按摩能够促进颈部的血液循环，加强颈部淋巴系统的排毒，防止皱纹的产生。颈部按摩是改善颈部皮肤最常用的一个方法。可以取少量的精油涂在颈部，用指腹从锁骨的地方由下至上轻轻地按压，直到精油完全被颈部皮肤完全吸收为止。</item>
-        <item>颈部皮肤容易松弛，要紧致颈部的皮肤。可以DIY鸡蛋清蜂蜜颈膜，准备一个鸡蛋清，加入适量的蜂蜜和淀粉，然后搅拌成糊状。用清水清洁颈部，把颈膜均匀地涂抹在颈部，敷20分钟之后用清水洗干净。这样的颈膜纯天然，并且能有效地紧致颈部肌肤，可以每周敷2次！效果很好哦！</item>
-        <item>清洁颈部皮肤对颈部保养也是很重要的。因为颈部长期暴露在外面，难免会手袋一些污染，所以每天都要对颈部进行清洁。每次外出回来后记得用清水清洁颈部，洗完后，还要涂上颈霜，这样能够延缓颈部皮肤的衰老状态！</item>
-        <item>适当的颈部运动也能起到保养颈部的作用。可以上下左右的扭头活动一下颈部，每天做20次这样的动作，可以让颈部的肌肉得到充分的舒展，活动颈部能促使颈部皮肤不容易产生皱纹哦！</item>
-        <item>颈部保养还可以多吃一些富含核酸的食物，比如鱼、虾、动物肝酵母、蘑菇、木耳及花粉等，同时多吃一些维生素C含量高的新鲜蔬菜或者是水果，这样能够促进核酸的吸收。</item>
-        <item>当使用完面膜之后，先别急着将它丢掉，因为刚用过的面膜中还有很多的营养成分并没有全部被消耗，这是可以将面膜当做颈膜来使用。将其放在颈部再敷上5分钟，不仅可以养护颈部，还能够充分利用面膜中残存的营养。做面膜的时候，头最好向后仰。</item>
+        <item>Because the neck of the sebaceous glands less, it is easy to appear the phenomenon of dry skin. This time, you can use olive oil directly on the neck, so that the dry skin to get moisture. Prior to the application of olive oil, olive oil should be poured on the palm of the hand to warm, and then from the bottom up, gently smear. </item>
+        <item>Neck massage can promote blood circulation, strengthen the neck lymphatic system of detoxification, to prevent the generation of wrinkles. Neck massage is the most commonly used method to improve the skin of the neck. Can take a small amount of essential oil applied to the neck, with the pulp from the clavicle from the place of the first gently press, until the oil is completely absorbed by the neck skin.</item>
+        <item>The skin of the neck is easy to loose, to tighten the skin of the neck. Can DIY egg white honey and neck film, prepare an egg, add the right amount of honey and starch, and then stir into a paste. Clean the neck with clean water, evenly spread the neck film on the neck, and then rinse with clean water after 20 minutes. This film is pure natural, and can effectively compact neck skin, you can apply 2 times a week! Effect is very good oh!</item>
+        <item>Clean neck skin care is also very important. Because the long-term exposure to the neck, it is inevitable that some bags of pollution, so every day to clean the neck. Every time after going out to come back, remember to use clean water to clean the neck, after washing, but also painted on the neck cream, which can delay the aging of the skin of the neck!</item>
+        <item>Appropriate neck movement can also play a role in the maintenance of the neck. Turned up and down around your neck every day to do 20 times this kind of action, can make the neck muscles get full stretch, the activities of the neck can make the neck skin is not prone to wrinkles Oh!</item>
+        <item>The maintenance of the neck can also eat some foods rich in nucleic acids, such as fish, shrimp, animal liver, yeast, mushrooms, edible fungus, and pollen. At the same time, eat some high vitamin C content of fresh vegetables or fruit, so as to promote the nucleic acid absorption.</item>
+        <item>When using the mask, the first do not hurry to throw it away, because just used in the mask there are a lot of nutrients and not all of the consumption, which is to be used as a film mask to use. Put it in the neck and then apply for 5 minutes, not only to the conservation of the neck, but also to fully utilize the remnants of the mask nutrition. To do mask, the head best back.</item>
     </string-array>
     <string-array name="the_face_share">
-        <item>很多人只知道吃猪蹄具有美容护肤的效果，可是你知道吗？猪蹄不仅可以吃，还能用来涂抹哦！用老母猪蹄数只，洗净后煮成膏状，晚上睡觉时涂于脸部，第二天早晨再洗干净，坚持半个月就会有明显的去皱效果。 </item>
-        <item>多吃黄瓜、草莓、西红柿、桔子等，因为其含有大量VC，能有效帮助黑色素还原，协助美白，增进免疫力.充足睡眠，有效缓解生活压力，多听音乐，也是美白的好帮手。少抽烟、少喝刺激性饮料，保证睡眠，可保持肌肤柔嫩光润。 远离人工添加剂，少吃油炸食品，慎用激素和避孕药，这些都会直接导致黑色素沉着和雀斑生成。</item>
-        <item>坚持每天用食盐洗脸，不但可以美白，去角质，最重要的是，脸上不再油油的哦，脸上一出油，就会显得脸很脏.相信坚持一段时间，你一定能看到效果的.</item>
-        <item>柠檬面膜：将一个鲜柠檬切片直接贴于面部15-20分钟左右取下，洗净脸部。每天一次，七天为一个疗程。此面膜具有收敛作用，可使皮肤清爽、润滑、细嫩，长期坚持能延缓皮肤衰老。</item>
-        <item>香蕉牛奶美白法：这也是个非常廉价但非常有效地美白方法。首先将香蕉捣成糊状，然后倒入牛奶，酸奶更佳，并掺入少量的水，调成糊状，将混合物抹在脸上，并轻轻按摩拍打面部，大约15-20分钟洗掉。一周一次，长期坚持，你会惊喜的发现你的肤色白皙均匀了许多。</item>
-        <item>木瓜面膜对保湿美白润滑皮肤效果都很好哦。将吃完的木瓜皮上残存的木瓜肉用勺刮下来，加入牛奶或直接将木瓜皮抹在脸上，20分钟洗掉，吃了木瓜肉利用木瓜皮真是一举两得。</item>
-        <item>试一试苹果面膜。苹果所含有的果酸，能使皮肤细滑、滋润、白嫩，还可消除皮肤暗疮、雀斑、黑斑等。材料：苹果半只，牛奶、植物油和蛋清少许。制法：将苹果去皮后捣成泥，然后涂于脸部。干性、过敏性皮肤，可加适量鲜牛奶或植物油；油性皮肤宜加些蛋清。15~20分钟后用热毛巾洗干净即可。隔天一次，一个疗程为20天。</item>
-        <item>推荐丝瓜面膜，将新鲜丝瓜洗净切碎，用纱布包好挤出汁，加入等量药用酒精和蜂蜜，混合均匀，使用时用棉球蘸汁涂抹面部斑点处，20分钟后用清水洗净。每天晚上搽1次，连续一个月,可以滋润美白祛斑.</item>
-        <item> 蜂蜜番茄面膜：先将番茄压烂取汁，加入适量蜂蜜和少许面粉调成膏状，涂面20―30分钟后洗去，具有使皮肤滋润、白嫩、柔软的作用，长期使用还具有祛斑除皱和治疗皮肤痤疮等功能</item>
+        <item>Many people only know that eating pig is trotters beauty care effect, but do you know? Pig is trotters can not only eat, can also be used to apply! With the mother only a few trotters, cleaned boiled cream, sleep at night when coated on the face, the next day in the morning and then wash clean, insist on half a month there will be obvious wrinkle effect.</item>
+        <item>Eat more cucumbers, strawberries, tomatoes, oranges and other, because it contains large amounts of VC, can effectively help restore melanin, assist whitening, enhance immunity. Enough sleep, effectively alleviate the pressure of life, listen to music, but also whitening good helper. Smoke less, drink less stimulating drink, sleep, can keep skin tender and smooth. Away from artificial additives, eat less fried foods, hormones and contraceptives with caution. All of these will directly lead to black pigmentation and freckles generation.</item>
+        <item>Insist on a day with salt wash your face, can not only whitening, exfoliating, the most important is, face no longer oil of Oh, face out of the oil, it is face dirty. Believe that persist for a period of time, you will be able to see the effect.</item>
+        <item>Lemon facial mask: a fresh lemon slice is directly attached to the face about 15-20 minutes, wash the face. Once a day, seven days for a course of treatment. This mask has a convergence effect, make skin fresh, lubrication, delicate, long-term adherence can delay skin aging.</item>
+        <item>Banana milk whitening method: This is also a very cheap but very effective whitening method. Firstly, the banana mash, then pour milk, yogurt is better, and the incorporation of a small amount of water, tune into a paste, spread the mixture on the face, and massage gently tapping the face, about 15-20 minutes, wash. A Monday times, long-term adherence, you will be pleasantly surprised to find that you have a fair complexion and a lot of white.</item>
+        <item>Papaya mask on the moisturizing whitening skin effect is very good oh. Will eat papaya skin on the remnants of the papaya meat spoon scraped off and add milk or directly to the papaya skin wiping the face, 20 minutes wash, eat papaya flesh use papaya skin is really killing two birds with one stone.</item>
+        <item>Try apple mask. Apple contains acid, can make the skin smooth, moist, white, can eliminate the skin acne, freckles, dark spots. Material: apple half, milk, vegetable oil and egg white a little. Method: peel the apples into mud, and then apply it to the face. Dry, allergic skin, can add the right amount of fresh milk or vegetable oil, oily skin should add some egg white. 15~20 minutes later with hot towel wash can be. The next day, a period of treatment for 20 days.</item>
+        <item>Loofah mask is recommended. The fresh loofah wash, chopped, wrapped with gauze out of juice, add equal amount of medicinal alcohol and honey, mixing, when used with cotton dip juice daub at facial spots, 20 minutes later washed with water. Every night on the 1, for a month, can moisten whitening.</item>
+        <item> Tomato honey mask: the tomato juice, adding proper amount of honey and a little flour, tune into a paste, painted face 20 - 30 minutes after the wash, with the skin moist, soft white, soft, long-term use also has a freckle skin wrinkles and treatment of acne and other functions</item>
     </string-array>
     <string-array name="the_eye_share">
-        <item>眼睛酸涩疲劳：可用牛奶洗眼。将纱布折叠成小片，在牛奶中完全浸透，覆盖在眼皮上20—30分钟，能增强眼部肌肉活力，解除疲劳。 </item>
-        <item>黑眼圈：可用喝剩的红茶包敷眼，每晚睡前使用，20—30分钟后取下，对后天性黑眼圈效果较好。</item>
-        <item>眼袋或生理性浮肿：新鲜土豆切成片先揉擦眼部患处，再敷在眼周15—20分钟取下，可消肿，经常使用可减轻眼袋症状。</item>
-        <item>黄瓜眼膜能够另皮肤变得更加光亮，非常适合深夜使用，将黄瓜切碎后和酸奶混合，然后用2个绿茶袋，并在其中加入混合好的黄瓜，放入冰箱5分钟，然后取出冰袋放在眼睛上部10分钟左右。</item>
-        <item>丝瓜是护肤的好原料。取未成熟的丝瓜去皮、去籽、捣成泥涂在眼部。有抗过敏、洁肤、防皱的效果。</item>
-        <item>将木瓜加薄荷浸在热水中制成茶。晾凉后经常涂抹或是敷在眼下的皮肤上。木瓜茶不仅能缓解眼睛的疲劳而且还有减轻眼袋的功效。</item>
-        <item>将苹果切成薄片或捣成泥轻敷于眼周围，10-15分钟后取下，再用清水洗净残余汁体。每2天可做一次。能够帮助减轻黑眼圈。</item>
-        <item>将喝过的茶叶包成小茶包放入冰箱冰镇，之后取出平辅于眼周围，10-15分钟后取下，再用清水洗净残余汁液。每周可做一次。该自制眼膜能有效去除眼袋黑眼圈。值得注意的是，选择茶叶眼膜是一定要注意禁用红茶，否则会造成色素沉淀。应选用花茶、绿茶、菊花茶等，最好选用绿茶。</item>
-        <item>将银耳洗净煮成汁，后放入冰箱冰镇，每次取3-4滴涂于眼周围，10-15分钟后眼部基本吸收，再用清水洗净残余汁液。每天可做一次，让眼周肌肤平滑有光泽。</item>
-        <item>热水泡少许茶后凉下来，用化妆棉片沾湿后轻抓干，平辅于眼部，10-15分钟后取下，再用清水洗净残余汁液。每周做可做一次，能消除肿眼泡。</item>
-        <item>取一勺冰镇牛奶，用化妆棉沾后轻抓干，平辅于眼部，10分钟后取下，再用清水洗净残余汁液。早晚各做一次，让眼周皮肤自然美白。</item>
-        <item>把一个蛋黄加入一匙蜂蜜调匀，再加两滴橄榄油，有润肤防皱之效，每周可做1-2次。</item>
-        <item>将黄瓜榨汁与一个蛋清混合调匀，再加2滴白醋，涂于眼周，有滋润和去皱的功效，每周1-2次。</item>
+        <item>Eye Suanse fatigue: available milk eye wash. Will be folded into a small piece of gauze, in the milk completely soaked, covering 20 to 30 minutes on the eyelids, can enhance the vitality of the eye muscles, relieve fatigue. </item>
+        <item>Black eye: can be used to drink tea bags left eye, every night before going to bed, 20 - 30 minutes after the take off, the effect of the day after tomorrow black eye.</item>
+        <item>Bags under the eyes or physiological edema: fresh potato slices to rub the eye lesion, and then deposited in eye week 15 - 20 minutes, remove and can be swelling, often using can reduce the symptoms of bags under the eyes.</item>
+        <item>Cucumber eye mask can be another skin become more bright, very suitable for night use, will be chopped cucumber and yogurt mixture, after, and then use two tea bags, and to include a good mix of cucumber, placed in the refrigerator for 5 minutes, then remove the ice packs on the eyes and the upper part of about 10 minutes.</item>
+        <item>Loofah is a good skin care ingredients. Take immature loofah peeled, seeded, Daocheng mud in the eye. Anti allergic, cleansing, anti crease effect.</item>
+        <item>Add the papaya and mint in the hot water to make tea. After the dry cold often smear or deposited on the current skin. Papaya tea can not only ease the eye fatigue and reduce the effectiveness of the bags under the eyes.</item>
+        <item>The apple slice or mash DAB to look around, for 10-15 minutes, then rinse the residual juice. Do once every 2 days. Can help reduce the black eye.</item>
+        <item>To drink the tea bag into a small tea bags into the refrigerator iced, and then out flat auxiliary in the eye around, 10-15 minutes after the take down, and then rinse off with clear water residual juice. Do once a week. This mask can effectively remove pouch black rim of the eye. It is worth noting that, the choice of tea mask is the attention must be paid to the disabled Black Tea will cause pigmentation, otherwise. Should choose tea, Green Tea, Chrysanthemum Tea, the best selection of Green Tea.</item>
+        <item>Wash the white fungus boiled juice, into the refrigerator iced, each taking 3-4 drops of painted around the eyes, 10-15 minutes after the eye was absorbed, and then rinse off with clear water residual juice. Do once a day, so that the skin smooth and shiny eyes.</item>
+        <item>Heat a little bubble tea cool down with a cotton pad wet light grasping dry, flat and auxiliary in the eye, 10-15 minutes after the take down, and then rinse off with clear water residual juice. A week to do once, can eliminate bags.</item>
+        <item>Take a spoonful of ice cold milk, stained with a cotton pad after light grasping dry, flat and auxiliary in the eye, removed after 10 minutes, and then rinse off with clear water residual juice. Sooner or later each do, so that the skin of the eye week natural whitening.</item>
+        <item>An egg yolk add a spoonful of honey and mix thoroughly, add two drops of olive oil, skin wrinkle effect, do 1-2 times a week.</item>
+        <item>Will cucumber juice mixed with an egg white and mix thoroughly, add 2 drops of white vinegar, apply the eye week, moisturizing and anti wrinkle efficacy, weekly 1-2 times.</item>
     </string-array>
     <string-array name="water_suggestion">
-        <item>肌肤大量缺水，容易出现干纹，若长期不管它就会越来越深且定型为挥之不去的皱纹。 </item>
-        <item>肌肤水分值较低，属于严重受损的状态。</item>
-        <item>肌肤干燥，状态有些令人担忧。</item>
-        <item>肌肤干燥，容易出现皱纹及水肿，而且此处的皮肤一旦松弛，就很难恢复原来的状态。补水是延缓衰老的根本保障。</item>
-        <item>肌肤比较干燥，极易产生浅层皱纹。夸张的表情更会加重细纹的产生，赶紧补水，令肌肤唤回光泽。</item>
-        <item>肌肤水分值有些偏低咯。</item>
-        <item>肌肤水分值在正常范围内，但也接近干燥哦。</item>
-        <item>肌肤水分值虽在正常范围内，但皮肤也略显疲态。</item>
-        <item>肌肤水分虽然处于正常区间内。但仍不够滋润。</item>
-        <item>肌肤水分值正常，优化生活作息，水分能进一步提升哦。</item>
-        <item>肌肤较为水润，在正常值的范围之内。</item>
+        <item>A large number of dry skin, prone to dry lines, if the long-term regardless of it will become more and more deep and stereotyped as a lingering wrinkle. </item>
+        <item>The skin moisture value is low, belongs to the serious damage state.</item>
+        <item>Dry skin, some of the state is worrying.</item>
+        <item>Dry skin, prone to wrinkles and edema, and once the skin of the skin once relaxed, it is difficult to restore the original state. Water is the fundamental guarantee for the delay of aging.</item>
+        <item>The skin is dry, extremely easy to produce light wrinkles. Exaggerated facial expressions will aggravate the wrinkles, make the skin regain luster to water.</item>
+        <item>Skin moisture value is somewhat low.</item>
+        <item>Skin moisture in the normal range, but also close to dry oh.</item>
+        <item>The skin moisture value is in the normal range, but the skin is also a bit tired.</item>
+        <item>While the skin moisture is in the normal range. But still not enough moisture.</item>
+        <item>Skin moisture value is normal, optimize life and rest, the water can be further improved oh.</item>
+        <item>The skin is more moist, within the normal range.</item>
     </string-array>
     <string-array name="water_suggestion_jiaogao">
-        <item>肌肤水分较充足，属于正常偏上的状态。 </item>
-        <item>肌肤紧致平滑，水分较为充足。</item>
-        <item>肌肤较为水润，保持的不错哦。</item>
+        <item>Skin moisture is adequate, is a normal state of the state. </item>
+        <item>Skin firm and smooth, moisture is more adequate.</item>
+        <item>The skin is more moist, keep good oh.</item>
     </string-array>
     <string-array name="water_suggestion_feichanggao">
-        <item>肌肤水分均衡，您应该是补水达人吧。 </item>
-        <item>肌肤触手柔弹紧致，水分充足。</item>
-        <item>肌肤水分饱满，宛如新生。</item>
-        <item>肌肤细嫩，触感如丝般幼滑，水分满满的。</item>
+        <item>Skin moisture balance, you should be a replenishment of people. </item>
+        <item>The skin is soft and elastic.</item>
+        <item>Skin full of water, like a new.</item>
+        <item>Skin tender, silky smooth, full of water.</item>
     </string-array>
 
-    <string name="MyBluetooth">我的蓝牙</string>
-    <string name="Bundleddevice">已绑定设备</string>
-    <string name="Cancel">取消</string>
-    <string name="OK">确定</string>
-    <string name="Confirm">确定</string>
-    <string name="Connected">已连接</string>
-    <string name="UnConnected">断开连接</string>
-    <string name="NotConnected">未连接</string>
-    <string name="Notevice">未连接设备</string>
-    <string name="age">年龄</string>
-    <string name="Dodevice">确定解除此设备绑定？</string>
-    <string name="Dodevice1">确定断开此设备并解除绑定？</string>
-    <string name="Done">完成</string>
-    <string name="Everyday">每天</string>
-    <string name="EveryMonday">每周一</string>
-    <string name="EveryTuesday">每周二</string>
-    <string name="EveryWednesday">每周三</string>
-    <string name="EveryThursday">每周四</string>
-    <string name="EveryFriday">每周五</string>
-    <string name="EverySaturday">每周六</string>
-    <string name="EverySunday">每周日</string>
-    <string name="Mon">周一</string>
-    <string name="Monday">星期一</string>
-    <string name="Tue">周二</string>
-    <string name="Tuesday">星期二</string>
-    <string name="Wed">周三</string>
-    <string name="Wednesday">星期三</string>
-    <string name="Thu">周四</string>
-    <string name="Thursday">星期四</string>
-    <string name="Fri">周五</string>
-    <string name="Friday">星期五</string>
-    <string name="Sat">周六</string>
-    <string name="Saturday">星期六</string>
-    <string name="Sun">周日</string>
-    <string name="Sunday">星期天</string>
-    <string name="Weekdays">工作日</string>
-    <string name="Weekends">周末</string>
+    <string name="MyBluetooth">My Bluetooth</string>
+    <string name="Bundleddevice">Binding equipment</string>
+    <string name="Cancel">Cancel</string>
+    <string name="OK">Ok</string>
+    <string name="Confirm">Determine</string>
+    <string name="Connected">Connected</string>
+    <string name="UnConnected">Disconnect</string>
+    <string name="NotConnected">Not connected</string>
+    <string name="Notevice">Not connected equipment</string>
+    <string name="age">age</string>
+    <string name="Dodevice">Determine the release of this device bound?</string>
+    <string name="Dodevice1">Determine disconnect this device and remove the binding?</string>
+    <string name="Done">Complete</string>
+    <string name="Everyday">Every day</string>
+    <string name="EveryMonday">Once a week</string>
+    <string name="EveryTuesday">Two per week</string>
+    <string name="EveryWednesday">Three per week</string>
+    <string name="EveryThursday">Four per week</string>
+    <string name="EveryFriday">Five per week</string>
+    <string name="EverySaturday">Six per week</string>
+    <string name="EverySunday">Every Sunday</string>
+    <string name="Mon">Monday</string>
+    <string name="Monday">Monday</string>
+    <string name="Tue">Tuesday</string>
+    <string name="Tuesday">Tuesday</string>
+    <string name="Wed">Wednesday</string>
+    <string name="Wednesday">Wednesday</string>
+    <string name="Thu">Thursday</string>
+    <string name="Thursday">Thursday</string>
+    <string name="Fri">Friday</string>
+    <string name="Friday">Friday</string>
+    <string name="Sat">Saturday</string>
+    <string name="Saturday">Saturday</string>
+    <string name="Sun">Sunday</string>
+    <string name="Sunday">Sunday</string>
+    <string name="Weekdays">Working days</string>
+    <string name="Weekends">Weekend</string>
     <string name="Never">Never</string>
-    <string name="Reminder">提醒</string>
-    <string name="NeutralSkin">中性皮肤</string>
-    <string name="DrySkin">干性皮肤</string>
-    <string name="OilySkin">油性皮肤</string>
-    <string name="MixedSkin">混合皮肤</string>
-    <string name="SensitiveSkin">敏感性皮肤</string>
-    <string name="success">成功</string>
-    <string name="Puredisconnected">Pure 已断开</string>
-    <string name="Pureconnected">Pure 已连接</string>
-    
-<string name="headfial">头像上传失败</string>
-    <string name="Qzone">QQ空间</string>
-    <string name="WeChatMoments">微信朋友圈</string>
-    <string name="Sineibo">新浪微博</string>
-    <string name="Tenceneibo">腾讯微博</string>
-    <string name="Oneluetooth">一键连接\n蓝牙连接 简单操作</string>
-    <string name="Bragskin">得瑟一下\n好肌肤记得分享</string>
-    <string name="roblems">护肤建议\n肌肤问题及时掌控</string>
-    <string name="SkincareTips">护肤建议</string>
-    <string name="Profile">个人资料</string>
-    <string name="ProfileSettings">个人资料设置</string>
-    <string name="ThereisnorelateddatayetGogeatest">亲，您还没有相关数据，快去检测吧!</string>
-    <string name="Today">今日</string>
-    <string name="Save">保存</string>
-    <string name="Faileddata">信息保存失败！</string>
-    <string name="Datasavedsuccessfully">信息保存成功！</string>
-    <string name="Moistu">冬季水分率与正常值相差5%左右</string>
-    <string name="Moistuabou">夏季水分率与正常值相差3%左右</string>
-    <string name="Norantumn">春秋季面部水分率正常值</string>
-    <string name="Sharea">分享到社交平台</string>
-    <string name="Delete">删除</string>
-    <string name="ProfilePicture">头像</string>
-    <string name="Failedtouploadprofilepicture">头像上传失败！</string>
-    <string name="Notset">未设置</string>
-    <string name="Male">男</string>
-    <string name="Female">女</string>
-    <string name="TimedReminder">定时提醒</string>
-    <string name="Password">密码</string>
-    <string name="SorrProfililed">对不起，头像设置失败了！</string>
-    <string name="Sorryregistratioailed">对不起，注册失败了！</string>
-    <string name="Sorryverificationcodecannotbefound">对不起，验证码获取失败！</string>
-    <string name="InvalidAccount">帐号不存在！</string>
-    <string name="AccountPassword">帐户密码</string>
-    <string name="Dry">干燥</string>
-    <string name="Average">平均</string>
-    <string name="AverageLevel">平均水平</string>
-    <string name="Gender">性别</string>
-    <string name="Yourpassworlbox">您的密码已发送至您的邮箱，请进入邮箱查看！</string>
-    <string name="Feedback">意见反馈</string>
-    <string name="OpenAPP">打开APP</string>
-    <string name="RetrievePassword">找回密码</string>
-    <string name="PasswordRetrievalFailed">找回密码失败！</string>
-    <string name="SkincareKnowledge">护肤知识</string>
-    <string name="Camera">拍照</string>
-    <string name="ReminderSettings">提醒设置</string>
-    <string name="NoData">无数据</string>
-    <string name="Registratiotion">无法完成注册，请检查网络状态！</string>
-    <string name="Verificaection">无法完成验证，请检查网络状态！</string>
-    <string name="Nickname">昵称</string>
-    <string name="More">更多</string>
-    <string name="UpdateUserProfile">更新用户资料</string>
-    <string name="NotLoggedin">未登录</string>
-    <string name="ThisWeek">本周</string>
-    <string name="ThisMonth">本月</string>
-    <string name="Tag">标签</string>
-    <string name="Numberofteststaken">检测次数 %d次</string>
-    <string name="Uploadingprofilepicture">正在上传头像...</string>
-    <string name="Loggingin">正在登录...</string>
-    <string name="Acquiringuserinf">正在获取用户资料...</string>
-    <string name="Acquiringverificationcode">正在获取验证码...</string>
-    <string name="Settingup">正在设置...</string>
-    <string name="suggestion">产品意见反馈</string>
-    <string name="emailcontent">请输入邮件反馈内容</string>
-    <string name="Settingpassword">正在设置密码...</string>
-    <string name="Normal">正常</string>
-    <string name="AccountAlreadyRegistered">此帐号已经注册！</string>
-    <string name="Comparedtothepreviousday">比前一天</string>
-    <string name="SkinMoistureDetector">水分检测仪</string>
-    <string name="reDetector">邮件发送中...</string>
-    <string name="rector">您没有安装邮件客户端</string>
-    <string name="ReferenceValuesforMoistureContent">水分对照</string>
-    <string name="Register">注册</string>
-    <string name="RegistrationSuccessful">注册成功！</string>
-    <string name="RegisteredUser">注册用户</string>
-    <string name="AddReminder">添加提醒</string>
-    <string name="Hydrated">湿润</string>
-    <string name="Birthday">生日</string>
-    <string name="UserNotExist">用户不存在！</string>
-    <string name="senging">验证码发送中...</string>
-    <string name="yzing">验证中...</string>
-    <string name="InvalidUsernameorPassword">用户名或密码错误！</string>
-    <string name="InvalidUsernameoradd">请输入邮箱地址</string>
-    <string name="Login">登录</string>
-    <string name="Afterloginyoucanchecktheaveragevaluefoyouagegroup">登录后可查看同龄人群平均值</string>
-    <string name="Loginfailed">登录失败</string>
-    <string name="emailsuccess">邮件发送成功</string>
-    <string name="emailfail">邮件发送失败</string>
-    <string name="SetLoginPassword">登录密码设置</string>
-    <string name="Loginsuccessful">登录成功</string>
-    <string name="SkinTesting">皮肤检测</string>
-    <string name="SkinTest">皮肤测试</string>
-    <string name="isgone">该邮箱已经被注册</string>
-    <string name="isdoing">处理中...</string>
-    <string name="Areyousureyouanttosignoutofthisaccount">确定要退出此帐号吗</string>
-    <string name="TryitutNow">立即体验</string>
-    <string name="Edit">编辑</string>
-    <string name="EditReminder">编辑提醒</string>
-    <string name="MakeupTips">美妆技巧</string>
-    <string name="LatestInfo">最新资讯</string>
-    <string name="SkincareTipss">护肤技巧</string>
-    <string name="ProductReview">产品评测</string>
-    <string name="MoistureLevel">肌肤水嫩度</string>
-    <string name="SkinType">肤质</string>
-    <string name="editError">输入有误</string>
-    <string name="SkinTypeEnquiry">肤质查询</string>
-    <string name="SkinCondition">肤质状况</string>
-    <string name="BluetoothNotConnected">蓝牙未连接</string>
-    <string name="BluetoothDevice">蓝牙设备</string>
-    <string name="SetPassword">设置密码</string>
-    <string name="Details">详情</string>
-    <string name="Pleasewait">请稍候</string>
-    <string name="Pleasesetyourgender">请设置您的性别</string>
-    <string name="Pleaseenteryourpassword">请输入密码</string>
-    <string name="Pleaseenteryournicknam">请输入昵称</string>
-    <string name="Pleaseeenteryourasswordforconfirmation">请输入确认密码</string>
-    <string name="Pleaseenterouremailaddress">请输入邮箱</string>
-    <string name="Pleasecheckourmailboxfortheverificationcode">请进入邮箱查看验证码</string>
-    <string name="Pleaseselectyourirthday">请选择您的生日</string>
-    <string name="Pleaseselectyourskintype">请选择您的皮肤类型</string>
-    <string name="Info">资讯</string>
-    <string name="Skip">跳过</string>
-    <string name="content">我是分享文本</string>
-    <string name="shark">我是测试评论文本</string>
-    <string name="Comparedtothepreviousdays">较前一天</string>
-    <string name="Exist">退出</string>
-    <string name="Logout">退出帐号</string>
-    <string name="Selectyourgender">选择性别</string>
-    <string name="Selectaphoto">选择照片</string>
-    <string name="Selectaskintype">选择皮肤类型</string>
-    <string name="EmailAddress">邮箱</string>
-    <string name="Repeat">重复</string>
-    <string name="Ringtone">铃声</string>
-    <string name="Error">错误</string>
+    <string name="Reminder">Remind</string>
+    <string name="NeutralSkin">Neutral skin</string>
+    <string name="DrySkin">Dry skin</string>
+    <string name="OilySkin">Oily skin</string>
+    <string name="MixedSkin">Mixed skin</string>
+    <string name="SensitiveSkin">Sensitive skin</string>
+    <string name="success">success</string>
+    <string name="Puredisconnected">Pure Has been disconnected</string>
+    <string name="Pureconnected">Pure Connected</string>
+    <string name="headfial">Avatar upload failed</string>
+    <string name="Qzone">Qzone</string>
+    <string name="WeChatMoments">Micro channel circle of friends</string>
+    <string name="Sineibo">Sina Weibo</string>
+    <string name="Tenceneibo">Tencent micro Bo</string>
+    <string name="Oneluetooth">A key connection \n Bluetooth connection simple operation</string>
+    <string name="Bragskin">Joseph \n remember to share good skin</string>
+    <string name="roblems"> skin problems in a timely manner to control</string>
+    <string name="SkincareTips">Skin care advice</string>
+    <string name="Profile">Personal data</string>
+    <string name="ProfileSettings">Personal data set</string>
+    <string name="ThereisnorelateddatayetGogeatest">Pro, you do not have the relevant data, to detect it!</string>
+    <string name="Today">today</string>
+    <string name="Save">save</string>
+    <string name="Faileddata">Failure of information preservation!</string>
+    <string name="Datasavedsuccessfully">Information preservation success!</string>
+    <string name="Moistu">Winter moisture and normal values are about 5%</string>
+    <string name="Moistuabou">The difference of moisture content and normal value in summer is about 3%</string>
+    <string name="Norantumn">Normal value of facial moisture content in spring and autumn season</string>
+    <string name="Sharea">Sharing to social platforms</string>
+    <string name="Delete">delete</string>
+    <string name="ProfilePicture">Head portrait</string>
+    <string name="Failedtouploadprofilepicture">Avatar upload failed!</string>
+    <string name="Notset">Not set</string>
+    <string name="Male">man</string>
+    <string name="Female">women</string>
+    <string name="TimedReminder">Time reminder</string>
+    <string name="Password">Cipher</string>
+    <string name="SorrProfililed">Sorry, the head is set to fail!</string>
+    <string name="Sorryregistratioailed">Sorry, the registration failed!</string>
+    <string name="Sorryverificationcodecannotbefound">Sorry, the authentication code gets a failure!</string>
+    <string name="InvalidAccount">The account does not exist!</string>
+    <string name="AccountPassword">Account password</string>
+    <string name="Dry">Dry</string>
+    <string name="Average">Average</string>
+    <string name="AverageLevel">Average level</string>
+    <string name="Gender">Gender</string>
+    <string name="Yourpassworlbox">Your password has been sent to your mailbox, please check the mailbox!</string>
+    <string name="Feedback">Feedback</string>
+    <string name="OpenAPP">Open APP</string>
+    <string name="RetrievePassword">Retrieve password</string>
+    <string name="PasswordRetrievalFailed">Password failure!</string>
+    <string name="SkincareKnowledge">Skin care knowledge</string>
+    <string name="Camera">Photograph</string>
+    <string name="ReminderSettings">Alert settings</string>
+    <string name="NoData">No data</string>
+    <string name="Registratiotion">Unable to complete the registration, please check the network status!</string>
+    <string name="Verificaection">Unable to complete the verification, please check the network status!</string>
+    <string name="Nickname">nickname</string>
+    <string name="More">more</string>
+    <string name="UpdateUserProfile">Update user information</string>
+    <string name="NotLoggedin">Not logged in</string>
+    <string name="ThisWeek">This week</string>
+    <string name="ThisMonth">This month</string>
+    <string name="Tag">Label</string>
+    <string name="Numberofteststaken">Times of detection%d</string>
+    <string name="Uploadingprofilepicture">Is uploading avatar...</string>
+    <string name="Loggingin">Is logged in...</string>
+    <string name="Acquiringuserinf">Getting user information...</string>
+    <string name="Acquiringverificationcode">Getting validation code...</string>
+    <string name="Settingup">Setting...</string>
+    <string name="suggestion">Product feedback</string>
+    <string name="emailcontent">Please enter email feedback</string>
+    <string name="Settingpassword">Setting password...</string>
+    <string name="Normal">Normal</string>
+    <string name="AccountAlreadyRegistered">This account has been registered!</string>
+    <string name="Comparedtothepreviousday">Than the previous day</string>
+    <string name="SkinMoistureDetector">Moisture detector</string>
+    <string name="reDetector">Mail sending...</string>
+    <string name="rector">You do not install the mail client</string>
+    <string name="ReferenceValuesforMoistureContent">Water control</string>
+    <string name="Register">Registered</string>
+    <string name="RegistrationSuccessful">Registered success!</string>
+    <string name="RegisteredUser">Registered users</string>
+    <string name="AddReminder">Add reminders</string>
+    <string name="Hydrated">Moist</string>
+    <string name="Birthday">Birthday</string>
+    <string name="UserNotExist">Users do not exist!</string>
+    <string name="senging">Verification code transmission...</string>
+    <string name="yzing">Verification...</string>
+    <string name="InvalidUsernameorPassword">User name or password error!</string>
+    <string name="InvalidUsernameoradd">Please enter your email address.</string>
+    <string name="Login">Login</string>
+    <string name="Afterloginyoucanchecktheaveragevaluefoyouagegroup">After logging in, you can check the average age group</string>
+    <string name="Loginfailed">Logon failure</string>
+    <string name="emailsuccess">Email sending</string>
+    <string name="emailfail">Email sending failure</string>
+    <string name="SetLoginPassword">Login password settings</string>
+    <string name="Loginsuccessful">Login success</string>
+    <string name="SkinTesting">Skin detection</string>
+    <string name="SkinTest">Skin test</string>
+    <string name="isgone">The mailbox has been registered</string>
+    <string name="isdoing">Processing...</string>
+    <string name="Areyousureyouanttosignoutofthisaccount">Are you sure you want to exit this account</string>
+    <string name="TryitutNow">Immediate experience</string>
+    <string name="Edit">Edit</string>
+    <string name="EditReminder">Edit reminder</string>
+    <string name="MakeupTips">Beauty tips</string>
+    <string name="LatestInfo">The latest information</string>
+    <string name="SkincareTipss">Skin care tips</string>
+    <string name="ProductReview">Product evaluation</string>
+    <string name="MoistureLevel">Skin supple degree</string>
+    <string name="SkinType">Skin</string>
+    <string name="editError">Input error</string>
+    <string name="SkinTypeEnquiry">Skin query</string>
+    <string name="SkinCondition">Skin condition</string>
+    <string name="BluetoothNotConnected">Bluetooth connectivity</string>
+    <string name="BluetoothDevice">Bluetooth device</string>
+    <string name="SetPassword">Set password</string>
+    <string name="Details">Details</string>
+    <string name="Pleasewait">Just a moment, please.</string>
+    <string name="Pleasesetyourgender">Please set your gender</string>
+    <string name="Pleaseenteryourpassword">Please enter a password</string>
+    <string name="Pleaseenteryournicknam">Please enter a nickname</string>
+    <string name="Pleaseeenteryourasswordforconfirmation">Please enter the confirmation password</string>
+    <string name="Pleaseenterouremailaddress">Please enter the mailbox</string>
+    <string name="Pleasecheckourmailboxfortheverificationcode">Please enter the mailbox to check the verification code</string>
+    <string name="Pleaseselectyourirthday">Please choose your birthday</string>
+    <string name="Pleaseselectyourskintype">Choose your skin type</string>
+    <string name="Info">Information</string>
+    <string name="Skip">Skip</string>
+    <string name="content">MiLi Pure</string>
+    <string name="shark">Moisture detector</string>
+    <string name="Comparedtothepreviousdays">Than the previous day</string>
+    <string name="Exist">Exit</string>
+    <string name="Logout">Exit account</string>
+    <string name="Selectyourgender">Select gender</string>
+    <string name="Selectaphoto">Select photos</string>
+    <string name="Selectaskintype">Select skin type</string>
+    <string name="EmailAddress">Mailbox</string>
+    <string name="Repeat">Repeat</string>
+    <string name="Ringtone">The bell</string>
+    <string name="Error">Error</string>
     <string name="faq">FAQ</string>
-    <string name="Verify">验证</string>
-    <string name="VerificationComplete">验证完成！</string>
-    <string name="InvalidVerificationCode">验证码错误</string>
-    <string name="Fail">获取用户资料失败</string>
-    <string name="Ac">获取验证码</string>
-    <string name="Thle">肤质细腻、较薄、毛孔不明显、皮脂分泌少而均匀、没有油腻感觉、细腻美观、皮脂分泌量少、白皙、缺少光泽、毛孔细小、容易产生细小皱纹、毛细血管表浅、对外界刺激较敏感、PH值约5.5-6.0。</string>
-    <string name="Thchaurekin">肌肤细腻、光滑、富有弹性、水嫩嫩的、白里透红。其特点是皮肤构造细腻、油脂及水分分泌均衡的弱酸性皮肤，毛细孔细致。且具光泽、富弹性，它是健康的理想皮肤。</string>
-    <string name="Mixed">混合性肌肤是皮肤的一种类型，它是指在脸部的不同区域，具有交大差异性的肤质特性，最常见的是T字部位呈现油性肤质，而脸颊部位则为中性或干性肤质。</string>
-    <string name="Th">皮肤较薄，容易看到红血丝，温度过冷或过热皮肤容易泛红，发热。容易受环境因素、季节变化及面部保养品刺激，并可能伴有全身皮肤敏感。</string>
-    <string name="Overa">皮脂分泌旺盛，多数人肤色偏深，毛孔粗大、皮肤油腻光亮，PH值在5.6-6.6，容易粘附污物，引起皮肤痤疮等。这类皮肤对外界刺激耐受性强，不容易产生过敏反应。</string>
-    <string name="Ysmo">肌肤紧致平滑，水分较为充足。</string>
-    <string name="Yange">肌肤水分较充足，属于正常偏上的状态。</string>
-    <string name="Yoo">肌肤大量缺水，容易出现干纹，若长期不管它就会越来越深且定型为挥之不去的皱纹。</string>
-    <string name="Youngining">肌肤干燥，容易出现皱纹及水肿，而且此处的皮肤一旦松弛，就很难恢复原来的状态。补水是延缓衰老的根本保障。</string>
-    <string name="You">肌肤干燥，状态有些令人担忧。</string>
-    <string name="Yokin">肌肤比较干燥，极易产生浅层皱纹。夸张的表情更会加重细纹的产生，赶紧补水，令肌肤唤回光泽。</string>
-    <string name="Yend">肌肤水分值在正常范围内，但也接近干燥哦。</string>
-    <string name="Yaw">肌肤水分值有些偏低咯。</string>
-    <string name="nomal">正常</string>
-    <string name="Youutine">肌肤水分值正常，优化生活作息，水分能进一步提升哦。</string>
-    <string name="Youigued">肌肤水分值虽在正常范围内，但皮肤也略显疲态。</string>
-    <string name="remark1">同龄人群手部水分平均值33.9%</string>
-    <string name="remark2">同龄人群手部水分平均值31.2%</string>
-    <string name="remark3">同龄人群手部水分平均值29.6%</string>
-    <string name="remark4">同龄人群手部水分平均值28.5%</string>
-    <string name="remark5">同龄人群手部水分平均值27.8%</string>
-    <string name="remark6">同龄人群手部水分平均值30.2%</string>
-    <string name="remark7">登录后可查看同龄人群平均值</string>
-    <string name="Your">肌肤水分值较低，属于严重受损的状态。</string>
-    <string name="YourskinhaswellbalancedmoisturecontentYoumustbanexpertinhydration">肌肤水分均衡，您应该是补水达人吧。</string>
-    <string name="Yourskinmoisturcontentiswithinthenormalrangebutstillnothighenough">肌肤水分虽然处于正常区间内。但仍不够滋润。</string>
-    <string name="Yourskinisfullyhydratedlikeanewborn">肌肤水分饱满，宛如新生。</string>
-    <string name="Yourskinisdelicatesilkysmoothandfullyhydrated">肌肤细嫩，触感如丝般幼滑，水分满满的。</string>
-    <string name="Theskinistenderelasticandfirmtotouchandwellhydrated">肌肤触手柔弹紧致，水分充足。</string>
-    <string name="YourskinisquitehydratedWelldone">肌肤较为水润，保持的不错哦。</string>
-    <string name="Yourskinisquitehydratedandfallswithinthenormalrange">肌肤较为水润，在正常值的范围之内。</string>
-    <string name="Eye">眼部</string>
-    <string name="Face">脸部</string>
-    <string name="Neck">颈部</string>
-    <string name="Hand">手部</string>
-    <string name="Dingdong">叮当</string>
-    <string name="Cuckoo">布谷鸟</string>
-    <string name="Fantasy">梦幻</string>
-    <string name="TheAverageMoistureContentoftheHandfortheAgeGroup">同龄人群手部水分平均值</string>
-    <string name="TheAverageMoistureContentoftheFacefortheAgeGroup">同龄人群脸部水分平均值</string>
-    <string name="TheAverageMoistureContentoftheEyefortheAgeGroup">同龄人群眼部水分平均值</string>
-    <string name="TheAverageMoistureContentoftheNeckfortheAgeGroup">同龄人群颈部水分平均值</string>
-    <string name="ViewDetailedResults">查看详细结果</string>
-    <string name="Comparedtotoday">比今天</string>
-    <string name="Comparedtothepreviousweek">比前一周</string>
-    <string name="Comparedtothisweek">比本周</string>
-    <string name="Comparedtothepreviousmonth">比前一月</string>
-    <string name="Comparedtothismonth">比本月</string>
-    <string name="Previousday">前一天</string>
-    <string name="Previousweek">前一周</string>
-    <string name="Thisweek">本周</string>
-    <string name="Previousmonth">前一月</string>
-    <string name="Thismonth">本月</string>
-    <string name="TestCentre">检测中心</string>
-    <string name="exittoast">再按一次返回桌面</string>
-    <string name="HistoricalData">历史数据</string>
-    <string name="addn">添加闹钟</string>
-    <string name="yzyx">验证邮箱</string>
-    <string name="issended">该邮箱已经发送过邮件</string>
-    <string name="Toohighinmoisturecontent">水分太高</string>
-    <string name="Toolowinmoisturecontent">水分太低</string>
-    <string name="Pleaseholdforseconds">请保持5秒</string>
-    <string name="Pleasehss">邮箱验证通过,正在进行注册操作</string>
-    <string name="Pol">邮箱不存在,或验证有误,请重试</string>
-    <string name="SelectBirthday">选择生日</string>
-    <string name="Loading">正在加载...</string>
-    <string name="LoadingFailed">加载失败</string>
-    <string name="Dearyoualreadylikedthis">^_^  亲，你已经点过赞了噢~!</string>
-    <string name="DearyoualreError">接口验证错误</string>
-    <string name="face1">同龄人群脸部水分平均值39.5%</string>
-    <string name="face2">同龄人群脸部水分平均值37.8%</string>
-    <string name="face3">同龄人群脸部水分平均值36.7%</string>
-    <string name="face4">同龄人群脸部水分平均值35.8%</string>
-    <string name="face5">同龄人群脸部水分平均值34.2%</string>
-    <string name="face6">同龄人群脸部水分平均值33.3%</string>
-    <string name="face7">同龄人群脸部水分平均值35.8%</string>
-    <string name="Type1">同龄人群脸部水分平均值44.6%</string>
-    <string name="Type2">同龄人群脸部水分平均值43.3%</string>
-    <string name="Type3">同龄人群脸部水分平均值41.1%</string>
-    <string name="Type4">同龄人群脸部水分平均值39.7%</string>
-    <string name="Type5">同龄人群脸部水分平均值37.2%</string>
-    <string name="Type6">同龄人群脸部水分平均值36.3%</string>
-    <string name="Type7">同龄人群脸部水分平均值41.1%</string>
-    <string name="takepick">拍照</string>
-    <string name="takepickfrom">从相册中选择</string>
-    <string name="exit">退出当前账号</string>
-    <string name="issure">退出登录后需要重新登录，确定退出？</string>
-    <string name="sure">确认退出</string>
+    <string name="Verify">Verification</string>
+    <string name="VerificationComplete">Verification complete!</string>
+    <string name="InvalidVerificationCode">Verification code error</string>
+    <string name="Fail">Failed to obtain user data</string>
+    <string name="Ac">Get verification code</string>
+    <string name="Thle">Delicate skin, thin, obvious pores, sebum secretion less and uniform, no greasy feeling, delicate appearance, sebum secretion quantity is little, white, the lack of luster, small pores, prone to fine wrinkles, capillary table shallow, is sensitive to outside stimuli, pH value of about 5.5 6.0.</string>
+    <string name="Thchaurekin">The skin delicate, smooth, elastic, supple and tender, white and red. Its characteristic is the delicate skin structure, oil and water secretion balanced weak skin, delicate pores. And with a shiny, rich elasticity, it is the ideal skin of health.</string>
+    <string name="Mixed">Mixed skin is a type of skin, it is that in different areas of the face, with differences in National Chiao Tung University skin characteristics, the most common is T word place appears oily skin, and cheeks is neutral or dry skin.</string>
+    <string name="Th">The skin is thin, easy to see red blood, the temperature is too cold or too hot skin easy to redness, fever. Easily affected by environmental factors, seasonal changes and facial skin care products, and may be accompanied by systemic skin sensitivity.</string>
+    <string name="Overa">Strong sebum secretion, the majority of people with deep color, large pores, oily skin, pH value in the 5.6-6.6, easy to adhesion dirt, causing skin acne, etc.. This type of skin irritation to the outside world, is not easy to produce allergic reactions.</string>
+    <string name="Ysmo">Skin firm and smooth, moisture is more adequate.</string>
+    <string name="Yange">Skin moisture is adequate, is a normal state of the state.</string>
+    <string name="Yoo">A large number of dry skin, prone to dry lines, if the long-term regardless of it will become more and more deep and stereotyped as a lingering wrinkle.</string>
+    <string name="Youngining">Dry skin, prone to wrinkles and edema, and once the skin of the skin once relaxed, it is difficult to restore the original state. Water is the fundamental guarantee for the delay of aging.</string>
+    <string name="You">Dry skin, some of the state is worrying.</string>
+    <string name="Yokin">The skin is dry, extremely easy to produce light wrinkles. Exaggerated facial expressions will aggravate the wrinkles, make the skin regain luster to water.</string>
+    <string name="Yend">Skin moisture in the normal range, but also close to dry oh.</string>
+    <string name="Yaw">Skin moisture value is somewhat low.</string>
+    <string name="nomal">Normal</string>
+    <string name="Youutine">Skin moisture value is normal, optimize life and rest, the water can be further improved oh.</string>
+    <string name="Youigued">The skin moisture value is in the normal range, but the skin is also a bit tired.</string>
+    <string name="remark1">Average moisture content of the peers in the group of 33.9%</string>
+    <string name="remark2">Average moisture content of the peers in the group of 31.2%</string>
+    <string name="remark3">Average moisture content of the peers in the group of 29.6%</string>
+    <string name="remark4">Average moisture content of the peers in the group of 28.5%</string>
+    <string name="remark5">Average moisture content of the peers in the group of 27.8%</string>
+    <string name="remark6">Average moisture content of the peers in the group of 30.2%</string>
+    <string name="remark7">After logging in, you can check the average age group</string>
+    <string name="Your">The skin moisture value is low, belongs to the serious damage state.</string>
+    <string name="YourskinhaswellbalancedmoisturecontentYoumustbanexpertinhydration">Skin moisture balance, you should be a replenishment of people.</string>
+    <string name="Yourskinmoisturcontentiswithinthenormalrangebutstillnothighenough">While the skin moisture is in the normal range. But still not enough moisture.</string>
+    <string name="Yourskinisfullyhydratedlikeanewborn">Skin full of water, like a new.</string>
+    <string name="Yourskinisdelicatesilkysmoothandfullyhydrated">Skin tender, silky smooth, full of water.</string>
+    <string name="Theskinistenderelasticandfirmtotouchandwellhydrated">The skin is soft and elastic.</string>
+    <string name="YourskinisquitehydratedWelldone">The skin is more moist, keep good oh.</string>
+    <string name="Yourskinisquitehydratedandfallswithinthenormalrange">The skin is more moist, within the normal range.</string>
+    <string name="Eye">Eye</string>
+    <string name="Face">Face</string>
+    <string name="Neck">The neck</string>
+    <string name="Hand">Hand</string>
+    <string name="Dingdong">Jingle</string>
+    <string name="Cuckoo">Cuckoo</string>
+    <string name="Fantasy">Dream</string>
+    <string name="TheAverageMoistureContentoftheHandfortheAgeGroup">Average value of water in the hands of peers</string>
+    <string name="TheAverageMoistureContentoftheFacefortheAgeGroup">Average age of the same age population</string>
+    <string name="TheAverageMoistureContentoftheEyefortheAgeGroup">Average age population of the same age</string>
+    <string name="TheAverageMoistureContentoftheNeckfortheAgeGroup">Average neck moisture in the same age group</string>
+    <string name="ViewDetailedResults">View detailed results</string>
+    <string name="Comparedtotoday">Than today</string>
+    <string name="Comparedtothepreviousweek">Than the previous week</string>
+    <string name="Comparedtothisweek">This week</string>
+    <string name="Comparedtothepreviousmonth">Than before January</string>
+    <string name="Comparedtothismonth">This month</string>
+    <string name="Previousday">The day before</string>
+    <string name="Previousweek">The previous week</string>
+    <string name="Thisweek">This week</string>
+    <string name="Previousmonth">Before January</string>
+    <string name="Thismonth">This month</string>
+    <string name="TestCentre">Test Center</string>
+    <string name="exittoast">On a return to the desktop</string>
+    <string name="HistoricalData">Historical data</string>
+    <string name="addn">Add alarm clock</string>
+    <string name="yzyx">Verify mailbox</string>
+    <string name="issended">The mail has been sent to the mailbox.</string>
+    <string name="Toohighinmoisturecontent">Water is too high</string>
+    <string name="Toolowinmoisturecontent">Water is too low</string>
+    <string name="Pleaseholdforseconds">Please hold for 5 seconds</string>
+    <string name="Pleasehss">Mail verification through, the registration operation is being carried out</string>
+    <string name="Pol">The mailbox does not exist, or is verified to be incorrect, please try again</string>
+    <string name="SelectBirthday">Choose birthday</string>
+    <string name="Loading">Loading...</string>
+    <string name="LoadingFailed">Failed to load</string>
+    <string name="Dearyoualreadylikedthis">Dear, you have already had good oh!</string>
+    <string name="DearyoualreError">Interface verification error</string>
+    <string name="face1">The average age of the same age group was 39.5%</string>
+    <string name="face2">The average age of the same age group was 37.8%</string>
+    <string name="face3">The average age of the same age group was 36.7%</string>
+    <string name="face4">The average age of the same age group was 35.8%</string>
+    <string name="face5">The average age of the same age group was 34.2%</string>
+    <string name="face6">The average age of the same age group was 33.3%</string>
+    <string name="face7">The average age of the same age group was 35.8%</string>
+    <string name="Type1">The average age of the same age group was 44.6%</string>
+    <string name="Type2">The average age of the same age group was 43.3%</string>
+    <string name="Type3">The average age of the same age group was 41.1%</string>
+    <string name="Type4">The average age of the same age group was 39.7%</string>
+    <string name="Type5">The average age of the same age group was 37.2%</string>
+    <string name="Type6">The average age of the same age group was 36.3%</string>
+    <string name="Type7">The average age of the same age group was 41.1%</string>
+    <string name="takepick">Photograph</string>
+    <string name="takepickfrom">Select from the album</string>
+    <string name="exit">Exit current account</string>
+    <string name="issure">After you log out, you need to log in.</string>
+    <string name="sure">Exit</string>
+    <string name="tips">The most intelligent skin moisture tester</string>
+    <string name="iswatch">The alarm clock</string>
+    <string name="add">Add to</string>
+    <string name="bnew">Refresh</string>
+    <string name="divercon">Connecting equipment</string>
+    <string name="pro">Common problem</string>
+    <string name="bluetooth">Bluetooth switch</string>
+    <string name="updatepwd">Change password</string>
+    <string name="updatetips">Advisory update reminder</string>
+    <string name="upips">\t\tInsist on a day with salt wash your face, can not only whitening, exfoliating, the most important is the face no longer oil Oh, face out of the oil, it will look dirty, I believe insist on a period of time, you will be able to see results.</string>
+    <string name="testpf">Skin tester</string>
+    <string name="testfrom">Source:88888</string>
+    <string name="sld">Eye socket</string>
+    <string name="gzxjf">Dry skin</string>
+    <string name="gzxjf1">Average age population of 41.1%</string>
+    <string name="gzxjf2">Compared to the last +0.2%</string>
+    <string name="gzxjf3">Skin tester, you deserve it, for more details. Please click www.mymili.com</string>
+    <string name="gzxjf4">Please enter the mailbox verification code</string>
+    <string name="gzxjf5">Normal value of moisture in the spring and Autumn Period</string>
+    <string name="gzxjf6">The difference of moisture content in summer is about 3%</string>
+    <string name="gzxjf7">Winter water ratio is about 5%</string>
+    <string name="gzxjf8">Eye\n35%-45%</string>
+    <string name="gzxjf9">Face\n32%-42%</string>
+    <string name="gzxjf10">Hand\n30%-38%</string>
+    <string name="gzxjf11">Neck\n35%-45%</string>
+    <string name="time">Hour</string>
+    <string name="muinite">Minute</string>
+    <string name="delnz">Delete alarm clock</string>
+    <string name="pfzk">Skin condition</string>
+    <string name="yhm">username</string>
+    <string name="jl">Distance</string>
+    <string name="hddz">Activity address</string>
+    <string name="grzx">Personal Center</string>
+    <string name="tczh">Exit account</string>
+    <string name="zd">How long do you expect to fall in love (in marriage)?</string>
+    <string name="zd1">1year</string>
+    <string name="zd2">2year</string>
+    <string name="zd3">3year</string>
+    <string name="zd4">4year</string>
+    <string name="sbd">The hand skin tender degree</string>
+    <string name="sbd1">Mean value</string>
+    <string name="sbd2">I am sorry, but you do not have the data.</string>
+    <string name="sbd3">Bluetooth connection</string>
+    <string name="history">Historical records</string>
+    <string name="query">View detailed results >></string>
+    <string name="testtotal">Detection times</string>
+    <string name="clickfivemuni">Hold for 5 seconds.</string>
+    <string name="ci">Time</string>
+    <string name="byface">The facial skin supple degree</string>
+    <string name="byeye">Eye skin tender degree</string>
+    <string name="byneck">The skin of the neck</string>
+    <string name="today">today</string>
+    <string name="lineone">lineone</string>
+    <string name="r1">sunday</string>
+    <string name="r2">Monday</string>
+    <string name="r3">Tuesday</string>
+    <string name="r4">Wednesday</string>
+    <string name="r5">Thursday</string>
+    <string name="r6">Friday</string>
+    <string name="r7">Saturday</string>
 
 </resources>

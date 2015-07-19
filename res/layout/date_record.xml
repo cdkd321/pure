@@ -11,9 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="19dp"
-        android:textSize="@dimen/activity_title_text_size"
         android:text="2015-06-20"
-        android:textColor="@color/theme_blue" />
+        android:textColor="@color/theme_blue"
+        android:textSize="@dimen/activity_title_text_size" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,16 +26,16 @@
 
             <TextView
                 android:id="@+id/tvJzzk"
-                style="@style/styleCenterText" 
-                android:text="皮肤状况" />
+                style="@style/styleCenterText"
+                android:text="@string/pfzk" />
 
             <TextView
                 android:id="@+id/tvJzzkData"
-                style="@style/styleCenterText" 
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"
+                style="@style/styleCenterText"
                 android:layout_marginBottom="34dp"
-                android:text="正常" />
+                android:layout_marginTop="10dp"
+                android:text="@string/nomal"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -44,16 +44,16 @@
 
             <TextView
                 android:id="@+id/tvAverageLevel"
-                style="@style/styleCenterText" 
-                android:text="平均水平" />
+                style="@style/styleCenterText"
+                android:text="@string/AverageLevel" />
 
             <TextView
                 android:id="@+id/tvAverageLevelData"
-                style="@style/styleCenterText" 
-                android:layout_marginTop="10dp"
+                style="@style/styleCenterText"
                 android:layout_marginBottom="34dp"
-                android:textColor="@color/black"
-                android:text="0.0%" />
+                android:layout_marginTop="10dp"
+                android:text="0.0%"
+                android:textColor="@color/black" />
         </LinearLayout>
 
         <LinearLayout
@@ -63,15 +63,15 @@
 
             <TextView
                 android:id="@+id/tvThanLastDay"
-                style="@style/styleCenterText" 
-                android:text="前一天" />
+                style="@style/styleCenterText"
+                android:text="@string/Previousday" />
 
             <TextView
                 android:id="@+id/tvThanLastDayData"
-                style="@style/styleCenterText" 
+                style="@style/styleCenterText"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:text="0.0%" />
+                android:text="0.0%"
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 

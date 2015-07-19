@@ -115,18 +115,21 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		super.onDestroy();
 		getActivity().unregisterReceiver(mReceiver);
 	}
-    @Override
-    public void onResume() {
-    	// TODO Auto-generated method stub
-    	super.onResume();
-    	SelfDefineApplication.getInstance().isResume=true;
-    }
-    @Override
-    public void onPause() {
-    	// TODO Auto-generated method stub
-    	super.onPause();
-    	SelfDefineApplication.getInstance().isResume=false;
-    }
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		SelfDefineApplication.getInstance().isResume = true;
+	}
+
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		SelfDefineApplication.getInstance().isResume = false;
+	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -237,27 +240,29 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 			@Override
 			public void onPageSelected(int arg0) {
-				SelfDefineApplication.getInstance().viewpagerPositon=arg0;
+				SelfDefineApplication.getInstance().viewpagerPositon = arg0;
 				if (arg0 == 0) {
 					actActivity.ivImg.setBackgroundResource(R.drawable.back);
 					actActivity.getTkActionBar();
-					actActivity.setTitle("检测中心");
+					actActivity.setTitle(actActivity.getResources().getString(R.string.TestCentre));
 					actActivity.ivImg.setVisibility(View.VISIBLE);
-					actActivity.addRightImage(R.drawable.news_pressed, new OnClickListener() {
-						
-						@Override
-						public void onClick(View arg0) {
-							Intent intent = new Intent(getActivity(), ZXInfoAct.class);
-							startActivity(intent);
-						}
-					});
-					
+					actActivity.addRightImage(R.drawable.news_pressed,
+							new OnClickListener() {
+
+								@Override
+								public void onClick(View arg0) {
+									Intent intent = new Intent(getActivity(),
+											ZXInfoAct.class);
+									startActivity(intent);
+								}
+							});
+
 				} else {
 					actActivity.ivImg
 							.setBackgroundResource(R.drawable.arrow_down);
-					actActivity.setTitle("历史记录");
+					actActivity.setTitle(actActivity.getResources().getString(R.string.history));
 					actActivity.ivImg.setVisibility(View.VISIBLE);
-					View view=new View(actActivity);
+					View view = new View(actActivity);
 					actActivity.getTkActionBar().setRightView(view, null);
 				}
 
@@ -308,7 +313,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		checkType = getArguments().getInt("checkType");
-		
+
 	}
 
 	@Override
@@ -355,8 +360,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		float averageYesTodayWater = 0;
 		// 鏄ㄥぉ鐨勬暟鎹�
 		WhereBuilder builder1 = WhereBuilder.b("date", "==",
-				DateUtil.getDateStr(DateUtil.getCurrentDate(), -1)).and("modelstate", "==",
-				checkType);
+				DateUtil.getDateStr(DateUtil.getCurrentDate(), -1)).and(
+				"modelstate", "==", checkType);
 		try {
 			yesTodayBlts = db.findAll(Selector.from(BltModel.class).where(
 					builder1));
@@ -370,12 +375,11 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				}
 				if (yesTodayBlts.size() > 0) {
 					averageYesTodayWater = totalWater / yesTodayBlts.size();
-					tvYestodayLabel
-					.setText(Float.parseFloat(df
-									.format((averageYesTodayWater) / 45.0f + 20.0))
+					tvYestodayLabel.setText(Float.parseFloat(df
+							.format((averageYesTodayWater) / 45.0f + 20.0))
 							+ "%");
-				}else{
-					
+				} else {
+
 				}
 
 				// mAdapter.notifymDataSetChanged(lists);
@@ -386,21 +390,15 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*if (averageWater - averageYesTodayWater > 0) {
-			tvYestodayLabel
-					.setText("+"
-							+ Float.parseFloat(df
-									.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
-							+ "%");
-		} else if (averageWater - averageYesTodayWater == 0) {
-			tvYestodayLabel.setText("0.0%");
-		} else {
-			tvYestodayLabel
-					.setText("-"
-							+ Float.parseFloat(df
-									.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
-							+ "%");
-		}*/
+		/*
+		 * if (averageWater - averageYesTodayWater > 0) { tvYestodayLabel
+		 * .setText("+" + Float.parseFloat(df .format((averageWater -
+		 * averageYesTodayWater) / 45.0f + 20.0)) + "%"); } else if
+		 * (averageWater - averageYesTodayWater == 0) {
+		 * tvYestodayLabel.setText("0.0%"); } else { tvYestodayLabel
+		 * .setText("-" + Float.parseFloat(df .format((averageYesTodayWater -
+		 * averageWater) / 45.0f + 20.0)) + "%"); }
+		 */
 	}
 
 	private void registerBoradcastReceiver() {
@@ -441,7 +439,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									tvBlueTouth.setText("干燥");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.Dry));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -453,7 +451,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 								@Override
 								public void run() {
-									tvBlueTouth.setText("湿润");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.Hydrated));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -464,7 +462,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 								@Override
 								public void run() {
-									tvBlueTouth.setText("正常");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.nomal));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -478,7 +476,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									tvBlueTouth.setText("干燥");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.Dry));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -490,7 +488,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 								@Override
 								public void run() {
-									tvBlueTouth.setText("湿润");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.Hydrated));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -501,7 +499,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 								@Override
 								public void run() {
-									tvBlueTouth.setText("正常");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.nomal));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -515,7 +513,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									tvBlueTouth.setText("干燥");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.Dry));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -527,7 +525,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 								@Override
 								public void run() {
-									tvBlueTouth.setText("湿润");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.Hydrated));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -538,7 +536,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 								@Override
 								public void run() {
-									tvBlueTouth.setText("正常");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.nomal));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -552,7 +550,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 								@Override
 								public void run() {
 									// TODO Auto-generated method stub
-									tvBlueTouth.setText("干燥");
+									tvBlueTouth.setText(R.string.Dry);
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -564,7 +562,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 								@Override
 								public void run() {
-									tvBlueTouth.setText("湿润");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.Hydrated));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -575,7 +573,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 								@Override
 								public void run() {
-									tvBlueTouth.setText("正常");
+									tvBlueTouth.setText(actActivity.getResources().getString(R.string.nomal));
 									tvBlueTouth.setVisibility(View.VISIBLE);
 								}
 							}, 1500);
@@ -586,7 +584,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 						@Override
 						public void run() {
-							toSeeMore.setText("查看详细结果  >>");
+							toSeeMore.setText(actActivity.getResources().getString(R.string.query));
 							toSeeMore.setVisibility(View.VISIBLE);
 						}
 					}, 1500);
@@ -634,7 +632,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 									.setText(Float.parseFloat(df
 											.format(averageWater / 45.0f + 20.0))
 											+ "%");
-							detectionTimes.setText("检测次数 " + blts.size() + "次");
+							detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+									+ blts.size() + actActivity.getResources().getString(R.string.ci));
 						}
 
 					}
@@ -665,13 +664,11 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 							averageYesTodayWater = totalWater
 									/ yesTodayBlts.size();
 							tvThanLastDayData
-							.setText(Float.parseFloat(df
-									.format(averageWater / 45.0f + 20.0))
-									+ "%");
-						}else{
-							tvThanLastDayData
-							.setText(0
-									+ "%");
+									.setText(Float.parseFloat(df
+											.format(averageWater / 45.0f + 20.0))
+											+ "%");
+						} else {
+							tvThanLastDayData.setText(0 + "%");
 						}
 
 						// mAdapter.notifymDataSetChanged(lists);
@@ -682,24 +679,22 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				/*if (averageWater - averageYesTodayWater >= 0) {
-					tvThanLastDayData
-							.setText("+"
-									+ Float.parseFloat(df
-											.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
-									+ "%");
-				} else {
-					tvThanLastDayData
-							.setText("-"
-									+ Float.parseFloat(df
-											.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
-									+ "%");
-				}*/
-				String[] tishi=getResources().getStringArray(R.array.water_suggestion);
-				String[] tishijiaohao=getResources().getStringArray(R.array.water_suggestion_jiaogao);
-				String[] water_suggestion_feichanggao=getResources().getStringArray(R.array.water_suggestion_feichanggao);
+				/*
+				 * if (averageWater - averageYesTodayWater >= 0) {
+				 * tvThanLastDayData .setText("+" + Float.parseFloat(df
+				 * .format((averageWater - averageYesTodayWater) / 45.0f +
+				 * 20.0)) + "%"); } else { tvThanLastDayData .setText("-" +
+				 * Float.parseFloat(df .format((averageYesTodayWater -
+				 * averageWater) / 45.0f + 20.0)) + "%"); }
+				 */
+				String[] tishi = getResources().getStringArray(
+						R.array.water_suggestion);
+				String[] tishijiaohao = getResources().getStringArray(
+						R.array.water_suggestion_jiaogao);
+				String[] water_suggestion_feichanggao = getResources()
+						.getStringArray(R.array.water_suggestion_feichanggao);
 				refreshTishi(tishi, tishijiaohao, water_suggestion_feichanggao);
-				
+
 				refreshChartView(tvDate.getText().toString());
 				reFreshDegreeView();
 				java.text.DecimalFormat dfc = new java.text.DecimalFormat(
@@ -710,59 +705,58 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) < 30) {
 
-						tvJzzkData.setText("干燥");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Dry));
 
 					} else if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) > 38) {
-						tvJzzkData.setText("湿润");
-						
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Hydrated));
 
 					} else {
-						tvJzzkData.setText("正常");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Normal));
 
 					}
 				} else if (checkType == 1) {
 					if (Float.parseFloat(tvAverageLevelData.getText()
-							.toString().replace("%", ""))< 32) {
+							.toString().replace("%", "")) < 32) {
 
-						tvJzzkData.setText("干燥");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Dry));
 
 					} else if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) > 42) {
 
-						tvJzzkData.setText("湿润");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Hydrated));
 
 					} else {
-						tvJzzkData.setText("正常");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Normal));
 
 					}
 				} else if (checkType == 2) {
 					if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) < 35) {
 
-						tvJzzkData.setText("干燥");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Dry));
 
 					} else if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) > 45) {
-						tvJzzkData.setText("湿润");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Hydrated));
 
 					} else {
-						tvJzzkData.setText("正常");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Normal));
 
 					}
 				} else if (checkType == 3) {
 					if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) < 35) {
 
-						tvJzzkData.setText("干燥");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Dry));
 
 					} else if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) > 45) {
 
-						tvJzzkData.setText("湿润");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Hydrated));
 
 					} else {
-						tvJzzkData.setText("正常");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Normal));
 
 					}
 				}
@@ -770,7 +764,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				actActivity.touming.setVisibility(View.GONE);
 
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
-				tvBlueTouth.setMyText("已连接");
+				tvBlueTouth.setMyText(getString(R.string.Connected));
 				tvBlueTouth.setVisibility(View.VISIBLE);
 
 				/*
@@ -781,7 +775,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				 */
 
 			} else if (BleService.ACTION_GATT_DISCONNECTED.equals(action)) {
-				tvBlueTouth.setMyText("断开连接");
+				tvBlueTouth.setMyText(getString(R.string.UnConnected));
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress, false);
 				toSeeMore.setVisibility(View.INVISIBLE);
@@ -793,7 +787,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				 * e.printStackTrace(); }
 				 */
 			} else if (BleService.ACTION_STATUS_WRONG.equals(action)) {
-				tvBlueTouth.setMyText("断开连接");
+				tvBlueTouth.setMyText(getString(R.string.UnConnected));
 				tvBlueTouth.setVisibility(View.VISIBLE);
 				pb.setProgressing(0.0f, tvBlueProgress, false);
 				toSeeMore.setVisibility(View.INVISIBLE);
@@ -805,25 +799,27 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				 * e.printStackTrace(); }
 				 */
 			} else if (BleService.ACTION_TIME_TOOSHORT.equals(action)) {
-				if(SelfDefineApplication.getInstance().viewpagerPositon==0&&SelfDefineApplication.getInstance().isResume){
-					Toast.makeText(getActivity(), "请连续按住5秒", 1000).show();
+				if (SelfDefineApplication.getInstance().viewpagerPositon == 0
+						&& SelfDefineApplication.getInstance().isResume) {
+					Toast.makeText(getActivity(), actActivity.getResources().getString(R.string.clickfivemuni), 1000)
+							.show();
 					pb.setProgressing(0.0f, tvBlueProgress, false);
 				}
 				actActivity.touming.setVisibility(View.GONE);
 			} else if (BleService.ACTION_START.equals(action)) {
-				if(SelfDefineApplication.getInstance().viewpagerPositon==0&&SelfDefineApplication.getInstance().isResume){
+				if (SelfDefineApplication.getInstance().viewpagerPositon == 0
+						&& SelfDefineApplication.getInstance().isResume) {
 					pb.setProgressing(0.5f, tvBlueProgress, true);
 					tvBlueTouth.setText("");
 					toSeeMore.setText("");
 					actActivity.touming.setVisibility(View.VISIBLE);
 				}
-				
+
 			}
 
 		}
 
 	};
-	
 
 	private void reFreshDegreeView() {
 		CircleProgressBarBlue pb = (CircleProgressBarBlue) cell_bottom
@@ -851,9 +847,12 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 	private TextView tvJzzkData;
 
 	private void initDownView(final View view) {
-		String[] tishi=getResources().getStringArray(R.array.water_suggestion);
-		String[] tishijiaohao=getResources().getStringArray(R.array.water_suggestion_jiaogao);
-		String[] water_suggestion_feichanggao=getResources().getStringArray(R.array.water_suggestion_feichanggao);
+		String[] tishi = getResources()
+				.getStringArray(R.array.water_suggestion);
+		String[] tishijiaohao = getResources().getStringArray(
+				R.array.water_suggestion_jiaogao);
+		String[] water_suggestion_feichanggao = getResources().getStringArray(
+				R.array.water_suggestion_feichanggao);
 		ViewPager vpager = (ViewPager) view.findViewById(R.id.vPager);
 		AbOuterScrollView scroll = (AbOuterScrollView) view
 				.findViewById(R.id.onlysv);
@@ -863,7 +862,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		detectionTimes = (TextView) view.findViewById(R.id.detection_times);
 		shunengdu_title = (TextView) view.findViewById(R.id.shunengdu_title);
 		chartView = (SplineChart03View) view.findViewById(R.id.spline_chart);
-		pingjun_tishi=(TextView) view.findViewById(R.id.pingjun_tishi);
+		pingjun_tishi = (TextView) view.findViewById(R.id.pingjun_tishi);
 		clickPageLeft.setOnClickListener(this);
 		clickPageRight.setOnClickListener(this);
 		List<View> viewList = new ArrayList<View>();
@@ -933,11 +932,11 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					selectFlag = 0;
 					refreshChartView(DateUtil.getCurrentDate());
 					tvDate.setText(DateUtil.getCurrentDate());
-					tvThanLastDay.setText("前一天");
+					tvThanLastDay.setText(actActivity.getResources().getString(R.string.Previousday));
 					biJiaoToday(
 							DateUtil.getDateStr(DateUtil.getCurrentDate(), -1),
 							DateUtil.getCurrentDate(), tvThanLastDayData);
-					
+
 					break;
 				case R.id.rbRight:
 					selectFlag = 2;
@@ -947,8 +946,9 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					tvDate.setText(df.format(getFirstDayOfMonth(new Date()))
 							+ "~" + df.format(getLastDayOfMonth(new Date())));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
-					tvThanLastDay.setText("前一月");
-					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
+					tvThanLastDay.setText(actActivity.getResources().getString(R.string.Previousmonth));
+					detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+							+ averagem.getCount() + actActivity.getResources().getString(R.string.ci));
 					break;
 				case R.id.rbMid:
 					selectFlag = 1;
@@ -958,8 +958,9 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 							df.format(getFirstDayOfWeek(new Date())), -1)
 							+ "~" + df.format(getLastDayOfWeek(new Date())));
 					tvAverageLevelData.setText(average.getAverage() + "%");
-					tvThanLastDay.setText("前一周");
-					detectionTimes.setText("检测次数 " + average.getCount() + "次");
+					tvThanLastDay.setText(actActivity.getResources().getString(R.string.Previousweek));
+					detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+							+ average.getCount() + actActivity.getResources().getString(R.string.ci));
 					break;
 
 				default:
@@ -969,67 +970,69 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 						"#0.00");
 				Float d = Float.parseFloat(tvAverageLevelData.getText()
 						.toString().replace("%", "")) / 60f;
-				String[] tishi=getResources().getStringArray(R.array.water_suggestion);
-				String[] tishijiaohao=getResources().getStringArray(R.array.water_suggestion_jiaogao);
-				String[] water_suggestion_feichanggao=getResources().getStringArray(R.array.water_suggestion_feichanggao);
+				String[] tishi = getResources().getStringArray(
+						R.array.water_suggestion);
+				String[] tishijiaohao = getResources().getStringArray(
+						R.array.water_suggestion_jiaogao);
+				String[] water_suggestion_feichanggao = getResources()
+						.getStringArray(R.array.water_suggestion_feichanggao);
 				refreshTishi(tishi, tishijiaohao, water_suggestion_feichanggao);
 				if (checkType == 0) {
 					if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) < 30) {
 
-						tvJzzkData.setText("干燥");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Dry));
 
 					} else if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) > 38) {
-						tvJzzkData.setText("湿润");
-						
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Hydrated));
 
 					} else {
-						tvJzzkData.setText("正常");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.nomal));
 
 					}
 				} else if (checkType == 1) {
 					if (Float.parseFloat(tvAverageLevelData.getText()
-							.toString().replace("%", ""))< 32) {
+							.toString().replace("%", "")) < 32) {
 
-						tvJzzkData.setText("干燥");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Dry));
 
 					} else if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) > 42) {
 
-						tvJzzkData.setText("湿润");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Hydrated));
 
 					} else {
-						tvJzzkData.setText("正常");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Normal));
 
 					}
 				} else if (checkType == 2) {
 					if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) < 35) {
 
-						tvJzzkData.setText("干燥");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Dry));
 
 					} else if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) > 45) {
-						tvJzzkData.setText("湿润");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Hydrated));
 
 					} else {
-						tvJzzkData.setText("正常");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Normal));
 
 					}
 				} else if (checkType == 3) {
 					if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) < 35) {
 
-						tvJzzkData.setText("干燥");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Dry));
 
 					} else if (Float.parseFloat(tvAverageLevelData.getText()
 							.toString().replace("%", "")) > 45) {
 
-						tvJzzkData.setText("湿润");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Hydrated));
 
 					} else {
-						tvJzzkData.setText("正常");
+						tvJzzkData.setText(actActivity.getResources().getString(R.string.Normal));
 
 					}
 				}
@@ -1050,281 +1053,336 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 	public void refreshTishi(String[] tishi, String[] tishijiaohao,
 			String[] water_suggestion_feichanggao) {
 		if (checkType == 0) {
-			shunengdu_title.setText("手部的肌肤水嫩度");
-			
-			if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>20&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=21.9){
+			shunengdu_title.setText(actActivity.getResources().getString(R.string.sbd));
+
+			if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) > 20
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 21.9) {
 				pingjun_tishi.setText(tishi[0]);
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=22&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=23.9){
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 22
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 23.9) {
 				pingjun_tishi.setText(tishi[1]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=24&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=25.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 24
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 25.9) {
 				pingjun_tishi.setText(tishi[2]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=26&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=27.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 26
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 27.9) {
 				pingjun_tishi.setText(tishi[3]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=28&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=28.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 28
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 28.9) {
 				pingjun_tishi.setText(tishi[4]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=29&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=29.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 29
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 29.9) {
 				pingjun_tishi.setText(tishi[5]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=30&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=31.6){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 30
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 31.6) {
 				pingjun_tishi.setText(tishi[6]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=31.7&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=33.2){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 31.7
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 33.2) {
 				pingjun_tishi.setText(tishi[7]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=33.3&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=34.8){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 33.3
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 34.8) {
 				pingjun_tishi.setText(tishi[8]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=34.9&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=36.4){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 34.9
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 36.4) {
 				pingjun_tishi.setText(tishi[9]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=36.5&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=38){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 36.5
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 38) {
 				pingjun_tishi.setText(tishi[10]);
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=38&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=40){
-				int position=(int)(Math.random()*tishijiaohao.length);
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 38
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 40) {
+				int position = (int) (Math.random() * tishijiaohao.length);
 				pingjun_tishi.setText(tishijiaohao[position]);
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>40){
-				int position=(int)(Math.random()*water_suggestion_feichanggao.length);
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) > 40) {
+				int position = (int) (Math.random() * water_suggestion_feichanggao.length);
 				pingjun_tishi.setText(water_suggestion_feichanggao[position]);
-			};
+			}
+			;
 		} else if (checkType == 1) {
-			shunengdu_title.setText("脸部的肌肤水嫩度");
-			if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>20&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=22.4){
+			shunengdu_title.setText(actActivity.getResources().getString(R.string.byface));
+			if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) > 20
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 22.4) {
 				pingjun_tishi.setText(tishi[0]);
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=22.5&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=24.9){
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 22.5
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 24.9) {
 				pingjun_tishi.setText(tishi[1]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=25&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=27.4){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 25
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 27.4) {
 				pingjun_tishi.setText(tishi[2]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=27.5&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=29.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 27.5
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 29.9) {
 				pingjun_tishi.setText(tishi[3]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=30&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=30.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 30
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 30.9) {
 				pingjun_tishi.setText(tishi[4]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=31&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=31.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 31
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 31.9) {
 				pingjun_tishi.setText(tishi[5]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=32&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=33.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 32
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 33.9) {
 				pingjun_tishi.setText(tishi[6]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=34&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=35.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 34
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 35.9) {
 				pingjun_tishi.setText(tishi[7]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=36&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=37.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 36
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 37.9) {
 				pingjun_tishi.setText(tishi[8]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=38&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=39.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 38
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 39.9) {
 				pingjun_tishi.setText(tishi[9]);
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=40&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=41.9){
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 40
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 41.9) {
 				pingjun_tishi.setText(tishi[10]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=42&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=44){
-				int position=(int)(Math.random()*tishijiaohao.length);
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 42
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 44) {
+				int position = (int) (Math.random() * tishijiaohao.length);
 				pingjun_tishi.setText(tishijiaohao[position]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=44){
-				int position=(int)(Math.random()*water_suggestion_feichanggao.length);
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 44) {
+				int position = (int) (Math.random() * water_suggestion_feichanggao.length);
 				pingjun_tishi.setText(water_suggestion_feichanggao[position]);
-				
-			};
+
+			}
+			;
 		} else if (checkType == 2) {
-			shunengdu_title.setText("眼部的肌肤水嫩度");
-			if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>20&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=22.9){
+			shunengdu_title.setText(actActivity.getResources().getString(R.string.byeye));
+			if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) > 20
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 22.9) {
 				pingjun_tishi.setText(tishi[0]);
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=23&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=25.9){
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 23
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 25.9) {
 				pingjun_tishi.setText(tishi[1]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=26&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=28.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 26
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 28.9) {
 				pingjun_tishi.setText(tishi[2]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=29&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=31.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 29
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 31.9) {
 				pingjun_tishi.setText(tishi[3]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=32&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=33.4){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 32
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 33.4) {
 				pingjun_tishi.setText(tishi[4]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=33.5&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=34.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 33.5
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 34.9) {
 				pingjun_tishi.setText(tishi[5]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=35&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=36.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 35
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 36.9) {
 				pingjun_tishi.setText(tishi[6]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=37&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=38.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 37
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 38.9) {
 				pingjun_tishi.setText(tishi[7]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=39&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=40.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 39
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 40.9) {
 				pingjun_tishi.setText(tishi[8]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=41&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=42.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 41
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 42.9) {
 				pingjun_tishi.setText(tishi[9]);
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=43&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=44.9){
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 43
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 44.9) {
 				pingjun_tishi.setText(tishi[10]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=45&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=47){
-				int position=(int)(Math.random()*tishijiaohao.length);
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 45
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 47) {
+				int position = (int) (Math.random() * tishijiaohao.length);
 				pingjun_tishi.setText(tishijiaohao[position]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=47){
-				int position=(int)(Math.random()*water_suggestion_feichanggao.length);
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 47) {
+				int position = (int) (Math.random() * water_suggestion_feichanggao.length);
 				pingjun_tishi.setText(water_suggestion_feichanggao[position]);
-				
-			};
+
+			}
+			;
 		} else {
-			shunengdu_title.setText("颈部的肌肤水嫩度");
-			if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>20&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=22.9){
+			shunengdu_title.setText(actActivity.getResources().getString(R.string.byneck));
+			if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) > 20
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 22.9) {
 				pingjun_tishi.setText(tishi[0]);
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=23&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=25.9){
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 23
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 25.9) {
 				pingjun_tishi.setText(tishi[1]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=26&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=28.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 26
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 28.9) {
 				pingjun_tishi.setText(tishi[2]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=29&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=31.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 29
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 31.9) {
 				pingjun_tishi.setText(tishi[3]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=32&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=33.4){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 32
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 33.4) {
 				pingjun_tishi.setText(tishi[4]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=33.5&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=34.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 33.5
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 34.9) {
 				pingjun_tishi.setText(tishi[5]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=35&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=36.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 35
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 36.9) {
 				pingjun_tishi.setText(tishi[6]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=37&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=38.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 37
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 38.9) {
 				pingjun_tishi.setText(tishi[7]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=39&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=40.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 39
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 40.9) {
 				pingjun_tishi.setText(tishi[8]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=41&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=42.9){
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 41
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 42.9) {
 				pingjun_tishi.setText(tishi[9]);
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=43&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=44.9){
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 43
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 44.9) {
 				pingjun_tishi.setText(tishi[10]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=45&&Float.parseFloat(tvAverageLevelData.getText().toString()
-							.replace("%", ""))<=47){
-				int position=(int)(Math.random()*tishijiaohao.length);
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 45
+					&& Float.parseFloat(tvAverageLevelData.getText().toString()
+							.replace("%", "")) <= 47) {
+				int position = (int) (Math.random() * tishijiaohao.length);
 				pingjun_tishi.setText(tishijiaohao[position]);
-				
-			}else if(Float.parseFloat(tvAverageLevelData.getText().toString()
-					.replace("%", ""))>=47){
-				int position=(int)(Math.random()*water_suggestion_feichanggao.length);
+
+			} else if (Float.parseFloat(tvAverageLevelData.getText().toString()
+					.replace("%", "")) >= 47) {
+				int position = (int) (Math.random() * water_suggestion_feichanggao.length);
 				pingjun_tishi.setText(water_suggestion_feichanggao[position]);
-				
-			};
+
+			}
+			;
 		}
 	}
 
 	@Override
 	public void onClick(View v) {
 		java.text.DecimalFormat dfDec = new java.text.DecimalFormat("#0.00");
-		String[] tishi=getResources().getStringArray(R.array.water_suggestion);
-		String[] tishijiaohao=getResources().getStringArray(R.array.water_suggestion_jiaogao);
-		String[] water_suggestion_feichanggao=getResources().getStringArray(R.array.water_suggestion_feichanggao);
+		String[] tishi = getResources()
+				.getStringArray(R.array.water_suggestion);
+		String[] tishijiaohao = getResources().getStringArray(
+				R.array.water_suggestion_jiaogao);
+		String[] water_suggestion_feichanggao = getResources().getStringArray(
+				R.array.water_suggestion_feichanggao);
 		switch (v.getId()) {
 		case R.id.abarLeft: // 宸﹁竟鏇村鎸夐挳
 			ToastHelper.ToastSht("you click left", getActivity());
@@ -1336,7 +1394,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			if (selectFlag == 0) {
 				tvDate.setText(DateUtil.getDateStr(tvDate.getText().toString(),
 						-1));
-				tvThanLastDay.setText("今天");
+				tvThanLastDay.setText(actActivity.getResources().getString(R.string.today));
 				biJiaoLastDay(tvDate.getText().toString(),
 						DateUtil.getCurrentDate(), tvThanLastDayData);
 				refreshChartView(tvDate.getText().toString());
@@ -1349,7 +1407,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 						dates[0], -7));
 
 				tvAverageLevelData.setText(average.getAverage() + "%");
-				detectionTimes.setText("检测次数 " + average.getCount() + "次");
+				detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal) + average.getCount()
+						+ actActivity.getResources().getString(R.string.ci));
 
 			} else if (selectFlag == 2) {
 				String[] dates = tvDate.getText().toString().split("~");
@@ -1363,12 +1422,13 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 							df.format(getReduceMonth(df.parse(dates[0]))),
 							df.format(getReduceMonth(df.parse(dates[1]))));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
-					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
+					detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+							+ averagem.getCount() + actActivity.getResources().getString(R.string.ci));
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 			}
-             
+
 			Float dl = Float.parseFloat(tvAverageLevelData.getText().toString()
 					.replace("%", "")) / 60f;
 			refreshTishi(tishi, tishijiaohao, water_suggestion_feichanggao);
@@ -1383,18 +1443,18 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 							.toString(), 1));
 					if (tvDate.getText().toString()
 							.equals(DateUtil.getCurrentDate())) {
-						tvThanLastDay.setText("前一天");
+						tvThanLastDay.setText(actActivity.getResources().getString(R.string.Previousday));
 						biJiaoToday(DateUtil.getDateStr(
 								DateUtil.getCurrentDate(), -1),
 								DateUtil.getCurrentDate(), tvThanLastDayData);
 					} else {
 						biJiaoLastDay(tvDate.getText().toString(),
 								DateUtil.getCurrentDate(), tvThanLastDayData);
-						tvThanLastDay.setText("今天");
+						tvThanLastDay.setText(actActivity.getResources().getString(R.string.today));
 					}
 
 				} else {
-					tvThanLastDay.setText("前一天");
+					tvThanLastDay.setText(actActivity.getResources().getString(R.string.Previousday));
 					biJiaoToday(tvDate.getText().toString(),
 							DateUtil.getCurrentDate(), tvThanLastDayData);
 				}
@@ -1408,7 +1468,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 						dates[0], 7));
 
 				tvAverageLevelData.setText(average.getAverage() + "%");
-				detectionTimes.setText("检测次数 " + average.getCount() + "次");
+				detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal) + average.getCount()
+						+ actActivity.getResources().getString(R.string.ci));
 			} else if (selectFlag == 2) {
 				String[] dates = tvDate.getText().toString().split("~");
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -1419,7 +1480,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 							df.format(getAddMonth(df.parse(dates[0]))),
 							df.format(getAddMonth(df.parse(dates[1]))));
 					tvAverageLevelData.setText(averagem.getAverage() + "%");
-					detectionTimes.setText("检测次数 " + averagem.getCount() + "次");
+					detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+							+ averagem.getCount() + actActivity.getResources().getString(R.string.ci));
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1583,8 +1645,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			linePoint1.add(new PointD(96d, hourAvera(DateUtil.getCurrentDate(),
 					"24")));
 		}
-		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
-				179, 147, 197));
+		SplineData dataSeries1 = new SplineData(getString(R.string.lineone),
+				linePoint1, Color.rgb(179, 147, 197));
 		// 鎶婄嚎寮勭粏鐐�
 		dataSeries1.getLinePaint().setStrokeWidth(2);
 		// dataSeries1.setLabelVisible(true);
@@ -1605,7 +1667,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		Average averageEntity = new Average();
 		float average = 0;
 		int count = 0;
-		double m=0;
+		double m = 0;
 		List<PointD> linePoint1 = new ArrayList<PointD>();
 		String ends[] = endDate.split("-");
 		int totalDay = Integer.parseInt(ends[2]);
@@ -1622,8 +1684,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			}
 
 		}
-		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
-				179, 147, 197));
+		SplineData dataSeries1 = new SplineData(getString(R.string.lineone),
+				linePoint1, Color.rgb(179, 147, 197));
 		// 鎶婄嚎寮勭粏鐐�
 		dataSeries1.getLinePaint().setStrokeWidth(2);
 		// dataSeries1.setLabelVisible(true);
@@ -1636,13 +1698,13 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		chartData.add(dataSeries1);
 		chartView.setChartData(chartData);
 		chartView.setChartLabels(chartLabels);
-		if(m!=0){
+		if (m != 0) {
 			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
-			averageEntity.setAverage(Float.parseFloat(df.format(average/m)));
-		}else{
+			averageEntity.setAverage(Float.parseFloat(df.format(average / m)));
+		} else {
 			averageEntity.setAverage(0.0f);
 		}
-		//averageEntity.setAverage(average);
+		// averageEntity.setAverage(average);
 		averageEntity.setCount(count);
 		chartView.initView();
 		return averageEntity;
@@ -1656,7 +1718,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		Average averageEntity = new Average();
 		double average = 0;
 		int count = 0;
-		double i=0;
+		double i = 0;
 		List<PointD> linePoint1 = new ArrayList<PointD>();
 		if (dayAvera(date).getAverage() != 0) {
 			average = average + dayAvera(date).getAverage();
@@ -1717,32 +1779,32 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			i++;
 
 		}
-		SplineData dataSeries1 = new SplineData("线一", linePoint1, Color.rgb(
-				179, 147, 197));
+		SplineData dataSeries1 = new SplineData(getString(R.string.lineone),
+				linePoint1, Color.rgb(179, 147, 197));
 		// 鎶婄嚎寮勭粏鐐�
 		dataSeries1.getLinePaint().setStrokeWidth(2);
 		// dataSeries1.setLabelVisible(true);
 		LinkedList<SplineData> chartData = new LinkedList<SplineData>();
 		LinkedList<String> chartLabels = new LinkedList<String>();
-		chartLabels.add("日");
-		chartLabels.add("一");
-		chartLabels.add("二");
-		chartLabels.add("三");
-		chartLabels.add("四");
-		chartLabels.add("五");
-		chartLabels.add("六");
+		chartLabels.add(getString(R.string.r1));
+		chartLabels.add(getString(R.string.r2));
+		chartLabels.add(getString(R.string.r3));
+		chartLabels.add(getString(R.string.r4));
+		chartLabels.add(getString(R.string.r5));
+		chartLabels.add(getString(R.string.r6));
+		chartLabels.add(getString(R.string.r7));
 		// 璁惧畾鏁版嵁婧�
 		chartData.add(dataSeries1);
 		chartView.setChartData(chartData);
 		chartView.setChartLabels(chartLabels);
 		chartView.initView();
-		if(i!=0){
+		if (i != 0) {
 			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
-			averageEntity.setAverage(Float.parseFloat(df.format(average/i)));
-		}else{
+			averageEntity.setAverage(Float.parseFloat(df.format(average / i)));
+		} else {
 			averageEntity.setAverage(0.0f);
 		}
-		
+
 		averageEntity.setCount(count);
 		return averageEntity;
 	}
@@ -1775,7 +1837,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					averageWater = totalWater / blts.size();
 					tvAverageLevelData.setText(Float.parseFloat(df
 							.format(averageWater / 45.0f + 20.0)) + "%");
-					detectionTimes.setText("检测次数 " + blts.size() + "次");
+					detectionTimes.setText(getString(R.string.testtotal)
+							+ blts.size() + actActivity.getResources().getString(R.string.ci));
 
 				} else {
 					tvAverageLevelData.setText("0.0%");
@@ -1808,11 +1871,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				}
 				if (yesTodayBlts.size() > 0) {
 					averageYesTodayWater = totalWater / yesTodayBlts.size();
-					tvbiJiao.setText(
-							+ Float.parseFloat(df
-									.format((averageYesTodayWater) / 45.0f + 20.0))
+					tvbiJiao.setText(+Float.parseFloat(df
+							.format((averageYesTodayWater) / 45.0f + 20.0))
 							+ "%");
-				}else{
+				} else {
 					tvbiJiao.setText("+0%");
 				}
 
@@ -1824,19 +1886,14 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*if (averageWater - averageYesTodayWater > 0) {
-			tvbiJiao.setText("+"
-					+ Float.parseFloat(df
-							.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
-					+ "%");
-		} else if (averageYesTodayWater - averageWater == 0) {
-			tvbiJiao.setText("+0%");
-		} else {
-			tvbiJiao.setText("-"
-					+ Float.parseFloat(df
-							.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
-					+ "%");
-		}*/
+		/*
+		 * if (averageWater - averageYesTodayWater > 0) { tvbiJiao.setText("+" +
+		 * Float.parseFloat(df .format((averageWater - averageYesTodayWater) /
+		 * 45.0f + 20.0)) + "%"); } else if (averageYesTodayWater - averageWater
+		 * == 0) { tvbiJiao.setText("+0%"); } else { tvbiJiao.setText("-" +
+		 * Float.parseFloat(df .format((averageYesTodayWater - averageWater) /
+		 * 45.0f + 20.0)) + "%"); }
+		 */
 	}
 
 	/**
@@ -1865,13 +1922,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				}
 				if (blts.size() > 0) {
 					averageWater = totalWater / blts.size();
-					tvbiJiao.setText(
-							Float.parseFloat(df
-									.format(averageWater / 45.0f + 20.0))
-							+ "%");
-				}else{
-					tvbiJiao.setText(
-							 "0.0%");
+					tvbiJiao.setText(Float.parseFloat(df
+							.format(averageWater / 45.0f + 20.0)) + "%");
+				} else {
+					tvbiJiao.setText("0.0%");
 				}
 
 			}
@@ -1902,10 +1956,12 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 							.setText(Float.parseFloat(df
 									.format(averageYesTodayWater / 45.0f + 20.0))
 									+ "%");
-					detectionTimes.setText("检测次数 " + yesTodayBlts.size() + "次");
+					detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+							+ yesTodayBlts.size() + actActivity.getResources().getString(R.string.ci));
 				} else {
 					tvAverageLevelData.setText("0.0%");
-					detectionTimes.setText("检测次数  0" + "次");
+					detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal) + "0"
+							+ actActivity.getResources().getString(R.string.ci));
 				}
 
 				// mAdapter.notifymDataSetChanged(lists);
@@ -1918,19 +1974,14 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*if (averageYesTodayWater - averageWater > 0) {
-			tvbiJiao.setText("+"
-					+ Float.parseFloat(df
-							.format((averageYesTodayWater - averageWater) / 45.0f + 20.0))
-					+ "%");
-		} else if (averageYesTodayWater - averageWater == 0) {
-			tvbiJiao.setText("+0%");
-		} else {
-			tvbiJiao.setText("-"
-					+ Float.parseFloat(df
-							.format((averageWater - averageYesTodayWater) / 45.0f + 20.0))
-					+ "%");
-		}*/
+		/*
+		 * if (averageYesTodayWater - averageWater > 0) { tvbiJiao.setText("+" +
+		 * Float.parseFloat(df .format((averageYesTodayWater - averageWater) /
+		 * 45.0f + 20.0)) + "%"); } else if (averageYesTodayWater - averageWater
+		 * == 0) { tvbiJiao.setText("+0%"); } else { tvbiJiao.setText("-" +
+		 * Float.parseFloat(df .format((averageWater - averageYesTodayWater) /
+		 * 45.0f + 20.0)) + "%"); }
+		 */
 	}
 
 	/**

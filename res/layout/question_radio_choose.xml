@@ -8,19 +8,19 @@
 
     <RadioButton
         android:id="@+id/radioButton1"
-        android:text="1年" />
+        android:text="@string/zd1" />
 
     <RadioButton
         android:id="@+id/radioButton2"
-        android:text="2年" />
+        android:text="@string/zd2" />
 
     <RadioButton
         android:id="@+id/radioButton3"
-        android:text="3年" />
-<!--  style="@style/styleForQuestionRadio"  -->
+        android:text="@string/zd3" />
+    <!-- style="@style/styleForQuestionRadio" -->
+
     <RadioButton
         android:id="@+id/radioButton4"
-       
-        android:text="4年" />
+        android:text="@string/zd4" />
 
 </RadioGroup>

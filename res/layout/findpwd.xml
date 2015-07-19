@@ -39,7 +39,7 @@
                         android:layout_toRightOf="@+id/ivSanjiao"
                         android:background="@color/bg"
                         android:gravity="center"
-                        android:hint="请输入邮箱" >
+                        android:hint="@string/InvalidUsernameoradd" >
                     </EditText>
                 </RelativeLayout>
             </LinearLayout>

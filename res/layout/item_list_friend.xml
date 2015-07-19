@@ -12,28 +12,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="用户名" />
+            android:text="@string/yhm" />
 
         <TextView
             android:id="@+id/TextViewAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="年龄" />
+            android:text="@string/age" />
 
         <TextView
             android:id="@+id/TextViewDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="距离" />
-
+            android:text="@string/jl" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/TextViewActivityAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="活动地址" />
+        android:text="@string/hddz" />
 
 </LinearLayout>

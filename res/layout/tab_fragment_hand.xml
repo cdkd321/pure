@@ -13,39 +13,38 @@
         android:layout_marginTop="43dp" >
 
         <com.mygame.pure.view.CircleProgressBar
-             android:id="@+id/cpbUp"
-             android:layout_centerHorizontal="true"
-             android:layout_width="200dp"
-             android:layout_height="200dp" />
+            android:id="@+id/cpbUp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true" />
+
         <TextView
             android:id="@+id/tvBlueProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="31.3%"
-            android:textSize="60dp"
             android:textColor="@color/white"
-             />
+            android:textSize="60dp" />
+
         <com.mygame.pure.view.MyTextView
             android:id="@+id/tvBlueTouth"
             style="@style/styleNormalText"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="36dp"
-            android:visibility="gone"
-            android:text="蓝牙已连接" />
+            android:text="@string/sbd3"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <com.mygame.pure.view.MyTextView
         android:id="@+id/toSeeMore"
         style="@style/styleNormalText"
-        android:layout_marginTop="38dp"
-        android:visibility="invisible"
-        android:gravity="center_vertical"
         android:layout_gravity="center_horizontal"
-         />
-    
-    
+        android:layout_marginTop="38dp"
+        android:gravity="center_vertical"
+        android:visibility="invisible" />
+
     <RelativeLayout
         android:id="@+id/rlData"
         android:layout_width="match_parent"
@@ -56,32 +55,32 @@
             android:id="@+id/tvAverageLabel"
             style="@style/styleNormalText"
             android:layout_marginLeft="@dimen/thirty_six_dp"
-            android:text="平均水平" />
-        
+            android:text="@string/AverageLevel" />
+
         <TextView
             android:id="@+id/tvAverage"
             style="@style/styleNormalText"
             android:layout_below="@+id/tvAverageLabel"
-            android:textSize="25sp"
             android:layout_marginLeft="43dp"
-            android:text="0.0" />
-        
+            android:text="0.0"
+            android:textSize="25sp" />
+
         <TextView
             android:id="@+id/tvYestodayLabel"
             style="@style/styleNormalText"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/tvAverageLabel"
             android:layout_marginRight="36dp"
-            android:text="前一天" />
-        
+            android:text="@string/Previousday" />
+
         <TextView
             android:id="@+id/tvYestoday"
             style="@style/styleNormalText"
-            android:layout_below="@+id/tvYestodayLabel"
             android:layout_alignParentRight="true"
-            android:textSize="25sp"
+            android:layout_below="@+id/tvYestodayLabel"
             android:layout_marginRight="36dp"
-            android:text="+0.0%" />
+            android:text="+0.0%"
+            android:textSize="25sp" />
     </RelativeLayout>
 
 </LinearLayout>

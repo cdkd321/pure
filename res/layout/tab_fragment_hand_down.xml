@@ -8,7 +8,7 @@
 
     <com.mygame.pure.view.AbOuterScrollView
         android:id="@+id/onlysv"
-         style="@style/m_w" >
+        style="@style/m_w" >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -30,19 +30,19 @@
                     android:id="@+id/rbLeft"
                     style="@style/styleRadioButton"
                     android:background="@drawable/btn_round_radio_left"
-                    android:text="今日" />
+                    android:text="@string/Today" />
 
                 <RadioButton
                     android:id="@+id/rbMid"
                     style="@style/styleRadioButton"
                     android:background="@drawable/btn_round_radio_mid"
-                    android:text="本周" />
+                    android:text="@string/ThisWeek" />
 
                 <RadioButton
                     android:id="@+id/rbRight"
                     style="@style/styleRadioButton"
                     android:background="@drawable/btn_round_radio_right"
-                    android:text="本月" />
+                    android:text="@string/ThisMonth" />
             </RadioGroup>
 
             <include layout="@layout/include_split" />
@@ -71,11 +71,15 @@
                     android:src="@drawable/icon_arrow_right" />
             </RelativeLayout>
 
-           <!--  <include
+            <!--
+                 <include
                 android:layout_width="match_parent"
-                layout="@layout/include_split" /> -->
+                layout="@layout/include_split" />
+            -->
 
-            <!-- <RelativeLayout
+
+            <!--
+            <RelativeLayout
                 android:id="@+id/rlOlder"
                 style="@style/m_w"
                 android:layout_height="60dp"
@@ -95,11 +99,11 @@
                     android:text="老了0岁" />
 
                 
-            </RelativeLayout> -->
+            </RelativeLayout>
+            -->
 
             <include layout="@layout/include_split" />
 
-            
             <RelativeLayout
                 android:id="@+id/rlWater"
                 style="@style/m_w"
@@ -113,16 +117,14 @@
                     style="@style/styleCenterText"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:text="手部的肌肤水嫩度" />
+                    android:text="@string/sbd" />
 
                 <com.mygame.pure.view.MyrogressBar
                     android:id="@+id/myProgress"
-                    android:layout_toRightOf="@+id/shunengdu_title"
-                    android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                     />
-
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@+id/shunengdu_title" />
             </RelativeLayout>
 
             <include layout="@layout/include_split" />
@@ -131,7 +133,8 @@
                 android:layout_marginTop="@dimen/ten_dp"
                 layout="@layout/include_split" />
 
-           <!--  <RelativeLayout
+            <!--
+            <RelativeLayout
                 style="@style/m_w"
                 android:padding="@dimen/margin_of_cell"
                 android:visibility="visible" >
@@ -150,15 +153,17 @@
                     style="@style/w_w"
                      android:layout_centerHorizontal="true"
                     android:src="@drawable/line" />
-            </RelativeLayout> -->
+            </RelativeLayout>
+            -->
+
             <com.mygame.pure.view.SplineChart03View
-                    android:id="@+id/spline_chart"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
-                     />
+                android:id="@+id/spline_chart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
@@ -180,61 +185,62 @@
                 <ImageView
                     android:id="@+id/ivDegreeImg"
                     style="@style/w_w"
+                    android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:paddingTop="30dp"
-                    android:layout_alignParentTop="true"
                     android:src="@drawable/water_drop" />
 
                 <TextView
                     android:id="@+id/tvDegreeText"
                     style="@style/styleCenterText"
                     android:layout_centerInParent="true"
-                    android:textSize="18sp"
-                    android:text="0%" />
+                    android:text="0%"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvPoint"
                     style="@style/w_w"
                     android:layout_alignParentBottom="true"
-                    android:paddingBottom="20dp"
                     android:layout_centerHorizontal="true"
-                    android:text="平均值"
-                    android:textSize="14sp"
-                    android:textColor="@color/gray" />
+                    android:paddingBottom="20dp"
+                    android:text="@string/sbd1"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp" />
             </RelativeLayout>
-            <TextView 
+
+            <TextView
                 android:id="@+id/detection_times"
                 style="@style/styleCenterText"
-                android:layout_gravity="center_horizontal"
-                />
+                android:layout_gravity="center_horizontal" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="20dp"
                 android:background="@color/gray" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/twenty_dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
                 android:layout_marginBottom="@dimen/sixty_dp"
-                android:orientation="horizontal" >
-                
+                android:orientation="horizontal"
+                android:paddingBottom="20dp"
+                android:paddingLeft="@dimen/twenty_dp"
+                android:paddingTop="20dp" >
+
                 <ImageView
-	                android:layout_width="@dimen/forty_dp"
-	                android:layout_height="@dimen/forty_dp"
-	                android:layout_gravity="center_vertical"
-	                android:src="@drawable/cry"/>
-                
+                    android:layout_width="@dimen/forty_dp"
+                    android:layout_height="@dimen/forty_dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/cry" />
+
                 <TextView
                     android:id="@+id/pingjun_tishi"
-	                style="@style/styleCenterText"
-	                android:layout_marginLeft="@dimen/ten_dp"
-	                android:layout_gravity="center_vertical" 
-	                android:text="抱歉现在您还没有数据" />
+                    style="@style/styleCenterText"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/ten_dp"
+                    android:text="@string/sbd2" />
             </LinearLayout>
-           
         </LinearLayout>
     </com.mygame.pure.view.AbOuterScrollView>
 

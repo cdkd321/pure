@@ -22,7 +22,7 @@
                 android:id="@+id/tvTittle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="皮肤测试器"
+                android:text="@string/testpf"
                 android:textColor="@color/black_555555"
                 android:textSize="@dimen/list_text_size_1" />
 
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="来源:88888"
+                    android:text="@string/testfrom"
                     android:textColor="@color/black_555555"
                     android:textSize="@dimen/input_size" />
 
@@ -76,19 +76,19 @@
 
                     <TextView
                         style="@style/styleText1"
-                        android:text="女" />
+                        android:text="@string/Female" />
 
                     <View style="@style/styleOfHalfTransLine" />
 
                     <TextView
                         style="@style/styleText1"
-                        android:text="眼窝" />
+                        android:text="@string/sld" />
 
                     <View style="@style/styleOfHalfTransLine" />
 
                     <TextView
                         style="@style/styleText1"
-                        android:text="干燥性肌肤" />
+                        android:text="@string/gzxjf" />
                 </LinearLayout>
 
                 <View
@@ -110,23 +110,23 @@
 
                     <TextView
                         style="@style/styleText1"
-                        android:text="同龄人群平均值41.1%"
+                        android:text="@string/gzxjf1"
                         android:textColor="@color/theme_blue" />
 
                     <TextView
                         style="@style/styleText1"
-                        android:text="相比上次+0.2%"
+                        android:text="@string/gzxjf2"
                         android:textColor="@color/theme_blue" />
                 </LinearLayout>
             </LinearLayout>
 
             <TextView
                 style="@style/w_w"
-                android:layout_marginTop="@dimen/twenty_dp"
-                android:layout_width="match_parent" 
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black_555555"
-                android:text="美肤测试器，你值得拥有，更多详情。请点击www.mymili.com" />
+                android:layout_marginTop="@dimen/twenty_dp"
+                android:text="@string/gzxjf3"
+                android:textColor="@color/black_555555" />
         </LinearLayout>
     </LinearLayout>
 

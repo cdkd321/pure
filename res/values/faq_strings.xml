@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="faq_key1">1）MiLi Pure对手机系统及蓝牙有什么要求？</string>
-    <string name="faq_value1">1. IOS系统：IOS7以上，蓝牙4.0以上；\n2. Android系统：Android 4.3以上，蓝牙4.0以上。 </string>
-    <string name="faq_key2">2）MiLi Pure如何与手机连接？	</string>
-    <string name="faq_value2">1.轻触MiLi Pure底部开关，此时设备LED灯闪亮；\n2.打开手机 MiLi Pure APP（确认手机系统蓝牙已打开，请勿在此连接设备，蓝牙4.0无需配对连接，直接打开APP连接设备即可）；\n3.第一次进去会有蓝牙选择页面，点击MiLi信号绑定（APP显示蓝牙已连接，设备LED灯常亮）.后续此设备自动绑定手机APP，若更换设备重新选择绑定即可。	</string>
-    <string name="faq_key3">3）MiLi Pure如何使用？</string>
-    <string name="faq_value3">1.将盖帽按图示方向旋转，拧开盖帽； \n	2.轻触设备底部开关，打开手机APP连接；\n3.当提示蓝牙连接成功后，将金属探头垂直贴在待检测部位大约5S；\n4.请保证金属探头有效接触皮肤，测试完成后，数据分析结果将显示在手机上。</string>
-    <string name="faq_key4">4）为什么产品指示灯一直闪烁？</string>
-    <string name="faq_value4"> 若设备开启后，产品指示灯一直闪烁，表示蓝牙未连接成功，请尝试重启MiLi Pure，同时确认手机蓝牙已开启。</string>
-    <string name="faq_key5">5）肌肤水份参考值是多少？	</string>
-    <string name="faq_value5" formatted="false">占比%2s  %%</string>
-  <!--   <string name="faq_value5"> 手部：%30.～38%%	\n脸部：32%%rr.～42%%rr.	\n 眼部：35%%rr.～45%%rr.	\n 颈部：35%%rr.～45%%rr.	</string> -->
-    <string name="faq_key6">6）MiLi Pure如何激活及保修？	</string>
-    <string name="faq_value6">MiLi系列产品具有自购买之日起一年内的保修，深圳市哈里通实业有限公司承担一切由产品材料及做工方面引发的问题，\n购买者需在产品购买之日起7天内前往公司官方网站，在线激活保修。</string>
-    <string name="faq_key7">7）如何联系我们？</string>
-    <string name="faq_value7">如您在使用产品过程中有任何问题，请马上联系我们，谢谢\n国内电邮：customerservice@hali-power.com \n国内网址：www.myMiLi.cn\n国外电邮:cs@hali-power.com\n国外网址：www.myMiLi.com\n				
-	</string>
+    <string name="faq_key1">1）Pure MiLi on the phone system and Bluetooth?</string>
+    <string name="faq_value1">1 IOS system: IOS7 above, Bluetooth 4 above; Android \n2. system: Android 4.3 or above, Bluetooth 4. </string>
+    <string name="faq_key2">2）Pure MiLi how to connect with the phone?	</string>
+    <string name="faq_value2">1.Touch of Mili pure switch at the bottom of the. At this time equipment LED lights flashing; \n2. open mobile phone mili pure app (confirm Bluetooth phone system is open, please do not use this connection device, Bluetooth 4.0 without the need to be matched connected directly open the app connected devices can be); \ N3. For the first time into Bluetooth selection page, click mili signal bound (app that Bluetooth has been connected, equipment LED lights Changliang). Follow up, the device automatically bind the mobile app, if the replacement of equipment re select the binding can be.</string>
+    <string name="faq_key3">3）Pure MiLi how to use?</string>
+    <string name="faq_value3">1.Will cap as shown in the direction of rotation, unscrew the cap; \ N 2. Touch the bottom of the device switch, open the phone app connection. \ N3. When the tips Bluetooth connection is successful, the metal probe vertically attached to a part to be detected about 5S; \n4. please ensure the metal probe effective contact with the skin, after the completion of the test, data analysis results will be shown on the phone.</string>
+    <string name="faq_key4">4）Why the product indicator light has been flashing?</string>
+    <string name="faq_value4"> If the device is turned on, the product indicator has been flashing, said the Bluetooth connection is not successful, please try to restart the Pure MiLi, and confirmed that the mobile phone has been turned on.</string>
+    <string name="faq_key5">5）What is the skin moisture reference value?	</string>
+    <string name="faq_value5" formatted="false">Accounted for%2s%%</string>
+    <string name="faq_value10" formatted="false">Hand: 30% ~ 38% \n face: 32% ~ 42% \n eyes: 35% ~ 45% \n neck: 35% ~ 45%</string>
+    <!-- <string name="faq_value5"> 手部：%30.～38%%	\n脸部：32%%rr.～42%%rr.	\n 眼部：35%%rr.～45%%rr.	\n 颈部：35%%rr.～45%%rr.	</string> -->
+    <string name="faq_key6">6）Pure mili how to activate and guarantee?	</string>
+    <string name="faq_value6">Mili series products within one year warranty from the date of purchase, Shenzhen Harry Tong Industrial Co., Ltd. bear all the materials and workmanship caused problems, a n buyers need in the purchase of products, from 7 days to company official website, online activate the warranty.</string>
+    <string name="faq_key7">7）How to contact us?</string>
+    <string name="faq_value7">If you have any questions in the course of using the product, please contact us immediately, thank you for your \n domestic email:customerservice@hali-power.com \nDomestic web site：www.myMiLi.cn\nForeign e-mail:cs@hali-power.com\nForeign website：www.myMiLi.com\n				</string>
 
 </resources>

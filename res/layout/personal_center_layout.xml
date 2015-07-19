@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="个人中心"
+            android:text="@string/grzx"
             android:textColor="#ffffff"
             android:textSize="18sp" />
     </RelativeLayout>
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:text="头像"
+                android:text="@string/ProfilePicture"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -96,7 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="昵称"
+                android:text="@string/Nickname"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -130,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="性别"
+                android:text="@string/Gender"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -162,7 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="生日"
+                android:text="@string/Birthday"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -194,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:text="肤质"
+                android:text="@string/SkinType"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -224,7 +224,7 @@
         android:background="@drawable/bg_round_corner_theme"
         android:gravity="center"
         android:padding="@dimen/five_dp"
-        android:text="退出账号"
+        android:text="@string/tczh"
         android:textColor="@color/white"
         android:textSize="@dimen/input_size" />
 

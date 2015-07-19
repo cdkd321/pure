@@ -50,7 +50,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
             android:gravity="center"
-            android:text="资讯"
+            android:text="@string/Info"
             android:textColor="#fff"
             android:textSize="18sp" />
     </FrameLayout>

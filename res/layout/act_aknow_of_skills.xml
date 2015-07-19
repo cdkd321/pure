@@ -4,8 +4,8 @@
     android:background="@color/white"
     android:gravity="top|center"
     android:orientation="vertical" >
-    
-    <include layout="@layout/include_navigation_bar"/>
+
+    <include layout="@layout/include_navigation_bar" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -27,13 +27,13 @@
                 android:id="@+id/rbLeft"
                 style="@style/styleRadioButton"
                 android:background="@drawable/btn_round_radio_left"
-                android:text="水分对照" />
+                android:text="@string/ReferenceValuesforMoistureContent" />
 
             <RadioButton
                 android:id="@+id/rbRight"
                 style="@style/styleRadioButton"
                 android:background="@drawable/btn_round_radio_right"
-                android:text="肤质查询" />
+                android:text="@string/SkinTypeEnquiry" />
         </RadioGroup>
 
         <include
