@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//assets/ShareSDK.xml=UTF-8
 encoding//src/com/mygame/pure/activity/ZXInfoAct.java=UTF-8
 encoding//src/com/mygame/pure/ble/BleService.java=UTF-8
 encoding//src/com/mygame/pure/ble/ComMandContoller.java=gbk

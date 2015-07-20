@@ -107,7 +107,7 @@
             <RelativeLayout
                 android:id="@+id/rlWater"
                 style="@style/m_w"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:paddingLeft="@dimen/margin_of_cell"
                 android:paddingRight="@dimen/margin_of_cell" >
@@ -121,6 +121,8 @@
 
                 <com.mygame.pure.view.MyrogressBar
                     android:id="@+id/myProgress"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"

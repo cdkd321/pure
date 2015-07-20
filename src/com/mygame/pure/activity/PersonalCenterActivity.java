@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -88,6 +89,7 @@ public class PersonalCenterActivity extends FragmentActivity implements
 	private AbSoapUtil mAbSoapUtil = null;
 	private Bitmap bitmap;
 	private TextView tvExit;
+	String imagePath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -294,8 +296,17 @@ public class PersonalCenterActivity extends FragmentActivity implements
 			break;
 		case R.id.save_btn:
 			// 更改用户资料
+			if(tempage!=0){
+				settings.USER_AGE
+				.setValue(tempage+"");
+				
+			}
 			updateInfo();
 			updateFuzhiInfo();
+			// 上传头像
+			if(imagePath!=null){
+				getPostmyHead();
+			}
 			finish();
 			break;
 		case R.id.back_btn:
@@ -355,8 +366,7 @@ public class PersonalCenterActivity extends FragmentActivity implements
 				m = 1;
 			}
 			String date[] = DateUtil.getCurrentDate().split("-");
-			settings.USER_AGE
-					.setValue((Integer.parseInt(date[0]) - mYear) + "");
+			
 			mDateDisplay.setText(mYear + "-" + m + "-" + mDay);
 		}
 	}
@@ -449,9 +459,8 @@ public class PersonalCenterActivity extends FragmentActivity implements
 				photo1.compress(Bitmap.CompressFormat.PNG, 100, out);
 				out.flush();
 				out.close();
-				String imagePath = f.getAbsolutePath();
-				// 上传头像
-				getPostmyHead();
+				imagePath = f.getAbsolutePath();
+				
 			} catch (Exception e) {
 				Log.e("abc", "保存图片失败=" + e.toString());
 				e.printStackTrace();
@@ -504,7 +513,10 @@ public class PersonalCenterActivity extends FragmentActivity implements
 		AbSoapParams params = new AbSoapParams();
 		params.put("user1", "APP");
 		params.put("pass1", "4C85AF5AD4D0CC9349A8A468C38F292E");
-		params.put("nicheng", mynick.getText().toString());
+		if(!TextUtils.isEmpty(mynick.getText().toString().trim())){
+			params.put("nicheng", mynick.getText().toString());
+		}
+		
 		params.put("sex", sex + "");
 		params.put("birthday", ar + "");
 		// ...
@@ -621,7 +633,10 @@ public class PersonalCenterActivity extends FragmentActivity implements
 						if (arg1.indexOf("Nicheng=") != -1) {
 							String[] a = arg1.split("Nicheng=");
 							String[] b = a[1].split(";");
-							mynick.setText(b[0]);
+							if(!b[0].contains("anyType")){
+								mynick.setText(b[0]);
+							}
+							
 						}
 						if (arg1.indexOf("Touxiang=") != -1) {
 							String[] a1 = arg1.split("Touxiang=");
@@ -649,6 +664,9 @@ public class PersonalCenterActivity extends FragmentActivity implements
 
 							mDateDisplay.setText(AbDateUtil.getStringByFormat(
 									ms1, "yyyy-MM-dd"));
+							settings.USER_AGE
+							.setValue((Integer.parseInt(DateUtil.getCurrentDate().split("-")[0])- Integer.parseInt(AbDateUtil.getStringByFormat(
+									ms1, "yyyy-MM-dd").split("-")[0])) + "");
 						}
 						if (arg1.indexOf("Fuzhi=") != -1) {
 							String[] a3 = arg1.split("Fuzhi=");

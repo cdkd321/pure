@@ -84,6 +84,7 @@ public class ActBell extends BaseActivity {
 				finish();
 			}
 		});
+		addRightBtn("", null);
 		setTitle(getString(R.string.Ringtone));
 	}
 
@@ -128,7 +129,10 @@ public class ActBell extends BaseActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		mediaPlayer.release();
-		mediaPlayer = null;
+		if(mediaPlayer!=null){
+			mediaPlayer.release();
+			mediaPlayer = null;
+		}
+		
 	}
 }

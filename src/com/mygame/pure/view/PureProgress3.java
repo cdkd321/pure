@@ -1,6 +1,7 @@
 package com.mygame.pure.view;
 
 import com.mygame.pure.R;
+import com.mygame.pure.utils.DeviceConfiger;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -38,8 +39,8 @@ public class PureProgress3 extends LinearLayout{
 	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
 		// TODO Auto-generated method stub
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#0");
-		progress_tv.setText((df.format(mProgress*100)+"").replace(".0", "")+"%");
-    	progress_tv.setPadding((int)(getWidth()*mProgress), 0, 0, 0);
+		//progress_tv.setText((df.format(mProgress*100)+"").replace(".0", "")+"%");
+		progress_tv.setPadding((int)(getWidth()*((mProgress-0.2)/0.4))-DeviceConfiger.dp2px(30), 0, 0, 0);
 		return super.drawChild(canvas, child, drawingTime);
 		
 	}

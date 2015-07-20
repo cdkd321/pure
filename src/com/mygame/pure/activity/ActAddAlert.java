@@ -143,18 +143,28 @@ public class ActAddAlert extends BaseActivity {
 			String[] times = alertEdit.getAlertTime().split(":");
 			int hourIndex = 0;
 			if (times[0].startsWith("0") && !times[0].equals("0")) {
-				hourIndex = Integer.parseInt(times[0].replace("0", ""));
+				if(times[0].equals("00")){
+					hourIndex = 0;
+				}else{
+					hourIndex = Integer.parseInt(times[0].replace("0", ""));
+				}
+				
 			} else {
 				hourIndex = Integer.parseInt(times[0]);
 			}
-			leftWheel.setCurrentItem(hourIndex - 1);
+			leftWheel.setCurrentItem(hourIndex);
 			int miniteIndex = 0;
 			if (times[1].startsWith("0") && !times[1].equals("0")) {
-				miniteIndex = Integer.parseInt(times[1].replace("0", ""));
+				if(times[1].equals("00")){
+					miniteIndex = 0;
+				}else{
+					miniteIndex = Integer.parseInt(times[1].replace("0", ""));
+				}
+				
 			} else {
 				miniteIndex = Integer.parseInt(times[1]);
 			}
-			rightWheel.setCurrentItem(miniteIndex - 1);
+			rightWheel.setCurrentItem(miniteIndex);
 		}
 		addBackImage(R.drawable.btn_back_bg, new OnClickListener() {
 
@@ -164,7 +174,7 @@ public class ActAddAlert extends BaseActivity {
 			}
 		});
 
-		addRightBtn(getString(R.string.save), new OnClickListener() {
+		addRightBtn(R.string.save, new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -202,17 +212,39 @@ public class ActAddAlert extends BaseActivity {
 						cal.set(Calendar.MONTH, Integer.parseInt(date[1]) - 1);
 						cal.set(Calendar.DAY_OF_MONTH,
 								Integer.parseInt(date[2]));
-						cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours
-								.get(leftWheel.getCurrentItem())));
-						cal.set(Calendar.MINUTE, Integer.parseInt(times
-								.get(rightWheel.getCurrentItem())));
+						if(hours.get(leftWheel.getCurrentItem()).startsWith("0")){
+							if(hours.get(leftWheel.getCurrentItem()).equals("00")){
+								cal.set(Calendar.HOUR_OF_DAY, 0);
+		                    }else{
+		                    	cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours
+										.get(leftWheel.getCurrentItem()).replace("0", "")));
+		                    }
+							
+						}else{
+							cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours
+									.get(leftWheel.getCurrentItem())));
+						}
+						if(times.get(rightWheel.getCurrentItem()).startsWith("0")){
+							if(times.get(rightWheel.getCurrentItem()).equals("00")){
+								cal.set(Calendar.MINUTE, 0);
+							}else{
+								cal.set(Calendar.MINUTE, Integer.parseInt(times
+										.get(rightWheel.getCurrentItem()).replace("0", "")));
+							}
+							
+						}else{
+							cal.set(Calendar.MINUTE, Integer.parseInt(times
+									.get(rightWheel.getCurrentItem())));
+						}
+						
+						
 						cal.set(Calendar.SECOND, 0);
 						// System.out.println("今天的日期: " + cal.getTime());
 						int week = AbDateUtil.getWeekNumber(
 								DateUtil.getCurrentDate(), "yyyy-MM-dd");
 
 						long alertTime = cal.getTimeInMillis();
-						// System.out.println("alertTime>>>>>>>" + alertTime);
+						 System.out.println("alertTime>>>>>>>" + cal.getTime());
 						// System.out.println("System>>>>>>>"
 						// + System.currentTimeMillis() + 50000);
 						switch (i) {
@@ -778,16 +810,16 @@ public class ActAddAlert extends BaseActivity {
 		leftWheel = (com.androidex.appformwork.wheelview.WheelView) findViewById(R.id.leftwheel); // 只有一个
 		leftWheel.setCyclic(true);
 		hours = new ArrayList<String>();
-		hours.add("0");
-		hours.add("1");
-		hours.add("2");
-		hours.add("3");
-		hours.add("4");
-		hours.add("5");
-		hours.add("6");
-		hours.add("7");
-		hours.add("8");
-		hours.add("9");
+		hours.add("00");
+		hours.add("01");
+		hours.add("02");
+		hours.add("03");
+		hours.add("04");
+		hours.add("05");
+		hours.add("06");
+		hours.add("07");
+		hours.add("08");
+		hours.add("09");
 		hours.add("10");
 		hours.add("11");
 		hours.add("12");
@@ -807,16 +839,16 @@ public class ActAddAlert extends BaseActivity {
 		com.androidex.appformwork.wheelview.WheelView ccwvRight = (com.androidex.appformwork.wheelview.WheelView) findViewById(R.id.rightwheel); // 只有一个
 		ccwvRight.setCyclic(true);
 		times = new ArrayList<String>();
-		times.add("0");
-		times.add("1");
-		times.add("2");
-		times.add("3");
-		times.add("4");
-		times.add("5");
-		times.add("6");
-		times.add("7");
-		times.add("8");
-		times.add("9");
+		times.add("00");
+		times.add("01");
+		times.add("02");
+		times.add("03");
+		times.add("04");
+		times.add("05");
+		times.add("06");
+		times.add("07");
+		times.add("08");
+		times.add("09");
 		times.add("10");
 		times.add("11");
 		times.add("12");

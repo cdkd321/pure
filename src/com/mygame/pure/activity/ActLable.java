@@ -30,6 +30,7 @@ public class ActLable extends BaseActivity {
 				finish();
 			}
 		});
+		addRightBtn("", null);
 		setTitle(getString(R.string.Tag));
 	}
 

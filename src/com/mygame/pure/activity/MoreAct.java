@@ -292,7 +292,10 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 						if (arg1.indexOf("Nicheng=") != -1) {
 							String[] a = arg1.split("Nicheng=");
 							String[] b = a[1].split(";");
-							w_w.setText(b[0]);
+							if(!b[0].contains("anyType")){
+								w_w.setText(b[0]);
+							}
+							
 						}
 						if (arg1.indexOf("Touxiang=") != -1) {
 							String[] a1 = arg1.split("Touxiang=");

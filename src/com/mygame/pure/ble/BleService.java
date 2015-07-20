@@ -492,7 +492,7 @@ public class BleService extends Service {
 			Log.w(TAG, "BluetoothAdapter not initialized");
 			return;
 		}
-		// mBluetoothGatt.close();
+		 mBluetoothGatt.close();
 		mBluetoothGatt.disconnect();
 
 		mConnectionState = STATE_DISCONNECTED;

@@ -107,6 +107,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_toRightOf="@+id/tv_show"
                 android:gravity="right"
+                android:maxLength="30"
                 android:textColor="#666666"
                 android:textSize="16sp" />
         </RelativeLayout>
