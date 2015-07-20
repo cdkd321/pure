@@ -12,8 +12,8 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -73,7 +73,7 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 	public void initView() {
 		context = this;
 		settings = new MicroRecruitSettings(context);
-		setTitle(R.string.login);
+		setTitle(getString(R.string.login));
 		etUname = (EditText) findViewById(R.id.etUname);
 		etPwd = (EditText) findViewById(R.id.etPwd_2);
 		btnLoad = (Button) findViewById(R.id.btnLoad);
@@ -126,8 +126,10 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 								String[] a = arg1.split("=");
 								String[] b = a[1].split(";");
 								if (b[0].equals("1")) {
-									Toast.makeText(getApplicationContext(),
-											R.string.Loginsuccessful, 1).show();
+									Toast.makeText(
+											getApplicationContext(),
+											getString(R.string.Loginsuccessful),
+											1).show();
 									settings.USER_NAME.setValue(etUname
 											.getText().toString());
 									Intent intent2 = new Intent();
@@ -137,10 +139,12 @@ public class ActLogin extends BaseActivity implements OnClickListener {
 									finish();
 								} else if (b[0].equals("-1")) {
 									Toast.makeText(getApplicationContext(),
-											R.string.UserNotExist, 1).show();
+											getString(R.string.UserNotExist), 1)
+											.show();
 								} else if (b[0].equals("-2")) {
-									Toast.makeText(getApplicationContext(),
-											R.string.InvalidUsernameorPassword,
+									Toast.makeText(
+											getApplicationContext(),
+											getString(R.string.InvalidUsernameorPassword),
 											1).show();
 								}
 							}

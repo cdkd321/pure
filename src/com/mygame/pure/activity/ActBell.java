@@ -84,28 +84,27 @@ public class ActBell extends BaseActivity {
 				finish();
 			}
 		});
-		setTitle(R.string.Ringtone);
+		setTitle(getString(R.string.Ringtone));
 	}
 
 	private void startAlarm(int position) {
-		String music="bugu.mp3";
-		if(position==0){
-			music="bugu.mp3";
-		}else if(position==1){
-			music="lingdang.mp3";
-		}else if(position==2){
-			music="menghuan.mp3";
+		String music = "bugu.mp3";
+		if (position == 0) {
+			music = "bugu.mp3";
+		} else if (position == 1) {
+			music = "lingdang.mp3";
+		} else if (position == 2) {
+			music = "menghuan.mp3";
 		}
 		if (mediaPlayer == null) {
 			mediaPlayer = new MediaPlayer();
-		}else{
+		} else {
 			mediaPlayer.stop();
 			mediaPlayer.reset();
 		}
 		try {
-			
-			AssetFileDescriptor fileDescriptor = getAssets().openFd(
-					music);
+
+			AssetFileDescriptor fileDescriptor = getAssets().openFd(music);
 			mediaPlayer
 					.setDataSource(fileDescriptor.getFileDescriptor(),
 							fileDescriptor.getStartOffset(),
@@ -124,11 +123,12 @@ public class ActBell extends BaseActivity {
 
 		mediaPlayer.start();
 	}
+
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		mediaPlayer.release();
-		mediaPlayer=null;
+		mediaPlayer = null;
 	}
 }

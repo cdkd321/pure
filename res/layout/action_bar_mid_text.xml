@@ -6,8 +6,7 @@
     android:clickable="true"
     android:focusable="true"
     android:gravity="center"
-    android:padding="10dp"
     android:text="@string/back"
     android:textColor="@color/white"
-    android:textSize="21sp" />
+    android:textSize="18sp" />
  

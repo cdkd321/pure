@@ -103,12 +103,12 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 				finish();
 			}
 		});
-		setTitle(R.string.more);
+		setTitle(getResources().getString(R.string.more));
 		// isLogin();
 		if (settings.USER_NAME.getValue().equals("")) {
-			w_w.setText(R.string.NotLoggedin);
-			Toast.makeText(getApplicationContext(), R.string.NotLoggedin, 1)
-					.show();
+			w_w.setText(getResources().getString(R.string.NotLoggedin));
+			Toast.makeText(getApplicationContext(),
+					getResources().getString(R.string.NotLoggedin), 1).show();
 		} else {
 			getHeadusername();
 		}
@@ -201,13 +201,16 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			i.setType("text/plain");
 
 			i.putExtra(Intent.EXTRA_EMAIL, new String[] { toaddress });
-			i.putExtra(Intent.EXTRA_SUBJECT, R.string.suggestion);
-			i.putExtra(Intent.EXTRA_TEXT, R.string.emailcontent);
+			i.putExtra(Intent.EXTRA_SUBJECT,
+					getResources().getString(R.string.suggestion));
+			i.putExtra(Intent.EXTRA_TEXT,
+					getResources().getString(R.string.emailcontent));
 			try {
 				startActivity(Intent.createChooser(i,
 						getResources().getString(R.string.reDetector)));
 			} catch (android.content.ActivityNotFoundException ex) {
-				Toast.makeText(MoreAct.this, R.string.rector,
+				Toast.makeText(MoreAct.this,
+						getResources().getString(R.string.rector),
 						Toast.LENGTH_SHORT).show();
 			}
 			break;
@@ -243,15 +246,18 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			java.text.DecimalFormat df = new java.text.DecimalFormat("#0.0");
 			String action = intent.getAction();
 			if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
-				connected_text.setText(R.string.Connected);
+				connected_text.setText(getResources().getString(
+						R.string.Connected));
 				connected_text.setVisibility(View.VISIBLE);
 			}
 			if (BleService.ACTION_GATT_DISCONNECTED.equals(action)) {
-				connected_text.setText(R.string.UnConnected);
+				connected_text.setText(getResources().getString(
+						R.string.UnConnected));
 				connected_text.setVisibility(View.VISIBLE);
 			}
 			if (BleService.ACTION_STATUS_WRONG.equals(action)) {
-				connected_text.setText(R.string.UnConnected);
+				connected_text.setText(getResources().getString(
+						R.string.UnConnected));
 				connected_text.setVisibility(View.VISIBLE);
 			}
 

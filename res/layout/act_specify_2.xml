@@ -5,80 +5,91 @@
     android:background="@color/white"
     android:orientation="vertical" >
 
-    <include layout="@layout/include_fragment_navigation_bar" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:id="@+id/llContent"
-            style="@style/m_w"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <include layout="@layout/include_fragment_navigation_bar" />
+
             <LinearLayout
-                style="@style/m_w"
-                android:layout_marginTop="@dimen/ten_dp"
-                android:background="@drawable/bg_round_corner_black"
-                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
                 android:orientation="vertical" >
 
-                <com.mygame.pure.view.CircleImageView
-                    android:id="@+id/user_logo"
-                    android:layout_width="@dimen/sixty_dp"
-                    android:layout_height="@dimen/sixty_dp"
-                    android:layout_margin="@dimen/ten_dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/hcy_icon" />
-
-                <TextView
-                    android:id="@+id/nick_name_text"
-                    style="@style/w_w"
-                    android:layout_marginBottom="@dimen/ten_dp"
-                    android:textColor="@color/black" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/gray" />
-
                 <LinearLayout
-                    android:id="@+id/chartLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
-                    android:gravity="center"
-                    android:orientation="vertical" />
+                    android:id="@+id/llContent"
+                    style="@style/m_w"
+                    android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/pingjun_text"
-                     android:textSize="14sp"
-                    style="@style/w_w"
-                    android:paddingBottom="20dp"
-                    android:textColor="@color/theme_blue" />
+                    <LinearLayout
+                        style="@style/m_w"
+                        android:layout_marginTop="@dimen/ten_dp"
+                        android:background="@drawable/bg_round_corner_black"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical" >
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/gray" />
+                        <com.mygame.pure.view.CircleImageView
+                            android:id="@+id/user_logo"
+                            android:layout_width="@dimen/sixty_dp"
+                            android:layout_height="@dimen/sixty_dp"
+                            android:layout_margin="@dimen/ten_dp"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="10dp"
+                            android:src="@drawable/hcy_icon" />
 
-                <TextView
-                    android:id="@+id/tishi_title"
-                    style="@style/w_w"
-                    android:textSize="14sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/twenty_dp"
-                    android:text="@string/upips"
-                    android:textColor="@color/black_555555" />
+                        <TextView
+                            android:id="@+id/nick_name_text"
+                            style="@style/w_w"
+                            android:layout_marginBottom="@dimen/ten_dp"
+                            android:textColor="@color/black" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/gray" />
+
+                        <LinearLayout
+                            android:id="@+id/chartLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="30dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="30dp"
+                            android:gravity="center"
+                            android:orientation="vertical" />
+
+                        <TextView
+                            android:id="@+id/pingjun_text"
+                            style="@style/w_w"
+                            android:paddingBottom="20dp"
+                            android:textColor="@color/theme_blue"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/gray" />
+
+                        <TextView
+                            android:id="@+id/tishi_title"
+                            style="@style/w_w"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/twenty_dp"
+                            android:text="@string/upips"
+                            android:textColor="@color/black_555555"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

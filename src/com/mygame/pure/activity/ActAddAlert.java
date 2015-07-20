@@ -97,25 +97,25 @@ public class ActAddAlert extends BaseActivity {
 				if ("1".equals(rePeats[i])) {
 					switch (i) {
 					case 0:
-						repeat = repeat + R.string.Sun;
+						repeat = repeat + getString(R.string.Sun);
 						break;
 					case 1:
-						repeat = repeat + R.string.Mon;
+						repeat = repeat + getString(R.string.Mon);
 						break;
 					case 2:
-						repeat = repeat + R.string.Tue;
+						repeat = repeat + getString(R.string.Tue);
 						break;
 					case 3:
-						repeat = repeat + R.string.Wed;
+						repeat = repeat + getString(R.string.Wed);
 						break;
 					case 4:
-						repeat = repeat + R.string.Thu;
+						repeat = repeat + getString(R.string.Thu);
 						break;
 					case 5:
-						repeat = repeat + R.string.Fri;
+						repeat = repeat + getString(R.string.Fri);
 						break;
 					case 6:
-						repeat = repeat + R.string.Sat;
+						repeat = repeat + getString(R.string.Sat);
 						break;
 
 					}
@@ -127,16 +127,16 @@ public class ActAddAlert extends BaseActivity {
 			repeat_time.setText(repeat);
 			lable_text.setText(alertEdit.getAlertName());
 			if ("1".equals(alertEdit.getAlertmusic())) {
-				bellText.setText(R.string.Cuckoo);
+				bellText.setText(getString(R.string.Cuckoo));
 				bell[0] = true;
 			}
 			if ("1".equals(alertEdit.getAlertmusic())) {
-				bellText.setText(R.string.Dingdong);
+				bellText.setText(getString(R.string.Dingdong));
 				bell[1] = true;
 				bell[0] = false;
 			}
 			if ("1".equals(alertEdit.getAlertmusic())) {
-				bellText.setText(R.string.Fantasy);
+				bellText.setText(getString(R.string.Fantasy));
 				bell[2] = true;
 				bell[0] = false;
 			}
@@ -164,7 +164,7 @@ public class ActAddAlert extends BaseActivity {
 			}
 		});
 
-		addRightBtn(R.string.save, new OnClickListener() {
+		addRightBtn(getString(R.string.save), new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -716,7 +716,7 @@ public class ActAddAlert extends BaseActivity {
 				startActivityForResult(intent, 1);
 			}
 		});
-		setTitle(R.string.addn);
+		setTitle(getString(R.string.addn));
 	}
 
 	/**
@@ -881,25 +881,25 @@ public class ActAddAlert extends BaseActivity {
 				if (reReart[i]) {
 					switch (i) {
 					case 0:
-						repeat = repeat + R.string.Sun;
+						repeat = repeat + getString(R.string.Sun);
 						break;
 					case 1:
-						repeat = repeat + R.string.Mon;
+						repeat = repeat + getString(R.string.Mon);
 						break;
 					case 2:
-						repeat = repeat + R.string.Tue;
+						repeat = repeat + getString(R.string.Tue);
 						break;
 					case 3:
-						repeat = repeat + R.string.Wed;
+						repeat = repeat + getString(R.string.Wed);
 						break;
 					case 4:
-						repeat = repeat + R.string.Thu;
+						repeat = repeat + getString(R.string.Thu);
 						break;
 					case 5:
-						repeat = repeat + R.string.Fri;
+						repeat = repeat + getString(R.string.Fri);
 						break;
 					case 6:
-						repeat = repeat + R.string.Sat;
+						repeat = repeat + getString(R.string.Sat);
 						break;
 					}
 				}
@@ -912,13 +912,13 @@ public class ActAddAlert extends BaseActivity {
 				if (bell[i]) {
 					switch (i) {
 					case 0:
-						bells = bells + R.string.Cuckoo;
+						bells = bells + getString(R.string.Cuckoo);
 						break;
 					case 1:
-						bells = bells + R.string.Dingdong;
+						bells = bells + getString(R.string.Dingdong);
 						break;
 					case 2:
-						bells = bells + R.string.Fantasy;
+						bells = bells + getString(R.string.Fantasy);
 						break;
 
 					}

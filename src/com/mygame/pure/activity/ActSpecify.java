@@ -2,7 +2,6 @@ package com.mygame.pure.activity;
 
 import java.io.File;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,10 +15,6 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
-import com.ab.view.level.AbLevelChartFactory;
-import com.ab.view.level.AbLevelSeriesDataset;
-import com.ab.view.level.AbLevelSeriesRenderer;
-import com.ab.view.level.AbLevelView;
 import com.mygame.pure.R;
 import com.mygame.pure.core.MicroRecruitSettings;
 import com.mygame.pure.utils.ShareUtil;
@@ -75,13 +70,13 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		the_neck_share = getResources().getStringArray(R.array.the_neck_share);
 		the_face_share = getResources().getStringArray(R.array.the_face_share);
 		the_eye_share = getResources().getStringArray(R.array.the_eye_share);
-		
+
 		if (checkType == 0) {
-			PureProgress1 pure=new PureProgress1(this);
-			
+			PureProgress1 pure = new PureProgress1(this);
+
 			if (progress < 0.30) {
 				textlevelIndex = 0;
-				
+
 				// 当前值描述
 				textDesc = getResources().getString(R.string.Dry);
 			} else if (progress > 0.38) {
@@ -93,7 +88,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				// 当前值描述
 				textDesc = getResources().getString(R.string.nomal);
 			}
-			pure.setProgress(progress,textlevelIndex,textValue);
+			pure.setProgress(progress, textlevelIndex, textValue);
 			chartLayout.addView(pure, new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			// 假如 每段的百分比 2 3 2 1 1 1
@@ -105,25 +100,33 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 					int age = Integer.parseInt(settings.USER_AGE.getValue()
 							.toString());
 					if (age >= 0 && age <= 16) {
-						pingjun_text.setText(R.string.remark1);
+						pingjun_text.setText(getResources().getString(
+								R.string.remark1));
 					} else if (age >= 17 && age <= 23) {
-						pingjun_text.setText(R.string.remark2);
+						pingjun_text.setText(getResources().getString(
+								R.string.remark2));
 					} else if (age >= 24 && age <= 27) {
-						pingjun_text.setText(R.string.remark6);
+						pingjun_text.setText(getResources().getString(
+								R.string.remark6));
 					} else if (age >= 28 && age <= 34) {
-						pingjun_text.setText(R.string.remark3);
+						pingjun_text.setText(getResources().getString(
+								R.string.remark3));
 					} else if (age >= 35 && age <= 44) {
-						pingjun_text.setText(R.string.remark4);
+						pingjun_text.setText(getResources().getString(
+								R.string.remark4));
 					} else if (age >= 45) {
-						pingjun_text.setText(R.string.remark5);
+						pingjun_text.setText(getResources().getString(
+								R.string.remark5));
 					}
 				} else {
-					pingjun_text.setText(R.string.remark5);
+					pingjun_text.setText(getResources().getString(
+							R.string.remark5));
 				}
 				getHeadusername();
 				w_w.setText(settings.USER_nick.getValue().toString());
 			} else {
-				pingjun_text.setText(R.string.remark7);
+				pingjun_text
+						.setText(getResources().getString(R.string.remark7));
 
 			}
 
@@ -132,7 +135,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 			tishi_text
 					.setText(hand_skin_share[(int) (Math.random() * hand_skin_share.length)]);
 		} else if (checkType == 1) {
-			PureProgress2 pure=new PureProgress2(this);
+			PureProgress2 pure = new PureProgress2(this);
 			if (progress < 0.32) {
 				textlevelIndex = 0;
 				// 当前值描述
@@ -151,22 +154,29 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 					int age = Integer.parseInt(settings.USER_AGE.getValue()
 							.toString());
 					if (age >= 0 && age <= 16) {
-						pingjun_text.setText(R.string.face1);
+						pingjun_text.setText(getResources().getString(
+								R.string.face1));
 					} else if (age >= 17 && age <= 23) {
-						pingjun_text.setText(R.string.face2);
+						pingjun_text.setText(getResources().getString(
+								R.string.face2));
 					} else if (age >= 24 && age <= 27) {
-						pingjun_text.setText(R.string.face3);
+						pingjun_text.setText(getResources().getString(
+								R.string.face3));
 					} else if (age >= 28 && age <= 34) {
-						pingjun_text.setText(R.string.face4);
+						pingjun_text.setText(getResources().getString(
+								R.string.face4));
 					} else if (age >= 35 && age <= 44) {
-						pingjun_text.setText(R.string.face5);
+						pingjun_text.setText(getResources().getString(
+								R.string.face5));
 					} else if (age >= 45) {
-						pingjun_text.setText(R.string.face6);
+						pingjun_text.setText(getResources().getString(
+								R.string.face6));
 					}
 				} else {
-					pingjun_text.setText(R.string.face7);
+					pingjun_text.setText(getResources().getString(
+							R.string.face7));
 				}
-				pure.setProgress(progress,textlevelIndex,textValue);
+				pure.setProgress(progress, textlevelIndex, textValue);
 				chartLayout.addView(pure, new LinearLayout.LayoutParams(
 						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 				// pingjun_text.setText("同龄人群脸部水分平均值36.70%");
@@ -174,7 +184,9 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				w_w.setText(settings.USER_nick.getValue().toString());
 			} else {
 				pingjun_text
-						.setText(R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup);
+						.setText(getResources()
+								.getString(
+										R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup));
 			}
 
 			// 假如 每段的百分比 2 3 2 1 1 1
@@ -184,7 +196,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 			tishi_text
 					.setText(the_face_share[(int) (Math.random() * the_face_share.length)]);
 		} else if (checkType == 2) {
-			PureProgress3 pure=new PureProgress3(this);
+			PureProgress3 pure = new PureProgress3(this);
 			if (progress < 0.35) {
 				textlevelIndex = 0;
 				// 当前值描述
@@ -203,29 +215,38 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 					int age = Integer.parseInt(settings.USER_AGE.getValue()
 							.toString());
 					if (age >= 0 && age <= 16) {
-						pingjun_text.setText(R.string.Type1);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type1));
 					} else if (age >= 17 && age <= 23) {
-						pingjun_text.setText(R.string.Type2);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type2));
 					} else if (age >= 24 && age <= 27) {
-						pingjun_text.setText(R.string.Type3);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type3));
 					} else if (age >= 28 && age <= 34) {
-						pingjun_text.setText(R.string.Type4);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type4));
 					} else if (age >= 35 && age <= 44) {
-						pingjun_text.setText(R.string.Type5);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type5));
 					} else if (age >= 45) {
-						pingjun_text.setText(R.string.Type6);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type6));
 					}
 				} else {
-					pingjun_text.setText(R.string.Type7);
+					pingjun_text.setText(getResources().getString(
+							R.string.Type7));
 				}
 
 				getHeadusername();
 				w_w.setText(settings.USER_nick.getValue().toString());
 			} else {
 				pingjun_text
-						.setText(R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup);
+						.setText(getResources()
+								.getString(
+										R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup));
 			}
-			pure.setProgress(progress,textlevelIndex,textValue);
+			pure.setProgress(progress, textlevelIndex, textValue);
 			chartLayout.addView(pure, new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			// 假如 每段的百分比 2 3 2 1 1 1
@@ -235,7 +256,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 			tishi_text
 					.setText(the_eye_share[(int) (Math.random() * the_eye_share.length)]);
 		} else if (checkType == 3) {
-			PureProgress3 pure=new PureProgress3(this);
+			PureProgress3 pure = new PureProgress3(this);
 			if (progress < 0.35) {
 				textlevelIndex = 0;
 				// 当前值描述
@@ -254,29 +275,38 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 					int age = Integer.parseInt(settings.USER_AGE.getValue()
 							.toString());
 					if (age >= 0 && age <= 16) {
-						pingjun_text.setText(R.string.Type1);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type1));
 					} else if (age >= 17 && age <= 23) {
-						pingjun_text.setText(R.string.Type2);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type2));
 					} else if (age >= 24 && age <= 27) {
-						pingjun_text.setText(R.string.Type3);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type3));
 					} else if (age >= 28 && age <= 34) {
-						pingjun_text.setText(R.string.Type4);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type4));
 					} else if (age >= 35 && age <= 44) {
-						pingjun_text.setText(R.string.Type5);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type5));
 					} else if (age >= 45) {
-						pingjun_text.setText(R.string.Type6);
+						pingjun_text.setText(getResources().getString(
+								R.string.Type6));
 					}
 				} else {
-					pingjun_text.setText(R.string.Type7);
+					pingjun_text.setText(getResources().getString(
+							R.string.Type7));
 				}
 
 				getHeadusername();
 				w_w.setText(settings.USER_nick.getValue().toString());
 			} else {
 				pingjun_text
-						.setText(R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup);
+						.setText(getResources()
+								.getString(
+										R.string.Afterloginyoucanchecktheaveragevaluefoyouagegroup));
 			}
-			pure.setProgress(progress,textlevelIndex,textValue);
+			pure.setProgress(progress, textlevelIndex, textValue);
 			chartLayout.addView(pure, new LinearLayout.LayoutParams(
 					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			// 假如 每段的百分比 2 3 2 1 1 1
@@ -294,87 +324,68 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				showShare();
 			}
 		});
-		/*// 等级图形宽
-		int width = 300;
-		// 等级图形高
-		int height = 200;
-		// 各等级段的颜色
-		int[] color = new int[] { Color.rgb(223, 117, 8),
-				Color.rgb(35, 196, 125), Color.rgb(55, 162, 236) };
-
-		// 当前值的等级
-
-		// 当前值文字大小
-		int textLevelSize = 30;
-		// 当前值文字与顶部的距离
-		int marginTop = 30;
-		// 指示三角形的宽度
-		int arrowWidth = 20;
-		// 指示三角形的高度
-		int arrowHeight = 10;
-		// 等级条的高度
-		int levelHeight = 20;
-		// 指示三角形与其他间距
-		int arrowMarginTop = 10;
-		// 等级坐标文字大小
-		int partTextSize = 15;
-		// 等级说明文字大小
-		int textDescSize = 22;*/
+		/*
+		 * // 等级图形宽 int width = 300; // 等级图形高 int height = 200; // 各等级段的颜色 int[]
+		 * color = new int[] { Color.rgb(223, 117, 8), Color.rgb(35, 196, 125),
+		 * Color.rgb(55, 162, 236) };
+		 * 
+		 * // 当前值的等级
+		 * 
+		 * // 当前值文字大小 int textLevelSize = 30; // 当前值文字与顶部的距离 int marginTop = 30;
+		 * // 指示三角形的宽度 int arrowWidth = 20; // 指示三角形的高度 int arrowHeight = 10; //
+		 * 等级条的高度 int levelHeight = 20; // 指示三角形与其他间距 int arrowMarginTop = 10;
+		 * // 等级坐标文字大小 int partTextSize = 15; // 等级说明文字大小 int textDescSize = 22;
+		 */
 		/*
 		 * // 当前值 java.text.DecimalFormat df=new
 		 * java.text.DecimalFormat("#0.0"); String textValue =
 		 * df.format(progress*100)+"%";
 		 */
 		// 要显示图形的View
-		
 
-		/*AbLevelSeriesRenderer renderer = new AbLevelSeriesRenderer();
+		/*
+		 * AbLevelSeriesRenderer renderer = new AbLevelSeriesRenderer();
+		 * 
+		 * renderer.setWidth(width); renderer.setHeight(height);
+		 * renderer.setColor(color); renderer.setPart(part);
+		 * renderer.setPartValue(partValue); renderer.setTextValue(textValue);
+		 * renderer.setTextDesc(textDesc);
+		 * renderer.setTextlevelIndex(textlevelIndex);
+		 * renderer.setTextLevelSize(textLevelSize);
+		 * renderer.setMarginTop(marginTop); renderer.setArrowWidth(arrowWidth);
+		 * renderer.setArrowHeight(arrowHeight);
+		 * renderer.setArrowMarginTop(arrowMarginTop);
+		 * renderer.setLevelHeight(levelHeight);
+		 * renderer.setPartTextSize(partTextSize);
+		 * renderer.setTextDescSize(textDescSize);
+		 * renderer.setTextRectWidth(120); renderer.setTextRectHeight(50);
+		 * 
+		 * AbLevelSeriesDataset mDataset = new AbLevelSeriesDataset();
+		 * AbLevelView mAbLevelView =
+		 * AbLevelChartFactory.getLevelChartView(this, mDataset, renderer);
+		 */
 
-		renderer.setWidth(width);
-		renderer.setHeight(height);
-		renderer.setColor(color);
-		renderer.setPart(part);
-		renderer.setPartValue(partValue);
-		renderer.setTextValue(textValue);
-		renderer.setTextDesc(textDesc);
-		renderer.setTextlevelIndex(textlevelIndex);
-		renderer.setTextLevelSize(textLevelSize);
-		renderer.setMarginTop(marginTop);
-		renderer.setArrowWidth(arrowWidth);
-		renderer.setArrowHeight(arrowHeight);
-		renderer.setArrowMarginTop(arrowMarginTop);
-		renderer.setLevelHeight(levelHeight);
-		renderer.setPartTextSize(partTextSize);
-		renderer.setTextDescSize(textDescSize);
-		renderer.setTextRectWidth(120);
-		renderer.setTextRectHeight(50);
+		setTitle(getResources().getString(R.string.Details));
 
-		AbLevelSeriesDataset mDataset = new AbLevelSeriesDataset();
-		AbLevelView mAbLevelView = AbLevelChartFactory.getLevelChartView(this,
-				mDataset, renderer);*/
-		
-		setTitle(R.string.Details);
-		
 	}
 
 	private void showShare() {
-		
-		LinearLayout llContent = (LinearLayout)findViewById(R.id.llContent);
+
+		LinearLayout llContent = (LinearLayout) findViewById(R.id.llContent);
 		try {
 			ShareUtil.snapshot(this, llContent, 0);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		String pngName = ShareUtil.fname.replace("#Package#",
-				getPackageName());
+
+		String pngName = ShareUtil.fname.replace("#Package#", getPackageName());
 		File file = new File(pngName);
 		if (!file.exists()) {
 			file.mkdirs();
 		}
-		pngName = pngName + File.separator + ShareUtil.png; 
-		
+		pngName = pngName + File.separator + ShareUtil.png;
+
 		ShareSDK.initSDK(this);
 		OnekeyShare oks = new OnekeyShare();
 		// 关闭sso授权
@@ -386,7 +397,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		oks.setTitle(getString(R.string.share));
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		//oks.setTitleUrl("http://sharesdk.cn");
+		// oks.setTitleUrl("http://sharesdk.cn");
 		// text是分享文本，所有平台都需要这个字段
 		oks.setText(getResources().getString(R.string.content));
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数

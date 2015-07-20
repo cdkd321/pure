@@ -1,12 +1,12 @@
 package com.mygame.pure.activity;
 
-import com.mygame.pure.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+
+import com.mygame.pure.R;
 
 public class ActLable extends BaseActivity {
 	private EditText etLable;
@@ -30,7 +30,7 @@ public class ActLable extends BaseActivity {
 				finish();
 			}
 		});
-		setTitle(R.string.Tag);
+		setTitle(getString(R.string.Tag));
 	}
 
 }

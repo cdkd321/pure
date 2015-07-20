@@ -5,17 +5,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.mygame.pure.R;
 
 /**
  * 关于界面
+ * 
  * @author tom
  */
 public class ActKnowSkin extends BaseActivity implements OnClickListener {
-	 
+
 	private View layout1;
 	private View layout2;
 
@@ -24,20 +23,20 @@ public class ActKnowSkin extends BaseActivity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_aknow_of_skills);
 		addBackImage(R.drawable.back_pressed, null);
-		 
-		setTitle(R.string.SkincareKnowledge);
-		
+
+		setTitle(getString(R.string.SkincareKnowledge));
+
 		layout1 = findViewById(R.id.aknow_of_water);
 		layout2 = findViewById(R.id.aknow_of_skin);
 		layout1.setVisibility(View.VISIBLE);
 		layout2.setVisibility(View.GONE);
-		
-		RadioGroup rgroup = (RadioGroup)findViewById(R.id.rGroup);
+
+		RadioGroup rgroup = (RadioGroup) findViewById(R.id.rGroup);
 		rgroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-			
+
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				 switch (checkedId) {
+				switch (checkedId) {
 				case R.id.rbLeft:
 					layout1.setVisibility(View.VISIBLE);
 					layout2.setVisibility(View.GONE);
@@ -53,10 +52,10 @@ public class ActKnowSkin extends BaseActivity implements OnClickListener {
 			}
 		});
 	}
-	 
+
 	@Override
 	public void onClick(View v) {
-		 
+
 	}
- 
+
 }

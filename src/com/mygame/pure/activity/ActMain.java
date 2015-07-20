@@ -203,13 +203,13 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		});
 
 		getTkActionBar();
-		setTitle(R.string.TestCentre);
+		setTitle(getString(R.string.TestCentre));
 		addBackImage(R.drawable.more, new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ActMain.this, MoreAct.class);
-				//Intent intent = new Intent(ActMain.this, ActSpecify.class);
+				// Intent intent = new Intent(ActMain.this, ActSpecify.class);
 				startActivityForResult(intent, 0);
 
 			}
@@ -408,7 +408,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (isQuit == false) {
 				isQuit = true;
-				Toast.makeText(getBaseContext(), R.string.exittoast,
+				Toast.makeText(getBaseContext(), getString(R.string.exittoast),
 						Toast.LENGTH_SHORT).show();
 				TimerTask task = null;
 				task = new TimerTask() {

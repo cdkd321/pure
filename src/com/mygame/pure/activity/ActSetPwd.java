@@ -6,8 +6,8 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -53,7 +53,7 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 	}
 
 	public void initView() {
-		setTitle(R.string.SetLoginPassword);
+		setTitle(getString(R.string.SetLoginPassword));
 		pd = new ProgressDialog(ActSetPwd.this);
 		btn_setpwd = (Button) findViewById(R.id.btn_setpwd);
 		btn_setpwd.setOnClickListener(this);
@@ -100,8 +100,8 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 				// getFinalHttp().post(Urls.checkEmail_istrue,
 				// AjaxParamsbyEmail(), majaxCallback);
 			} else {
-				Toast.makeText(getApplicationContext(), R.string.editError, 1)
-						.show();
+				Toast.makeText(getApplicationContext(),
+						getString(R.string.editError), 1).show();
 			}
 			break;
 
@@ -126,7 +126,8 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 					@Override
 					public void onSuccess(int arg0, String arg1) {
 						Toast.makeText(getApplicationContext(),
-								R.string.RegistrationSuccessful, 1).show();
+								getString(R.string.RegistrationSuccessful), 1)
+								.show();
 						// TODO Auto-generated method stub
 						if (arg1 != null) {
 							String[] a = arg1.split("=");
@@ -144,7 +145,8 @@ public class ActSetPwd extends BaseActivity implements OnClickListener {
 
 							} else if (b[0].equals("0")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.LoadingFailed, 1).show();
+										getString(R.string.LoadingFailed), 1)
+										.show();
 								pd.dismiss();
 							}
 						}

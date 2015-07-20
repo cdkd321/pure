@@ -1,22 +1,22 @@
 package com.mygame.pure.activity;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
 import com.mygame.pure.R;
 import com.mygame.pure.view.PureActionBar;
-
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.DialogInterface.OnCancelListener;
-import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class ActWriteYz extends BaseActivity implements OnClickListener {
 	protected PureActionBar mTkActionBar;
@@ -52,7 +52,7 @@ public class ActWriteYz extends BaseActivity implements OnClickListener {
 	}
 
 	public void initView() {
-		setTitle(R.string.yzyx);
+		setTitle(getResources().getString(R.string.yzyx));
 		pd = new ProgressDialog(ActWriteYz.this);
 		mywrite = (EditText) findViewById(R.id.mywirte);
 		btn_getNum_code = (Button) findViewById(R.id.btn_getNum_code);
@@ -100,12 +100,15 @@ public class ActWriteYz extends BaseActivity implements OnClickListener {
 							String[] b = a[1].split(";");
 							if (b[0].equals("0")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.Pol, 1).show();
+										getResources().getString(R.string.Pol),
+										1).show();
 								pd.dismiss();
 								return;
 							} else if (b[0].equals("1")) {
-								Toast.makeText(getApplicationContext(),
-										R.string.Pleasehss, 1).show();
+								Toast.makeText(
+										getApplicationContext(),
+										getResources().getString(
+												R.string.Pleasehss), 1).show();
 								Intent intent = new Intent();
 								intent.putExtra("userName", getIntent()
 										.getStringExtra("userName"));

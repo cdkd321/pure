@@ -20,8 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.mygame.pure.SelfDefineApplication;
-
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -156,7 +154,7 @@ public class BleService extends Service {
 				mConnectionState = STATE_DISCONNECTED;
 				broadcastUpdate(intentAction);
 				Log.w(TAG, "onConnectionStateChange: " + status);
-				//operateStatusWrong();
+				// operateStatusWrong();
 			}
 		}
 
@@ -319,13 +317,13 @@ public class BleService extends Service {
 					while (true) {
 						Thread.sleep(1000);
 						if (isAppOnForeground()) {
-							
+
 							Log.i(TAG, "true");
 						} else {
-							if(mConnectionState != STATE_DISCONNECTED){
+							if (mConnectionState != STATE_DISCONNECTED) {
 								disconnect();
 							}
-							
+
 							Log.i(TAG, "false");
 						}
 					}
@@ -343,7 +341,6 @@ public class BleService extends Service {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// TODO Auto-generated method stub
 
-		
 		return super.onStartCommand(intent, flags, startId);
 	}
 
@@ -495,7 +492,7 @@ public class BleService extends Service {
 			Log.w(TAG, "BluetoothAdapter not initialized");
 			return;
 		}
-		mBluetoothGatt.close();
+		// mBluetoothGatt.close();
 		mBluetoothGatt.disconnect();
 
 		mConnectionState = STATE_DISCONNECTED;

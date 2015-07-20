@@ -1,16 +1,13 @@
 package com.mygame.pure.activity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,8 +16,6 @@ import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
 import com.mygame.pure.R;
-import com.mygame.pure.http.AjaxCallBack;
-import com.mygame.pure.http.AjaxParams;
 import com.mygame.pure.view.PureActionBar;
 
 public class ActFindPwd extends BaseActivity implements OnClickListener {
@@ -58,9 +53,9 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 
 	public void initView() {
 		if (getIntent().getStringExtra("type").equals("1")) {
-			setTitle(R.string._findpwd);
+			setTitle(getString(R.string._findpwd));
 		} else if (getIntent().getStringExtra("type").equals("2")) {
-			setTitle(R.string.Register);
+			setTitle(getString(R.string.Register));
 		}
 
 		btn_getNum = (Button) findViewById(R.id.btn_getNum);
@@ -96,7 +91,7 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 
 			} else {
 				Toast.makeText(getApplicationContext(),
-						R.string.InvalidUsernameoradd, 1).show();
+						getString(R.string.InvalidUsernameoradd), 1).show();
 			}
 			break;
 
@@ -136,20 +131,25 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 							String[] b = a[1].split(";");
 							if (b[0].equals("0")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.LoadingFailed, 1).show();
+										getString(R.string.LoadingFailed), 1)
+										.show();
 							} else if (b[0].equals("-1")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.DearyoualreError, 1).show();
+										getString(R.string.DearyoualreError), 1)
+										.show();
 							} else if (b[0].equals("-3")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.UserNotExist, 1).show();
+										getString(R.string.UserNotExist), 1)
+										.show();
 							} else if (b[0].equals("1")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.emailsuccess, 1).show();
+										getString(R.string.emailsuccess), 1)
+										.show();
 								finish();
 							} else if (b[0].equals("-2")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.emailfail, 1).show();
+										getString(R.string.emailfail), 1)
+										.show();
 							}
 						}
 					}
@@ -221,7 +221,8 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 							String[] b = a[1].split(";");
 							if (b[0].equals("0")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.LoadingFailed, 1).show();
+										getString(R.string.LoadingFailed), 1)
+										.show();
 							} else if (b[0].equals("1")) {
 								Intent intent = new Intent();
 								intent.putExtra("updatepwd", "0");
@@ -232,10 +233,11 @@ public class ActFindPwd extends BaseActivity implements OnClickListener {
 								startActivity(intent);
 							} else if (b[0].equals("-1")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.issended, 1).show();
+										getString(R.string.issended), 1).show();
 							} else if (b[0].equals("-2")) {
 								Toast.makeText(getApplicationContext(),
-										R.string.emailfail, 1).show();
+										getString(R.string.emailfail), 1)
+										.show();
 							}
 						}
 					}

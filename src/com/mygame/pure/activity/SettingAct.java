@@ -31,13 +31,14 @@ public class SettingAct extends BaseActivity {
 			}
 		});
 
-		addRightBtn(R.string.more, new View.OnClickListener() {
+		addRightBtn(getResources().getString(R.string.more),
+				new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(getActivity(), MoreAct.class));
-			}
-		});
+					@Override
+					public void onClick(View v) {
+						startActivity(new Intent(getActivity(), MoreAct.class));
+					}
+				});
 
 		ui_alarm.setValue(-1, -1, R.drawable.next, -1);
 		ui_questions.setValue(-1, -1, R.drawable.next, -1);
