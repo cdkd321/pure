@@ -17,9 +17,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:text="cancel"
+            android:text="@string/cancel"
             android:textColor="@color/blue"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/title"
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:text="@string/title"
             android:textColor="@color/blue"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold" />
 
         <ProgressBar
@@ -53,7 +53,7 @@
         android:paddingLeft="10dp"
         android:text="@string/bundled"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <RelativeLayout
@@ -107,7 +107,7 @@
         android:paddingLeft="10dp"
         android:text="@string/disconnected"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <ListView

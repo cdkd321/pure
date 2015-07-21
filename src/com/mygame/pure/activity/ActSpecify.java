@@ -149,6 +149,9 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 				// 当前值描述
 				textDesc = getResources().getString(R.string.nomal);
 			}
+			pure.setProgress(progress, textlevelIndex, textValue);
+			chartLayout.addView(pure, new LinearLayout.LayoutParams(
+					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			if (!settings.USER_NAME.getValue().equals("")) {
 				if (!TextUtils.isEmpty(settings.USER_AGE.getValue().toString())) {
 					int age = Integer.parseInt(settings.USER_AGE.getValue()
@@ -176,9 +179,7 @@ public class ActSpecify extends BaseActivity implements OnClickListener {
 					pingjun_text.setText(getResources().getString(
 							R.string.face7));
 				}
-				pure.setProgress(progress, textlevelIndex, textValue);
-				chartLayout.addView(pure, new LinearLayout.LayoutParams(
-						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+				
 				// pingjun_text.setText("同龄人群脸部水分平均值36.70%");
 				getHeadusername();
 				w_w.setText(settings.USER_nick.getValue().toString());

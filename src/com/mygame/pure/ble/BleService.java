@@ -153,6 +153,7 @@ public class BleService extends Service {
 				intentAction = ACTION_STATUS_WRONG;
 				mConnectionState = STATE_DISCONNECTED;
 				broadcastUpdate(intentAction);
+				disconnect();
 				Log.w(TAG, "onConnectionStateChange: " + status);
 				// operateStatusWrong();
 			}
@@ -713,14 +714,14 @@ public class BleService extends Service {
 				} else {
 
 					initialize();
-					broadcastUpdate(ACTION_CLEAR);
-					mBluetoothAdapter.stopLeScan(mLeScanCallback);
-					mBluetoothAdapter.startLeScan(mLeScanCallback);
+					//broadcastUpdate(ACTION_CLEAR);
+					/*mBluetoothAdapter.stopLeScan(mLeScanCallback);
+					mBluetoothAdapter.startLeScan(mLeScanCallback);*/
 
-					if (!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC",
-							"")) && isAppOnForeground()) {
+					/*if (!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC",
+							"")) && isAppOnForeground()) {*/
 						connect(share.getString("LAST_CONNECT_MAC", ""));
-					}
+					//}
 
 				}
 

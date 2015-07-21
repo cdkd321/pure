@@ -34,6 +34,7 @@
     <string name="bundled">bundled device</string>
     <string name="disconnected">disconnecdted device</string>
     <string name="connected">connected</string>
+     <string name="disconnect">disconnecdted</string>
     <string name="save">Storage</string>
     <string name="_findpwd">Retrieve password</string>
     <string name="_reg">User registration</string>
@@ -447,5 +448,7 @@
     <string name="r5">Thursday</string>
     <string name="r6">Friday</string>
     <string name="r7">Saturday</string>
+    <string name="every_day">Every day</string>
+    <string name="weekdays">Weekdays</string>
 
 </resources>

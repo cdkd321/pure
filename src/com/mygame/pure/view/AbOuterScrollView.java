@@ -15,6 +15,8 @@
  */
 package com.mygame.pure.view;
 
+import com.mygame.pure.SelfDefineApplication;
+
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -53,6 +55,13 @@ public class AbOuterScrollView extends ScrollView {
 	public void setScrollViewListener(ScrollViewListener scrollViewListener) {
 		this.scrollViewListener = scrollViewListener;
 	}
+	@Override
+	public boolean onTouchEvent(MotionEvent ev) {
+		// TODO Auto-generated method stub
+		
+		return super.onTouchEvent(ev);
+		 
+	}
 
 	/**
 	 * 描述：TODO.
@@ -63,6 +72,7 @@ public class AbOuterScrollView extends ScrollView {
 	 */
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
+		SelfDefineApplication.getInstance().setmPosition(5);
 		return super.onInterceptTouchEvent(ev)
 				&& mGestureDetector.onTouchEvent(ev);
 	}

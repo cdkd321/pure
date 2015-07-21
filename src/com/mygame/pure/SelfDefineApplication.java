@@ -13,6 +13,15 @@ public class SelfDefineApplication extends Application {
 	public static boolean isResume;
 	public static int viewpagerPositon;
 	public static boolean finishLogin;
+	private static int mPosition;
+	public static int getmPosition() {
+		return mPosition;
+	}
+
+	public static void setmPosition(int mPosition) {
+		SelfDefineApplication.mPosition = mPosition;
+	}
+
 	private static SelfDefineApplication application;
 	private static FinalHttp finalHttp;
 	public static int selectPostion;

@@ -93,13 +93,18 @@ public class ActReceiveAlarm extends Activity {
 		}
 		// mMediaPlayer = new MediaPlayer();
 		// mMediaPlayer.setDataSource(getApplicationContext(), alert);
-		if ("0".equals(alert.getAlertmusic())) {
-			music = "bugu.mp3";
-		} else if ("1".equals(alert.getAlertmusic())) {
-			music = "lingdang.mp3";
-		} else if ("2".equals(alert.getAlertmusic())) {
-			music = "menghuan.mp3";
+		if(alert==null){
+			 music = "bugu.mp3";
+		}else{
+			if ("0".equals(alert.getAlertmusic())) {
+				music = "bugu.mp3";
+			} else if ("1".equals(alert.getAlertmusic())) {
+				music = "lingdang.mp3";
+			} else if ("2".equals(alert.getAlertmusic())) {
+				music = "menghuan.mp3";
+			}
 		}
+		
 
 		try {
 			AssetFileDescriptor fileDescriptor = getAssets().openFd(music);

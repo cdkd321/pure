@@ -124,9 +124,37 @@ public class ActAddAlert extends BaseActivity {
 					reReart[i] = false;
 				}
 			}
-			repeat_time.setText(repeat);
+			if (repeat.contains(getString(R.string.Sun))
+					&& repeat.contains(getString(R.string.Mon))
+					&& repeat.contains(getString(R.string.Tue))
+					&& repeat.contains(getString(R.string.Wed))
+					&& repeat.contains(getString(R.string.Thu))
+					&& repeat.contains(getString(R.string.Fri))
+					&& repeat.contains(getString(R.string.Sat))) {
+				repeat_time.setText(getString(R.string.every_day));
+			}else if (repeat.contains(getString(R.string.Mon))
+					&& repeat.contains(getString(R.string.Tue))
+					&& repeat.contains(getString(R.string.Wed))
+					&& repeat.contains(getString(R.string.Thu))
+					&& repeat.contains(getString(R.string.Fri))
+					&& !repeat.contains(getString(R.string.Sun))
+					&& !repeat.contains(getString(R.string.Sat))) {
+				repeat_time.setText(getString(R.string.weekdays));
+
+			} else if(!repeat.contains(getString(R.string.Mon))
+					&& !repeat.contains(getString(R.string.Tue))
+					&& !repeat.contains(getString(R.string.Wed))
+					&& !repeat.contains(getString(R.string.Thu))
+					&& !repeat.contains(getString(R.string.Fri))
+					&& !repeat.contains(getString(R.string.Sun))
+					&& !repeat.contains(getString(R.string.Sat))){
+				repeat_time.setText(getString(R.string.Never));
+				
+			}else {
+				repeat_time.setText(repeat);
+			}
 			lable_text.setText(alertEdit.getAlertName());
-			if ("1".equals(alertEdit.getAlertmusic())) {
+			if ("0".equals(alertEdit.getAlertmusic())) {
 				bellText.setText(getString(R.string.Cuckoo));
 				bell[0] = true;
 			}
@@ -135,7 +163,7 @@ public class ActAddAlert extends BaseActivity {
 				bell[1] = true;
 				bell[0] = false;
 			}
-			if ("1".equals(alertEdit.getAlertmusic())) {
+			if ("2".equals(alertEdit.getAlertmusic())) {
 				bellText.setText(getString(R.string.Fantasy));
 				bell[2] = true;
 				bell[0] = false;
@@ -143,24 +171,24 @@ public class ActAddAlert extends BaseActivity {
 			String[] times = alertEdit.getAlertTime().split(":");
 			int hourIndex = 0;
 			if (times[0].startsWith("0") && !times[0].equals("0")) {
-				if(times[0].equals("00")){
+				if (times[0].equals("00")) {
 					hourIndex = 0;
-				}else{
+				} else {
 					hourIndex = Integer.parseInt(times[0].replace("0", ""));
 				}
-				
+
 			} else {
 				hourIndex = Integer.parseInt(times[0]);
 			}
 			leftWheel.setCurrentItem(hourIndex);
 			int miniteIndex = 0;
 			if (times[1].startsWith("0") && !times[1].equals("0")) {
-				if(times[1].equals("00")){
+				if (times[1].equals("00")) {
 					miniteIndex = 0;
-				}else{
+				} else {
 					miniteIndex = Integer.parseInt(times[1].replace("0", ""));
 				}
-				
+
 			} else {
 				miniteIndex = Integer.parseInt(times[1]);
 			}
@@ -196,7 +224,13 @@ public class ActAddAlert extends BaseActivity {
 						+ times.get(rightWheel.getCurrentItem());
 				alert.setClockid(Integer.parseInt(clock));
 				String alertRepeat = "";
-
+				String alertMusic = "";
+				for (int i = 0; i < bell.length; i++) {
+					if (bell[i]) {
+						alertMusic = i + "";
+					}
+				}
+				alert.setAlertmusic(alertMusic);
 				for (int i = 0; i < reReart.length; i++) {
 					if (reReart[i]) {
 						Calendar cal = Calendar.getInstance();
@@ -212,39 +246,47 @@ public class ActAddAlert extends BaseActivity {
 						cal.set(Calendar.MONTH, Integer.parseInt(date[1]) - 1);
 						cal.set(Calendar.DAY_OF_MONTH,
 								Integer.parseInt(date[2]));
-						if(hours.get(leftWheel.getCurrentItem()).startsWith("0")){
-							if(hours.get(leftWheel.getCurrentItem()).equals("00")){
+						if (hours.get(leftWheel.getCurrentItem()).startsWith(
+								"0")) {
+							if (hours.get(leftWheel.getCurrentItem()).equals(
+									"00")) {
 								cal.set(Calendar.HOUR_OF_DAY, 0);
-		                    }else{
-		                    	cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours
-										.get(leftWheel.getCurrentItem()).replace("0", "")));
-		                    }
-							
-						}else{
-							cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(hours
-									.get(leftWheel.getCurrentItem())));
-						}
-						if(times.get(rightWheel.getCurrentItem()).startsWith("0")){
-							if(times.get(rightWheel.getCurrentItem()).equals("00")){
-								cal.set(Calendar.MINUTE, 0);
-							}else{
-								cal.set(Calendar.MINUTE, Integer.parseInt(times
-										.get(rightWheel.getCurrentItem()).replace("0", "")));
+							} else {
+								cal.set(Calendar.HOUR_OF_DAY, Integer
+										.parseInt(hours.get(
+												leftWheel.getCurrentItem())
+												.replace("0", "")));
 							}
-							
-						}else{
+
+						} else {
+							cal.set(Calendar.HOUR_OF_DAY, Integer
+									.parseInt(hours.get(leftWheel
+											.getCurrentItem())));
+						}
+						if (times.get(rightWheel.getCurrentItem()).startsWith(
+								"0")) {
+							if (times.get(rightWheel.getCurrentItem()).equals(
+									"00")) {
+								cal.set(Calendar.MINUTE, 0);
+							} else {
+								cal.set(Calendar.MINUTE, Integer.parseInt(times
+										.get(rightWheel.getCurrentItem())
+										.replace("0", "")));
+							}
+
+						} else {
 							cal.set(Calendar.MINUTE, Integer.parseInt(times
 									.get(rightWheel.getCurrentItem())));
 						}
-						
-						
+
 						cal.set(Calendar.SECOND, 0);
 						// System.out.println("今天的日期: " + cal.getTime());
 						int week = AbDateUtil.getWeekNumber(
 								DateUtil.getCurrentDate(), "yyyy-MM-dd");
 
 						long alertTime = cal.getTimeInMillis();
-						 System.out.println("alertTime>>>>>>>" + cal.getTime());
+						System.out.println("alertTime>>>>>>>" + cal.getTime());
+						
 						// System.out.println("System>>>>>>>"
 						// + System.currentTimeMillis() + 50000);
 						switch (i) {
@@ -690,14 +732,9 @@ public class ActAddAlert extends BaseActivity {
 						}
 					}
 				}
-				String alertMusic = "";
-				for (int i = 0; i < bell.length; i++) {
-					if (bell[i]) {
-						alertMusic = i + "";
-					}
-				}
+				
 				alert.setCurrenttime(System.currentTimeMillis());
-				alert.setAlertmusic(alertMusic);
+				
 				alert.setAlertRepeat(alertRepeat);
 				try {
 
@@ -936,7 +973,36 @@ public class ActAddAlert extends BaseActivity {
 					}
 				}
 			}
-			repeat_time.setText(repeat);
+			if (repeat.contains(getString(R.string.Sun))
+					&& repeat.contains(getString(R.string.Mon))
+					&& repeat.contains(getString(R.string.Tue))
+					&& repeat.contains(getString(R.string.Wed))
+					&& repeat.contains(getString(R.string.Thu))
+					&& repeat.contains(getString(R.string.Fri))
+					&& repeat.contains(getString(R.string.Sat))) {
+				repeat_time.setText(getString(R.string.every_day));
+			} else if (repeat.contains(getString(R.string.Mon))
+					&& repeat.contains(getString(R.string.Tue))
+					&& repeat.contains(getString(R.string.Wed))
+					&& repeat.contains(getString(R.string.Thu))
+					&& repeat.contains(getString(R.string.Fri))
+					&& !repeat.contains(getString(R.string.Sun))
+					&& !repeat.contains(getString(R.string.Sat))) {
+				repeat_time.setText(getString(R.string.weekdays));
+
+			}else if(!repeat.contains(getString(R.string.Mon))
+					&& !repeat.contains(getString(R.string.Tue))
+					&& !repeat.contains(getString(R.string.Wed))
+					&& !repeat.contains(getString(R.string.Thu))
+					&& !repeat.contains(getString(R.string.Fri))
+					&& !repeat.contains(getString(R.string.Sun))
+					&& !repeat.contains(getString(R.string.Sat))){
+				repeat_time.setText(getString(R.string.Never));
+				
+			} else {
+				repeat_time.setText(repeat);
+			}
+
 		} else if (arg1 == 201) {
 			bell = arg2.getBooleanArrayExtra("bell");
 			String bells = "";

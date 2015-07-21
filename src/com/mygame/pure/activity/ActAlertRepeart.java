@@ -111,6 +111,7 @@ public class ActAlertRepeart extends BaseActivity {
 				finish();
 			}
 		});
+		addRightBtn("", null);
 		setTitle(getString(R.string.Repeat));
 	}
 

@@ -91,6 +91,7 @@ public class DeviceListActivity extends Activity {
 											int arg1) {
 										connectedMacLayout
 												.setVisibility(View.GONE);
+										bund_text.setVisibility(View.GONE);
 										share.edit()
 												.putString("LAST_CONNECT_MAC",
 														"").commit();
@@ -119,14 +120,16 @@ public class DeviceListActivity extends Activity {
 		if (!TextUtils.isEmpty(share.getString("LAST_CONNECT_MAC", ""))) {
 			connectedMacLayout.setVisibility(View.VISIBLE);
 			connectedName.setVisibility(View.VISIBLE);
+			bund_text.setVisibility(View.VISIBLE);
+			
 			connectedName.setText(share.getString("LAST_CONNECT_NAME", ""));
 			if (SelfDefineApplication.getInstance().mService != null) {
 				if (SelfDefineApplication.getInstance().mService.mConnectionState == BleService.STATE_DISCONNECTED) {
 					
-					state.setText("disconnected");
+					state.setText(getResources().getString(R.string.disconnect));
 					signal_strength.setImageResource(R.drawable.ic_rssi0_bars);
 				} else {
-					state.setText("connected");
+					state.setText(getResources().getString(R.string.connected));
 					signal_strength.setImageResource(R.drawable.ic_rssi_3_bars);
 				}
 			}
@@ -239,13 +242,13 @@ public class DeviceListActivity extends Activity {
 					}
 				});
 			} else if (BleService.ACTION_GATT_CONNECTED.equals(action)) {
-				state.setText("connected");
+				state.setText(getResources().getString(R.string.connected));
 				signal_strength.setImageResource(R.drawable.ic_rssi_3_bars);
 			} else if (BleService.ACTION_GATT_DISCONNECTED.equals(action)) {
-				state.setText("disconnected");
+				state.setText(getResources().getString(R.string.disconnect));
 				signal_strength.setImageResource(R.drawable.ic_rssi0_bars);
 			} else if (BleService.ACTION_STATUS_WRONG.equals(action)) {
-				state.setText("disconnected");
+				state.setText(getResources().getString(R.string.disconnect));
 				signal_strength.setImageResource(R.drawable.ic_rssi0_bars);
 			}else if(BleService.ACTION_CLEAR.equals(action)){
 				deviceList.clear();

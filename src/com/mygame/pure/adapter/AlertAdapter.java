@@ -7,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.ab.util.AbSharedUtil;
 import com.mygame.pure.R;
 import com.mygame.pure.bean.Alert;
 import com.mygame.pure.view.AbSlidingButton;
@@ -59,35 +62,102 @@ public class AlertAdapter extends BaseAdapter {
 		slidingBtn.setImageResource(R.drawable.btn_bottom,
 				R.drawable.btn_frame, R.drawable.btn_mask,
 				R.drawable.btn_unpressed, R.drawable.btn_pressed);
+
 		slidingBtn.setChecked(true);
-		Alert alert = alerts.get(position);
+		final Alert alert = alerts.get(position);
 		alert_name.setText(alert.getAlertName());
 		alert_time.setText(alert.getAlertTime());
+		if(AbSharedUtil.getBoolean(mContext, ""+alert.getClockid(), true)){
+			slidingBtn.setChecked(true);
+		}else{
+			slidingBtn.setChecked(false);
+		}
+		slidingBtn.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+				if (arg1) {
+					AbSharedUtil.putBoolean(mContext, ""+alert.getClockid(), true);
+				} else {
+					AbSharedUtil.putBoolean(mContext, ""+alert.getClockid(), false);
+				}
+			}
+		});
 		String[] repeats = alert.getAlertRepeat().split(",");
 		String repeat = "";
 		if (repeats[0].equals("1")) {
-			repeat = repeat + "周日  ";
+			repeat = repeat + mContext.getResources().getString(R.string.Sun);
 		}
 		if (repeats[1].equals("1")) {
-			repeat = repeat + "周一  ";
+			repeat = repeat + mContext.getResources().getString(R.string.Mon);
 		}
 		if (repeats[2].equals("1")) {
-			repeat = repeat + "周二  ";
+			repeat = repeat + mContext.getResources().getString(R.string.Tue);
 		}
 		if (repeats[3].equals("1")) {
-			repeat = repeat + "周三  ";
+			repeat = repeat + mContext.getResources().getString(R.string.Wed);
 		}
 		if (repeats[4].equals("1")) {
-			repeat = repeat + "周四  ";
+			repeat = repeat + mContext.getResources().getString(R.string.Thu);
 		}
 		if (repeats[5].equals("1")) {
-			repeat = repeat + "周五  ";
+			repeat = repeat + mContext.getResources().getString(R.string.Fri);
 		}
 		if (repeats[6].equals("1")) {
-			repeat = repeat + "周六  ";
+			repeat = repeat + mContext.getResources().getString(R.string.Sat);
 		}
+		if (repeat.contains(mContext.getResources().getString(R.string.Sun))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Mon))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Tue))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Wed))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Thu))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Fri))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Sat))) {
+			alert_time_repeat.setText(mContext.getResources().getString(
+					R.string.every_day));
+		} else if (repeat.contains(mContext.getResources().getString(
+				R.string.Mon))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Tue))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Wed))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Thu))
+				&& repeat.contains(mContext.getResources().getString(
+						R.string.Fri))
+				&& !repeat.contains(mContext.getResources().getString(
+						R.string.Sun))
+				&& !repeat.contains(mContext.getResources().getString(
+						R.string.Sat))) {
+			alert_time_repeat.setText(mContext.getResources().getString(
+					R.string.weekdays));
 
-		alert_time_repeat.setText(repeat);
+		} else if (!repeat.contains(mContext.getResources().getString(
+				R.string.Mon))
+				&& !repeat.contains(mContext.getResources().getString(
+						R.string.Tue))
+				&& !repeat.contains(mContext.getResources().getString(
+						R.string.Wed))
+				&& !repeat.contains(mContext.getResources().getString(
+						R.string.Thu))
+				&& !repeat.contains(mContext.getResources().getString(
+						R.string.Fri))
+				&& !repeat.contains(mContext.getResources().getString(
+						R.string.Sun))
+				&& !repeat.contains(mContext.getResources().getString(
+						R.string.Sat))) {
+			alert_time_repeat.setText(mContext.getResources().getString(
+					R.string.Never));
+
+		} else {
+			alert_time_repeat.setText(repeat);
+		}
 
 		return convertView;
 	}

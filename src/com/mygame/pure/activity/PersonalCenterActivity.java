@@ -16,6 +16,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -41,6 +42,7 @@ import android.widget.Toast;
 import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
+import com.ab.util.AbSharedUtil;
 import com.mygame.pure.R;
 import com.mygame.pure.core.MicroRecruitSettings;
 import com.mygame.pure.utils.AbDateUtil;
@@ -131,7 +133,28 @@ public class PersonalCenterActivity extends FragmentActivity implements
 		save_btn = (ImageButton) findViewById(R.id.save_btn);
 		skin = (TextView) findViewById(R.id.skin);
 		personal_img = (ImageView) findViewById(R.id.personal_img);
-
+		if(!TextUtils.isEmpty(AbSharedUtil.getString(context,"imagePath"))){
+			personal_img.setImageBitmap(BitmapFactory.decodeFile(AbSharedUtil.getString(context,"imagePath")));
+		};
+		if(!TextUtils.isEmpty(AbSharedUtil.getString(context,"img_logo"))){
+			Picasso.with(context)
+			.load(AbSharedUtil.getString(context,"img_logo"))
+			.placeholder(R.drawable.hcy_icon)
+			.error(R.drawable.hcy_icon)
+			.into(personal_img);
+		};
+		if(!TextUtils.isEmpty(AbSharedUtil.getString(context,"nick"))){
+			mynick.setText(AbSharedUtil.getString(context,"nick"));
+		};
+		if(!TextUtils.isEmpty(AbSharedUtil.getString(context,"birthday"))){
+			mDateDisplay.setText(AbSharedUtil.getString(context,"birthday"));
+		};
+		if(!TextUtils.isEmpty(AbSharedUtil.getString(context,"sex"))){
+			sex_text.setText(AbSharedUtil.getString(context,"sex"));
+		};
+		if(!TextUtils.isEmpty(AbSharedUtil.getString(context,"fuzhi"))){
+			skin.setText(AbSharedUtil.getString(context,"fuzhi"));
+		};
 		save_btn.setOnClickListener(this);
 		uploadmyhenad.setOnClickListener(this);
 		rel_nickname.setOnClickListener(this);
@@ -528,6 +551,10 @@ public class PersonalCenterActivity extends FragmentActivity implements
 					@Override
 					public void onSuccess(int arg0, String arg1) {
 						// TODO Auto-generated method stub
+						AbSharedUtil.putString(context, "nick",mynick.getText().toString());
+						AbSharedUtil.putString(context, "sex",sex_text.getText().toString() + "");
+						AbSharedUtil.putString(context, "birthday",mDateDisplay.getText().toString());
+						
 						if (arg1 != null) {
 							String[] a = arg1.split("=");
 							String[] b = a[1].split(";");
@@ -590,6 +617,7 @@ public class PersonalCenterActivity extends FragmentActivity implements
 				new AbSoapListener() {
 					@Override
 					public void onSuccess(int arg0, String arg1) {
+						AbSharedUtil.putString(context, "fuzhi",skin.getText().toString());
 						// TODO Auto-generated method stub
 						/*
 						 * if (arg1 != null) { String[] a = arg1.split("=");
@@ -641,6 +669,7 @@ public class PersonalCenterActivity extends FragmentActivity implements
 						if (arg1.indexOf("Touxiang=") != -1) {
 							String[] a1 = arg1.split("Touxiang=");
 							String[] b1 = a1[1].split(";");
+							AbSharedUtil.putString(context, "img_logo", "http://miliapp.ebms.cn/" + b1[0]);
 							Picasso.with(context)
 									.load("http://miliapp.ebms.cn/" + b1[0])
 									.placeholder(R.drawable.hcy_icon)
@@ -683,6 +712,10 @@ public class PersonalCenterActivity extends FragmentActivity implements
 								skin.setText(getString(R.string.SensitiveSkin));
 							}
 						}
+						AbSharedUtil.putString(context, "nick",mynick.getText().toString());
+						AbSharedUtil.putString(context, "sex",sex_text.getText().toString() + "");
+						AbSharedUtil.putString(context, "birthday",mDateDisplay.getText().toString());
+						AbSharedUtil.putString(context, "fuzhi",skin.getText().toString());
 
 						// AbDialogUtil.showAlertDialog(MoreAct.this, "���ؽ��",
 						// arg1, new AbDialogOnClickListener() {
@@ -746,6 +779,7 @@ public class PersonalCenterActivity extends FragmentActivity implements
 					@Override
 					public void onSuccess(int arg0, String arg1) {
 						// TODO Auto-generated method stub
+						AbSharedUtil.putString(context, "imagePath",imagePath);
 						if (arg1 != null) {
 							String[] a = arg1.split("=");
 							String[] b = a[1].split(";");

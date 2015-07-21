@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.ab.soap.AbSoapListener;
 import com.ab.soap.AbSoapParams;
 import com.ab.soap.AbSoapUtil;
+import com.ab.util.AbSharedUtil;
 import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
 import com.mygame.pure.ble.BleService;
@@ -104,12 +105,20 @@ public class MoreAct extends BaseActivity implements OnClickListener {
 			}
 		});
 		setTitle(getResources().getString(R.string.more));
+		
 		// isLogin();
 		if (settings.USER_NAME.getValue().equals("")) {
 			w_w.setText(getResources().getString(R.string.NotLoggedin));
 			Toast.makeText(getApplicationContext(),
 					getResources().getString(R.string.NotLoggedin), 1).show();
 		} else {
+			if(!TextUtils.isEmpty(AbSharedUtil.getString(context,"img_logo"))){
+				Picasso.with(context)
+				.load(AbSharedUtil.getString(context,"img_logo"))
+				.placeholder(R.drawable.hcy_icon)
+				.error(R.drawable.hcy_icon)
+				.into(cimg);
+			};
 			getHeadusername();
 		}
 

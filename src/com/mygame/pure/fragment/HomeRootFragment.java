@@ -23,9 +23,7 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -39,6 +37,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ab.util.AbSharedUtil;
 import com.lidroid.xutils.db.sqlite.Selector;
 import com.lidroid.xutils.db.sqlite.WhereBuilder;
 import com.lidroid.xutils.exception.DbException;
@@ -52,6 +51,7 @@ import com.mygame.pure.adapter.HistoryAdapter;
 import com.mygame.pure.bean.Average;
 import com.mygame.pure.bean.BltModel;
 import com.mygame.pure.ble.BleService;
+import com.mygame.pure.utils.AbDateUtil;
 import com.mygame.pure.utils.Constants;
 import com.mygame.pure.utils.DateUtil;
 import com.mygame.pure.utils.DbUtils;
@@ -61,8 +61,10 @@ import com.mygame.pure.view.CircleProgressBar;
 import com.mygame.pure.view.CircleProgressBarBlue;
 import com.mygame.pure.view.MyTextView;
 import com.mygame.pure.view.MyrogressBar;
+import com.mygame.pure.view.PagerAdapter;
 import com.mygame.pure.view.SplineChart03View;
 import com.mygame.pure.view.VerticalViewPager;
+import com.mygame.pure.view.VerticalViewPager.OnPageChangeListener;
 
 public class HomeRootFragment extends Fragment implements OnClickListener {
 
@@ -86,6 +88,10 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 	Float perProgres;
 	private boolean isResume;
 	private int selectPositon;
+	private int shouWaters;
+	private int lanWaters;
+	private int yanWaters;
+	private int jingWaters;
 
 	public static HomeRootFragment newInstance(int checkType) {
 		HomeRootFragment f = new HomeRootFragment();
@@ -150,6 +156,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				toSeeMore.setText("");
 				SelfDefineApplication.getInstance().selectPostion = 0;
 				checkType = 0;
+				detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+						+ 0 + actActivity.getResources().getString(R.string.ci));
 				initDownView(cell_bottom);
 				initUPView(cell_top);
 			}
@@ -164,6 +172,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				toSeeMore.setText("");
 				SelfDefineApplication.getInstance().selectPostion = 1;
 				checkType = 1;
+				detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+						+ 0 + actActivity.getResources().getString(R.string.ci));
 				initDownView(cell_bottom);
 				initUPView(cell_top);
 			}
@@ -178,6 +188,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				toSeeMore.setText("");
 				SelfDefineApplication.getInstance().selectPostion = 2;
 				checkType = 2;
+				detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+						+ 0 + actActivity.getResources().getString(R.string.ci));
 				initDownView(cell_bottom);
 				initUPView(cell_top);
 			}
@@ -192,6 +204,8 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 				toSeeMore.setText("");
 				SelfDefineApplication.getInstance().selectPostion = 3;
 				checkType = 3;
+				detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+						+ 0 + actActivity.getResources().getString(R.string.ci));
 				initDownView(cell_bottom);
 				initUPView(cell_top);
 			}
@@ -246,7 +260,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					actActivity.getTkActionBar();
 					actActivity.setTitle(actActivity.getResources().getString(R.string.TestCentre));
 					actActivity.ivImg.setVisibility(View.VISIBLE);
-					actActivity.addRightImage(R.drawable.news_pressed,
+					/*actActivity.addRightImage(R.drawable.news_pressed,
 							new OnClickListener() {
 
 								@Override
@@ -255,15 +269,15 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 											ZXInfoAct.class);
 									startActivity(intent);
 								}
-							});
+							});*/
 
 				} else {
 					actActivity.ivImg
 							.setBackgroundResource(R.drawable.arrow_down);
 					actActivity.setTitle(actActivity.getResources().getString(R.string.history));
 					actActivity.ivImg.setVisibility(View.VISIBLE);
-					View view = new View(actActivity);
-					actActivity.getTkActionBar().setRightView(view, null);
+					/*View view = new View(actActivity);
+					actActivity.getTkActionBar().setRightView(view, null);*/
 				}
 
 			}
@@ -424,10 +438,12 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 					"#0.0");
 			if (Constants.UPDATE_OK.equals(action)) {
 				final int waters = intent.getIntExtra("waters", 0);
+				
 				int selectPostion = intent.getIntExtra("selectPostion", 0);
 				perProgres = Float.parseFloat(df.format(waters / 45.0f + 20.0)) / 100f;
 				System.out.println("perProgres" + perProgres);
 				if (checkType == selectPostion) {
+					shouWaters=waters;
 					System.out.println("checkType" + checkType);
 					pb.setProgressing(perProgres, tvBlueProgress, false);
 					getData(df);
@@ -1462,26 +1478,36 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 
 			} else if (selectFlag == 1) {
 				String[] dates = tvDate.getText().toString().split("~");
-				tvDate.setText(DateUtil.getDateStr(dates[0], 7) + "~"
-						+ DateUtil.getDateStr(dates[1], 7));
-				Average average = refreshWeekChartView(DateUtil.getDateStr(
-						dates[0], 7));
+				
+				int state=AbDateUtil.compare_date(DateUtil.getDateStr(dates[0], 7), DateUtil.getCurrentDate());
+				if(state==-1||state==0){
+					tvDate.setText(DateUtil.getDateStr(dates[0], 7) + "~"
+							+ DateUtil.getDateStr(dates[1], 7));
+					Average average = refreshWeekChartView(DateUtil.getDateStr(
+							dates[0], 7));
 
-				tvAverageLevelData.setText(average.getAverage() + "%");
-				detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal) + average.getCount()
-						+ actActivity.getResources().getString(R.string.ci));
+					tvAverageLevelData.setText(average.getAverage() + "%");
+					detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal) + average.getCount()
+							+ actActivity.getResources().getString(R.string.ci));
+				}
+				
 			} else if (selectFlag == 2) {
 				String[] dates = tvDate.getText().toString().split("~");
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				
 				try {
-					tvDate.setText(df.format(getAddMonth(df.parse(dates[0])))
-							+ "~" + df.format(getAddMonth(df.parse(dates[1]))));
-					Average averagem = refreshMonthChartView(
-							df.format(getAddMonth(df.parse(dates[0]))),
-							df.format(getAddMonth(df.parse(dates[1]))));
-					tvAverageLevelData.setText(averagem.getAverage() + "%");
-					detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
-							+ averagem.getCount() + actActivity.getResources().getString(R.string.ci));
+					int state=AbDateUtil.compare_date(df.format(getAddMonth(df.parse(dates[0]))), DateUtil.getCurrentDate());
+					if(state==-1||state==0){
+						tvDate.setText(df.format(getAddMonth(df.parse(dates[0])))
+								+ "~" + df.format(getAddMonth(df.parse(dates[1]))));
+						Average averagem = refreshMonthChartView(
+								df.format(getAddMonth(df.parse(dates[0]))),
+								df.format(getAddMonth(df.parse(dates[1]))));
+						tvAverageLevelData.setText(averagem.getAverage() + "%");
+						detectionTimes.setText(actActivity.getResources().getString(R.string.testtotal)
+								+ averagem.getCount() + actActivity.getResources().getString(R.string.ci));
+					}
+					
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

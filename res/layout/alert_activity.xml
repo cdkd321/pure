@@ -65,7 +65,7 @@
                 android:background="@drawable/wheel_line" >
             </LinearLayout>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="83dp" >
@@ -73,8 +73,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:paddingLeft="120dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
                     android:text="@string/time"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
@@ -82,12 +83,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:paddingRight="60dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="10dp"
                     android:text="@string/muinite"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
-            </RelativeLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -134,6 +136,7 @@
             android:padding="10dp" >
 
             <TextView
+                android:id="@+id/tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -143,9 +146,11 @@
 
             <TextView
                 android:id="@+id/lable_text"
-                android:layout_width="wrap_content"
+                android:layout_toRightOf="@+id/tag"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:gravity="right"
+                android:singleLine="true"
                 android:text="@string/SkinTest"
                 android:textSize="16sp" />
         </RelativeLayout>
