@@ -79,11 +79,10 @@ public class DeviceListActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				AlertDialog dialog = new AlertDialog.Builder(
 						DeviceListActivity.this)
-						.setMessage("Do you wanna canel the device?")
-						.setPositiveButton("confirm",
+						.setMessage(getResources().getString(R.string.cancel_release_device))
+						.setPositiveButton(getResources().getString(R.string.OK),
 								new DialogInterface.OnClickListener() {
 
 									@Override
@@ -104,7 +103,7 @@ public class DeviceListActivity extends Activity {
 										
 									}
 								})
-						.setNegativeButton("cancel",
+						.setNegativeButton(getResources().getString(R.string.Cancel),
 								new DialogInterface.OnClickListener() {
 
 									@Override

@@ -33,10 +33,14 @@ import android.widget.ScrollView;
  * @date：2013-5-21 下午3:59:38
  */
 public class AbOuterScrollView extends ScrollView {
-	private ScrollViewListener scrollViewListener = null;
+	//private ScrollViewListener scrollViewListener = null;
 
 	/** The m gesture detector. */
 	private GestureDetector mGestureDetector;
+	public static float firstPoint; 
+	public float getTopHeight(){  
+        return firstPoint;  
+    }  
 
 	/**
 	 * Instantiates a new ab pager scroll view.
@@ -52,16 +56,23 @@ public class AbOuterScrollView extends ScrollView {
 		setFadingEdgeLength(0);
 	}
 
-	public void setScrollViewListener(ScrollViewListener scrollViewListener) {
+	/*public void setScrollViewListener(ScrollViewListener scrollViewListener) {
 		this.scrollViewListener = scrollViewListener;
-	}
-	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-		// TODO Auto-generated method stub
-		
-		return super.onTouchEvent(ev);
-		 
-	}
+	}*/
+	 @Override  
+	    public boolean onTouchEvent(MotionEvent ev) {  
+	        switch (ev.getAction()) {  
+	        case MotionEvent.ACTION_DOWN:  
+	            break;  
+	        case MotionEvent.ACTION_MOVE:  
+	            firstPoint = getScrollY();  
+	            break;  
+	        default:  
+	            break;  
+	        }  
+	          
+	        return super.onTouchEvent(ev);  
+	    }  
 
 	/**
 	 * 描述：TODO.
@@ -107,7 +118,7 @@ public class AbOuterScrollView extends ScrollView {
 			return false;
 		}
 	}
-
+/*
 	@Override
 	protected void onScrollChanged(int x, int y, int oldx, int oldy) {
 		super.onScrollChanged(x, y, oldx, oldy);
@@ -120,6 +131,6 @@ public class AbOuterScrollView extends ScrollView {
 
 		void onScrollChanged(AbOuterScrollView scrollView, int x, int y,
 				int oldx, int oldy);
-	}
+	}*/
 
 }

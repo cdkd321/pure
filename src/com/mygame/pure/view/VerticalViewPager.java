@@ -48,7 +48,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import com.mygame.pure.R;
 import com.mygame.pure.SelfDefineApplication;
+import com.mygame.pure.activity.ActMain;
 
 
 /**
@@ -84,6 +86,7 @@ public class VerticalViewPager extends ViewGroup {
     private static final boolean DEBUG = false;
 
     private static final boolean USE_CACHE = false;
+    private Context context;
 
     private static final int DEFAULT_OFFSCREEN_PAGES = 1;
     private static final int MAX_SETTLE_DURATION = 600; // ms
@@ -335,10 +338,12 @@ public class VerticalViewPager extends ViewGroup {
     public VerticalViewPager(Context context) {
         super(context);
         initViewPager();
+        this.context=context;
     }
 
     public VerticalViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context=context;
         initViewPager();
     }
 
@@ -1815,7 +1820,22 @@ public class VerticalViewPager extends ViewGroup {
                     mInitialMotionY = mLastMotionY = y;
                     mLastMotionX = x;
                     mIsUnableToDrag = true;
-                    return false;
+                  
+                    ActMain act = (ActMain)context;  
+                    AbOuterScrollView sv = (AbOuterScrollView) act.findViewById(R.id.onlysv);  
+                    float height = sv.getTopHeight();   
+                    //MyLog.i("--tom", ",sv height:" + height + "dy" + dy );  
+                    if (sv.getTopHeight() > 0){  
+                        return false;  
+                    } else {  
+                        if(dy < 0){  
+                           // MyLog.i("--tom", "dx < 0 viewpage interceptTouchEvent return false");  
+                            return false;  
+                        }  
+                        //MyLog.i("--tom", "dx >= 0 viewpage interceptTouchEvent return true");  
+                        return true;  
+                    }  
+                    //return false;
                 }
                 if (yDiff > mTouchSlop && yDiff > xDiff) {
                     if (DEBUG) Log.v(TAG, "Starting drag!");
@@ -1832,6 +1852,7 @@ public class VerticalViewPager extends ViewGroup {
                         // with children that have scrolling containers.
                         if (DEBUG) Log.v(TAG, "Starting unable to drag!");
                         mIsUnableToDrag = true;
+                        
                     }
                 }
                 if (mIsBeingDragged) {

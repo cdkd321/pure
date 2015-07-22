@@ -450,5 +450,6 @@
     <string name="r7">Saturday</string>
     <string name="every_day">Every day</string>
     <string name="weekdays">Weekdays</string>
+    <string name="cancel_release_device">Determine the release of this device binding?</string>
 
 </resources>

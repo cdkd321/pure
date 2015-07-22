@@ -92,6 +92,7 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 	private int lanWaters;
 	private int yanWaters;
 	private int jingWaters;
+	AbOuterScrollView scroll;
 
 	public static HomeRootFragment newInstance(int checkType) {
 		HomeRootFragment f = new HomeRootFragment();
@@ -145,6 +146,21 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		View view = inflater.inflate(R.layout.homerootfragment, container,
 				false);
 		viewPager = (VerticalViewPager) view.findViewById(R.id.vertical_page);
+		viewPager.setOnTouchListener(new View.OnTouchListener() {
+		    public boolean onTouch(View v, MotionEvent e) {
+		        // How far the user has to scroll before it locks the parent vertical scrolling.
+		    	scroll.requestDisallowInterceptTouchEvent(true);
+
+		            int action = e.getActionMasked();
+
+		            switch(action){
+		            case MotionEvent.ACTION_UP:
+		            	scroll.requestDisallowInterceptTouchEvent(false);
+		                break;
+		            }
+		            return false;
+		    }
+		});
 		registerBoradcastReceiver();
 		actActivity.llTab1.setOnClickListener(new OnClickListener() {
 
@@ -870,8 +886,19 @@ public class HomeRootFragment extends Fragment implements OnClickListener {
 		String[] water_suggestion_feichanggao = getResources().getStringArray(
 				R.array.water_suggestion_feichanggao);
 		ViewPager vpager = (ViewPager) view.findViewById(R.id.vPager);
-		AbOuterScrollView scroll = (AbOuterScrollView) view
+		 scroll = (AbOuterScrollView) view
 				.findViewById(R.id.onlysv);
+		scroll.setOnTouchListener(new OnTouchListener() {
+			
+			@Override
+			public boolean onTouch(View arg0, MotionEvent arg1) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
+		scroll.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+		scroll.setFocusable(true);
+		scroll.setFocusableInTouchMode(true);
 		clickPageLeft = (ImageView) view.findViewById(R.id.clickPageLeft);
 		clickPageRight = (ImageView) view.findViewById(R.id.clickPageRight);
 		rGroup = (RadioGroup) view.findViewById(R.id.rGroup);
